@@ -1,0 +1,24 @@
+# artefactos temporais do processo
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# saidas intermediarias e capturas de teste
+shot_*.png
+oc_*.png
+oc_*.txt
+pg_*.png
+tab_*.png
+amb_*.png
+crop_*.png
+chk_*.jpg
+q??.png
+*.log
+node_modules/
+
+# Cadernos e gabaritos oficiais do INEP.
+# Nao sao versionados por padrao (cerca de 27 MB). Coloque-os em fontes_inep/
+# para rodar o processo de extracao. Para versiona-los, remova as duas linhas
+# abaixo e rode: git add -f fontes_inep/*.pdf
+fontes_inep/*.pdf

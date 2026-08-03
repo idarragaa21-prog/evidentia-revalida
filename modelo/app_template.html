@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="data:image/png;base64,__FAVICON__">
+<link rel="apple-touch-icon" href="data:image/png;base64,__FAVICON__">
+<title>Evidentia · Revalida — Banco de Questões</title>
+<style>
+/* ===================== ESTILO DE CASA ===================== */
+:root{
+  --navy:#1b2e22; --navy-700:#254032; --navy-600:#2f6047; --navy-050:#eef4f0;
+  --sky:#2f6047; --sky-600:#265239; --sky-100:#e2ede7; --sky-050:#f1f7f3;
+  --gold:#b08d4c; --gold-600:#8f7038; --gold-100:#f3ead2;
+  --good:#1f9463; --good-100:#e3f3ec; --bad:#c0503f; --bad-100:#f8e9e5;
+  --branco:#94988c; --branco-100:#edefe9;
+  --bg:#f4f3ec; --card:#ffffff; --ink:#1a2620; --ink-2:#4d5a51; --ink-3:#7e8a80;
+  --line:#d3e1d8; --line-2:#bcd0c2;
+  --shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.09);
+  --shadow-lg:0 8px 40px rgba(27,46,34,.18);
+  --r:16px; --r-sm:10px; --r-lg:22px;
+  --ff:"Calibri","Segoe UI",system-ui,-apple-system,"Roboto","Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+  --maxw:1080px;
+}
+[data-theme="dark"]{
+  --navy:#0d1712; --navy-700:#16271c; --navy-600:#2f6047; --navy-050:#12211a;
+  --sky:#5aa585; --sky-600:#4a9070; --sky-100:#15281d; --sky-050:#111f18;
+  --gold:#cca862; --gold-600:#b08d4c; --gold-100:#2a2416;
+  --good:#3fbb86; --good-100:#123326; --bad:#e0705f; --bad-100:#39201c;
+  --branco:#93a08f; --branco-100:#1a2a20;
+  --bg:#08130d; --card:#0f1e16; --ink:#eaf1ea; --ink-2:#b6c6ba; --ink-3:#84958a;
+  --line:#1d3226; --line-2:#284735;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.35);
+  --shadow-lg:0 10px 46px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--ff); background:var(--bg); color:var(--ink);
+  line-height:1.5; font-size:16px; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;font-weight:700;color:var(--navy)}
+h1,h2{font-family:var(--serif);letter-spacing:-.005em}
+h3,h4{font-family:var(--ff);letter-spacing:0}
+[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4{color:var(--ink)}
+p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus{outline:none}
+:focus-visible{outline:2.5px solid var(--sky);outline-offset:2px;border-radius:8px}
+.switch:focus-visible,.chip:focus-visible,.preset:focus-visible{outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.hidden{display:none!important}
+.fade{animation:fade .32s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ===================== TOPO ===================== */
+.appbar{position:sticky;top:0;z-index:40;background:var(--card);
+  border-bottom:2px solid var(--sky);box-shadow:0 2px 14px rgba(27,46,34,.07)}
+.appbar .wrap{display:flex;align-items:center;gap:13px;height:62px}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none}
+.crest-img{width:42px;height:42px;flex:none;border-radius:50%;object-fit:cover;
+  box-shadow:0 0 0 2px var(--gold-100),0 2px 6px rgba(27,46,34,.18)}
+.brand b{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:.18em;color:var(--navy);line-height:1}
+.brand small{display:block;font-size:11px;color:var(--sky-600);font-weight:700;letter-spacing:.04em;margin-top:3px;text-transform:uppercase}
+.appbar .spacer{flex:1}
+.iconbtn{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:var(--ink-2);
+  transition:background .2s}
+.iconbtn:hover{background:var(--navy-050)}
+.iconbtn svg{width:20px;height:20px}
+[data-theme="dark"] .brand b{color:var(--ink)}
+.svgnum{fill:var(--navy)} [data-theme="dark"] .svgnum{fill:var(--ink)}
+.svglbl{fill:var(--ink-3)}
+
+/* ===================== CARDS / GENÉRICOS ===================== */
+main{padding:26px 0 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.pad{padding:22px}
+.section-t{font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--sky-600)}
+.muted{color:var(--ink-2)}
+.chiprow{display:flex;flex-wrap:wrap;gap:9px}
+.chip{border:1.5px solid var(--line-2);background:var(--card);color:var(--ink-2);
+  padding:9px 15px;border-radius:999px;font-size:14.5px;font-weight:600;transition:all .16s;display:inline-flex;align-items:center;gap:7px}
+.chip:hover{border-color:var(--sky);color:var(--sky-600)}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#fff;box-shadow:0 4px 14px rgba(47,96,71,.30)}
+[data-theme="dark"] .chip.on{color:#08130d}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.seg{display:inline-flex;background:var(--navy-050);border:1px solid var(--line);border-radius:13px;padding:5px;gap:4px;flex-wrap:wrap}
+.seg button{padding:10px 16px;border-radius:9px;font-weight:700;font-size:14.5px;color:var(--ink-2);transition:all .16s}
+.seg button.on{background:var(--card);color:var(--navy);box-shadow:var(--shadow)}
+[data-theme="dark"] .seg button.on{color:var(--ink)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;border-radius:13px;
+  font-weight:800;font-size:15.5px;transition:transform .12s,box-shadow .2s,background .2s;border:1.5px solid transparent}
+.btn:active{transform:translateY(1px)}
+.btn-gold{background:linear-gradient(180deg,var(--gold),var(--gold-600));color:#3a2f06;box-shadow:0 6px 20px rgba(198,161,42,.4)}
+.btn-gold:hover{box-shadow:0 8px 26px rgba(198,161,42,.5)}
+.btn-navy{background:linear-gradient(180deg,var(--navy-600),var(--navy));color:#fff;box-shadow:0 6px 20px rgba(27,46,34,.30)}
+.btn-sky{background:var(--sky);color:#fff}
+.btn-ghost{background:var(--card);border-color:var(--line-2);color:var(--navy)}
+[data-theme="dark"] .btn-ghost{color:var(--ink)}
+.btn-ghost:hover{border-color:var(--sky);color:var(--sky-600)}
+.btn.block{width:100%}
+.btn.lg{padding:17px 26px;font-size:16.5px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* stepper */
+.stepper{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--line-2);border-radius:12px;overflow:hidden}
+.stepper button{width:46px;height:46px;font-size:22px;font-weight:700;color:var(--sky-600);background:var(--sky-050)}
+.stepper button:hover{background:var(--sky-100)}
+.stepper input{width:78px;height:46px;border:none;text-align:center;font-size:20px;font-weight:800;color:var(--navy);background:var(--card);font-family:inherit}
+[data-theme="dark"] .stepper input{color:var(--ink)}
+.stepper input:focus{outline:none}
+.presetrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.preset{padding:8px 14px;border-radius:10px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
+.preset.on,.preset:hover{border-color:var(--gold);color:var(--gold-600);background:var(--gold-100)}
+
+/* toggle */
+.tg{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 2px;border-bottom:1px solid var(--line)}
+.tg:last-child{border-bottom:none}
+.tg .lab b{display:block;font-size:15px;color:var(--ink)}
+.tg .lab small{color:var(--ink-2);font-size:13px}
+.switch{width:50px;height:29px;border-radius:999px;background:var(--line-2);position:relative;transition:background .2s;flex:none}
+.switch::after{content:"";position:absolute;width:23px;height:23px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.switch.on{background:var(--good)}
+.switch.on::after{left:24px}
+
+/* ===================== COMPONENTES (rediseño) ===================== */
+.modegrid{display:grid;grid-template-columns:1fr;gap:10px}
+.modecard{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1.5px solid var(--line-2);border-radius:14px;background:var(--card);text-align:left;transition:all .16s;width:100%}
+.modecard:hover{border-color:var(--sky)}
+.modecard.on{border-color:var(--sky);background:var(--sky-050);box-shadow:0 0 0 1px var(--sky) inset}
+.modecard .mi{width:42px;height:42px;flex:none;border-radius:11px;display:grid;place-items:center;background:var(--navy-050);color:var(--sky-600);transition:all .16s}
+.modecard.on .mi{background:var(--sky);color:#fff}
+[data-theme=dark] .modecard.on .mi{color:#08130d}
+.modecard .mi svg{width:21px;height:21px}
+.modecard .mt b{display:block;font-size:15px;color:var(--ink);font-weight:700}
+.modecard .mt small{color:var(--ink-2);font-size:12.5px}
+.modecard .chk{margin-left:auto;width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line-2);display:grid;place-items:center;color:#fff;transition:all .16s}
+.modecard.on .chk{background:var(--sky);border-color:var(--sky)}
+.modecard .chk svg{width:13px;height:13px;opacity:0}
+.modecard.on .chk svg{opacity:1}
+[data-theme=dark] .modecard.on .chk{color:#08130d}
+.pickhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.pickhead label{margin:0!important}
+.linklike{font-size:13px;font-weight:700;color:var(--sky-600);background:none;padding:5px 8px;border-radius:8px}
+.linklike:hover{background:var(--sky-050)}
+.simbar{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin:18px 0 4px;padding:14px 16px;border:1.5px dashed var(--line-2);border-radius:14px;background:var(--navy-050)}
+.simbar .lead{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--navy);font-size:14px}
+[data-theme=dark] .simbar .lead{color:var(--ink)}
+.simbar .lead svg{width:18px;height:18px;color:var(--sky-600)}
+.simbar .pill{font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--card);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+.simbar .pill b{color:var(--sky-600);font-weight:800}
+/* navegação do quiz */
+.qactions{display:flex;gap:10px;align-items:center;margin-top:22px}
+.navbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:800;font-size:15px;border:1.5px solid var(--line-2);background:var(--card);color:var(--ink-2);transition:all .14s}
+.navbtn:hover:not(:disabled){border-color:var(--sky);color:var(--sky-600)}
+.navbtn svg{width:17px;height:17px}
+.navbtn:disabled{opacity:.4;cursor:not-allowed}
+.navbtn.primary{background:linear-gradient(180deg,var(--navy-600),var(--navy));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(27,46,34,.26)}
+.navbtn.finish{background:linear-gradient(180deg,var(--gold),var(--gold-600));color:#3a2f06;border-color:transparent;box-shadow:0 6px 18px rgba(176,141,76,.4)}
+.kbdhint{margin-top:14px;font-size:12px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 5px;align-items:center}
+.mk svg{width:14px;height:14px}
+.verdict svg{width:17px;height:17px}
+
+/* ===================== INÍCIO ===================== */
+.hero{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:30px;color:#fff;
+  background:radial-gradient(120% 140% at 90% -10%,var(--sky-600) 0%,var(--navy-600) 42%,var(--navy) 100%)}
+.hero::after{content:"";position:absolute;inset:0;opacity:.14;background-image:
+  repeating-linear-gradient(135deg,#fff 0 2px,transparent 2px 26px);pointer-events:none}
+.hero h1{color:#f4efe1;font-size:28px;line-height:1.16;position:relative;max-width:22ch;font-family:var(--serif)}
+.hero p{color:#d7d0bb;margin-top:11px;font-size:15px;position:relative;max-width:52ch}
+.hero .metrics{display:flex;gap:26px;margin-top:22px;position:relative;flex-wrap:wrap}
+.hero .metrics div b{display:block;font-size:27px;font-weight:800;color:#dcc07f;font-family:var(--serif)}
+.hero .metrics div span{font-size:12px;color:#c3b59a;font-weight:600;letter-spacing:.04em}
+.hero-over{position:relative;color:#dcc07f;font-weight:800;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:13px}
+.hero-over::before{content:"";display:inline-block;width:22px;height:2px;background:#b08d4c;vertical-align:middle;margin-right:9px;margin-bottom:3px}
+.grid2{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
+.field{margin-bottom:22px}
+.field:last-child{margin-bottom:0}
+.field>label{display:block;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:10px}
+[data-theme="dark"] .field>label{color:var(--ink)}
+.field .hint{font-size:12.5px;color:var(--ink-2);font-weight:500;margin-left:6px}
+.availrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.availcard{flex:1;min-width:120px;background:var(--navy-050);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.availcard b{font-size:19px;color:var(--navy)}
+[data-theme="dark"] .availcard b{color:var(--ink)}
+.availcard span{display:block;font-size:12px;color:var(--ink-2);font-weight:600}
+
+.secbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.secbtn{display:flex;align-items:center;gap:12px;padding:15px;border-radius:14px;border:1.5px solid var(--line-2);background:var(--card);text-align:left;transition:all .16s}
+.secbtn:hover{border-color:var(--sky);transform:translateY(-1px);box-shadow:var(--shadow)}
+.secbtn .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:none;background:var(--sky-100);color:var(--sky-600)}
+.secbtn .ic svg{width:21px;height:21px}
+.secbtn b{font-size:15px;color:var(--navy);display:block}
+[data-theme="dark"] .secbtn b{color:var(--ink)}
+.secbtn small{color:var(--ink-2);font-size:12.5px}
+
+.notice{display:flex;gap:11px;padding:13px 15px;border-radius:12px;background:var(--gold-100);
+  border:1px solid #e9d68f;color:#6a5410;font-size:13px;font-weight:500;line-height:1.45}
+[data-theme="dark"] .notice{color:var(--gold);border-color:#4a4220}
+.notice svg{width:19px;height:19px;flex:none;margin-top:1px}
+
+/* ===================== QUIZ ===================== */
+.qtop{position:sticky;top:62px;z-index:30;background:var(--bg);padding:12px 0 8px;border-bottom:1px solid var(--line)}
+.qtop .wrap{display:flex;align-items:center;gap:12px}
+.progress{flex:1;height:9px;background:var(--line-2);border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--gold));border-radius:999px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.qcount{font-size:13.5px;font-weight:800;color:var(--navy);white-space:nowrap}
+[data-theme="dark"] .qcount{color:var(--ink)}
+.timer{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums;font-weight:800;font-size:14px;color:var(--sky-600);background:var(--sky-050);padding:7px 11px;border-radius:10px}
+.timer svg{width:15px;height:15px}
+
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+.tag{font-size:12px;font-weight:800;padding:5px 11px;border-radius:8px;letter-spacing:.02em}
+.tag-ed{background:var(--navy);color:#fff}
+.tag-ar{background:var(--sky-100);color:var(--sky-600)}
+.tag-num{background:var(--branco-100);color:var(--ink-2)}
+.tag-anul{background:var(--bad-100);color:var(--bad)}
+.enun{font-size:17px;line-height:1.62;color:var(--ink);margin-bottom:22px;white-space:pre-wrap}
+.figbox{margin:0 0 22px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--navy-050)}
+.figbox img{display:block;width:100%;height:auto;cursor:zoom-in;background:#fff}
+.figbox .cap{padding:9px 13px;font-size:12px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;gap:7px}
+.figbox .cap svg{width:15px;height:15px;color:var(--sky-600)}
+.lightbox{position:fixed;inset:0;background:rgba(10,20,14,.92);z-index:70;display:grid;place-items:center;padding:16px;cursor:zoom-out}
+.lightbox img{max-width:100%;max-height:100%;border-radius:10px;background:#fff}
+.alts{display:flex;flex-direction:column;gap:11px}
+.alt{display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border:1.8px solid var(--line-2);border-radius:14px;
+  background:var(--card);transition:all .14s;text-align:left;width:100%}
+.alt:hover{border-color:var(--sky);background:var(--sky-050)}
+.alt .key{width:30px;height:30px;flex:none;border-radius:9px;border:1.8px solid var(--line-2);display:grid;place-items:center;
+  font-weight:800;font-size:15px;color:var(--ink-2);transition:all .14s}
+.alt .txt{font-size:15.5px;line-height:1.5;color:var(--ink);padding-top:3px}
+.alt.sel{border-color:var(--sky);background:var(--sky-100);box-shadow:0 4px 16px rgba(47,96,71,.20)}
+.alt.sel .key{background:var(--sky);border-color:var(--sky);color:#fff}
+[data-theme="dark"] .alt.sel .key,[data-theme="dark"] .alt.correct .key,[data-theme="dark"] .alt.wrong .key{color:#08130d}
+/* estados de revisão/estudo */
+.alt.correct{border-color:var(--good);background:var(--good-100)}
+.alt.correct .key{background:var(--good);border-color:var(--good);color:#fff}
+.alt.wrong{border-color:var(--bad);background:var(--bad-100)}
+.alt.wrong .key{background:var(--bad);border-color:var(--bad);color:#fff}
+.alt .mk{margin-left:auto;font-weight:800;font-size:12.5px;align-self:center;display:flex;align-items:center;gap:5px}
+.alt.correct .mk{color:var(--good)} .alt.wrong .mk{color:var(--bad)}
+
+.qnav{display:flex;gap:10px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.flagbtn{display:inline-flex;align-items:center;gap:7px;padding:11px 15px;border-radius:11px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
+.flagbtn.on{background:var(--gold-100);border-color:var(--gold);color:var(--gold-600)}
+.flagbtn svg{width:16px;height:16px}
+.navspace{flex:1}
+
+/* navegador de questões */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:8px}
+.qgrid button{aspect-ratio:1;border-radius:10px;border:1.5px solid var(--line-2);font-weight:800;font-size:14px;color:var(--ink-2);background:var(--card);position:relative}
+.qgrid button.answered{background:var(--sky);border-color:var(--sky);color:#fff}
+.qgrid button.flagged::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.qgrid button.current{outline:3px solid var(--gold);outline-offset:1px}
+
+/* ===================== RESULTADO ===================== */
+.result-hero{text-align:center;padding:30px 22px}
+.scorebig{font-size:60px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.scorebig small{font-size:24px;color:var(--ink-2);font-weight:700}
+.verdict{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 18px;border-radius:999px;font-weight:800;font-size:15px}
+.v-ok{background:var(--good-100);color:var(--good)} .v-no{background:var(--bad-100);color:var(--bad)}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.tile b{font-size:26px;font-weight:800;line-height:1;display:block}
+.tile span{font-size:12.5px;color:var(--ink-2);font-weight:600;margin-top:6px;display:block}
+.tile.g b{color:var(--good)} .tile.r b{color:var(--bad)} .tile.n b{color:var(--branco)} .tile.s b{color:var(--sky-600)}
+
+.chart-card h3{font-size:16px;margin-bottom:4px}
+.bars{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.barrow{display:grid;grid-template-columns:1fr;gap:6px}
+.barrow .top{display:flex;justify-content:space-between;align-items:baseline}
+.barrow .top b{font-size:14px;color:var(--ink);font-weight:700}
+.barrow .top span{font-size:13px;color:var(--ink-2);font-weight:700;font-variant-numeric:tabular-nums}
+.track{height:12px;background:var(--branco-100);border-radius:999px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:999px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+table.perf{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+table.perf th,table.perf td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line)}
+table.perf th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2);font-weight:800}
+table.perf td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+
+/* ===================== REVISÃO ===================== */
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:62px;z-index:20;background:var(--bg);padding:12px 0}
+.rev-card{margin-bottom:16px}
+.just{margin-top:18px;border-radius:13px;overflow:hidden;border:1px solid var(--line)}
+.just summary{cursor:pointer;list-style:none;padding:14px 16px;background:var(--navy-050);display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy);font-size:14.5px}
+[data-theme="dark"] .just summary{color:var(--ink)}
+.just summary::-webkit-details-marker{display:none}
+.just summary .badge{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.03em;padding:4px 9px;border-radius:7px;background:var(--gold-100);color:var(--gold-600);text-transform:uppercase}
+.just .body{padding:16px;font-size:15px;line-height:1.62;color:var(--ink-2);white-space:pre-wrap}
+.just .src{padding:0 16px 14px;font-size:12px;color:var(--ink-3)}
+.chev{transition:transform .2s} .just[open] .chev{transform:rotate(90deg)}
+
+/* histórico */
+.hist-item{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);border-radius:13px;margin-bottom:10px;background:var(--card)}
+.hist-item .ring{width:52px;height:52px;flex:none}
+.hist-item .info{flex:1;min-width:0}
+.hist-item .info b{font-size:15px;color:var(--navy)} [data-theme="dark"] .hist-item .info b{color:var(--ink)}
+.hist-item .info small{display:block;color:var(--ink-2);font-size:12.5px}
+.emptyst{text-align:center;padding:40px 20px;color:var(--ink-2)}
+.emptyst svg{width:52px;height:52px;color:var(--line-2);margin-bottom:12px}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(11,26,42,.55);backdrop-filter:blur(3px);z-index:60;display:grid;place-items:center;padding:20px;animation:fade .2s both}
+.modal{background:var(--card);border-radius:20px;max-width:440px;width:100%;box-shadow:var(--shadow-lg);overflow:hidden}
+.modal .mh{padding:22px 22px 0} .modal .mb{padding:16px 22px 22px}
+.modal h3{font-size:19px}
+
+/* rodapé */
+footer{border-top:1px solid var(--line);padding:22px 0 34px;margin-top:20px;color:var(--ink-3);font-size:12.5px;text-align:center}
+footer a{color:var(--sky-600);text-decoration:none;font-weight:700}
+footer .brandline{font-family:var(--serif);color:var(--sky-600);font-weight:700;letter-spacing:.14em;font-size:14px;margin-bottom:9px}
+footer .brandline b{color:var(--navy)}
+[data-theme="dark"] footer .brandline b{color:var(--ink)}
+
+/* ===================== RESPONSIVO ===================== */
+@media(min-width:720px){
+  .grid2{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(4,1fr)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .hero h1{font-size:32px}
+}
+@media(max-width:520px){
+  .wrap{padding:0 15px}
+  .hero{padding:24px 20px} .hero h1{font-size:23px}
+  .scorebig{font-size:50px}
+  .secbtns{grid-template-columns:1fr}
+  .pad{padding:18px}
+  .enun{font-size:16px}
+  .brand small{display:none}
+}
+.stack{display:flex;flex-direction:column;gap:18px}
+.rowbtns{display:flex;gap:10px;flex-wrap:wrap}
+.rowbtns .btn{flex:1;min-width:150px}
+kbd{font-family:var(--ff);background:var(--navy-050);border:1px solid var(--line-2);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:12px;font-weight:800;color:var(--ink-2)}
+/* ===================== IMPRESSÃO ===================== */
+@media print{
+  .appbar,footer,.filterbar,.qtop,.iconbtn,.btn,.navbtn,.simbar,.kbdhint,.chip,#ov,.qactions{display:none!important}
+  html,body{background:#fff!important}
+  main{padding:0}
+  .wrap{max-width:none;padding:0}
+  .card{box-shadow:none!important;border:1px solid #bbb;break-inside:avoid;margin-bottom:10px}
+  .just{border:1px solid #bbb}
+  .just .body,.just .src{display:block!important}
+  .just summary .badge{border:1px solid #bbb}
+  .enun,.alt .txt,.alt .key{color:#000!important}
+  .alt{border-color:#bbb!important;break-inside:avoid}
+  h2{margin-bottom:8px}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="wrap">
+    <div class="brand" onclick="go('home')">
+      <img class="crest-img" src="data:image/png;base64,__LOGO__" alt="Evidentia">
+      <div><b>EVIDENTIA</b><small>Revalida · Banco de Questões</small></div>
+    </div>
+    <div class="spacer"></div>
+    <button class="iconbtn" id="themeBtn" title="Tema claro/escuro" onclick="toggleTheme()" aria-label="Alternar tema">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+    </button>
+    <button class="iconbtn" title="Início" onclick="go('home')" aria-label="Início">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+    </button>
+  </div>
+</div>
+
+<main><div class="wrap" id="screen"></div></main>
+
+<footer>
+  <div class="wrap">
+    <div class="brandline"><b>EVIDENTIA</b> · Estratégia | Solução | Confiança</div>
+    Enunciados, alternativas e gabaritos: <b>oficiais do INEP</b> · As explicações são material de estudo (IA), não oficial.<br>
+    Fonte: Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP) — Revalida · Provas e Gabaritos.
+  </div>
+</footer>
+
+<script>
+/*==================== DADOS ====================*/
+const QUESTOES = /*__DATA__*/ [];
+const META = /*__META__*/ {};
+const FIGS = /*__FIGS__*/ {};
+
+/*==================== ESTADO ====================*/
+const AREAS = ["Clínica Médica","Cirurgia","Pediatria","Ginecologia e Obstetrícia","Medicina da Família, Comunidade e Saúde Coletiva"];
+const AREA_ABR = {"Clínica Médica":"Clínica Médica","Cirurgia":"Cirurgia","Pediatria":"Pediatria","Ginecologia e Obstetrícia":"Gineco-Obstetrícia","Medicina da Família, Comunidade e Saúde Coletiva":"Med. Família/Saúde Coletiva"};
+const APROV = 0.6; // limiar orientativo de aproveitamento
+let S = null;          // sessão atual do simulado
+let cfg = { modo:"aleatorio", areas:[], edicoes:[], n:20, embaralhar:false, incluirAnuladas:false, cronometro:true, feedback:false, autoAvancar:false };
+
+/*==================== ARMAZENAMENTO (com fallback) ====================*/
+const store = (()=>{ let ok=true; try{localStorage.setItem("_t","1");localStorage.removeItem("_t");}catch(e){ok=false;}
+  const mem={};
+  return {
+    ok,
+    get(k){ try{return ok?localStorage.getItem(k):mem[k];}catch(e){return mem[k];} },
+    set(k,v){ try{ ok?localStorage.setItem(k,v):(mem[k]=v);}catch(e){mem[k]=v;} },
+    del(k){ try{ ok?localStorage.removeItem(k):delete mem[k];}catch(e){} }
+  };
+})();
+function loadHist(){ try{return JSON.parse(store.get("revalida_hist")||"[]");}catch(e){return [];} }
+function saveHist(h){ store.set("revalida_hist",JSON.stringify(h.slice(-60))); }
+function loadCfg(){ try{Object.assign(cfg,JSON.parse(store.get("revalida_cfg")||"{}"));}catch(e){} }
+function persistCfg(){ store.set("revalida_cfg",JSON.stringify(cfg)); }
+
+/*==================== UTIL ====================*/
+const $=s=>document.querySelector(s);
+function esc(t){return (t==null?"":String(t)).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function fmtTime(s){s=Math.max(0,Math.floor(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
+  return (h?h+":":"")+String(m).padStart(h?2:1,"0")+":"+String(ss).padStart(2,"0");}
+function go(scr,arg){ if(S&&S.timer&&scr!=="quiz"){/*keep*/} window.scrollTo(0,0); render(scr,arg); }
+function poolFor(c){
+  return QUESTOES.filter(q=>{
+    if(!c.incluirAnuladas && q.anulada) return false;
+    if(c.modo==="especialidade" && c.areas.length && !c.areas.includes(q.area)) return false;
+    if(c.modo==="edicao" && c.edicoes.length && !c.edicoes.includes(q.edicao)) return false;
+    return true;
+  });
+}
+
+/*==================== RENDER PRINCIPAL ====================*/
+function render(scr,arg){
+  const el=$("#screen"); el.className=""; el.classList.add("fade");
+  if(scr==="home") el.innerHTML=viewHome();
+  else if(scr==="quiz") { el.innerHTML=viewQuiz(); bindQuizKeys(); }
+  else if(scr==="result") el.innerHTML=viewResult();
+  else if(scr==="review") el.innerHTML=viewReview(arg||"todas");
+  else if(scr==="history") el.innerHTML=viewHistory();
+  else if(scr==="about") el.innerHTML=viewAbout();
+  el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
+}
+
+/*==================== INÍCIO ====================*/
+function viewHome(){
+  const total=QUESTOES.length, disp=QUESTOES.filter(q=>!q.anulada).length, anul=total-disp;
+  const eds=META.edicoes||[];
+  const hist=loadHist();
+  const inprog=store.get("revalida_run");
+  const perEd=eds.map(e=>`<div class="availcard"><b>${QUESTOES.filter(q=>q.edicao===e&&!q.anulada).length}</b><span>Edição ${esc(e)}</span></div>`).join("");
+  return `
+  <div class="hero">
+    <div class="hero-over">Estratégia · Solução · Confiança</div>
+    <h1>Estude para o Revalida com provas oficiais</h1>
+    <p>Monte simulados a partir das questões objetivas reais do exame do INEP, com correção detalhada e justificativa questão a questão.</p>
+    <div class="metrics">
+      <div><b>${disp}</b><span>QUESTÕES VÁLIDAS</span></div>
+      <div><b>${eds.length}</b><span>EDIÇÕES</span></div>
+      <div><b>5</b><span>ÁREAS</span></div>
+    </div>
+  </div>
+
+  ${inprog?`<button class="secbtn" style="width:100%;margin-top:16px;border-color:var(--gold)" onclick="resumeRun()">
+     <span class="ic" style="background:var(--gold-100);color:var(--gold-600)">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg></span>
+     <span><b>Continuar simulado em andamento</b><small>Retomar de onde você parou</small></span></button>`:""}
+
+  <div class="card pad" style="margin-top:16px">
+    <div class="section-t">Montar simulado</div>
+
+    <div class="field" style="margin-top:16px">
+      <label>Modo do simulado</label>
+      <div class="modegrid" id="segModo">
+        ${modeCard('aleatorio',ICN.dice,'Aleatório','Sorteia questões de todo o acervo')}
+        ${modeCard('especialidade',ICN.steth,'Por especialidade','Escolha uma ou mais áreas')}
+        ${modeCard('edicao',ICN.doc,'Por edição','Refaça uma prova específica')}
+      </div>
+    </div>
+
+    <div class="field ${cfg.modo==='especialidade'?'':'hidden'}" id="fldAreas">
+      <div class="pickhead"><label>Especialidades</label>
+        <div><button class="linklike" onclick="allAreas(true)">Selecionar todas</button><button class="linklike" onclick="allAreas(false)">Limpar</button></div></div>
+      <div class="chiprow" id="chAreas">
+        ${AREAS.map((a,i)=>`<button class="chip ${cfg.areas.includes(a)?'on':''}" onclick="toggleArea('${a.replace(/'/g,"\\'")}')">
+          <span class="dot" style="background:${areaColor(i)}"></span>${esc(AREA_ABR[a])}</button>`).join("")}
+      </div>
+    </div>
+
+    <div class="field ${cfg.modo==='edicao'?'':'hidden'}" id="fldEds">
+      <div class="pickhead"><label>Edições</label>
+        <div><button class="linklike" onclick="allEds(true)">Selecionar todas</button><button class="linklike" onclick="allEds(false)">Limpar</button></div></div>
+      <div class="chiprow" id="chEds">
+        ${eds.map(e=>`<button class="chip ${cfg.edicoes.includes(e)?'on':''}" onclick="toggleEd('${e}')">Edição ${esc(e)}</button>`).join("")}
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Número de questões <span class="hint" id="maxHint"></span></label>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <div class="stepper">
+          <button onclick="bumpN(-5)">−</button>
+          <input id="nInput" type="number" min="1" value="${cfg.n}" onchange="setN(this.value)" inputmode="numeric">
+          <button onclick="bumpN(5)">+</button>
+        </div>
+        <div class="presetrow" id="presets"></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Opções</label>
+      <div class="tg"><div class="lab"><b>Modo estudo</b><small>Mostrar a correção logo após responder cada questão</small></div>
+        <div class="switch ${cfg.feedback?'on':''}" tabindex="0" role="switch" onclick="tog('feedback',this)"></div></div>
+      <div class="tg"><div class="lab"><b>Avançar automaticamente</b><small>Passa para a próxima questão ao responder (modo prova)</small></div>
+        <div class="switch ${cfg.autoAvancar?'on':''}" tabindex="0" role="switch" onclick="tog('autoAvancar',this)"></div></div>
+      <div class="tg"><div class="lab"><b>Embaralhar alternativas</b><small>Evita decorar a posição da resposta</small></div>
+        <div class="switch ${cfg.embaralhar?'on':''}" tabindex="0" role="switch" onclick="tog('embaralhar',this)"></div></div>
+      <div class="tg"><div class="lab"><b>Cronômetro</b><small>Registrar o tempo do simulado</small></div>
+        <div class="switch ${cfg.cronometro?'on':''}" tabindex="0" role="switch" onclick="tog('cronometro',this)"></div></div>
+      <div class="tg"><div class="lab"><b>Incluir questões anuladas</b><small>Não entram na pontuação; ${anul} no acervo</small></div>
+        <div class="switch ${cfg.incluirAnuladas?'on':''}" tabindex="0" role="switch" onclick="tog('incluirAnuladas',this)"></div></div>
+    </div>
+
+    <div class="simbar" id="simResumo"></div>
+    <button class="btn btn-gold block lg" onclick="startRun()" style="margin-top:16px">
+      Iniciar simulado
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="secbtns">
+    <button class="secbtn" onclick="go('history')">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-8 5"/><path d="M3 3v5h5M12 7v5l3 2"/></svg></span>
+      <span><b>Histórico e desempenho</b><small>${hist.length} simulado(s) salvos</small></span></button>
+    <button class="secbtn" onclick="go('about')">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span>
+      <span><b>Sobre e integridade</b><small>Origem dos dados e método</small></span></button>
+  </div>
+
+  <div class="availrow" style="margin-top:16px">${perEd}</div>
+  <div class="notice" style="margin-top:16px">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div>As <b>explicações</b> são geradas por inteligência artificial como apoio ao estudo e podem conter imprecisões — <b>confira sempre</b> em fonte confiável. O gabarito e o texto das questões são oficiais do INEP.</div>
+  </div>`;
+}
+function areaColor(i){return ["#2f6047","#b08d4c","#c0503f","#3f6f8f","#7c6aa6"][i%5];}
+/* ícones em traço (sem emojis) */
+const ICN={
+  dice:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"/></svg>',
+  steth:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v5a4 4 0 0 0 8 0V3"/><path d="M9 16a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="10" r="2.2"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>'
+};
+function modeCard(m,icon,title,sub){
+  return `<button class="modecard ${cfg.modo===m?'on':''}" data-m="${m}" onclick="setModo('${m}')">
+    <span class="mi">${icon}</span>
+    <span class="mt"><b>${title}</b><small>${sub}</small></span>
+    <span class="chk">${ICN.check}</span></button>`;
+}
+function allAreas(v){ cfg.areas = v?AREAS.slice():[]; persistCfg(); syncHome(); }
+function allEds(v){ cfg.edicoes = v?(META.edicoes||[]).slice():[]; persistCfg(); syncHome(); }
+function fmtEst(min){ min=Math.max(1,Math.round(min)); const h=Math.floor(min/60),m=min%60; return h?(h+" h"+(m?" "+m+" min":"")):(m+" min"); }
+function updateResumo(){
+  const el=$("#simResumo"); if(!el)return;
+  const mx=poolFor(cfg).length; const n=Math.min(cfg.n,mx||1);
+  const modoLab = cfg.modo==="especialidade"?"Por especialidade":cfg.modo==="edicao"?"Por edição":"Aleatório";
+  let escopo="todas as áreas e edições";
+  if(cfg.modo==="especialidade") escopo = cfg.areas.length? (cfg.areas.length+" especialidade"+(cfg.areas.length>1?"s":"")) : "nenhuma área selecionada";
+  if(cfg.modo==="edicao") escopo = cfg.edicoes.length? (cfg.edicoes.length+" edição"+(cfg.edicoes.length>1?"ões":"")) : "nenhuma edição selecionada";
+  const est = fmtEst(n*3); // ritmo oficial ≈ 3 min/questão
+  const opts=[]; if(cfg.feedback)opts.push("modo estudo"); if(cfg.autoAvancar)opts.push("auto-avanço"); if(cfg.embaralhar)opts.push("embaralhado");
+  el.innerHTML = `<span class="lead">${ICN.check.replace('stroke-width="3"','stroke-width="2.4"')} Pronto para iniciar</span>
+    <span class="pill">${modoLab}</span>
+    <span class="pill"><b>${n}</b> quest${n>1?'ões':'ão'}</span>
+    <span class="pill">${escopo}</span>
+    <span class="pill">~${est}</span>
+    ${cfg.cronometro?'<span class="pill">com cronômetro</span>':''}
+    ${opts.length?`<span class="pill">${opts.join(" · ")}</span>`:''}`;
+}
+
+/*==================== CONFIG HANDLERS ====================*/
+function setModo(m){cfg.modo=m;persistCfg();syncHome();}
+function toggleArea(a){const i=cfg.areas.indexOf(a);i<0?cfg.areas.push(a):cfg.areas.splice(i,1);persistCfg();syncHome();}
+function toggleEd(e){const i=cfg.edicoes.indexOf(e);i<0?cfg.edicoes.push(e):cfg.edicoes.splice(i,1);persistCfg();syncHome();}
+function tog(k,el){cfg[k]=!cfg[k];el.classList.toggle("on",cfg[k]);persistCfg();syncHome();}
+function setN(v){let n=parseInt(v)||1;const mx=poolFor(cfg).length;n=Math.max(1,Math.min(n,mx||1));cfg.n=n;persistCfg();const inp=$("#nInput");if(inp)inp.value=n;syncPresets();}
+function bumpN(d){setN(cfg.n+d);}
+function syncHome(){
+  document.querySelectorAll("#segModo .modecard").forEach(b=>b.classList.toggle("on",b.dataset.m===cfg.modo));
+  const fa=$("#fldAreas"),fe=$("#fldEds"); if(fa)fa.classList.toggle("hidden",cfg.modo!=="especialidade");
+  if(fe)fe.classList.toggle("hidden",cfg.modo!=="edicao");
+  document.querySelectorAll("#chAreas .chip").forEach((b,i)=>b.classList.toggle("on",cfg.areas.includes(AREAS[i])));
+  const edl=META.edicoes||[]; document.querySelectorAll("#chEds .chip").forEach((b,i)=>b.classList.toggle("on",cfg.edicoes.includes(edl[i])));
+  const mx=poolFor(cfg).length; const mh=$("#maxHint"); if(mh)mh.textContent="· máx. "+mx;
+  if(cfg.n>mx)setN(mx); syncPresets(); updateResumo();
+}
+function syncPresets(){
+  const mx=poolFor(cfg).length; const el=$("#presets"); if(!el)return;
+  const ps=[10,20,40,60,100].filter(p=>p<=mx); if(mx>0&&!ps.includes(mx))ps.push(mx);
+  el.innerHTML=ps.map(p=>`<button class="preset ${cfg.n===p?'on':''}" onclick="setN(${p})">${p===mx?('Todas ('+mx+')'):p}</button>`).join("");
+  const mh=$("#maxHint"); if(mh)mh.textContent="· máx. "+mx; updateResumo();
+}
+
+/*==================== INICIAR / SESSÃO ====================*/
+function startRun(){
+  const pool=poolFor(cfg);
+  if(pool.length===0){ alert("Nenhuma questão disponível com esses filtros."); return; }
+  const n=Math.min(cfg.n,pool.length);
+  const picked=shuffle(pool).slice(0,n).map(q=>{
+    let order=["A","B","C","D"];
+    if(cfg.embaralhar) order=shuffle(order);
+    return { id:q.id, order, resp:null, flag:false };
+  });
+  S={ items:picked, idx:0, startTs:Date.now(), elapsed:0, cfg:JSON.parse(JSON.stringify(cfg)), finished:false };
+  startTimer(); persistRun(); go("quiz");
+}
+function qById(id){return QUESTOES.find(q=>q.id===id);}
+function curItem(){return S.items[S.idx];}
+function startTimer(){ stopTimer(); if(!S.cfg.cronometro)return;
+  S._t=setInterval(()=>{ S.elapsed=Math.floor((Date.now()-S.startTs)/1000); const t=$("#timerVal"); if(t)t.textContent=fmtTime(S.elapsed); },1000);}
+function stopTimer(){ if(S&&S._t){clearInterval(S._t);S._t=null;} }
+function persistRun(){ if(!S)return; const c={...S}; delete c._t; store.set("revalida_run",JSON.stringify(c)); }
+function resumeRun(){ try{ S=JSON.parse(store.get("revalida_run")); if(!S){go('home');return;} S.startTs=Date.now()-(S.elapsed||0)*1000; if(S.finished){go('result');} else {startTimer();go('quiz');} }catch(e){store.del("revalida_run");go('home');} }
+
+/*==================== QUIZ ====================*/
+function viewQuiz(){
+  const it=curItem(), q=qById(it.id), n=S.items.length;
+  const answered=S.items.filter(x=>x.resp).length;
+  const opts=it.order.map((orig,pos)=>{
+    const disp="ABCD"[pos];
+    let cls="alt"; let mk="";
+    const isSel=it.resp===orig;
+    if(S.cfg.feedback && it.resp){ // modo estudo: revela após responder
+      if(orig===q.gabarito){cls+=" correct";mk=`<span class="mk">${ICN.check} correta</span>`;}
+      else if(isSel){cls+=" wrong";mk=`<span class="mk">sua resposta</span>`;}
+    } else if(isSel){cls+=" sel";}
+    const dis=(S.cfg.feedback&&it.resp)?"disabled":"";
+    return `<button class="${cls}" data-o="${orig}" ${dis} onclick="answer('${orig}')">
+      <span class="key">${disp}</span><span class="txt">${esc(q.alternativas[orig])}</span>${mk}</button>`;
+  }).join("");
+  const anulBadge=q.anulada?`<span class="tag tag-anul">ANULADA</span>`:"";
+  const feedbackNote=(S.cfg.feedback&&it.resp)? justBlock(q) : "";
+  return `
+  <div class="qtop"><div class="wrap">
+    <button class="iconbtn" style="color:var(--navy)" onclick="confirmExit()" aria-label="Sair">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="progress"><i style="width:${Math.round((S.idx+1)/n*100)}%"></i></div>
+    <span class="qcount">${S.idx+1}/${n}</span>
+    ${S.cfg.cronometro?`<span class="timer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg><span id="timerVal">${fmtTime(S.elapsed)}</span></span>`:""}
+    <button class="iconbtn" style="color:var(--navy)" onclick="openNav()" aria-label="Mapa de questões">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+  </div></div>
+
+  <div class="card pad" style="margin-top:16px">
+    <div class="qmeta">
+      <span class="tag tag-ed">Edição ${esc(q.edicao)} · nº ${q.numero}</span>
+      <span class="tag tag-ar">${esc(AREA_ABR[q.area])}</span>
+      ${q.tema?`<span class="tag tag-num">${esc(q.tema)}</span>`:""}
+      ${anulBadge}
+    </div>
+    <div class="enun">${esc(q.enunciado)}</div>
+    ${figBlock(q)}
+    <div class="alts" id="alts">${opts}</div>
+    ${feedbackNote}
+
+    <div class="qactions">
+      <button class="flagbtn ${it.flag?'on':''}" onclick="toggleFlag()" aria-label="Marcar para revisão">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V4h13l-2 4 2 4H4"/></svg>
+        ${it.flag?'Marcada':'Marcar'}</button>
+      <div class="navspace"></div>
+      <button class="navbtn" onclick="prevQ()" ${S.idx===0?'disabled':''}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>Anterior</button>
+      ${S.idx<n-1
+        ? `<button class="navbtn primary" onclick="nextQ()">Próxima<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>`
+        : `<button class="navbtn finish" onclick="finishRun()">Finalizar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg></button>`}
+    </div>
+    <div class="kbdhint">
+      Respondidas: <b style="color:var(--sky-600)"><span id="respCount">${answered}</span>/${n}</b>
+      <span style="margin:0 4px">·</span> atalhos: <kbd>A</kbd>–<kbd>D</kbd> responder · <kbd>←</kbd><kbd>→</kbd> navegar · <kbd>F</kbd> marcar${S.cfg.autoAvancar?' · avanço automático ativo':''}
+    </div>
+  </div>`;
+}
+function answer(orig){
+  const it=curItem();
+  if(S.cfg.feedback && it.resp) return;            // já corrigida em modo estudo
+  it.resp=orig; persistRun();
+  if(S.cfg.feedback){ render("quiz"); return; }    // revela correção + justificativa
+  // modo prova: atualiza a seleção no lugar (sem re-render → sem piscar)
+  const alts=document.querySelectorAll('#alts .alt');
+  if(alts.length){
+    alts.forEach(b=>b.classList.toggle('sel', b.getAttribute('data-o')===orig));
+    const rc=$("#respCount"); if(rc) rc.textContent=S.items.filter(x=>x.resp).length;
+  } else render("quiz");
+  if(S.cfg.autoAvancar){ setTimeout(()=>{ if(!S||S.finished)return; S.idx<S.items.length-1?nextQ():finishRun(); },240); }
+}
+function toggleFlag(){ curItem().flag=!curItem().flag; persistRun(); render("quiz"); }
+function nextQ(){ if(S.idx<S.items.length-1){S.idx++;persistRun();render("quiz");} }
+function prevQ(){ if(S.idx>0){S.idx--;persistRun();render("quiz");} }
+function gotoQ(i){ S.idx=i; persistRun(); closeModal(); render("quiz"); }
+function bindQuizKeys(){ document.onkeydown=(e)=>{
+  if(!S||S.finished)return; if($("#ov"))return;   // ignora atalhos com modal aberto
+  const k=e.key.toUpperCase();
+  if(["A","B","C","D"].includes(k)){ const pos="ABCD".indexOf(k); const it=curItem(); if(it.order[pos]) answer(it.order[pos]); }
+  else if(e.key==="ArrowRight"){e.preventDefault();nextQ();} else if(e.key==="ArrowLeft"){e.preventDefault();prevQ();}
+  else if(e.key==="Enter"){ e.preventDefault(); S.idx<S.items.length-1?nextQ():finishRun(); }
+  else if(k==="F")toggleFlag();
+};}
+
+function openNav(){
+  const n=S.items.length;
+  const grid=S.items.map((it,i)=>`<button class="${it.resp?'answered':''} ${it.flag?'flagged':''} ${i===S.idx?'current':''}" onclick="gotoQ(${i})">${i+1}</button>`).join("");
+  const answered=S.items.filter(x=>x.resp).length;
+  showModal(`<div class="mh"><h3>Mapa de questões</h3><p class="muted" style="font-size:13.5px;margin-top:4px">${answered} de ${n} respondidas</p></div>
+    <div class="mb"><div class="qgrid">${grid}</div>
+    <button class="btn btn-gold block" style="margin-top:18px" onclick="closeModal();finishRun()">Finalizar simulado</button>
+    <button class="btn btn-ghost block" style="margin-top:10px" onclick="closeModal()">Voltar</button></div>`);
+}
+function confirmExit(){
+  showModal(`<div class="mh"><h3>Sair do simulado?</h3><p class="muted" style="margin-top:6px;font-size:14px">Seu progresso fica salvo e você pode continuar depois pela tela inicial.</p></div>
+   <div class="mb"><button class="btn btn-navy block" onclick="closeModal();stopTimer();go('home')">Salvar e sair</button>
+   <button class="btn btn-ghost block" style="margin-top:10px" onclick="closeModal()">Continuar simulado</button></div>`);
+}
+
+/*==================== FINALIZAR / RESULTADO ====================*/
+function scoreRun(){
+  let ac=0,er=0,br=0,anul=0; const byArea={},byEd={};
+  S.items.forEach(it=>{ const q=qById(it.id);
+    const A=q.area; byArea[A]=byArea[A]||{ac:0,tot:0}; const E=q.edicao; byEd[E]=byEd[E]||{ac:0,tot:0};
+    if(q.anulada){anul++;return;}
+    byArea[A].tot++; byEd[E].tot++;
+    if(!it.resp){br++;}
+    else if(it.resp===q.gabarito){ac++;byArea[A].ac++;byEd[E].ac++;}
+    else{er++;}
+  });
+  const tot=ac+er+br;
+  return {ac,er,br,anul,tot,pct:tot?ac/tot:0,byArea,byEd};
+}
+function finishRun(){
+  const answered=S.items.filter(x=>x.resp).length, n=S.items.length;
+  const doFinish=()=>{ stopTimer(); S.finished=true; S.elapsed=Math.floor((Date.now()-S.startTs)/1000);
+    const r=scoreRun();
+    const hist=loadHist();
+    hist.push({ ts:Date.now(), n, ac:r.ac,er:r.er,br:r.br,anul:r.anul,tot:r.tot,pct:r.pct,elapsed:S.elapsed,
+      modo:S.cfg.modo, areas:S.cfg.areas, edicoes:S.cfg.edicoes,
+      items:S.items.map(it=>({id:it.id,resp:it.resp,flag:it.flag,order:it.order})) });
+    saveHist(hist); persistRun(); closeModal(); go("result");
+  };
+  if(answered<n){
+    showModal(`<div class="mh"><h3>Finalizar agora?</h3><p class="muted" style="margin-top:6px;font-size:14px">Você respondeu ${answered} de ${n}. As não respondidas contam como em branco.</p></div>
+     <div class="mb"><button class="btn btn-gold block" onclick="_ff()">Finalizar e corrigir</button>
+     <button class="btn btn-ghost block" style="margin-top:10px" onclick="closeModal()">Voltar</button></div>`);
+    window._ff=doFinish;
+  } else doFinish();
+}
+
+function viewResult(){
+  const r=scoreRun(); const pct=Math.round(r.pct*100);
+  const ok=r.pct>=APROV;
+  const areas=Object.keys(r.byArea).sort((a,b)=>AREAS.indexOf(a)-AREAS.indexOf(b));
+  const bars=areas.map((a,i)=>{ const o=r.byArea[a]; const p=o.tot?Math.round(o.ac/o.tot*100):0;
+    return `<div class="barrow"><div class="top"><b>${esc(AREA_ABR[a])}</b><span>${o.ac}/${o.tot} · ${p}%</span></div>
+     <div class="track"><i style="width:${p}%;background:${p>=60?'var(--good)':p>=40?'var(--gold)':'var(--bad)'}"></i></div></div>`;}).join("");
+  const eds=Object.keys(r.byEd).sort();
+  const rows=eds.map(e=>{const o=r.byEd[e];const p=o.tot?Math.round(o.ac/o.tot*100):0;
+    return `<tr><td>Edição ${esc(e)}</td><td class="num">${o.ac}/${o.tot}</td><td class="num">${p}%</td></tr>`;}).join("");
+  return `
+  <div class="card result-hero fade" style="margin-top:8px">
+    ${donut(r)}
+    <div class="scorebig" style="color:${ok?'var(--good)':'var(--ink)'}">${pct}<small>%</small></div>
+    <div class="muted" style="font-weight:700;margin-top:2px">${r.ac} de ${r.tot} questões válidas</div>
+    <div class="verdict ${ok?'v-ok':'v-no'}">
+      ${ok?ICN.check:ICN.warn} ${ok?'Aproveitamento suficiente':'Abaixo do alvo'} · alvo orientativo ${Math.round(APROV*100)}%
+    </div>
+    <div class="tiles">
+      <div class="tile g"><b>${r.ac}</b><span>ACERTOS</span></div>
+      <div class="tile r"><b>${r.er}</b><span>ERROS</span></div>
+      <div class="tile n"><b>${r.br}</b><span>EM BRANCO</span></div>
+      <div class="tile s"><b>${S.cfg.cronometro?fmtTime(S.elapsed):'—'}</b><span>TEMPO${r.tot?' · '+Math.round(S.elapsed/r.tot)+'s/q':''}</span></div>
+    </div>
+    ${r.anul?`<p class="muted" style="font-size:12.5px;margin-top:14px">${r.anul} questão(ões) anulada(s) não entraram na pontuação.</p>`:""}
+  </div>
+
+  <div class="two" style="margin-top:18px">
+    <div class="card pad chart-card">
+      <h3>Aproveitamento por área</h3>
+      <p class="muted" style="font-size:12.5px">Classificação de estudo (não oficial)</p>
+      <div class="bars">${bars||'<p class="muted">—</p>'}</div>
+    </div>
+    <div class="card pad chart-card">
+      <h3>Por edição</h3>
+      <table class="perf"><thead><tr><th>Edição</th><th class="num">Acertos</th><th class="num">%</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="notice" style="margin-top:16px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+        <div>O alvo de ${Math.round(APROV*100)}% é apenas orientativo para estudo; o critério oficial de aprovação do Revalida é definido a cada edição pelo INEP.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rowbtns" style="margin-top:18px">
+    <button class="btn btn-gold" onclick="go('review','erradas')">Revisar questões</button>
+    <button class="btn btn-navy" onclick="redoWrong()">Refazer as erradas</button>
+    <button class="btn btn-ghost" onclick="store.del('revalida_run');go('home')">Novo simulado</button>
+  </div>`;
+}
+function redoWrong(){
+  const wrong=S.items.filter(it=>{const q=qById(it.id);return !q.anulada && it.resp!==q.gabarito;});
+  if(wrong.length===0){alert("Você não errou nenhuma questão. Parabéns!");return;}
+  S={items:wrong.map(it=>({id:it.id,order:cfg.embaralhar?shuffle(["A","B","C","D"]):["A","B","C","D"],resp:null,flag:false})),
+     idx:0,startTs:Date.now(),elapsed:0,cfg:JSON.parse(JSON.stringify(S.cfg)),finished:false};
+  startTimer();persistRun();go("quiz");
+}
+
+/*==================== REVISÃO ====================*/
+function viewReview(filter){
+  const items=S.items.map((it,i)=>({it,q:qById(it.id),i}));
+  const cnt={todas:items.length,
+    erradas:items.filter(x=>!x.q.anulada&&x.it.resp&&x.it.resp!==x.q.gabarito).length,
+    certas:items.filter(x=>!x.q.anulada&&x.it.resp===x.q.gabarito).length,
+    branco:items.filter(x=>!x.it.resp).length,
+    marcadas:items.filter(x=>x.it.flag).length};
+  const show=items.filter(x=>{
+    if(filter==="erradas")return !x.q.anulada&&x.it.resp&&x.it.resp!==x.q.gabarito;
+    if(filter==="certas")return x.it.resp===x.q.gabarito&&!x.q.anulada;
+    if(filter==="branco")return !x.it.resp;
+    if(filter==="marcadas")return x.it.flag;
+    return true;
+  });
+  const fb=(k,lab)=>`<button class="chip ${filter===k?'on':''}" onclick="go('review','${k}')">${lab} <b style="margin-left:4px">${cnt[k]}</b></button>`;
+  const cards=show.map(({it,q})=>reviewCard(it,q)).join("")||`<div class="emptyst"><p>Nenhuma questão neste filtro.</p></div>`;
+  return `
+  <div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px">
+    <button class="iconbtn" style="color:var(--navy)" onclick="go('result')" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <h2 style="font-size:20px">Revisão detalhada</h2>
+    <div style="flex:1"></div>
+    <button class="chip" onclick="printErros()" aria-label="Imprimir">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>Imprimir</button>
+  </div>
+  <div class="filterbar">
+    ${fb("todas","Todas")}${fb("erradas","Erradas")}${fb("certas","Certas")}${fb("branco","Em branco")}${fb("marcadas","Marcadas")}
+  </div>
+  ${cards}
+  <button class="btn btn-ghost block" style="margin-top:8px" onclick="go('result')">Voltar ao resultado</button>`;
+}
+function figBlock(q){
+  if(!q.figura || !FIGS[q.figura]) return "";
+  const f=FIGS[q.figura];
+  return `<div class="figbox">
+    <img src="data:image/jpeg;base64,${f}" alt="Figura da questão ${q.numero} da edição ${esc(q.edicao)}" onclick="zoomFig(this.src)" loading="lazy">
+    <div class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>
+    Imagem original do caderno do INEP · toque para ampliar</div></div>`;
+}
+function zoomFig(src){
+  const o=document.createElement("div"); o.className="lightbox";
+  o.innerHTML=`<img src="${src}" alt="Figura ampliada">`;
+  o.onclick=()=>o.remove(); document.body.appendChild(o);
+}
+function printErros(){ document.querySelectorAll('details.just').forEach(d=>d.open=true); setTimeout(()=>window.print(),60); }
+function reviewCard(it,q){
+  const opts=it.order.map((orig,pos)=>{
+    const disp="ABCD"[pos]; let cls="alt";let mk="";
+    if(orig===q.gabarito){cls+=" correct";mk=`<span class="mk">${ICN.check} oficial</span>`;}
+    if(it.resp===orig && orig!==q.gabarito){cls+=" wrong";mk=`<span class="mk">sua resposta</span>`;}
+    if(it.resp===orig && orig===q.gabarito){mk=`<span class="mk">${ICN.check} você acertou</span>`;}
+    return `<div class="${cls}"><span class="key">${disp}</span><span class="txt">${esc(q.alternativas[orig])}</span>${mk}</div>`;
+  }).join("");
+  let statusTag;
+  if(q.anulada)statusTag=`<span class="tag tag-anul">ANULADA</span>`;
+  else if(!it.resp)statusTag=`<span class="tag tag-num">EM BRANCO</span>`;
+  else if(it.resp===q.gabarito)statusTag=`<span class="tag" style="background:var(--good-100);color:var(--good)">ACERTOU</span>`;
+  else statusTag=`<span class="tag" style="background:var(--bad-100);color:var(--bad)">ERROU</span>`;
+  return `<div class="card pad rev-card">
+    <div class="qmeta">
+      <span class="tag tag-ed">Ed. ${esc(q.edicao)} · nº ${q.numero}</span>
+      <span class="tag tag-ar">${esc(AREA_ABR[q.area])}</span>
+      ${q.tema?`<span class="tag tag-num">${esc(q.tema)}</span>`:""}
+      ${statusTag}
+    </div>
+    <div class="enun">${esc(q.enunciado)}</div>
+    ${figBlock(q)}
+    <div class="alts">${opts}</div>
+    ${justBlock(q)}
+  </div>`;
+}
+function justBlock(q){
+  return `<details class="just" ${q.anulada?'open':''}>
+    <summary><svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg>
+      Justificativa e comentário<span class="badge">estudo · IA</span></summary>
+    <div class="body">${esc(q.explicacao||"—")}</div>
+    <div class="src">Gabarito oficial INEP: <b>${q.anulada?'anulada':q.gabarito}</b> · Explicação não oficial, confira em fonte confiável.</div>
+  </details>`;
+}
+
+/*==================== HISTÓRICO ====================*/
+function viewHistory(){
+  const hist=loadHist().slice().reverse();
+  if(hist.length===0) return `
+   <div style="display:flex;align-items:center;gap:12px;margin:8px 0 16px">
+     <button class="iconbtn" style="color:var(--navy)" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+     <h2 style="font-size:20px">Histórico</h2></div>
+   <div class="card pad"><div class="emptyst">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+     <p>Você ainda não finalizou simulados.<br>Seu desempenho aparecerá aqui.</p>
+     <button class="btn btn-gold" style="margin-top:16px" onclick="go('home')">Começar agora</button>
+   </div></div>`;
+  const all=hist.reduce((a,h)=>{a.ac+=h.ac;a.tot+=h.tot;a.t+=h.elapsed;return a;},{ac:0,tot:0,t:0});
+  const avg=all.tot?Math.round(all.ac/all.tot*100):0;
+  const areaAgg={};
+  hist.forEach(h=> (h.items||[]).forEach(it=>{const q=qById(it.id);if(!q||q.anulada)return;areaAgg[q.area]=areaAgg[q.area]||{ac:0,tot:0};areaAgg[q.area].tot++;if(it.resp===q.gabarito)areaAgg[q.area].ac++;}));
+  const bars=AREAS.filter(a=>areaAgg[a]).map(a=>{const o=areaAgg[a];const p=Math.round(o.ac/o.tot*100);
+    return `<div class="barrow"><div class="top"><b>${esc(AREA_ABR[a])}</b><span>${o.ac}/${o.tot} · ${p}%</span></div>
+      <div class="track"><i style="width:${p}%;background:${p>=60?'var(--good)':p>=40?'var(--gold)':'var(--bad)'}"></i></div></div>`;}).join("");
+  const items=hist.map((h,idx)=>{const p=Math.round(h.pct*100);const d=new Date(h.ts);
+    const dd=d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    const modo=h.modo==='especialidade'?'Por especialidade':h.modo==='edicao'?'Por edição':'Aleatório';
+    return `<button class="hist-item" style="width:100%;text-align:left;border:1px solid var(--line)" onclick="reopenHist(${hist.length-1-idx})">
+      ${miniRing(p)}
+      <div class="info"><b>${p}% · ${h.ac}/${h.tot}</b><small>${dd} · ${modo} · ${h.n} questões · ${fmtTime(h.elapsed)}</small></div>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--ink-3)" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+    </button>`;}).join("");
+  return `
+   <div style="display:flex;align-items:center;gap:12px;margin:8px 0 16px">
+     <button class="iconbtn" style="color:var(--navy)" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+     <h2 style="font-size:20px">Histórico e desempenho</h2></div>
+   <div class="tiles">
+     <div class="tile s"><b>${hist.length}</b><span>SIMULADOS</span></div>
+     <div class="tile g"><b>${avg}%</b><span>APROVEITAMENTO MÉDIO</span></div>
+     <div class="tile"><b>${all.ac}/${all.tot}</b><span>ACERTOS TOTAIS</span></div>
+     <div class="tile n"><b>${fmtTime(all.t)}</b><span>TEMPO TOTAL</span></div>
+   </div>
+   ${bars?`<div class="card pad chart-card" style="margin-top:18px"><h3>Aproveitamento acumulado por área</h3>
+     <p class="muted" style="font-size:12.5px">Classificação de estudo (não oficial)</p><div class="bars">${bars}</div></div>`:""}
+   <div class="card pad" style="margin-top:18px">
+     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+       <h3 style="font-size:16px">Simulados recentes</h3>
+       <button class="chip" onclick="clearHist()">Limpar histórico</button></div>
+     ${items}
+   </div>`;
+}
+function reopenHist(i){ const h=loadHist()[i]; if(!h)return;
+  S={items:h.items.map(it=>({id:it.id,resp:it.resp,flag:it.flag,order:it.order||["A","B","C","D"]})),
+     idx:0,startTs:Date.now(),elapsed:h.elapsed,cfg:{cronometro:false,feedback:false,embaralhar:false,modo:h.modo,areas:h.areas||[],edicoes:h.edicoes||[]},finished:true};
+  go("result");
+}
+function clearHist(){ showModal(`<div class="mh"><h3>Limpar histórico?</h3><p class="muted" style="margin-top:6px;font-size:14px">Isso apaga todos os simulados salvos neste dispositivo. Não pode ser desfeito.</p></div>
+  <div class="mb"><button class="btn block" style="background:var(--bad);color:#fff" onclick="store.del('revalida_hist');closeModal();go('history')">Apagar tudo</button>
+  <button class="btn btn-ghost block" style="margin-top:10px" onclick="closeModal()">Cancelar</button></div>`); }
+
+/*==================== SOBRE ====================*/
+function viewAbout(){
+  return `
+  <div style="display:flex;align-items:center;gap:12px;margin:8px 0 16px">
+    <button class="iconbtn" style="color:var(--navy)" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <h2 style="font-size:20px">Sobre e integridade dos dados</h2></div>
+  <div class="card pad stack">
+    <div><div class="section-t">Origem das questões</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">Os enunciados, as alternativas e o gabarito de cada questão foram extraídos diretamente dos <b>cadernos de prova e gabaritos oficiais do INEP</b> (Prova Objetiva do Revalida). O gabarito de cada item foi conferido por dupla verificação contra a imagem oficial do gabarito definitivo.</p></div>
+    <div><div class="section-t">Imagens das questões</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">As questões que dependem de figura — radiografias, eletrocardiogramas, fotografias e gráficos — trazem a <b>imagem original recortada do caderno oficial</b>, para que possam ser respondidas integralmente. Toque na imagem para ampliá-la.</p></div>
+    <div><div class="section-t">Tabelas de exames</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">As tabelas de exames laboratoriais foram <b>transcritas a partir da imagem oficial da prova</b> e conferidas valor a valor, e não por leitura automática, para evitar qualquer erro em resultados, unidades e valores de referência.</p></div>
+    <div><div class="section-t">O que é oficial e o que não é</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6"><b>Oficial:</b> texto das questões, alternativas, letra do gabarito e questões anuladas.<br>
+      <b>Apoio de estudo (não oficial):</b> a classificação por especialidade e as <b>explicações/justificativas</b>, geradas por inteligência artificial. Elas podem conter imprecisões — confira sempre em fonte confiável antes de considerá-las definitivas.</p></div>
+    <div><div class="section-t">Pontuação</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">As questões <b>anuladas não entram na pontuação</b>. O aproveitamento é calculado como acertos ÷ questões válidas do simulado. O alvo de ${Math.round(APROV*100)}% é apenas orientativo; o critério oficial de aprovação é definido a cada edição pelo INEP.</p></div>
+    <div><div class="section-t">Privacidade</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">Todo o seu histórico e progresso ficam salvos <b>apenas neste dispositivo</b> (armazenamento local do navegador). Nada é enviado para servidores. ${store.ok?"":"<br><b>Atenção:</b> o armazenamento local está indisponível neste contexto, então o histórico não será mantido ao fechar."}</p></div>
+    <div><div class="section-t">Edições incluídas</div>
+      <p class="muted" style="margin-top:8px">${(META.edicoes||[]).map(e=>'Edição '+esc(e)).join(' · ')} — total de ${QUESTOES.length} questões (${QUESTOES.filter(q=>!q.anulada).length} válidas e ${QUESTOES.filter(q=>q.anulada).length} anuladas no acervo).</p></div>
+    <div><div class="section-t">Backup do progresso</div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">Exporte seu histórico e configurações para um arquivo, ou restaure a partir de um backup. Útil ao trocar de dispositivo ou navegador.</p>
+      <div class="rowbtns" style="margin-top:12px">
+        <button class="btn btn-ghost" onclick="exportBackup()">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M8 11l4 4 4-4M4 21h16"/></svg>Exportar backup</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('impFile').click()">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M8 7l4-4 4 4M4 21h16"/></svg>Importar backup</button>
+        <input id="impFile" type="file" accept="application/json" class="hidden" onchange="importBackup(this.files[0])">
+      </div></div>
+  </div>
+  <button class="btn btn-ghost block" style="margin-top:16px" onclick="go('home')">Voltar ao início</button>`;
+}
+
+/*==================== GRÁFICOS SVG ====================*/
+function donut(r){
+  const seg=[["var(--good)",r.ac],["var(--bad)",r.er],["var(--branco)",r.br]];
+  const total=r.tot||1; let off=0; const R=52,C=2*Math.PI*R; const parts=[];
+  seg.forEach(([col,v])=>{ const frac=v/total; const len=frac*C;
+    parts.push(`<circle r="${R}" cx="70" cy="70" fill="none" stroke="${col}" stroke-width="16" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)" stroke-linecap="butt"/>`);
+    off+=len; });
+  return `<svg viewBox="0 0 140 140" width="130" height="130" style="margin-bottom:6px" role="img" aria-label="Distribuição de acertos, erros e em branco">
+    <circle r="52" cx="70" cy="70" fill="none" stroke="var(--branco-100)" stroke-width="16"/>${parts.join("")}
+    <text x="70" y="66" text-anchor="middle" font-size="26" font-weight="800" class="svgnum">${r.tot?Math.round(r.pct*100):0}%</text>
+    <text x="70" y="86" text-anchor="middle" font-size="11" font-weight="700" class="svglbl">acerto</text></svg>`;
+}
+function miniRing(p){
+  const R=22,C=2*Math.PI*R,len=p/100*C; const col=p>=60?'var(--good)':p>=40?'var(--gold)':'var(--bad)';
+  return `<svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle r="22" cx="26" cy="26" fill="none" stroke="var(--branco-100)" stroke-width="6"/>
+   <circle r="22" cx="26" cy="26" fill="none" stroke="${col}" stroke-width="6" stroke-dasharray="${len} ${C-len}" transform="rotate(-90 26 26)" stroke-linecap="round"/>
+   <text x="26" y="30" text-anchor="middle" font-size="14" font-weight="800" class="svgnum">${p}</text></svg>`;
+}
+
+/*==================== MODAL / TEMA ====================*/
+function showModal(html){ let o=$("#ov"); if(!o){o=document.createElement("div");o.id="ov";o.className="overlay";o.onclick=e=>{if(e.target===o)closeModal();};document.body.appendChild(o);} o.innerHTML=`<div class="modal">${html}</div>`; }
+function closeModal(){ const o=$("#ov"); if(o)o.remove(); }
+function toggleTheme(){ const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",cur); store.set("revalida_theme",cur);
+  document.querySelector('meta[name=theme-color]').setAttribute("content",cur==="dark"?"#08130d":"#ffffff"); }
+
+/*==================== BOOT ====================*/
+function exportBackup(){
+  const data={ _app:"evidentia-revalida", _v:1, ts:Date.now(), hist:loadHist(), cfg };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob); const a=document.createElement("a");
+  const d=new Date(); const stamp=d.toISOString().slice(0,10);
+  a.href=url; a.download="evidentia-revalida-backup-"+stamp+".json"; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+function importBackup(file){
+  if(!file)return; const rd=new FileReader();
+  rd.onload=()=>{ try{ const d=JSON.parse(rd.result);
+      if(!d||!Array.isArray(d.hist)) throw 0;
+      showModal(`<div class="mh"><h3>Restaurar backup?</h3><p class="muted" style="margin-top:6px;font-size:14px">O arquivo contém ${d.hist.length} simulado(s). Isso substituirá o histórico atual deste dispositivo.</p></div>
+        <div class="mb"><button class="btn btn-gold block" onclick="_doImport()">Restaurar</button>
+        <button class="btn btn-ghost block" style="margin-top:10px" onclick="closeModal()">Cancelar</button></div>`);
+      window._doImport=()=>{ saveHist(d.hist); if(d.cfg)Object.assign(cfg,d.cfg); persistCfg(); closeModal(); go('history'); };
+    }catch(e){ alert("Arquivo de backup inválido."); } };
+  rd.readAsText(file);
+}
+(function init(){
+  const th=store.get("revalida_theme"); if(th==="dark")document.documentElement.setAttribute("data-theme","dark");
+  loadCfg();
+  document.addEventListener("keydown",e=>{ if((e.key===" "||e.key==="Enter") && e.target && e.target.classList && e.target.classList.contains("switch")){ e.preventDefault(); e.target.click(); }});
+  render("home");
+  setTimeout(()=>{ syncHome(); },0);
+})();
+</script>
+</body>
+</html>
