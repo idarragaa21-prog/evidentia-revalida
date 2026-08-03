@@ -50,6 +50,15 @@ As 22 questões que dependem de figura — radiografias, eletrocardiogramas, fot
 
 Baixe o arquivo `aplicativo/Revalida_Evidentia.html` e abra-o no navegador. No celular, dá para adicioná-lo à tela de início e usá-lo como um aplicativo comum.
 
+## Aplicativo para o celular
+
+Além do arquivo único, o projeto traz duas formas de instalar a app no telefone, ambas com todo o conteúdo embutido e funcionamento offline:
+
+- **App web instalável (PWA)** — em [`app-web/`](app-web/). Funciona no iPhone e no Android: publica-se a pasta num endereço `https://` (Netlify Drop ou GitHub Pages) e instala-se pela tela de início do navegador, com ícone próprio e tela cheia.
+- **App Android (APK)** — em [`app-android/`](app-android/). O arquivo `Evidentia-Revalida.apk` instala como um aplicativo Android comum (versão de teste, assinada em modo debug). O projeto Capacitor que o gera acompanha, com instruções em [`app-android/COMO_COMPILAR.md`](app-android/COMO_COMPILAR.md).
+
+O passo a passo de instalação para iPhone e Android está em [`COMO_INSTALAR.md`](COMO_INSTALAR.md).
+
 ## Integridade dos dados
 
 Este é o ponto central do projeto, então vale ser explícito sobre o que é oficial e o que não é.
@@ -78,6 +87,8 @@ Ao final, as cem questões ficaram sem um único caractere ilegível.
 
 ```
 aplicativo/     aplicativo pronto para uso (arquivo HTML único)
+app-web/        app web instalável (PWA) para iPhone e Android
+app-android/    projeto Android (Capacitor) e APK pronto para instalar
 modelo/         modelo HTML sem os dados, usado na montagem
 dados/          banco de questões, figuras e tabelas de decodificação (JSON)
 fontes_inep/    cadernos de prova e gabaritos oficiais (PDF)

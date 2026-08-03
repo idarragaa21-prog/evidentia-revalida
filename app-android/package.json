@@ -1,0 +1,16 @@
+{
+  "name": "evidentia-revalida",
+  "version": "1.0.0",
+  "description": "Evidentia · Revalida — banco de questões (app Android)",
+  "private": true,
+  "scripts": {
+    "sync": "cap sync android",
+    "build:apk": "cd android && ./gradlew assembleDebug",
+    "build:aab": "cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.1",
+    "@capacitor/cli": "^6.2.1",
+    "@capacitor/core": "^6.2.1"
+  }
+}

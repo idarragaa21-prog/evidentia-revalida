@@ -22,3 +22,13 @@ node_modules/
 # para rodar o processo de extracao. Para versiona-los, remova as duas linhas
 # abaixo e rode: git add -f fontes_inep/*.pdf
 fontes_inep/*.pdf
+
+# App Android: manter fora artefatos de build, node_modules e chaves
+app-android/node_modules/
+app-android/android/build/
+app-android/android/app/build/
+app-android/android/.gradle/
+app-android/android/local.properties
+app-android/android/capacitor-cordova-android-plugins/build/
+*.keystore
+*.jks

@@ -1,0 +1,7 @@
+{
+  "appId": "com.evidentia.revalida",
+  "appName": "Revalida",
+  "webDir": "www",
+  "backgroundColor": "#182118",
+  "android": { "backgroundColor": "#182118" }
+}
