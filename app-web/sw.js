@@ -79,11 +79,12 @@ self.addEventListener("activate", (evento) => {
     // Apaga so os caches deste aplicativo: em github.io a origem e compartilhada
     // com os outros repositorios do mesmo usuario.
     const nomes = await caches.keys();
-    await Promise.all(
-      nomes.filter((nome) => nome.startsWith(PREFIXO) && nome !== CACHE)
-           .map((nome) => caches.delete(nome))
-    );
+    const antigos = nomes.filter((nome) => nome.startsWith(PREFIXO) && nome !== CACHE);
+    await Promise.all(antigos.map((nome) => caches.delete(nome)));
     await self.clients.claim();
+    // Avisa so quando havia mesmo uma versao anterior: na primeira instalacao
+    // nao existe nada para atualizar, e o aviso seria mentira.
+    if (antigos.length === 0) return;
     const abas = await self.clients.matchAll({ type: "window" });
     for (const aba of abas) {
       aba.postMessage({ tipo: "evidentia-atualizado", versao: VERSAO });
