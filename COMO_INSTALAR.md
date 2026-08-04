@@ -28,7 +28,11 @@ Baixe o arquivo [`aplicativo/Revalida_Evidentia.html`](aplicativo/Revalida_Evide
 
 ## No iPhone e no iPad
 
-No iOS, só o **Safari** consegue instalar o aplicativo na tela de início — pelo Chrome ou pelo Firefox a opção não aparece.
+Para abrir o endereço no aparelho, aponte a câmera do iPhone para este código:
+
+<div align="center"><img src="qr-instalar.png" alt="Código QR com o endereço do aplicativo" width="300"></div>
+
+No iOS, só o **Safari** consegue instalar o aplicativo na tela de início — pelo Chrome ou pelo Firefox a opção não aparece. Se o código abrir em outro navegador, copie o endereço e cole no Safari.
 
 1. Abra <https://idarragaa21-prog.github.io/evidentia-revalida/> **no Safari**.
 2. Toque no botão de compartilhar (o quadrado com uma seta para cima, na barra de baixo).
