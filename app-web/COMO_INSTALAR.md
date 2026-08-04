@@ -1,57 +1,14 @@
-# Como instalar o Evidentia · Revalida no celular
+# App web instalável (PWA)
 
-Há duas formas de ter o aplicativo no seu telefone. A **app web instalável (PWA)** funciona tanto no iPhone quanto no Android. O **arquivo APK** é só para Android.
+Esta pasta é o aplicativo publicado na web: `index.html` com todo o conteúdo embutido, o manifesto, os ícones e o *service worker* que faz o aplicativo funcionar sem internet.
 
----
+**Não edite os arquivos daqui à mão.** Eles são gerados por:
 
-## Opção 1 — App web instalável (PWA) · iPhone e Android
+```bash
+python3 scripts/08_montar_aplicativo.py   # monta o aplicativo a partir do modelo e dos dados
+python3 scripts/09_montar_pwa.py          # gera app-web/index.html e versiona o cache do sw.js
+```
 
-A app precisa estar publicada num endereço `https://` para poder ser instalada. É gratuito e leva um minuto.
+A publicação é automática: cada envio para o ramo `main` dispara [`.github/workflows/publicar-app-web.yml`](../.github/workflows/publicar-app-web.yml), que põe o conteúdo desta pasta no ar.
 
-### Passo 1 — Publicar a pasta (uma única vez)
-
-Escolha **um** destes caminhos:
-
-**a) Netlify Drop (o mais rápido, sem conta)**
-1. No computador, abra <https://app.netlify.com/drop>.
-2. Arraste a pasta `app-web` inteira para a área indicada.
-3. Em segundos aparece um endereço do tipo `https://algo.netlify.app`. Esse é o link do seu aplicativo.
-
-**b) GitHub Pages (se você subiu o repositório)**
-1. No repositório, coloque o conteúdo da pasta `app-web` dentro da pasta `docs`.
-2. Em *Settings → Pages*, escolha *Deploy from a branch*, ramo `main`, pasta `/docs`.
-3. O endereço será `https://SEU_USUARIO.github.io/evidentia-revalida/`.
-
-### Passo 2 — Instalar no telefone
-
-**No iPhone (Safari):**
-1. Abra o endereço `https://…` no **Safari**.
-2. Toque no botão de compartilhar (o quadrado com a seta para cima).
-3. Escolha **Adicionar à Tela de Início** e confirme.
-4. O ícone da Evidentia aparece na tela. Ao abri-lo, funciona em tela cheia, como um aplicativo, e sem internet depois da primeira vez.
-
-**No Android (Chrome):**
-1. Abra o endereço `https://…` no **Chrome**.
-2. Toque no menu (três pontos) e escolha **Instalar aplicativo** (ou aparece sozinho um aviso *Instalar*).
-3. O ícone aparece na tela inicial e a app funciona offline.
-
----
-
-## Opção 2 — Arquivo APK · só Android
-
-O arquivo `Evidentia-Revalida.apk` instala a app como um aplicativo Android comum.
-
-1. Passe o arquivo `Evidentia-Revalida.apk` para o celular (por cabo, e-mail, nuvem ou mensagem).
-2. Abra o arquivo no celular. O Android vai pedir permissão para **instalar apps de fontes desconhecidas** — é normal para apps fora da Play Store. Autorize para o app que estiver abrindo o arquivo (o gerenciador de arquivos ou o navegador).
-3. Confirme a instalação. O ícone **Revalida** aparece na gaveta de aplicativos.
-
-> Este APK é uma versão de teste assinada em modo *debug*, pensada para uso pessoal por instalação direta. Para publicar na Google Play seria necessário gerar uma versão assinada de produção e uma conta de desenvolvedor.
-
----
-
-## Qual escolher?
-
-- **iPhone:** só existe a Opção 1 (app web instalável). A Apple não permite instalar APK.
-- **Android:** as duas funcionam. O APK é o mais parecido com baixar um app; a app web é ainda mais leve e não pede permissões.
-
-Em todos os casos, todo o conteúdo (as 400 questões e as 22 figuras) fica dentro do próprio aplicativo e funciona **sem internet**. O seu progresso é salvo apenas no seu aparelho.
+O passo a passo de instalação para computador, iPhone e Android está em [`COMO_INSTALAR.md`](../COMO_INSTALAR.md), na raiz do repositório.

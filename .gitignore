@@ -17,6 +17,9 @@ q??.png
 *.log
 node_modules/
 
+# configuracao local do editor/assistente
+.claude/
+
 # Cadernos e gabaritos oficiais do INEP.
 # Nao sao versionados por padrao (cerca de 27 MB). Coloque-os em fontes_inep/
 # para rodar o processo de extracao. Para versiona-los, remova as duas linhas

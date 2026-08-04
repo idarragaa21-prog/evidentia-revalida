@@ -6,7 +6,7 @@
 
 Aplicativo web de arquivo único, que funciona sem internet, no celular e no computador.
 
-`400 questões` · `4 edições` · `22 figuras originais` · `gabarito oficial verificado`
+`400 questões` · `4 edições` · `26 figuras originais` · `texto e gabarito conferidos contra o caderno oficial`
 
 </div>
 
@@ -32,7 +32,7 @@ O aplicativo inteiro é **um único arquivo HTML**. Não precisa de instalação
 
 Distribuição por área: Clínica Médica (99), Ginecologia e Obstetrícia (87), Pediatria (86), Cirurgia (68) e Medicina da Família, Comunidade e Saúde Coletiva (60).
 
-As 22 questões que dependem de figura — radiografias, eletrocardiogramas, fotografias e gráficos — trazem a imagem original recortada do caderno oficial, para que possam ser respondidas por inteiro.
+As 26 questões que dependem de figura — radiografias, eletrocardiogramas, monitores, fotografias e gráficos — trazem a imagem original recortada do caderno oficial, para que possam ser respondidas por inteiro.
 
 ## Recursos
 
@@ -46,18 +46,23 @@ As 22 questões que dependem de figura — radiografias, eletrocardiogramas, fot
 
 > As questões anuladas nunca entram na pontuação. O alvo de 60% exibido é apenas orientativo para estudo: o critério oficial de aprovação é definido a cada edição pelo INEP.
 
-## Como usar
+## Como instalar
 
-Baixe o arquivo `aplicativo/Revalida_Evidentia.html` e abra-o no navegador. No celular, dá para adicioná-lo à tela de início e usá-lo como um aplicativo comum.
+O aplicativo se instala no computador, no iPhone e no Android, sempre com todo o conteúdo embutido e funcionamento offline:
 
-## Aplicativo para o celular
+| Aparelho | Como instalar |
+|:--|:--|
+| Computador (Windows, macOS, Linux) | Abrir o endereço no Chrome ou Edge e clicar em **Instalar** |
+| iPhone e iPad | Abrir no **Safari** e usar *Compartilhar → Adicionar à Tela de Início* |
+| Android | Abrir no Chrome e escolher **Instalar aplicativo**, ou instalar o APK |
 
-Além do arquivo único, o projeto traz duas formas de instalar a app no telefone, ambas com todo o conteúdo embutido e funcionamento offline:
+Endereço do aplicativo: **<https://idarragaa21-prog.github.io/evidentia-revalida/>** — publicado a partir de [`app-web/`](app-web/) pela rotina em [`.github/workflows/publicar-app-web.yml`](.github/workflows/publicar-app-web.yml) a cada envio para `main`. Para ligar a publicação, basta escolher *Settings → Pages → Source: GitHub Actions* uma única vez.
 
-- **App web instalável (PWA)** — em [`app-web/`](app-web/). Funciona no iPhone e no Android: publica-se a pasta num endereço `https://` (Netlify Drop ou GitHub Pages) e instala-se pela tela de início do navegador, com ícone próprio e tela cheia.
-- **App Android (APK)** — em [`app-android/`](app-android/). O arquivo `Evidentia-Revalida.apk` instala como um aplicativo Android comum (versão de teste, assinada em modo debug). O projeto Capacitor que o gera acompanha, com instruções em [`app-android/COMO_COMPILAR.md`](app-android/COMO_COMPILAR.md).
+Sem instalar nada, também dá para baixar [`aplicativo/Revalida_Evidentia.html`](aplicativo/Revalida_Evidentia.html) e abrir o arquivo no navegador — é um único arquivo, sem servidor nem conexão.
 
-O passo a passo de instalação para iPhone e Android está em [`COMO_INSTALAR.md`](COMO_INSTALAR.md).
+O APK está em [`app-android/Evidentia-Revalida.apk`](app-android/) (versão de teste, assinada em modo debug); o projeto Capacitor que o gera acompanha, com instruções em [`app-android/COMO_COMPILAR.md`](app-android/COMO_COMPILAR.md). **Esse APK ainda é o anterior à conferência contra o caderno oficial** — o conteúdo a empacotar (`app-android/www/`) já está corrigido, mas gerar o arquivo novo exige Android Studio. Até lá, no Android prefira a instalação pelo navegador.
+
+O passo a passo detalhado, aparelho por aparelho, está em [`COMO_INSTALAR.md`](COMO_INSTALAR.md).
 
 ## Integridade dos dados
 
@@ -69,15 +74,20 @@ Este é o ponto central do projeto, então vale ser explícito sobre o que é of
 
 **Verificações realizadas:**
 
+- **Cada palavra de cada questão foi conferida contra o caderno oficial.** O INEP passou a publicar os cadernos com texto extraível, então `scripts/10_conferir_textos_oficiais.py` compara enunciado e alternativas, campo a campo, com o PDF de cada edição. A conferência hoje termina sem nenhuma divergência.
+- Essa conferência encontrou e corrigiu perdas silenciosas da primeira extração: unidades que sumiram (`130 × 80` sem o mmHg, `3.850 mm3` virando `mmy`), cifras que sumiram no meio da frase (`duração de 8 horas` virando `duração de horas`, `homem com 65 anos` virando `homem com anos`), letras iniciais comidas e 187 caracteres não decifrados grudados na alternativa correta da questão 100 de 2024/2. Ao todo, 47 campos foram restaurados a partir do original.
+- Também apareceram **quatro questões cuja imagem havia ficado de fora** — sem ela não dava para respondê-las: as radiografias seriadas da 63 de 2023/2, o monitor multiparamétrico da 11 de 2024/2, os dois eletrocardiogramas da 46 e a radiografia de tórax da 60. Foram extraídas do caderno por `scripts/11_figuras_faltantes.py`.
+- Nos dois casos em que o banco diverge do caderno de propósito, o motivo está registrado no próprio script: o caderno de 2024/2 traz `CKP - EPI` (a sigla correta é CKD-EPI) e `Trichomonas vaginallis` (o correto é *vaginalis*).
 - Cada gabarito foi conferido por dupla verificação: leitura automática do arquivo e leitura visual da imagem oficial do gabarito definitivo, comparadas item a item.
 - As tabelas de exames laboratoriais foram transcritas a partir da imagem oficial e conferidas valor a valor, e não por leitura automática, porque um erro em resultado, unidade ou valor de referência seria especialmente danoso.
-- Todas as cifras do caderno de 2024/2 foram comparadas com o reconhecimento óptico das páginas originais; as divergências foram inspecionadas uma a uma na imagem.
 - Cada justificativa foi cruzada automaticamente contra a letra do gabarito oficial. Esse cruzamento encontrou duas justificativas erradas (questões 85 e 89 de 2024/2), que foram revistas no original e corrigidas.
-- O aplicativo passa por testes automatizados de pontuação (tudo certo, tudo errado, metade em branco, anuladas fora da conta) e de correspondência entre a alternativa exibida e a alternativa registrada quando o embaralhamento está ligado.
+- O aplicativo passa por 121 verificações automatizadas: pontuação (tudo certo, tudo errado, metade em branco, anuladas fora da conta), correspondência entre a alternativa exibida e a registrada com o embaralhamento ligado, recusa de backups malformados, atalhos de teclado, cronômetro, contraste de cores nos dois temas e ausência de transbordo em tela de 375 px.
 
 ## O caderno cifrado de 2024/2
 
-O caderno da edição 2024/2 não tem texto legível: o arquivo usa onze fontes com tabelas de caracteres deliberadamente corrompidas, de modo que copiar o texto produz apenas ruído. A extração exigiu reconstruir a codificação de cada fonte.
+O caderno da edição 2024/2 **não tinha** texto legível quando este projeto começou: o arquivo usava onze fontes com tabelas de caracteres deliberadamente corrompidas, de modo que copiar o texto produzia apenas ruído. A extração exigiu reconstruir a codificação de cada fonte.
+
+> O INEP passou a publicar esse caderno com o texto extraível. Por isso a decodificação deixou de ser a única fonte: hoje ela serve de registro do método, e o texto do banco é conferido diretamente contra o PDF oficial (veja *Integridade dos dados*). Foi essa segunda conferência que revelou o que a decodificação havia perdido.
 
 O método está descrito em [`docs/METODO_DECODIFICACAO.md`](docs/METODO_DECODIFICACAO.md). Em resumo: os glifos foram recortados do documento pelas suas coordenadas e reconhecidos individualmente, com votação entre várias ocorrências; o resultado foi arbitrado por alinhamento com o reconhecimento óptico das páginas; e os códigos que escondiam mais de um caractere — o mesmo código servia ao sinal de mais das cruzes clínicas e ao dígito sete — foram separados por agrupamento da forma dos glifos, com conferência visual no original.
 
@@ -86,15 +96,16 @@ Ao final, as cem questões ficaram sem um único caractere ilegível.
 ## Estrutura do repositório
 
 ```
-aplicativo/     aplicativo pronto para uso (arquivo HTML único)
-app-web/        app web instalável (PWA) para iPhone e Android
-app-android/    projeto Android (Capacitor) e APK pronto para instalar
-modelo/         modelo HTML sem os dados, usado na montagem
-dados/          banco de questões, figuras e tabelas de decodificação (JSON)
-fontes_inep/    cadernos de prova e gabaritos oficiais (PDF)
-scripts/        processo completo de extração, verificação e montagem
-testes/         testes automatizados do aplicativo
-docs/           método de decodificação e plano da interface
+aplicativo/          aplicativo pronto para uso (arquivo HTML único)
+app-web/             app web instalável (PWA) para computador, iPhone e Android
+app-android/         projeto Android (Capacitor) e APK pronto para instalar
+modelo/              modelo HTML sem os dados, usado na montagem
+dados/               banco de questões, figuras e tabelas de decodificação (JSON)
+fontes_inep/         cadernos de prova e gabaritos oficiais (PDF)
+scripts/             processo completo de extração, verificação e montagem
+testes/              testes automatizados do aplicativo
+docs/                método de decodificação e plano da interface
+.github/workflows/   publicação automática da app web no GitHub Pages
 ```
 
 ## Reproduzir
@@ -106,16 +117,27 @@ pip install pymupdf pillow
 python3 scripts/08_montar_aplicativo.py
 ```
 
-O comando acima reconstrói `aplicativo/Revalida_Evidentia.html` byte a byte idêntico ao arquivo versionado.
+O comando acima reconstrói `aplicativo/Revalida_Evidentia.html` byte a byte idêntico ao arquivo versionado. Para gerar também a app web instalável e sincronizar o projeto Android:
+
+```bash
+python3 scripts/09_montar_pwa.py
+```
 
 Para refazer o processo desde os PDF originais, os scripts estão numerados na ordem de execução, de `01_extrair_provas_legiveis.py` a `08_montar_aplicativo.py`. Eles leem os arquivos de `fontes_inep/`; para apontar para outra pasta, defina a variável de ambiente `REVALIDA_FONTES`.
+
+Os dois scripts de conferência contra a fonte oficial exigem `PyMuPDF` e os cadernos em `fontes_inep/`:
+
+```bash
+python3 scripts/10_conferir_textos_oficiais.py   # confere; --corrigir grava as correções
+python3 scripts/11_figuras_faltantes.py          # extrai as figuras que faltarem
+```
 
 > Os cadernos e gabaritos oficiais em PDF **não são versionados por padrão**, por ocuparem cerca de 27 MB. Baixe-os do portal do INEP e coloque-os em `fontes_inep/` com os nomes indicados em [`fontes_inep/FONTES.md`](fontes_inep/FONTES.md). Para versioná-los mesmo assim, remova a última regra do `.gitignore` e rode `git add -f fontes_inep/*.pdf`.
 
 Os testes usam Node com Playwright:
 
 ```bash
-node testes/teste_funcional.mjs
+npm install && npm run preparar && npm test
 ```
 
 ## Fonte

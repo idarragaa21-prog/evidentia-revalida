@@ -1,0 +1,22 @@
+{
+  "name": "evidentia-revalida",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidentia · Revalida — suíte de testes automatizados do aplicativo (Playwright)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "preparar": "playwright install chromium",
+    "teste:funcional": "node testes/teste_funcional.mjs",
+    "teste:tema": "node testes/teste_tema_escuro.mjs",
+    "capturas:telas": "node testes/capturas_telas.mjs",
+    "capturas:figuras": "node testes/capturas_figuras.mjs",
+    "test": "npm run teste:funcional && npm run teste:tema && npm run capturas:telas && npm run capturas:figuras"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

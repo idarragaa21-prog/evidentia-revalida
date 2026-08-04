@@ -1,0 +1,94 @@
+# Publica a app web instalavel (PWA) no GitHub Pages.
+#
+# O que vai para o ar: apenas o conteudo de app-web/, na raiz do site.
+# Assim o service worker (sw.js) tem alcance sobre todo o site e os caminhos
+# relativos do manifesto e dos icones continuam validos. A pasta docs/, que
+# guarda documentacao interna em markdown, nao e publicada -- por isso o
+# deploy e feito por Actions, e nao pela opcao "Deploy from a branch /docs".
+#
+# Endereco do site: https://idarragaa21-prog.github.io/evidentia-revalida/
+#
+# PASSO MANUAL, uma unica vez, antes da primeira publicacao:
+#   Settings -> Pages -> Build and deployment -> Source: "GitHub Actions"
+# (o token padrao do workflow nao tem permissao para ligar o Pages sozinho)
+
+name: Publicar app web (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissoes minimas para publicar no Pages usando o GITHUB_TOKEN.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Uma publicacao de cada vez. Nao cancela a que estiver em andamento, para
+# nao deixar o site num estado intermediario.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    name: Publicar app-web/
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - name: Baixar o repositorio
+        uses: actions/checkout@v7
+
+      - name: Configurar o GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Conferir os arquivos da PWA
+        run: |
+          set -euo pipefail
+
+          for arquivo in \
+            app-web/index.html \
+            app-web/manifest.webmanifest \
+            app-web/sw.js \
+            app-web/icons/icon-192.png \
+            app-web/icons/icon-512.png \
+            app-web/icons/icon-512-maskable.png \
+            app-web/icons/apple-touch-icon-180.png
+          do
+            if [ ! -f "$arquivo" ]; then
+              echo "arquivo faltando: $arquivo"
+              exit 1
+            fi
+          done
+
+          python3 -c "import json; json.load(open('app-web/manifest.webmanifest'))"
+          node --check app-web/sw.js
+
+          if ! grep -q 'manifest.webmanifest' app-web/index.html; then
+            echo 'index.html sem <link rel="manifest">: rode scripts/09_montar_pwa.py'
+            exit 1
+          fi
+
+          if ! grep -q 'serviceWorker' app-web/index.html; then
+            echo 'index.html sem o registro do service worker: rode scripts/09_montar_pwa.py'
+            exit 1
+          fi
+
+          if grep -q 'const VERSAO = "dev"' app-web/sw.js; then
+            echo 'sw.js ainda com VERSAO="dev": rode scripts/09_montar_pwa.py antes de publicar'
+            exit 1
+          fi
+
+          echo "app-web/ conferida ($(du -sh app-web | cut -f1))"
+
+      - name: Empacotar a pasta app-web
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: app-web
+
+      - name: Publicar no GitHub Pages
+        id: publicacao
+        uses: actions/deploy-pages@v5
