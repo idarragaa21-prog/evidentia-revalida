@@ -13,7 +13,7 @@ usando o Capacitor. O arquivo pronto para instalar já está aqui:
 
 ## Recompilar o APK
 
-Requer Node, Java 17+ e o Android SDK (plataforma 34 e build-tools 34).
+Requer Node, Java 17 ou 21 (nao 22+: o Gradle deste projeto nao os suporta) e o Android SDK (plataforma 34 e build-tools 34).
 
 ```bash
 npm install
