@@ -42,6 +42,15 @@ As 26 questões que dependem de figura — radiografias, eletrocardiogramas, mon
 
 **Depois da prova.** Percentual de acerto, acertos, erros, questões em branco, tempo total e tempo médio por questão; aproveitamento por área e por edição; revisão questão a questão com filtros; e a opção de refazer somente as erradas.
 
+**A justificativa de cada questão.** É onde está o trabalho. Cada questão traz o conceito que
+ela cobra, por que o gabarito é o gabarito, por que **cada** distrator falha naquele caso, os
+pontos para levar à prova e as **referências**: o documento, o autor, o ano, o endereço e a
+indicação de onde dentro dele está o respaldo. As fontes vêm de um catálogo que foi conferido
+documento por documento — protocolos do Ministério da Saúde, PCDT, diretrizes das sociedades
+brasileiras e guias internacionais. Quando o catálogo não cobre o ponto, a questão aparece
+com o selo *estudo* em vez de referências, porque citar uma fonte que não sustenta a
+afirmação seria pior do que não citar.
+
 **Fora da prova.** Histórico com desempenho acumulado por área, tema claro e escuro, exportação e importação do progresso em arquivo, e impressão do caderno de erros.
 
 > As questões anuladas nunca entram na pontuação. O alvo de 60% exibido é apenas orientativo para estudo: o critério oficial de aprovação é definido a cada edição pelo INEP.
@@ -96,15 +105,18 @@ Ao final, as cem questões ficaram sem um único caractere ilegível.
 ## Estrutura do repositório
 
 ```
-aplicativo/          aplicativo pronto para uso (arquivo HTML único)
-app-web/             app web instalável (PWA) para computador, iPhone e Android
+aplicativo/          aplicativo montado (edições completa, livre e de teste)
+app-web/             app web instalável (PWA) — publica a edição livre
 app-android/         projeto Android (Capacitor) e APK pronto para instalar
+app-desktop/         aplicativo de computador (Electron) e instaladores
 modelo/              modelo HTML sem os dados, usado na montagem
-dados/               banco de questões, figuras e tabelas de decodificação (JSON)
+dados/               banco de questões, figuras, catálogo de fontes e justificativas
+nuvem/               assinaturas: esquema, funções de borda, provas e painel do dono
 fontes_inep/         cadernos de prova e gabaritos oficiais (PDF)
+produto/             plano do produto e runbook de ativação
 scripts/             processo completo de extração, verificação e montagem
 testes/              testes automatizados do aplicativo
-docs/                método de decodificação e plano da interface
+docs/                método de decodificação, esquema das justificativas, interface
 .github/workflows/   publicação automática da app web no GitHub Pages
 ```
 
@@ -117,10 +129,20 @@ pip install pymupdf pillow
 python3 scripts/08_montar_aplicativo.py
 ```
 
-O comando acima reconstrói `aplicativo/Revalida_Evidentia.html` byte a byte idêntico ao arquivo versionado. Para gerar também a app web instalável e sincronizar o projeto Android:
+O comando acima monta duas edições a partir do mesmo modelo: a **completa**, que pede
+assinatura, e a **livre**, com um recorte gratuito e sem conta. Para gerar também a app web
+instalável (que publica a edição livre) e sincronizar o projeto Android com a completa:
 
 ```bash
 python3 scripts/09_montar_pwa.py
+```
+
+As justificativas com referências vivem fora do banco, em `dados/justificativas/`, e o
+catálogo de fontes em `dados/referencias.json`. A porta de qualidade confere as duas coisas
+contra o banco e falha se alguma referência citada não existir no catálogo:
+
+```bash
+python3 scripts/12_validar_justificativas.py
 ```
 
 Para refazer o processo desde os PDF originais, os scripts estão numerados na ordem de execução, de `01_extrair_provas_legiveis.py` a `08_montar_aplicativo.py`. Eles leem os arquivos de `fontes_inep/`; para apontar para outra pasta, defina a variável de ambiente `REVALIDA_FONTES`.
