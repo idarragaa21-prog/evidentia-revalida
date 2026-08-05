@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Evidentia · Revalida — Painel</title>
+<style>
+:root{
+  --navy:#1b2e22; --sky:#2f6047; --sky-100:#e2ede7; --gold:#b08d4c;
+  --good:#0f6b45; --good-100:#e3f3ec; --bad:#9d3a2b; --bad-100:#f8e9e5;
+  --bg:#f4f3ec; --card:#fff; --ink:#1a2620; --ink-2:#4d5a51; --ink-3:#69756b;
+  --line:#d3e1d8; --r:14px;
+  --ff:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--ff);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{background:var(--card);border-bottom:2px solid var(--sky);padding:14px 0}
+header .wrap{display:flex;align-items:baseline;gap:12px}
+header b{font-family:var(--serif);font-size:19px;letter-spacing:.06em}
+header small{color:var(--ink-3)}
+header .sair{margin-left:auto;font-size:13px;color:var(--ink-3);cursor:pointer;background:none;border:none;text-decoration:underline}
+main{padding:26px 0 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:18px;
+  box-shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.07)}
+h2{margin:0 0 14px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky)}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin:12px 0 5px}
+input,select{width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+input:focus,select:focus{outline:2.5px solid var(--sky);outline-offset:1px}
+button.acao{font:inherit;font-weight:700;border:none;border-radius:11px;padding:12px 18px;cursor:pointer;margin-top:14px}
+.acao.principal{background:var(--gold);color:#2e2404;width:100%}
+.acao.sec{background:var(--sky-100);color:var(--sky)}
+.acao.perigo{background:var(--bad-100);color:var(--bad)}
+.acao:disabled{opacity:.55;cursor:default}
+.msg{margin-top:12px;font-size:13.5px;color:var(--ink-3);min-height:18px}
+.msg.erro{color:var(--bad)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.tile b{display:block;font-size:26px;font-family:var(--serif)}
+.tile span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px}
+.pill.ativo{background:var(--good-100);color:var(--good)}
+.pill.inativo{background:var(--bad-100);color:var(--bad)}
+.pill.cortesia{background:#f3ead2;color:#6a5410}
+.mini{font-size:12px;color:var(--ink-3)}
+.linha-acoes{display:flex;gap:8px;flex-wrap:wrap}
+.linha-acoes .acao{margin-top:0;padding:7px 12px;font-size:12.5px}
+.duo{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+@media(max-width:640px){.duo{grid-template-columns:1fr}}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <b>EVIDENTIA</b><small>Revalida · painel do dono</small>
+  <button class="sair hidden" id="btnSair" onclick="sair()">sair</button>
+</div></header>
+<main><div class="wrap">
+
+  <div class="card" id="cardConfig">
+    <h2>Conexão</h2>
+    <p class="mini">Preencha uma vez; fica guardado só neste navegador. Use a chave <b>publicável</b> do
+    projeto (a mesma do aplicativo). O painel só funciona para contas que estão na tabela
+    <code>admins</code> — qualquer outra recebe «apenas administradores».</p>
+    <label>URL do projeto Supabase</label>
+    <input id="cfgUrl" placeholder="https://xxxx.supabase.co" autocomplete="off">
+    <label>Chave publicável</label>
+    <input id="cfgChave" placeholder="sb_publishable_…" autocomplete="off">
+  </div>
+
+  <div class="card" id="cardEntrar">
+    <h2>Entrar</h2>
+    <label>E-mail</label>
+    <input id="loginEmail" type="email" autocomplete="username">
+    <label>Senha</label>
+    <input id="loginSenha" type="password" autocomplete="current-password">
+    <button class="acao principal" id="btnEntrar" onclick="entrar()">Entrar</button>
+    <div class="msg" id="msgLogin" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="hidden" id="painel">
+    <div class="card">
+      <h2>Resumo</h2>
+      <div class="tiles" id="tiles"></div>
+    </div>
+
+    <div class="card">
+      <h2>Conceder acesso</h2>
+      <p class="mini">A pessoa precisa ter criado a conta antes (no aplicativo, «Criar conta»).
+      Conceder de novo substitui a cortesia anterior; nunca mexe num acesso pago.</p>
+      <div class="duo">
+        <div><label>E-mail da pessoa</label><input id="gEmail" type="email" autocomplete="off"></div>
+        <div><label>Dias de acesso</label><input id="gDias" type="number" value="365" min="1" max="3650"></div>
+      </div>
+      <label>Nota (só você vê)</label>
+      <input id="gNota" placeholder="ex.: colega do piloto, imprensa, permuta" autocomplete="off">
+      <button class="acao principal" id="btnConceder" onclick="conceder()">Conceder acesso</button>
+      <div class="msg" id="msgConceder" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h2>Pessoas</h2>
+      <label>Buscar por e-mail ou nome</label>
+      <input id="busca" placeholder="deixe vazio para ver as mais recentes" autocomplete="off"
+             onkeydown="if(event.key==='Enter')listar()">
+      <button class="acao sec" onclick="listar()">Buscar</button>
+      <div class="msg" id="msgLista" role="status" aria-live="polite"></div>
+      <div style="overflow-x:auto"><table class="hidden" id="tabela">
+        <thead><tr><th>Pessoa</th><th>Acesso</th><th>Vence</th><th></th></tr></thead>
+        <tbody id="corpo"></tbody>
+      </table></div>
+    </div>
+  </div>
+
+</div></main>
+<script>
+"use strict";
+/* Painel do dono: um arquivo, sem dependências, falando direto com as RPC do Supabase.
+   Nenhum segredo aqui: entra a chave publicável e a segurança quem faz é o banco
+   (RLS + is_admin nas próprias funções). */
+
+const cfg = {
+  get url(){ return (localStorage.getItem("painel_url")||"").replace(/\/+$/,""); },
+  set url(v){ localStorage.setItem("painel_url", v.trim()); },
+  get chave(){ return localStorage.getItem("painel_chave")||""; },
+  set chave(v){ localStorage.setItem("painel_chave", v.trim()); },
+  get sessao(){ try{ return JSON.parse(sessionStorage.getItem("painel_sessao")||"null"); }catch(e){ return null; } },
+  set sessao(v){ v ? sessionStorage.setItem("painel_sessao", JSON.stringify(v)) : sessionStorage.removeItem("painel_sessao"); },
+};
+
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function diz(sel, txt, erro){ const el=$(sel); el.textContent=txt||""; el.classList.toggle("erro", !!erro); }
+
+async function api(caminho, corpo, token){
+  const r = await fetch(cfg.url+caminho, {
+    method:"POST",
+    headers:{ apikey:cfg.chave, "content-type":"application/json",
+              ...(token?{Authorization:"Bearer "+token}:{}) },
+    body: JSON.stringify(corpo??{}),
+  });
+  const t = await r.text();
+  let d=null; try{ d=t?JSON.parse(t):null; }catch(e){ d={message:t}; }
+  if(!r.ok) throw new Error(d?.error_description||d?.msg||d?.message||("erro "+r.status));
+  return d;
+}
+const rpc = (nome,args)=>api("/rest/v1/rpc/"+nome, args||{}, cfg.sessao?.access_token);
+
+async function entrar(){
+  cfg.url=$("#cfgUrl").value; cfg.chave=$("#cfgChave").value;
+  if(!cfg.url||!cfg.chave){ diz("#msgLogin","Preencha a URL e a chave do projeto.",true); return; }
+  $("#btnEntrar").disabled=true; diz("#msgLogin","Entrando…");
+  try{
+    const r = await api("/auth/v1/token?grant_type=password",
+      {email:$("#loginEmail").value.trim().toLowerCase(), password:$("#loginSenha").value});
+    cfg.sessao = {access_token:r.access_token, email:$("#loginEmail").value.trim()};
+    const eu = await rpc("meu_acesso");
+    if(!eu?.admin){ cfg.sessao=null; diz("#msgLogin","Essa conta não é administradora.",true); return; }
+    mostrarPainel();
+  }catch(e){
+    diz("#msgLogin", /Invalid login/i.test(e.message)?"E-mail ou senha incorretos.":("Não deu: "+e.message), true);
+  }finally{ $("#btnEntrar").disabled=false; }
+}
+
+function sair(){ cfg.sessao=null; location.reload(); }
+
+async function mostrarPainel(){
+  $("#cardEntrar").classList.add("hidden");
+  $("#cardConfig").classList.add("hidden");
+  $("#painel").classList.remove("hidden");
+  $("#btnSair").classList.remove("hidden");
+  await Promise.all([resumo(), listar()]);
+}
+
+async function resumo(){
+  try{
+    const r = await rpc("resumo_assinaturas");
+    $("#tiles").innerHTML = [
+      ["contas","Contas"],["ativas","Acessos ativos"],["pagantes","Pagantes"],
+      ["cortesias","Cortesias"],["vencem_30d","Vencem em 30 dias"],
+    ].map(([k,rot])=>`<div class="tile"><b>${Number(r?.[k]??0)}</b><span>${rot}</span></div>`).join("");
+  }catch(e){ $("#tiles").innerHTML = `<div class="mini">resumo indisponível: ${esc(e.message)}</div>`; }
+}
+
+function fmt(dt){ return dt ? new Date(dt).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric"}) : "—"; }
+
+async function listar(){
+  diz("#msgLista","Buscando…");
+  try{
+    const linhas = await rpc("listar_pessoas", {p_busca:$("#busca").value.trim()||null, p_limite:100});
+    const corpo = $("#corpo");
+    corpo.innerHTML = (linhas||[]).map(p=>{
+      const a = p.acesso||{};
+      const estado = a.ativo
+        ? `<span class="pill ${a.origem==="pagamento"?"ativo":"cortesia"}">${a.origem==="pagamento"?"pagante":esc(a.origem)}</span>`
+        : `<span class="pill inativo">sem acesso</span>`;
+      return `<tr>
+        <td><b>${esc(p.nome)}</b><br><span class="mini">${esc(p.email)}</span></td>
+        <td>${estado}</td>
+        <td>${a.ativo?fmt(a.fim):"—"}</td>
+        <td><div class="linha-acoes">
+          <button class="acao sec" onclick="preencher('${esc(p.email)}')">conceder…</button>
+          ${a.ativo?`<button class="acao perigo" onclick="revogar('${esc(p.email)}')">revogar</button>`:""}
+        </div></td>
+      </tr>`;
+    }).join("");
+    $("#tabela").classList.toggle("hidden", !(linhas||[]).length);
+    diz("#msgLista", (linhas||[]).length ? "" : "Nenhuma conta encontrada.");
+  }catch(e){ diz("#msgLista","Não deu: "+e.message, true); }
+}
+
+function preencher(email){ $("#gEmail").value=email; $("#gEmail").scrollIntoView({behavior:"smooth",block:"center"}); }
+
+async function conceder(){
+  const email=$("#gEmail").value.trim().toLowerCase();
+  const dias=parseInt($("#gDias").value,10);
+  if(!email){ diz("#msgConceder","Escreva o e-mail.",true); return; }
+  if(!(dias>=1&&dias<=3650)){ diz("#msgConceder","Dias entre 1 e 3650.",true); return; }
+  $("#btnConceder").disabled=true; diz("#msgConceder","Concedendo…");
+  try{
+    const r = await rpc("conceder_acesso",
+      {p_email:email, p_dias:dias, p_origem:"cortesia", p_nota:$("#gNota").value.trim()||null});
+    diz("#msgConceder", `Feito: acesso até ${fmt(r.fim)}.`);
+    await Promise.all([resumo(), listar()]);
+  }catch(e){
+    diz("#msgConceder", /nao existe conta|no_data/i.test(e.message)
+      ? "Essa pessoa ainda não criou conta no aplicativo. Peça que crie primeiro (é grátis) e conceda de novo."
+      : "Não deu: "+e.message, true);
+  }finally{ $("#btnConceder").disabled=false; }
+}
+
+async function revogar(email){
+  if(!confirm(`Revogar o acesso de ${email}?\n\nA pessoa perde o acesso quando a licença atual do aparelho vencer (até 30 dias).`)) return;
+  try{
+    await rpc("revogar_acesso", {p_email:email, p_nota:"revogado pelo painel"});
+    await Promise.all([resumo(), listar()]);
+  }catch(e){ alert("Não deu: "+e.message); }
+}
+
+(function init(){
+  $("#cfgUrl").value=cfg.url; $("#cfgChave").value=cfg.chave;
+  if(cfg.sessao) mostrarPainel();
+})();
+</script>
+</body>
+</html>

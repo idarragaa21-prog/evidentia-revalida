@@ -35,3 +35,8 @@ app-android/android/local.properties
 app-android/android/capacitor-cordova-android-plugins/build/
 *.keystore
 *.jks
+
+# Chaves de licenca: a privada NUNCA entra no repositorio.
+nuvem/chaves/
+!nuvem/chaves/.gitkeep
+nuvem/supabase/client_config.local.json

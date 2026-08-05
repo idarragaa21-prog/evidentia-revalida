@@ -1,0 +1,5 @@
+{
+  "url": "https://SEU-PROJETO.supabase.co",
+  "chave_publicavel": "sb_publishable_XXXXXXXXXXXX",
+  "_nota": "Copie para client_config.local.json com os dados do seu projeto. Apenas a chave PUBLICAVEL (anon). A service_role NUNCA entra aqui nem no aplicativo."
+}

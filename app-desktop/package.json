@@ -1,0 +1,53 @@
+{
+  "name": "evidentia-revalida-desktop",
+  "productName": "Evidentia Revalida",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Banco de questões do Revalida — aplicativo de computador da Evidentia",
+  "author": {
+    "name": "Evidentia — Diego Alejandro Idárraga López",
+    "email": "contato@evidentia.co"
+  },
+  "license": "UNLICENSED",
+  "main": "main.js",
+  "scripts": {
+    "preparar": "node preparar_conteudo.mjs",
+    "iniciar": "npm run preparar && electron .",
+    "empacotar": "npm run preparar && electron-builder --publish never",
+    "empacotar:mac": "npm run preparar && electron-builder --mac --publish never",
+    "empacotar:win": "npm run preparar && electron-builder --win --publish never",
+    "empacotar:linux": "npm run preparar && electron-builder --linux --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "co.evidentia.revalida",
+    "productName": "Evidentia Revalida",
+    "copyright": "© 2026 Evidentia — Diego Alejandro Idárraga López",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "preload.js", "conteudo/**/*", "!node_modules/**/*"],
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [{ "target": "dmg", "arch": ["arm64", "x64"] }],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "icon": "recursos/icone.icns"
+    },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "recursos/icone.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Evidentia Revalida"
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "category": "Education",
+      "icon": "recursos/icone.png"
+    }
+  }
+}

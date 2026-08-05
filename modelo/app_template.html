@@ -326,11 +326,56 @@ table.perf td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight
 [data-theme="dark"] .just summary{color:var(--ink)}
 .just summary::-webkit-details-marker{display:none}
 .just summary .badge{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.03em;padding:4px 9px;border-radius:7px;background:var(--gold-100);color:var(--gold-ink);text-transform:uppercase}
+.just summary .badge.ref{background:var(--sky-100);color:var(--sky-600)}
+[data-theme="dark"] .just summary .badge.ref{color:var(--sky)}
 .just .body{padding:16px;font-size:15px;line-height:1.62;color:var(--ink-2);white-space:pre-wrap}
 .just .src{padding:0 16px 14px;font-size:12px;color:var(--ink-3)}
 .just .embaviso{margin:0 16px 14px;padding:9px 11px;border-radius:9px;background:var(--gold-100);
   color:var(--gold-ink);font-size:12px;line-height:1.45}
 .chev{transition:transform .2s} .just[open] .chev{transform:rotate(90deg)}
+
+/* atribuição da fonte oficial, por questão */
+.fonteinep{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
+  font-size:11.5px;line-height:1.5;color:var(--ink-3)}
+.fonteinep a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px}
+
+/* campos de formulário (conta e ativação) */
+.campo{display:block}
+.campo>span{display:block;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:6px}
+.campo>input{width:100%;font-family:inherit;font-size:16px;color:var(--ink);background:var(--card);
+  border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;min-height:48px}
+.campo>input:focus-visible{outline:2.5px solid var(--sky);outline-offset:1px;border-color:var(--sky)}
+.campo>input::placeholder{color:var(--ink-3);opacity:.7}
+
+/* justificativa estruturada: conceito, defesa do gabarito, queda dos distratores, fontes */
+.jconceito{margin:16px 16px 0;padding:12px 14px;border-radius:11px;background:var(--sky-050);
+  border-left:3px solid var(--sky);font-size:15px;line-height:1.55;font-weight:700;color:var(--navy)}
+[data-theme="dark"] .jconceito{color:var(--ink)}
+.jsec{padding:16px 16px 0}
+.jsec-h{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;margin-bottom:8px;color:var(--ink-3)}
+.jsec-h::before{content:"";width:9px;height:9px;border-radius:3px;background:currentColor;flex:none}
+.jsec-h.ok{color:var(--good-ink)} .jsec-h.no{color:var(--bad-ink)}
+.jsec-h.key{color:var(--gold-ink)} .jsec-h.ref{color:var(--sky-600)}
+[data-theme="dark"] .jsec-h.ref{color:var(--sky)}
+.jsec p{font-size:15px;line-height:1.62;color:var(--ink-2)}
+.jdist{display:flex;gap:11px;align-items:flex-start;margin-bottom:11px}
+.jdist:last-child{margin-bottom:0}
+.jletra{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+  font-weight:800;font-size:13px;background:var(--bad-100);color:var(--bad-ink);margin-top:1px}
+.jpontos{margin:0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--ink-2)}
+.jpontos li{margin-bottom:6px} .jpontos li:last-child{margin-bottom:0}
+.jrefs{padding:16px 16px 4px;margin-top:16px;border-top:1px solid var(--line);background:var(--navy-050)}
+.jrefs ol{margin:0;padding-left:20px}
+.jref{margin-bottom:12px;font-size:13.5px;line-height:1.5}
+.jref:last-child{margin-bottom:0}
+.jref-t{font-weight:700;color:var(--ink)}
+.jref-t a{color:var(--sky-600);text-decoration:underline;text-underline-offset:2px}
+[data-theme="dark"] .jref-t a{color:var(--sky)}
+.jref-m{color:var(--ink-3);font-size:12.5px;margin-top:1px}
+.jref-d{color:var(--ink-2);font-size:12.5px;margin-top:3px;font-style:italic}
+.just .jrefs + .src{padding-top:12px}
 
 /* histórico */
 .hist-item{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);border-radius:13px;margin-bottom:10px;background:var(--card)}
@@ -417,6 +462,13 @@ kbd{font-family:var(--ff);background:var(--navy-050);border:1px solid var(--line
   .just{border:1px solid #bbb}
   .just .body,.just .src{display:block!important}
   .just summary .badge{border:1px solid #bbb}
+  /* no papel a justificativa vai inteira, e a referência tem que poder ser conferida */
+  .jconceito,.jsec,.jrefs{display:block!important;background:#fff!important;border-color:#bbb!important}
+  .jconceito{border-left:3px solid #666!important;color:#000!important}
+  .jsec p,.jpontos,.jref-d,.jref-m{color:#222!important}
+  .jref-t a{color:#000!important}
+  .jref-t a::after{content:" (" attr(href) ")";font-weight:400;font-size:10px;word-break:break-all}
+  .jletra{border:1px solid #bbb;background:#fff!important;color:#000!important}
   .enun,.alt .txt,.alt .key{color:#000!important}
   .alt{border-color:#bbb!important;break-inside:avoid}
   h2{margin-bottom:8px}
@@ -433,6 +485,9 @@ kbd{font-family:var(--ff);background:var(--navy-050);border:1px solid var(--line
     <div class="spacer"></div>
     <button class="iconbtn" id="themeBtn" title="Tema claro/escuro" onclick="toggleTheme()" aria-label="Alternar tema">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+    </button>
+    <button class="iconbtn hidden" id="contaBtn" title="Sua assinatura" onclick="go('conta')" aria-label="Sua assinatura">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>
     </button>
     <button class="iconbtn" title="Início" onclick="go('home')" aria-label="Início">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
@@ -454,7 +509,13 @@ kbd{font-family:var(--ff);background:var(--navy-050);border:1px solid var(--line
 /*==================== DADOS ====================*/
 const QUESTOES = /*__DATA__*/ [];
 const META = /*__META__*/ {};
+const REFS = /*__REFS__*/ {};
 const FIGS = /*__FIGS__*/ {};
+/* "livre" = edição gratuita, já traz só o recorte de questões e não pede conta.
+   "completo" = edição assinada, exige licença válida. */
+const EDICAO = "__EDICAO__";
+const NUVEM = /*__NUVEM__*/ {};
+const CHAVE_LICENCA = "__CHAVE_LICENCA__";
 
 /*==================== ESTADO ====================*/
 const AREAS = ["Clínica Médica","Cirurgia","Pediatria","Ginecologia e Obstetrícia","Medicina da Família, Comunidade e Saúde Coletiva"];
@@ -496,9 +557,15 @@ function poolFor(c){
 }
 
 /*==================== RENDER PRINCIPAL ====================*/
+let telaAtual="home";
 function render(scr,arg){
-  const el=$("#screen"); el.className=""; el.classList.add("fade");
+  /* "wrap" precisa sobreviver ao render: é ela que dá a largura máxima e a margem
+     lateral da coluna de conteúdo. Sem ela o conteúdo cola nas bordas da tela. */
+  const el=$("#screen"); el.className="wrap"; el.classList.add("fade");
   if(scr!=="quiz") unbindQuizKeys();   // fora da prova, A–D e as setas voltam a ser teclas comuns
+  /* Na edição assinada, sem licença válida só existe a tela de conta. */
+  if(EDICAO==="completo" && !LIC.estado().liberado && scr!=="conta" && scr!=="about") scr="conta";
+  telaAtual=scr;
   if(scr==="home" && atualizacaoPendente) setTimeout(avisarAtualizacao,300);
   if(scr==="home"){ el.innerHTML=viewHome(); syncHome(); }   // atalhos de quantidade e resumo são preenchidos por JS
   else if(scr==="quiz") { el.innerHTML=viewQuiz(); bindQuizKeys(); }
@@ -506,6 +573,7 @@ function render(scr,arg){
   else if(scr==="review") el.innerHTML=viewReview(arg||"todas");
   else if(scr==="history") el.innerHTML=viewHistory();
   else if(scr==="about") el.innerHTML=viewAbout();
+  else if(scr==="conta") el.innerHTML=viewConta(arg);
   el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
 }
 
@@ -1022,21 +1090,85 @@ function reviewCard(it,q){
     ${figBlock(q)}
     <div class="alts">${opts}</div>
     ${justBlock(q,it)}
+    ${fonteOficial(q)}
   </div>`;
+}
+
+/* Atribuição por questão. É exigência da licença CC BY-ND sob a qual o Inep publica as
+   provas, e do art. 46 III da Lei 9.610/1998. Fica junto do item, não só no rodapé,
+   porque é o enunciado daquela questão que veio do Inep. */
+function fonteOficial(q){
+  return `<div class="fonteinep">Enunciado, alternativas e gabarito: <b>Inep — Revalida ${esc(q.edicao)}</b>,
+    Prova Objetiva, reproduzidos sem alteração.
+    <a href="https://download.inep.gov.br/" target="_blank" rel="noopener noreferrer">download.inep.gov.br</a> ·
+    <a href="https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR" target="_blank" rel="noopener noreferrer">CC BY-ND 3.0</a>.
+    A Evidentia não tem vínculo com o Inep nem com o Ministério da Educação.</div>`;
 }
 /* Com as alternativas embaralhadas, a letra do caderno oficial deixa de ser a letra
    que o candidato vê na tela — e as explicações citam a do caderno. Mostramos as duas. */
 function letraExibida(it,orig){ if(!it||!it.order)return null; const p=it.order.indexOf(orig); return p<0?null:"ABCD"[p]; }
+/* Uma referência do catálogo, com o ponteiro para onde dentro da fonte está o respaldo. */
+function refItem(r){
+  const f = REFS[r.id];
+  if(!f) return "";
+  const alvo = f.doi ? `https://doi.org/${f.doi}` : f.url;
+  const titulo = alvo
+    ? `<a href="${esc(alvo)}" target="_blank" rel="noopener noreferrer">${esc(f.titulo)}</a>`
+    : esc(f.titulo);
+  return `<li class="jref">
+    <div class="jref-t">${titulo}</div>
+    <div class="jref-m">${esc(f.autor)} · ${f.ano}${f.doi?` · doi ${esc(f.doi)}`:""}</div>
+    ${r.detalhe?`<div class="jref-d">${esc(r.detalhe)}</div>`:""}
+  </li>`;
+}
+
+/* Justificativa estruturada: conceito, defesa do gabarito, queda de cada distrator e
+   as fontes que sustentam tudo isso. Questões antigas (sem `just`) caem na prosa. */
+function justCorpo(q,letra){
+  const j = q.just;
+  if(!j) return `<div class="body">${esc(q.explicacao||"—")}</div>`;
+  const dist = j.distratores||{};
+  const ordem = Object.keys(dist).sort();
+  const pontos = j.pontos_chave||[];
+  const refs = (j.referencias||[]).filter(r=>REFS[r.id]);
+  return `
+    ${j.conceito?`<div class="jconceito">${esc(j.conceito)}</div>`:""}
+    <div class="jsec">
+      <div class="jsec-h ok">${q.anulada?"Por que foi anulada":`Por que a resposta é ${letra}`}</div>
+      <p>${esc(j.correta||"")}</p>
+    </div>
+    ${ordem.length?`<div class="jsec">
+      <div class="jsec-h no">Por que as outras não servem</div>
+      ${ordem.map(l=>`<div class="jdist"><span class="jletra">${l}</span><p>${esc(dist[l])}</p></div>`).join("")}
+    </div>`:""}
+    ${pontos.length?`<div class="jsec">
+      <div class="jsec-h key">Para levar na prova</div>
+      <ul class="jpontos">${pontos.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+    </div>`:""}
+    ${refs.length?`<div class="jrefs">
+      <div class="jsec-h ref">Referências</div>
+      <ol>${refs.map(refItem).join("")}</ol>
+    </div>`:""}`;
+}
+
 function justBlock(q,it){
   const emb = it && it.order && it.order.join("")!=="ABCD";
   const disp = emb ? letraExibida(it,q.gabarito) : null;
   const gab = q.anulada ? "anulada"
     : (emb&&disp ? `${disp}</b> nesta ordem <b>·</b> ${q.gabarito}<b> no caderno oficial` : q.gabarito);
+  const j = q.just;
+  const nrefs = j ? (j.referencias||[]).filter(r=>REFS[r.id]).length : 0;
+  const selo = nrefs
+    ? `<span class="badge ref">${nrefs} ${nrefs===1?"referência":"referências"}</span>`
+    : `<span class="badge">estudo</span>`;
+  const rodape = nrefs
+    ? `Gabarito oficial INEP: <b>${gab}</b> · Justificativa redigida pela Evidentia com base nas fontes citadas — não é documento oficial do INEP.`
+    : `Gabarito oficial INEP: <b>${gab}</b> · Explicação não oficial, confira em fonte confiável.`;
   return `<details class="just" ${q.anulada?'open':''}>
     <summary><svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg>
-      Justificativa e comentário<span class="badge">estudo · IA</span></summary>
-    <div class="body">${esc(q.explicacao||"—")}</div>
-    <div class="src">Gabarito oficial INEP: <b>${gab}</b> · Explicação não oficial, confira em fonte confiável.</div>
+      Justificativa${selo}</summary>
+    ${justCorpo(q, emb&&disp ? disp : q.gabarito)}
+    <div class="src">${rodape}</div>
     ${emb&&!q.anulada?`<div class="embaviso"><b>Alternativas embaralhadas:</b> as letras citadas na justificativa seguem a ordem do caderno oficial, não a da tela.</div>`:""}
   </details>`;
 }
@@ -1220,6 +1352,253 @@ function importBackup(file){
   rd.onerror=()=>alert("Não foi possível ler o arquivo.");
   rd.readAsText(file);
 }
+/*==================== TELA DE CONTA ====================*/
+function dataBR(iso){ try{ return new Date(iso).toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"}); }catch(e){ return "—"; } }
+
+function viewConta(aviso){
+  const e=LIC.estado();
+  const s=LIC.sessao();
+  const alerta=aviso?`<div class="notice" style="margin-bottom:16px"><b>${esc(aviso)}</b></div>`:"";
+
+  if(e.liberado && e.edicao==="completo"){
+    const p=e.payload;
+    return `<div class="card pad" style="margin-top:18px">
+      ${alerta}
+      <div class="section-t">Sua assinatura</div>
+      <div class="jconceito" style="margin:0 0 16px">Acesso liberado${p.origem==="cortesia"?" — cortesia da Evidentia":""}.</div>
+      <div class="tiles">
+        <div class="tile"><b>${esc(p.email||s?.email||"—")}</b><span>CONTA</span></div>
+        <div class="tile"><b>${e.diasRestantes}</b><span>DIAS ATÉ RECONFERIR</span></div>
+      </div>
+      <p class="muted" style="margin-top:16px;font-size:14px">
+        O aplicativo funciona sem internet. De tempos em tempos ele reconfere a assinatura
+        sozinho, quando houver conexão. Você não precisa fazer nada.
+      </p>
+      ${e.renovarLogo?`<div class="notice" style="margin-top:14px">Conecte-se à internet nos próximos ${e.diasRestantes} dia(s) para reconferir a assinatura.</div>`:""}
+      <div style="margin-top:18px">
+        <button class="btn btn-navy block" onclick="contaAtualizar()">Reconferir agora</button>
+        <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaSair()">Sair desta conta</button>
+      </div>
+    </div>`;
+  }
+
+  const email=esc(s?.email||"");
+  return `<div class="card pad" style="margin-top:18px">
+    ${alerta}
+    <div class="section-t">Ativar o Evidentia · Revalida</div>
+    <p class="muted" style="margin:2px 0 18px;font-size:14px">
+      Entre com a conta que você usou na compra. Se ganhou acesso de cortesia, use o mesmo
+      e-mail que informou.
+    </p>
+    <label class="campo"><span>E-mail</span>
+      <input id="contaEmail" type="email" inputmode="email" autocomplete="email" value="${email}" placeholder="voce@exemplo.com"></label>
+    <label class="campo" style="margin-top:12px"><span>Senha</span>
+      <input id="contaSenha" type="password" autocomplete="current-password" placeholder="sua senha"></label>
+    <div id="contaMsg" class="muted" style="margin-top:12px;font-size:13.5px" role="status" aria-live="polite"></div>
+    <div style="margin-top:16px">
+      <button class="btn btn-gold block" id="contaEntrar" onclick="contaEntrar()">Entrar e ativar</button>
+      <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaCriar()">Criar conta</button>
+      <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaEsqueci()">Esqueci a senha</button>
+    </div>
+    <p class="muted" style="margin-top:18px;font-size:13px">
+      Sem assinatura? A <b>edição livre</b>, com ${META.gratuitas||40} questões e as mesmas
+      justificativas referenciadas, é gratuita e não precisa de conta.
+    </p>
+  </div>`;
+}
+
+function contaDiz(txt,erro){
+  const el=$("#contaMsg"); if(!el) return;
+  el.textContent=txt||"";
+  el.style.color=erro?"var(--bad-ink)":"var(--ink-3)";
+}
+function contaCampos(){
+  return {email:($("#contaEmail")?.value||"").trim().toLowerCase(),
+          senha:$("#contaSenha")?.value||""};
+}
+async function contaEntrar(){
+  const {email,senha}=contaCampos();
+  if(!email||!senha){ contaDiz("Preencha e-mail e senha.",true); return; }
+  const btn=$("#contaEntrar"); if(btn) btn.disabled=true;
+  contaDiz("Entrando…");
+  try{
+    await LIC.entrar(email,senha);
+    contaDiz("Conferindo a assinatura…");
+    const r=await LIC.buscarLicenca();
+    if(!r.ativo){
+      contaDiz("A conta existe, mas não encontramos assinatura ativa nela. Se você acabou de comprar, aguarde um instante e tente de novo.",true);
+      return;
+    }
+    render("conta");
+  }catch(err){
+    contaDiz(String(err.message||err).includes("Invalid login")
+      ? "E-mail ou senha incorretos." : "Não foi possível entrar: "+(err.message||err), true);
+  }finally{ if($("#contaEntrar")) $("#contaEntrar").disabled=false; }
+}
+async function contaCriar(){
+  const {email,senha}=contaCampos();
+  if(!email||senha.length<8){ contaDiz("Informe o e-mail e uma senha de pelo menos 8 caracteres.",true); return; }
+  contaDiz("Criando a conta…");
+  try{
+    await LIC.criarConta(email,senha);
+    contaDiz("Conta criada. Confirme o e-mail que enviamos e depois entre aqui.");
+  }catch(err){ contaDiz("Não foi possível criar a conta: "+(err.message||err),true); }
+}
+async function contaEsqueci(){
+  const {email}=contaCampos();
+  if(!email){ contaDiz("Escreva seu e-mail primeiro.",true); return; }
+  try{ await LIC.recuperarSenha(email); contaDiz("Se existir conta com esse e-mail, enviamos as instruções."); }
+  catch(err){ contaDiz("Não foi possível enviar: "+(err.message||err),true); }
+}
+async function contaAtualizar(){
+  contaDiz("Reconferindo…");
+  try{
+    const r=await LIC.buscarLicenca();
+    render("conta", r.ativo?null:"Não encontramos assinatura ativa nesta conta.");
+  }catch(err){ contaDiz("Sem conexão agora. Sua licença atual continua valendo.",true); }
+}
+function contaSair(){
+  showModal(`<div class="mh"><h3>Sair desta conta?</h3><p class="muted" style="margin-top:6px;font-size:14px">
+      O aplicativo volta a pedir ativação. Seu histórico de simulados fica guardado neste aparelho.</p></div>
+    <div class="mb"><button class="btn btn-gold block" onclick="_doSair()">Sair</button>
+    <button class="btn btn-ghost block" style="margin-top:10px" onclick="closeModal()">Cancelar</button></div>`);
+  window._doSair=()=>{ LIC.sair(); delete window._doSair; closeModal(); render("conta"); };
+}
+
+/*==================== CONTA E LICENÇA ====================*/
+/* A edição assinada guarda uma licença assinada pelo servidor e a confere sozinha,
+   com a chave pública embutida. Enquanto a licença valer, o aplicativo funciona sem
+   rede nenhuma — no avião, no plantão, no interior sem sinal. Perto do vencimento ele
+   avisa e se renova sozinho assim que houver internet. */
+const LIC = (()=>{
+  const CHAVE_TOKEN="revalida_licenca", CHAVE_SESSAO="revalida_sessao";
+  const DIAS_AVISO=7;
+  let payload=null, chavePub=null;
+
+  const b64urlParaBytes=s=>{
+    s=String(s).replace(/-/g,"+").replace(/_/g,"/");
+    while(s.length%4) s+="=";
+    const bin=atob(s), out=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i);
+    return out;
+  };
+  const b64ParaBytes=s=>{
+    const bin=atob(String(s).trim()), out=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i);
+    return out;
+  };
+
+  async function chave(){
+    if(chavePub) return chavePub;
+    chavePub=await crypto.subtle.importKey("spki", b64ParaBytes(CHAVE_LICENCA).buffer,
+      {name:"ECDSA",namedCurve:"P-256"}, false, ["verify"]);
+    return chavePub;
+  }
+
+  /* Devolve o conteúdo da licença só se a assinatura conferir e o prazo não tiver
+     vencido. Qualquer falha devolve null: nunca "no benefício da dúvida". */
+  async function conferir(token){
+    try{
+      const [corpo,assinatura]=String(token).split(".");
+      if(!corpo||!assinatura) return null;
+      const dados=b64urlParaBytes(corpo);
+      const ok=await crypto.subtle.verify({name:"ECDSA",hash:"SHA-256"},
+        await chave(), b64urlParaBytes(assinatura), dados);
+      if(!ok) return null;
+      const p=JSON.parse(new TextDecoder().decode(dados));
+      if(!p||typeof p.exp!=="number") return null;
+      if(p.exp*1000 <= Date.now()) return null;
+      return p;
+    }catch(e){ return null; }
+  }
+
+  const sessao=()=>{ try{ return JSON.parse(store.get(CHAVE_SESSAO)||"null"); }catch(e){ return null; } };
+  const guardarSessao=s=> s ? store.set(CHAVE_SESSAO,JSON.stringify(s)) : store.del(CHAVE_SESSAO);
+
+  async function nuvem(caminho,opcoes={}){
+    if(!NUVEM.url||!NUVEM.chave) throw new Error("nuvem não configurada");
+    const r=await fetch(NUVEM.url+caminho,{
+      ...opcoes,
+      headers:{apikey:NUVEM.chave,"content-type":"application/json",...(opcoes.headers||{})}
+    });
+    const t=await r.text();
+    let corpo=null; try{ corpo=t?JSON.parse(t):null; }catch(e){ corpo={mensagem:t}; }
+    if(!r.ok) throw new Error(corpo?.error_description||corpo?.msg||corpo?.message||`erro ${r.status}`);
+    return corpo;
+  }
+
+  async function entrar(email,senha){
+    const r=await nuvem("/auth/v1/token?grant_type=password",
+      {method:"POST",body:JSON.stringify({email,password:senha})});
+    guardarSessao({access_token:r.access_token,refresh_token:r.refresh_token,email});
+    return r;
+  }
+  async function criarConta(email,senha){
+    return nuvem("/auth/v1/signup",{method:"POST",body:JSON.stringify({email,password:senha})});
+  }
+  async function recuperarSenha(email){
+    return nuvem("/auth/v1/recover",{method:"POST",body:JSON.stringify({email})});
+  }
+  async function renovarSessao(){
+    const s=sessao(); if(!s?.refresh_token) return null;
+    const r=await nuvem("/auth/v1/token?grant_type=refresh_token",
+      {method:"POST",body:JSON.stringify({refresh_token:s.refresh_token})});
+    guardarSessao({access_token:r.access_token,refresh_token:r.refresh_token,email:s.email});
+    return r.access_token;
+  }
+
+  /* Pede uma licença nova. Se o token de sessão expirou, renova uma vez e repete. */
+  async function buscarLicenca(){
+    const s=sessao(); if(!s?.access_token) throw new Error("sem sessão");
+    const pedir=async token=>nuvem("/functions/v1/emitir-licenca",{
+      method:"POST", headers:{Authorization:"Bearer "+token},
+      body:JSON.stringify({aparelho:(navigator.platform||"")+" · "+(navigator.userAgent||"").slice(0,80)})
+    });
+    let r;
+    try{ r=await pedir(s.access_token); }
+    catch(e){
+      const novo=await renovarSessao();
+      if(!novo) throw e;
+      r=await pedir(novo);
+    }
+    if(!r?.ativo || !r.licenca) return {ativo:false,motivo:r?.motivo||"sem_assinatura"};
+    const p=await conferir(r.licenca);
+    if(!p) throw new Error("o servidor devolveu uma licença que não confere");
+    store.set(CHAVE_TOKEN,r.licenca);
+    payload=p;
+    return {ativo:true,payload:p,fim_assinatura:r.fim_assinatura};
+  }
+
+  async function carregar(){
+    if(EDICAO!=="completo") return null;
+    payload=await conferir(store.get(CHAVE_TOKEN)||"");
+    return payload;
+  }
+
+  function estado(){
+    if(EDICAO!=="completo") return {liberado:true,edicao:"livre"};
+    if(!payload) return {liberado:false,edicao:"completo"};
+    const diasRestantes=Math.ceil((payload.exp*1000-Date.now())/86400000);
+    return {liberado:true,edicao:"completo",payload,diasRestantes,
+            renovarLogo:diasRestantes<=DIAS_AVISO};
+  }
+
+  function sair(){ store.del(CHAVE_TOKEN); store.del(CHAVE_SESSAO); payload=null; }
+
+  return {conferir,carregar,estado,entrar,criarConta,recuperarSenha,buscarLicenca,sair,
+          sessao,nuvem,get payload(){return payload;}};
+})();
+
+/* Renovação silenciosa: tenta em segundo plano e nunca interrompe quem está estudando. */
+async function renovarLicencaEmSilencio(){
+  if(EDICAO!=="completo") return;
+  const e=LIC.estado();
+  if(e.liberado && !e.renovarLogo) return;
+  if(!LIC.sessao()) return;
+  try{ await LIC.buscarLicenca(); if($("#screen")&&telaAtual==="conta") render("conta"); }
+  catch(err){ /* sem rede: a licença guardada continua valendo até vencer */ }
+}
+
 (function init(){
   const th=store.get("revalida_theme"); if(th==="dark")document.documentElement.setAttribute("data-theme","dark");
   loadCfg();
@@ -1233,8 +1612,18 @@ function importBackup(file){
   const salvar=()=>{ if(S&&!S.finished){ S.elapsed=Math.floor((Date.now()-S.startTs)/1000); persistRun(); } };
   window.addEventListener("pagehide",salvar);
   document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden")salvar(); });
-  render("home");
-  setTimeout(()=>{ syncHome(); },0);
+
+  /* A licença é conferida antes de desenhar a primeira tela, para que a edição
+     assinada nunca pisque o conteúdo antes de pedir ativação. */
+  if(EDICAO==="completo") $("#contaBtn")?.classList.remove("hidden");
+  LIC.carregar().then(()=>{
+    render(EDICAO==="completo" && !LIC.estado().liberado ? "conta" : "home");
+    setTimeout(()=>{ syncHome(); },0);
+    setTimeout(renovarLicencaEmSilencio,1500);
+  }).catch(()=>{
+    render(EDICAO==="completo" ? "conta" : "home");
+    setTimeout(()=>{ syncHome(); },0);
+  });
 })();
 </script>
 </body>
