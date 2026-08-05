@@ -1,0 +1,402 @@
+{
+ "1": {
+  "area": "Clínica Médica",
+  "tema": "Profilaxia da migrânea com aura"
+ },
+ "2": {
+  "area": "Pediatria",
+  "tema": "Terror noturno"
+ },
+ "3": {
+  "area": "Clínica Médica",
+  "tema": "Delirium no idoso"
+ },
+ "4": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Bacteriúria assintomática na gestação"
+ },
+ "5": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Larva migrans cutânea"
+ },
+ "6": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Óbito por acidente de trabalho"
+ },
+ "7": {
+  "area": "Clínica Médica",
+  "tema": "Intoxicação por lítio"
+ },
+ "8": {
+  "area": "Clínica Médica",
+  "tema": "Diagnóstico laboratorial da chikungunya"
+ },
+ "9": {
+  "area": "Pediatria",
+  "tema": "Síndrome inflamatória multissistêmica pediátrica"
+ },
+ "10": {
+  "area": "Cirurgia",
+  "tema": "Trauma abdominal fechado com instabilidade hemodinâmica"
+ },
+ "11": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Assistência ao trabalho de parto normal"
+ },
+ "12": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Desprescrição de medicamentos inapropriados no idoso"
+ },
+ "13": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Tratamento Fora do Domicílio no SUS"
+ },
+ "14": {
+  "area": "Clínica Médica",
+  "tema": "Hipotireoidismo como diagnóstico diferencial de depressão"
+ },
+ "15": {
+  "area": "Pediatria",
+  "tema": "Exantema medicamentoso por anti-inflamatório"
+ },
+ "16": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Surto de hepatite A"
+ },
+ "17": {
+  "area": "Cirurgia",
+  "tema": "Fístula após gastrectomia vertical"
+ },
+ "18": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Fatores de risco para hemorragia pós-parto"
+ },
+ "19": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Sífilis na gestação"
+ },
+ "20": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Taxa de letalidade"
+ },
+ "21": {
+  "area": "Pediatria",
+  "tema": "Controle esfincteriano na infância"
+ },
+ "22": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Hipertensão arterial estágio 1 na atenção primária"
+ },
+ "23": {
+  "area": "Pediatria",
+  "tema": "Enterocolite na doença de Hirschsprung"
+ },
+ "24": {
+  "area": "Cirurgia",
+  "tema": "Epistaxe anterior"
+ },
+ "25": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Distocia de ombro"
+ },
+ "26": {
+  "area": "Clínica Médica",
+  "tema": "Pielonefrite aguda com sepse"
+ },
+ "27": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Diagrama de controle da dengue"
+ },
+ "28": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Monitorização do uso prolongado de amitriptilina"
+ },
+ "29": {
+  "area": "Clínica Médica",
+  "tema": "Paracentese na ascite do cirrótico"
+ },
+ "30": {
+  "area": "Pediatria",
+  "tema": "Hipertrofia adenoidiana na criança"
+ },
+ "31": {
+  "area": "Cirurgia",
+  "tema": "Lesão traumática da aorta torácica"
+ },
+ "32": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Laceração perineal de segundo grau"
+ },
+ "33": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Vigilância em saúde do trabalhador"
+ },
+ "34": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Estudo de coorte"
+ },
+ "35": {
+  "area": "Pediatria",
+  "tema": "Risco de suicídio na adolescência"
+ },
+ "36": {
+  "area": "Clínica Médica",
+  "tema": "Infecção aguda pelo HIV"
+ },
+ "37": {
+  "area": "Pediatria",
+  "tema": "Transtorno do espectro autista"
+ },
+ "38": {
+  "area": "Cirurgia",
+  "tema": "Transferência do politraumatizado"
+ },
+ "39": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Contracepção no pós-parto"
+ },
+ "40": {
+  "area": "Clínica Médica",
+  "tema": "Nefropatia diabética"
+ },
+ "41": {
+  "area": "Clínica Médica",
+  "tema": "Crise tireotóxica"
+ },
+ "42": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Profilaxia antirrábica pós-exposição"
+ },
+ "43": {
+  "area": "Cirurgia",
+  "tema": "Trauma na gestante"
+ },
+ "44": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Prevenção da transmissão vertical do HIV"
+ },
+ "45": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Rastreamento do câncer do colo do útero com teste de DNA-HPV"
+ },
+ "46": {
+  "area": "Clínica Médica",
+  "tema": "Tromboembolismo pulmonar de alto risco"
+ },
+ "47": {
+  "area": "Pediatria",
+  "tema": "Puberdade precoce central"
+ },
+ "48": {
+  "area": "Cirurgia",
+  "tema": "Anestesia local para sutura de ferida"
+ },
+ "49": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Rotura uterina"
+ },
+ "50": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Contracepção no lúpus com anticorpo antifosfolípide"
+ },
+ "51": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Lipo-hipertrofia e falha da insulinoterapia"
+ },
+ "52": {
+  "area": "Pediatria",
+  "tema": "Doença de Legg-Calvé-Perthes"
+ },
+ "53": {
+  "area": "Cirurgia",
+  "tema": "Ingestão de cáustico"
+ },
+ "54": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Linfogranuloma venéreo"
+ },
+ "55": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Terapia hormonal da menopausa"
+ },
+ "56": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Profilaxia pós-exposição ao HIV em acidente ocupacional"
+ },
+ "57": {
+  "area": "Clínica Médica",
+  "tema": "Intoxicação aguda por opioides"
+ },
+ "58": {
+  "area": "Clínica Médica",
+  "tema": "Crise convulsiva na infecção pelo HIV avançada"
+ },
+ "59": {
+  "area": "Pediatria",
+  "tema": "Meningite meningocócica no lactente"
+ },
+ "60": {
+  "area": "Cirurgia",
+  "tema": "Reposição volêmica no grande queimado"
+ },
+ "61": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Abscesso tubo-ovariano na doença inflamatória pélvica"
+ },
+ "62": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "IVCF-20 na avaliação da pessoa idosa"
+ },
+ "63": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Visita domiciliar compartilhada na Atenção Primária"
+ },
+ "64": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Tristeza materna no puerpério"
+ },
+ "65": {
+  "area": "Clínica Médica",
+  "tema": "Síndrome coronariana aguda sem supradesnivelamento de ST"
+ },
+ "66": {
+  "area": "Pediatria",
+  "tema": "Cetoacidose diabética na criança"
+ },
+ "67": {
+  "area": "Cirurgia",
+  "tema": "Íleo paralítico pós-operatório"
+ },
+ "68": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Conduta na mamografia BI-RADS 4"
+ },
+ "69": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Teleconsultoria entre profissionais de saúde"
+ },
+ "70": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Nome social em documentos médicos"
+ },
+ "71": {
+  "area": "Clínica Médica",
+  "tema": "Demência vascular"
+ },
+ "72": {
+  "area": "Clínica Médica",
+  "tema": "Lesão renal aguda pré-renal com hipercalemia"
+ },
+ "73": {
+  "area": "Pediatria",
+  "tema": "Púrpura trombocitopênica imune"
+ },
+ "74": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Prevenção de lesão por pressão"
+ },
+ "75": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Células glandulares atípicas na citologia cervical"
+ },
+ "76": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Rastreamento do câncer do colo do útero em homem trans"
+ },
+ "77": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Controle vetorial da dengue"
+ },
+ "78": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Tratamento farmacológico do tabagismo"
+ },
+ "79": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Documentos médicos e autonomia do paciente idoso"
+ },
+ "80": {
+  "area": "Pediatria",
+  "tema": "Furunculose de repetição"
+ },
+ "81": {
+  "area": "Cirurgia",
+  "tema": "Jejum pré-operatório abreviado"
+ },
+ "82": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Pólipo endometrial"
+ },
+ "83": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Competência vetorial do Aedes aegypti"
+ },
+ "84": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Coordenação do cuidado na transição hospital-APS"
+ },
+ "85": {
+  "area": "Clínica Médica",
+  "tema": "Agitação psicomotora com risco de agressão"
+ },
+ "86": {
+  "area": "Clínica Médica",
+  "tema": "Hipotensão ortostática por polifarmácia no idoso"
+ },
+ "87": {
+  "area": "Pediatria",
+  "tema": "Pneumonia adquirida na comunidade grave na infância"
+ },
+ "88": {
+  "area": "Cirurgia",
+  "tema": "Hérnia inguinal indireta"
+ },
+ "89": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Gravidez ectópica"
+ },
+ "90": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Remoção de anzol na atenção primária"
+ },
+ "91": {
+  "area": "Clínica Médica",
+  "tema": "Síndrome de Gilbert"
+ },
+ "92": {
+  "area": "Pediatria",
+  "tema": "Diarreia aguda em lactente"
+ },
+ "93": {
+  "area": "Cirurgia",
+  "tema": "Terapia nutricional parenteral no intestino curto"
+ },
+ "94": {
+  "area": "Ginecologia e Obstetrícia",
+  "tema": "Tricomoníase vaginal"
+ },
+ "95": {
+  "area": "Clínica Médica",
+  "tema": "Dengue com sinais de alarme"
+ },
+ "96": {
+  "area": "Clínica Médica",
+  "tema": "Monoartrite aguda de joelho"
+ },
+ "97": {
+  "area": "Pediatria",
+  "tema": "Bronquiolite viral aguda"
+ },
+ "98": {
+  "area": "Cirurgia",
+  "tema": "Trombose venosa profunda no pós-operatório"
+ },
+ "99": {
+  "area": "Medicina da Família, Comunidade e Saúde Coletiva",
+  "tema": "Autonomia da adolescente no pré-natal"
+ },
+ "100": {
+  "area": "Pediatria",
+  "tema": "Sarampo"
+ }
+}

@@ -17,7 +17,7 @@
  *     falha continua falhando, em vez de devolver 2,8 MB de HTML no lugar.
  */
 
-const VERSAO = "e5d5cce46fb0";
+const VERSAO = "9d5e87d0a821";
 const CACHE = "evidentia-revalida-" + VERSAO;
 const PREFIXO = "evidentia-revalida-";
 
