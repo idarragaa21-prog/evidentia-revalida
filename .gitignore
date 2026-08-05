@@ -40,3 +40,4 @@ app-android/android/capacitor-cordova-android-plugins/build/
 nuvem/chaves/
 !nuvem/chaves/.gitkeep
 nuvem/supabase/client_config.local.json
+aplicativo/Revalida_Evidentia_teste.html

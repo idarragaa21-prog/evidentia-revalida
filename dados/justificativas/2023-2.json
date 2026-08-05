@@ -158,6 +158,26 @@
   ]
  },
  {
+  "numero": 8,
+  "conceito": "Reconhecer a síndrome de dumping como causa de sintomas pós-prandiais desencadeados por carboidratos simples após derivação gástrica em Y-de-Roux.",
+  "correta": "O adolescente operado há 3 meses apresenta crises de náusea, diarreia, dor abdominal, sudorese, pré-síncope e fraqueza que surgem 2 a 3 horas depois de ingerir carboidratos simples, com exame físico e exames bioquímicos, de imagem e endoscópicos normais entre os episódios. Esse vínculo temporal com a refeição rica em açúcar, o caráter episódico e autolimitado e a mistura de sintomas gastrointestinais e adrenérgicos definem a síndrome de dumping, na sua forma tardia, em que o esvaziamento rápido para o delgado gera pico glicêmico, liberação exagerada de insulina e hipoglicemia reativa. A normalidade da endoscopia e da imagem é decisiva porque afasta as complicações anatômicas do pós-operatório. O tratamento inicial é dietético, com fracionamento das refeições e retirada dos carboidratos simples que o paciente vem consumindo com frequência.",
+  "distratores": {
+   "A": "A fístula gastro-gástrica é achado anatômico, identificável na endoscopia digestiva alta ou no estudo contrastado, e costuma cursar com reganho de peso, refluxo e úlcera marginal; aqui a endoscopia e os exames de imagem são normais.",
+   "C": "Peritonite bacteriana secundária é quadro agudo e grave, com dor contínua, febre, taquicardia e irritação peritoneal, incompatível com um paciente que está bem entre as crises e tem exame físico e exames complementares sem alterações.",
+   "D": "As carências de ferro e de vitaminas do complexo B após a cirurgia produzem sintomas crônicos e progressivos, como anemia, glossite e parestesias, com alterações na bioquímica; neste caso a bioquímica é normal e os sintomas são desencadeados pela ingestão de açúcar."
+  },
+  "pontos_chave": [
+   "Dumping precoce ocorre 15 a 30 minutos após a refeição, por carga osmótica; o tardio ocorre 1 a 3 horas depois, por hipoglicemia reativa.",
+   "Sintomas pós-prandiais após bariátrica com endoscopia e imagem normais apontam para dumping, e o primeiro tratamento é dietético."
+  ],
+  "referencias": [
+   {
+    "id": "AAP-OBESIDADE-INFANTIL-2023",
+    "detalhe": "Seção sobre cirurgia bariátrica e metabólica no adolescente: indicação em obesidade grave e necessidade de acompanhamento pós-operatório continuado das complicações digestivas e nutricionais."
+   }
+  ]
+ },
+ {
   "numero": 9,
   "conceito": "Reconhecer o início puberal fisiológico na menina e não medicalizar o que está dentro da cronologia normal.",
   "correta": "A menina tem 9 anos e 4 meses e apresenta telarca há 2 meses, com mamas em M2 e pelos pubianos em P2. O início da puberdade feminina a partir dos 8 anos é fisiológico, e a telarca costuma ser o primeiro sinal, seguida da pubarca, que é exatamente a sequência descrita. Curvas de crescimento e de peso normais e menarca da irmã em idade habitual completam um quadro sem sinal de alarme. A conduta é informar mãe e paciente e manter acompanhamento, sem exames complementares neste momento.",
@@ -363,6 +383,22 @@
   ]
  },
  {
+  "numero": 18,
+  "conceito": "Distinguir fimose fisiológica de fimose patológica na criança em idade escolar e definir o encaminhamento correto.",
+  "correta": "Aos 7 anos, o prepúcio já deveria ser retrátil na maioria dos meninos, e o exame descreve não apenas a impossibilidade de retração completa, mas um anel prepucial cicatricial, isto é, tecido fibrótico. Somam-se a isso dois episódios pregressos de infecção local tratados com antimicrobiano, o padrão de balanopostite de repetição. Fibrose cicatricial não regride espontaneamente e mantém o risco de novas infecções, de dor e de retenção de smegma, de modo que há indicação de postectomia eletiva, com encaminhamento à cirurgia pediátrica. Como a criança está assintomática no momento, o encaminhamento é ambulatorial e programado, não de urgência.",
+  "distratores": {
+   "A": "A fimose fisiológica corresponde a aderência balanoprepucial sem tecido fibrótico e sem histórico infeccioso, e é ela que se resolve espontaneamente; o anel cicatricial e as duas infecções locais deste menino descaracterizam essa evolução benigna e a conduta expectante.",
+   "C": "Parafimose é o prepúcio já retraído que fica preso atrás da glande, causando edema e dor intensa, um quadro de emergência; aqui o prepúcio não retrai e a criança está assintomática, em consulta de rotina.",
+   "D": "Além de o diagnóstico estar errado, a orientação é iatrogênica: manobras forçadas de retração provocam fissuras que cicatrizam em anel fibrótico, ou seja, produzem exatamente a fimose patológica que o menino já apresenta."
+  },
+  "pontos_chave": [
+   "Anel prepucial cicatricial mais balanopostites de repetição definem fimose patológica, com indicação de postectomia eletiva.",
+   "Nunca oriente retração forçada do prepúcio: a higiene do lactente e da criança pequena é externa e delicada.",
+   "Parafimose é emergência cirúrgica: prepúcio retraído que estrangula a glande e exige redução imediata."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 19,
   "conceito": "Significado da categoria BI-RADS 0 e próximo passo na investigação de nódulo mamário palpável.",
   "correta": "BI-RADS 0 é laudo incompleto: a mamografia não conseguiu concluir e exige complementação, não seguimento. Em uma mulher de 52 anos com massa palpável de cerca de 3 cm na parte superior da mama e história materna de câncer, a complementação de primeira escolha é a ultrassonografia, que separa lesão cística de sólida, caracteriza margens e define a necessidade e o alvo de uma eventual biópsia. Só depois dessa caracterização a conduta invasiva ganha indicação e endereço.",
@@ -553,7 +589,7 @@
   ],
   "referencias": [
    {
-    "id": "MS-GVS-VOL2-2024",
+    "id": "MS-GVS-2024-V2",
     "detalhe": "Capítulo 'Leishmaniose tegumentar americana' (p. 885 na 6ª edição revisada), seções de manifestações clínicas da forma cutânea localizada e de tratamento com antimoniato de N-metilglucamina."
    },
    {
@@ -924,6 +960,22 @@
     "detalhe": "Recomendações específicas sobre nefrite lúpica, com indicação de biópsia renal na presença de proteinúria persistente e princípios do tratamento de indução."
    }
   ]
+ },
+ {
+  "numero": 42,
+  "conceito": "A questão cobra o reconhecimento da perda urinária contínua pela vagina após histerectomia como fístula do trato urinário, e a localização da lesão no ureter quando a micção segue normal.",
+  "correta": "A perda de líquido pela vagina começou cerca de um mês após a histerectomia e é contínua e progressiva, padrão de fístula urogenital e não de incontinência. Como a paciente continua urinando normalmente pela uretra, a bexiga está íntegra e o extravasamento vem de um ureter lesado na cirurgia, complicação clássica da histerectomia abdominal pela proximidade do ureter com a artéria uterina e o ligamento cardinal. A coleção perivesical vista na ultrassonografia corresponde ao urinoma formado por esse extravasamento. O conjunto de cirurgia prévia, perda contínua pela vagina, micção preservada e coleção líquida pélvica desenha a fístula uretero-vaginal.",
+  "distratores": {
+   "A": "Incompetência do assoalho vesical daria perda aos esforços, intermitente e pela uretra, sem coleção perivesical. Aqui a perda é contínua, sai pela vagina e a micção permanece normal, o que não combina com incontinência de esforço.",
+   "B": "Abscesso pélvico se manifestaria com febre, dor e sinais inflamatórios, em geral nos primeiros dias a semanas de pós-operatório, e não com mais de dois meses de perda indolor de líquido pela vagina em paciente sem queixa sistêmica.",
+   "C": "Seroma é coleção estéril e contida, que não drena continuamente pela vagina nem se mantém por mais de dois meses com perda progressiva; ele também não explica o início tardio do quadro, semanas depois da cirurgia."
+  },
+  "pontos_chave": [
+   "Perda contínua de líquido pela vagina após cirurgia pélvica é fístula urinária até prova em contrário.",
+   "Micção normal preservada aponta para lesão ureteral; na fístula vésico-vaginal a perda costuma substituir a micção.",
+   "Coleção perivesical, ou urinoma, depois de histerectomia reforça a suspeita de lesão do ureter."
+  ],
+  "referencias": []
  },
  {
   "numero": 43,
@@ -1504,7 +1556,7 @@
   ],
   "referencias": [
    {
-    "id": "MS-GVS-VOL3-2024",
+    "id": "MS-GVS-2024-V3",
     "detalhe": "Capítulo Leptospirose: subitens de manifestações clínicas da fase tardia (síndrome de Weil, com icterícia rubínica, insuficiência renal aguda geralmente não oligúrica e com hipocalemia, sufusão conjuntival e mialgia em panturrilhas) e de diagnóstico laboratorial, em que a microaglutinação é apresentada como exame de referência para confirmação."
    }
   ]
@@ -1833,7 +1885,7 @@
     "detalhe": "Seções de definição de caso suspeito e de diagnóstico laboratorial: reconhecimento do quadro bifásico com período de intoxicação (icterícia e manifestações hemorrágicas) e escolha do método conforme o tempo de doença, com pesquisa viral na fase inicial e sorologia IgM por ELISA a partir da primeira semana de sintomas, considerando o histórico vacinal na interpretação."
    },
    {
-    "id": "MS-GVS-VOL2-2024",
+    "id": "MS-GVS-2024-V2",
     "detalhe": "Capítulo Febre amarela (volume 2, a partir da página 797): definição de caso suspeito, obrigatoriedade de notificação imediata às autoridades de vigilância e fluxo de diagnóstico laboratorial, incluindo a relação entre epizootias em primatas não humanos e a investigação de casos humanos."
    }
   ]
@@ -2008,6 +2060,22 @@
     "detalhe": "Seção de avaliação diagnóstica do glaucoma: tonometria para medida da pressão intraocular, exame do disco óptico e da camada de fibras nervosas com atenção ao aumento da escavação e avaliação do campo visual como componentes obrigatórios da investigação de neuropatia óptica glaucomatosa."
    }
   ]
+ },
+ {
+  "numero": 88,
+  "conceito": "Escolher o exame que confirma e quantifica a escoliose no adolescente com teste de Adams positivo.",
+  "correta": "O desnivelamento dos ombros associado a gibosidade no teste de Adams indica deformidade rotacional que persiste na flexão do tronco, ou seja, escoliose estrutural, e não postura assimétrica. A medida dos membros inferiores, 98 cm de cada lado, afasta a escoliose compensatória por dismetria, deixando a escoliose idiopática do adolescente como principal hipótese. Para comprová-la, o exame indicado é a radiografia panorâmica da coluna em ortostase, que documenta a curva e permite medir o ângulo de Cobb. Essa medida não serve só para confirmar o diagnóstico: é ela que define a conduta entre observação, colete ou encaminhamento cirúrgico, e permite acompanhar a progressão durante o estirão.",
+  "distratores": {
+   "B": "A escanometria mede o comprimento dos membros inferiores, e a dismetria já foi excluída no exame clínico, com 98 cm de cada lado; além disso, o exame não avalia a curvatura da coluna nem permite medir o ângulo de Cobb.",
+   "C": "A ultrassonografia não demonstra o alinhamento vertebral no plano coronal nem quantifica a curva, não tendo papel na confirmação diagnóstica da escoliose do adolescente.",
+   "D": "A ressonância magnética fica reservada a casos com sinais de alarme, como déficit neurológico, dor noturna ou curva atípica, e o pedido restrito ao segmento lombar sequer abrangeria toda a coluna, sendo insuficiente para medir a deformidade neste adolescente sem alterações neurológicas."
+  },
+  "pontos_chave": [
+   "Teste de Adams positivo significa escoliose estrutural: confirme com radiografia panorâmica da coluna em pé e meça o ângulo de Cobb.",
+   "Membros inferiores de igual comprimento afastam a escoliose compensatória por dismetria.",
+   "Ressonância magnética apenas diante de sinais de alarme neurológicos, dor atípica ou curva de padrão incomum."
+  ],
+  "referencias": []
  },
  {
   "numero": 89,
@@ -2219,6 +2287,22 @@
     "detalhe": "Seção de indicações por índice de massa corporal e por doença metabólica, incluindo a recomendação de cirurgia em pacientes com índice entre 30 e 34,9 kg/m² com doença metabólica."
    }
   ]
+ },
+ {
+  "numero": 98,
+  "conceito": "Reconhecer o fenótipo da síndrome do X frágil e entender que a etiologia de uma deficiência intelectual sindrômica se confirma com estudo do DNA, não com imagem ou eletrofisiologia.",
+  "correta": "O adolescente reúne o conjunto clássico do X frágil: deficiência intelectual com hiperatividade e desatenção, epilepsia, perímetro cefálico acima da média, face alongada com fronte alta, orelhas proeminentes, prognatismo, macrorquidia pós-puberal e sinais de frouxidão do tecido conjuntivo, como hiperextensibilidade metacarpofalangiana, pés planos, escoliose, peito escavado e hérnia inguinal. Esse fenótipo decorre da expansão de trinucleotídeos no gene FMR1, alteração que só pode ser demonstrada em teste molecular. Entre as opções oferecidas, o único exame que analisa o material genético é o estudo genético, e por isso ele é o exame indicado para fechar a etiologia. Os demais exames avaliam consequências do quadro, como a atividade epiléptica ou a anatomia encefálica, e permaneceriam inconclusivos quanto à causa.",
+  "distratores": {
+   "B": "A ressonância de sela túrcica investiga a região hipotálamo-hipofisária e serviria para deficiências hormonais; o paciente não tem baixa estatura, atraso puberal ou qualquer pista endocrinológica, e o exame não detecta a alteração gênica que explica o fenótipo.",
+   "C": "A tomografia de crânio procura lesão estrutural ou sequela; aqui o perímetro cefálico está acima da média e não há sinal neurológico focal, e mesmo um exame normal não diria qual é a causa da deficiência intelectual.",
+   "D": "O eletroencefalograma em sono induzido caracteriza o padrão das crises, que já estão controladas com medicação; ele descreve a comorbidade epiléptica e não a síndrome genética que produz as características faciais e a macrorquidia."
+  },
+  "pontos_chave": [
+   "Deficiência intelectual com face alongada, orelhas proeminentes, prognatismo e macrorquidia após a puberdade: pense em síndrome do X frágil.",
+   "Diagnóstico sindrômico com suspeita genética se confirma com teste molecular do gene FMR1, não com imagem.",
+   "Imagem e eletroencefalograma medem consequências (lesão, crise); nenhum deles define etiologia genética."
+  ],
+  "referencias": []
  },
  {
   "numero": 99,

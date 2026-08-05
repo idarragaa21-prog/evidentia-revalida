@@ -227,7 +227,7 @@
  ],
  "Conjuntivite neonatal": [
   "MS-PCDT-IST-2022",
-  "CDC-IST-2021"
+  "CDC-STI-GUIDELINES-2021"
  ],
  "Conselho Local de Saúde": [
   "BR-CNS-RESOLUCAO-453-2012",
@@ -264,8 +264,7 @@
   "GINA-ESTRATEGIA-ASMA-2026"
  ],
  "Crise hipertensiva e emergência hipertensiva": [
-  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020",
-  "SBC-DIRETRIZ-HAS-2020"
+  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020"
  ],
  "Câncer de bexiga": [
   "INCA-CANCER-BEXIGA-PROFISSIONAIS",
@@ -416,15 +415,13 @@
   "KDIGO-DIABETES-DRC-2022"
  ],
  "Emergência hipertensiva": [
-  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020",
-  "SBC-DIRETRIZ-HAS-2020"
+  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020"
  ],
  "Empiema pleural": [
   "BTS-DOENCA-PLEURAL-2023"
  ],
  "Encefalopatia hipertensiva": [
-  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020",
-  "SBC-DIRETRIZ-HAS-2020"
+  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020"
  ],
  "Endometriose profunda com acometimento intestinal": [
   "ESHRE-ENDOMETRIOSE-2022"
@@ -444,7 +441,7 @@
   "ACR-EULAR-ESCLEROSE-SISTEMICA-2013"
  ],
  "Esquistossomose": [
-  "MS-GVS-VOL2-2024",
+  "MS-GVS-2024-V2",
   "WHO-ESQUISTOSSOMOSE-2022"
  ],
  "Estreptococo do grupo B": [
@@ -470,11 +467,10 @@
  ],
  "Febre amarela": [
   "MS-FEBRE-AMARELA-MANEJO-CLINICO-2020",
-  "MS-GVS-VOL2-2024",
   "MS-GVS-2024-V2"
  ],
  "Febre maculosa": [
-  "MS-GVS-VOL3-2024",
+  "MS-GVS-2024-V3",
   "CDC-RICKETTSIOSES-2016"
  ],
  "Febre pós-operatória": [
@@ -551,11 +547,10 @@
   "IW5-HIPERPARATIREOIDISMO-PRIMARIO-2022"
  ],
  "Hipertensão arterial": [
-  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020",
-  "SBC-DIRETRIZ-HAS-2020"
+  "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020"
  ],
  "Hipertensão intracraniana": [
-  "BTF-TCE-GRAVE-2017"
+  "BTF-TCE-GRAVE-2016"
  ],
  "Hipertensão intracraniana e tríade de Cushing": [
   "BTF-TCE-GRAVE-2016"
@@ -579,7 +574,7 @@
   "ATA-TIREOIDE-GESTACAO-2017"
  ],
  "Hipovitaminose A após sarampo": [
-  "MS-GVS-6ED-VOL1-2024"
+  "MS-GVS-2024-V1"
  ],
  "Hérnia incisional": [
   "TSRS-CIRURGIA-GERAL-ADULTO-2020",
@@ -650,11 +645,11 @@
   "BR-LEI-8142-1990"
  ],
  "Leishmaniose tegumentar": [
-  "MS-GVS-VOL2-2024",
+  "MS-GVS-2024-V2",
   "OPAS-LEISHMANIOSE-AMERICAS-2022"
  ],
  "Leptospirose": [
-  "MS-GVS-VOL3-2024"
+  "MS-GVS-2024-V3"
  ],
  "Lesão de via biliar": [
   "WSES-LESAO-VIA-BILIAR-2021"
@@ -683,7 +678,7 @@
   "ACOG-PB-224-DERMATOSES-VULVARES-2020"
  ],
  "Malária importada": [
-  "MS-GVS-VOL2-2024",
+  "MS-GVS-2024-V2",
   "WHO-MALARIA-2025"
  ],
  "Mamografia BI-RADS 0": [
@@ -709,7 +704,7 @@
   "AAP-OTITE-MEDIA-AGUDA-2013"
  ],
  "Megaesôfago chagásico": [
-  "MS-GVS-VOL2-2024",
+  "MS-GVS-2024-V2",
   "MS-PCDT-DOENCA-DE-CHAGAS-2018",
   "SBMT-CONSENSO-CHAGAS-2015"
  ],
@@ -759,7 +754,7 @@
   "ASCO-NEUTROPENIA-FEBRIL-PEDIATRICA-2023"
  ],
  "Níveis de prevenção": [
-  "INCA-DETECCAO-PRECOCE-2021",
+  "INCA-DETECCAO-PRECOCE-CANCER-2021",
   "USPSTF-CANCER-COLORRETAL-2021",
   "RBMFC-PREVENCAO-QUATERNARIA-2013"
  ],
@@ -809,12 +804,10 @@
   "ACG-PANCREATITE-CRONICA-2020"
  ],
  "Parada cardiorrespiratória": [
-  "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
-  "SBC-DIRETRIZ-RCP-2019"
+  "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019"
  ],
  "Parada cardiorrespiratória em atividade elétrica sem pulso": [
   "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
-  "SBC-DIRETRIZ-RCP-2019",
   "ERC-PCR-CIRCUNSTANCIAS-ESPECIAIS-2021"
  ],
  "Parada cardiorrespiratória no trauma": [
@@ -858,7 +851,6 @@
   "ATS-AMIANTO-2004"
  ],
  "Pneumonia comunitária": [
-  "SBPT-PNEUMONIA-ADQUIRIDA-COMUNIDADE-2018",
   "SBPT-PAC-2018"
  ],
  "Pneumonia na infância": [
@@ -870,7 +862,6 @@
  ],
  "Pneumotórax hipertensivo durante a reanimação": [
   "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
-  "SBC-DIRETRIZ-RCP-2019",
   "ERC-PCR-CIRCUNSTANCIAS-ESPECIAIS-2021",
   "BTS-DOENCA-PLEURAL-2023"
  ],
@@ -904,10 +895,10 @@
  "Profilaxia após violência sexual": [
   "MS-PCDT-IST-2022",
   "MS-PCDT-PEP-2024",
-  "CDC-IST-2021"
+  "CDC-STI-GUIDELINES-2021"
  ],
  "Profilaxia do tétano": [
-  "MS-GVS-VOL1-6ED-2024",
+  "MS-GVS-2024-V1",
   "MS-BR-TETANO-ACIDENTAL"
  ],
  "Profilaxia estreptococo grupo B": [
@@ -970,13 +961,11 @@
  ],
  "Rastreamento colorretal": [
   "INCA-DETECCAO-PRECOCE-CANCER-2021",
-  "INCA-DETECCAO-PRECOCE-2021",
   "USPSTF-CANCER-COLORRETAL-2021"
  ],
  "Rastreamento de próstata": [
   "INCA-DETECCAO-PRECOCE-CANCER-2021",
   "INCA-NT-NAO-RASTREAMENTO-PROSTATA-2023",
-  "INCA-DETECCAO-PRECOCE-2021",
   "USPSTF-CANCER-PROSTATA-2018"
  ],
  "Rastreamento de tuberculose em população vulnerável": [
@@ -1052,7 +1041,6 @@
  ],
  "Sangramento retal — diagnóstico e não rastreamento": [
   "INCA-DETECCAO-PRECOCE-CANCER-2021",
-  "INCA-DETECCAO-PRECOCE-2021",
   "USPSTF-CANCER-COLORRETAL-2021"
  ],
  "Sangramento uterino anormal": [
@@ -1092,7 +1080,7 @@
   "AAP-OBESIDADE-INFANTIL-2023"
  ],
  "Sorologia da hepatite B": [
-  "MS-GVS-VOL2-2024",
+  "MS-GVS-2024-V2",
   "MS-PCDT-HEPATITE-B-2023",
   "WHO-HEPATITE-B-2024"
  ],
@@ -1101,12 +1089,12 @@
   "MS-GVS-2024-V2"
  ],
  "Sífilis congênita": [
-  "MS-GVS-6ED-VOL2-2024",
+  "MS-GVS-2024-V2",
   "MS-PCDT-TRANSMISSAO-VERTICAL-HIV-SIFILIS-HEPATITES",
   "MS-PCDT-IST-2022",
   "MS-ATENCAO-RECEM-NASCIDO-VOL2-2014",
   "SBP-SIFILIS-CONGENITA-2025",
-  "CDC-IST-2021"
+  "CDC-STI-GUIDELINES-2021"
  ],
  "Sífilis na gestação": [
   "MS-MANUAL-GESTACAO-ALTO-RISCO-2022",
@@ -1121,7 +1109,6 @@
  ],
  "Síndrome coronariana aguda": [
   "SBC-DIRETRIZ-ANGINA-INSTAVEL-IAMSSST-2021",
-  "SBC-DIRETRIZ-SCA-SSST-2021",
   "ESC-SCA-2023"
  ],
  "Síndrome da cauda equina": [
@@ -1150,8 +1137,7 @@
   "INTL-PCOS-GUIDELINE-2023"
  ],
  "Síndrome metabólica": [
-  "SBC-SBH-SBEM-SBD-ABESO-SINDROME-METABOLICA-2005",
-  "SBC-SINDROME-METABOLICA-2005"
+  "SBC-SBH-SBEM-SBD-ABESO-SINDROME-METABOLICA-2005"
  ],
  "Síndrome nefrítica e nefropatia por IgA": [
   "KDIGO-GLOMERULOPATIAS-2021"
@@ -1164,21 +1150,17 @@
  "Tamponamento cardíaco": [
   "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
   "MS-SAMU-SAV-2014",
-  "SBC-DIRETRIZ-RCP-2019",
   "ESC-PERICARDIO-2015",
   "ERC-PCR-CIRCUNSTANCIAS-ESPECIAIS-2021",
-  "ACS-ATLS-11",
-  "ESC-DOENCAS-PERICARDIO-2015"
+  "ACS-ATLS-11"
  ],
  "Taquiarritmia com instabilidade hemodinâmica": [
   "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
   "SBC-DIRETRIZ-FA-2025",
-  "SBC-DIRETRIZ-RCP-2019",
   "ESC-ARRITMIAS-VENTRICULARES-2022"
  ],
  "Taquicardia ventricular": [
   "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
-  "SBC-DIRETRIZ-RCP-2019",
   "ESC-ARRITMIAS-VENTRICULARES-2022"
  ],
  "Taquipneia transitória do RN": [
@@ -1206,7 +1188,7 @@
   "BR-LEI-11350-2006-ACS"
  ],
  "Toxoplasmose congênita": [
-  "MS-GVS-6ED-VOL1-2024",
+  "MS-GVS-2024-V1",
   "MS-ATENCAO-RECEM-NASCIDO-VOL2-2014"
  ],
  "Toxoplasmose gestacional": [

@@ -54,6 +54,27 @@
   ]
  },
  {
+  "numero": 3,
+  "conceito": "Reconhecer a anemia megaloblástica do lactente alimentado com leite de cabra in natura e saber que o tratamento medicamentoso é a reposição de vitamina B12 e folato.",
+  "correta": "O hemograma mostra anemia macrocítica com neutrófilos hipersegmentados, neutropenia e plaquetopenia, ou seja, o padrão de eritropoese e mielopoese megaloblásticas por falta de vitamina B12 e/ou folato. A história alimentar fecha o raciocínio: leite de cabra in natura exclusivo desde o nascimento, que é pobre em folato e inadequado como única fonte láctea do lactente, e a glossite atrófica (língua lisa) com palidez importante são as manifestações clínicas esperadas dessa carência. O mielograma normal, isto é, sem infiltração ou aplasia, afasta doença medular primária e reforça a origem carencial. Por isso, além de corrigir a dieta, o tratamento é repor vitamina B12 e folato, que restauram a síntese de DNA e revertem a hematopoese ineficaz.",
+  "distratores": {
+   "A": "Vitamina E e iodo não participam da síntese de DNA nem da maturação nuclear do eritroblasto: a carência de vitamina E se expressa como hemólise, sobretudo no prematuro, e a de iodo como bócio e hipotireoidismo, nada disso compatível com macrocitose, hipersegmentação de neutrófilos e plaquetopenia.",
+   "C": "A deficiência de zinco produz dermatite periorificial, diarreia e déficit de crescimento, e a de ácido ascórbico produz escorbuto, com sangramento gengival e dor óssea; nenhuma delas explica o padrão megaloblástico do hemograma nem a língua lisa deste lactente.",
+   "D": "Sais de ferro tratam a anemia ferropriva, que é microcítica e hipocrômica, o oposto do VCM elevado descrito aqui, e a vitamina A não tem papel terapêutico neste quadro; oferecer ferro isoladamente não corrigiria a hipersegmentação nem a plaquetopenia."
+  },
+  "pontos_chave": [
+   "Anemia macrocítica com neutrófilos hipersegmentados e queda das outras séries é megaloblástica até prova em contrário.",
+   "Leite de cabra in natura é pobre em folato e não serve como alimentação láctea exclusiva do lactente.",
+   "Antes de 1 ano, leite não modificado, de vaca ou de cabra, não substitui leite materno nem fórmula infantil."
+  ],
+  "referencias": [
+   {
+    "id": "SBP-GUIA-ALIMENTACAO-0-A-5-ANOS-2021",
+    "detalhe": "Capítulo de alimentação láctea no primeiro ano de vida: leites não modificados, como os de vaca e de cabra, não são recomendados ao lactente pela inadequação de micronutrientes e pelo risco de carências nutricionais."
+   }
+  ]
+ },
+ {
   "numero": 4,
   "conceito": "A síndrome dos ovários policísticos é diagnóstico de exclusão, e o primeiro passo diante de anovulação com hiperandrogenismo é afastar as endocrinopatias que reproduzem o mesmo quadro.",
   "correta": "O conjunto de ciclos longos e irregulares desde a menarca, amenorreia de 6 meses, acne pustulosa, hirsutismo em face e membros e índice de massa corpórea de 30 kg/m2 aponta para anovulação hiperandrogênica, e a gravidez já foi descartada pelo teste rápido feito na consulta. Antes de rotular o quadro como síndrome dos ovários policísticos é obrigatório excluir as causas que a imitam: TSH e T4 livre para disfunção tireoidiana, prolactina para hiperprolactinemia e 17-hidroxiprogesterona para a forma não clássica da hiperplasia adrenal congênita. Por isso a conduta inicial é exatamente a solicitação desse painel, que é o que a alternativa A propõe. Só depois de exames normais é que os critérios diagnósticos podem ser aplicados e o tratamento definido.",
@@ -423,7 +444,7 @@
   ],
   "referencias": [
    {
-    "id": "MS-GVS-6ED-VOL1-2024",
+    "id": "MS-GVS-2024-V1",
     "detalhe": "Capítulo \"Toxoplasmose adquirida na gestação e toxoplasmose congênita\", seção de manifestações clínicas da forma congênita, com retinocoroidite, calcificações intracranianas e hidrocefalia."
    },
    {
@@ -514,6 +535,22 @@
     "detalhe": "Seção de avaliação do derrame pleural unilateral e de infecção pleural — achados clínicos e radiológicos que caracterizam líquido no espaço pleural em contexto infeccioso."
    }
   ]
+ },
+ {
+  "numero": 22,
+  "conceito": "Diferenciar as nodulações palpebrais e as afecções da via lacrimal pela topografia, pela dor e pela evolução no tempo.",
+  "correta": "O caso descreve um episódio inflamatório agudo que cedeu sozinho em 48 horas e deixou como sequela um nódulo de 0,3 cm, indolor, na face interna (tarsal) do terço médio da pálpebra superior: é a apresentação típica do calázio, inflamação granulomatosa crônica por obstrução do ducto de uma glândula de Meibômio. O que fecha o diagnóstico é a soma de ausência de dor, nódulo firme e bem delimitado e localização no corpo da pálpebra, longe da margem livre e do canto interno. A ausência de febre, de secreção e de epífora afasta processo infeccioso em atividade e doença da via lacrimal. O tratamento inicial é conservador, com compressas mornas e higiene palpebral, reservando-se exérese ou infiltração para as lesões que persistem.",
+  "distratores": {
+   "B": "O hordéolo é a fase aguda e supurativa, dolorosa, com hiperemia e ponto de drenagem na margem palpebral. Aqui os sinais flogísticos já regrediram há 48 horas e o que restou foi um nódulo indolor: isso é a lesão crônica residual, não o hordéolo em atividade.",
+   "C": "A canaliculite acomete o canalículo lacrimal, no canto interno junto ao ponto lacrimal, e cursa com epífora, secreção que reflui à expressão e concreções. A paciente tem nódulo no terço médio da pálpebra, fora da via lacrimal, e não relata lacrimejamento nem secreção.",
+   "D": "A dacriocistite é a infecção do saco lacrimal, abaixo do tendão cantal medial, e se manifesta como abaulamento doloroso no canto interno, com epífora, secreção purulenta e frequentemente febre. Nenhum desses achados existe no caso, e a topografia descrita não corresponde."
+  },
+  "pontos_chave": [
+   "Nódulo palpebral indolor, na face tarsal e fora da margem livre, depois de um surto inflamatório que cedeu: pense em calázio.",
+   "Hordéolo dói e fica na margem palpebral; calázio não dói e fica no corpo da pálpebra.",
+   "Lesão no canto interno com epífora desloca o raciocínio para a via lacrimal, não para a pálpebra."
+  ],
+  "referencias": []
  },
  {
   "numero": 23,
@@ -787,6 +824,31 @@
   ]
  },
  {
+  "numero": 34,
+  "conceito": "A questão cobra que a mutação homozigótica da MTHFR não é, sozinha, trombofilia a investigar ou a tratar, e que um único abortamento precoce não abre investigação de perda gestacional de repetição.",
+  "correta": "A variante homozigótica da metilenotetrahidrofolato redutase é achado frequente na população geral e, isoladamente, não se associa a trombose nem a perda gestacional, de modo que o exame trazido pela paciente não altera a condução do caso. A perda que ela teve foi única e precoce, na oitava semana, evento esporádico e comum, que não preenche o critério de abortamento de repetição usado para deflagrar investigação. Somando-se a ausência de história pessoal e familiar de trombose, não sobra nenhum gatilho para exames adicionais ou para anticoagulação. A conduta imediata é, portanto, dar seguimento ao pré-natal habitual, com a vigilância de rotina da gestação.",
+  "distratores": {
+   "B": "Investigar trombofilia gestacional não se justifica neste caso: a paciente teve uma única perda precoce e não tem evento trombótico próprio nem familiar, que são as situações que dão sentido ao painel. Pedir a investigação aqui só produz achados de significado incerto, como a própria MTHFR que ela já traz.",
+   "C": "Ácido acetilsalicílico associado a enoxaparina é tratamento, não rastreamento, e exporia uma gestante sem indicação a risco de sangramento. A anticoagulação profilática na gestação se apoia em trombofilia de alto risco com história trombótica ou em síndrome antifosfolípide confirmada, e nada disso está presente.",
+   "D": "Anticoagulante lúpico, anticardiolipina e anti-beta-2-glicoproteína I compõem o critério laboratorial da síndrome antifosfolípide, mas essa pesquisa pressupõe um critério clínico preenchido: três ou mais perdas precoces consecutivas, óbito fetal após dez semanas, prematuridade por insuficiência placentária grave ou trombose. A paciente tem apenas um abortamento de oito semanas, então não há critério clínico a ser confirmado."
+  },
+  "pontos_chave": [
+   "MTHFR isolada não indica investigação de trombofilia nem anticoagulação na gestação.",
+   "Um abortamento precoce isolado é esporádico; a investigação de perda recorrente começa a partir de duas a três perdas.",
+   "Só se pesquisa síndrome antifosfolípide depois de preenchido um critério clínico: perdas de repetição, óbito fetal ou trombose."
+  ],
+  "referencias": [
+   {
+    "id": "MS-MANUAL-GESTACAO-ALTO-RISCO-2022",
+    "detalhe": "Capítulo sobre trombofilias na gestação: quais trombofilias devem ser pesquisadas, critérios diagnósticos da síndrome antifosfolípide e situações que indicam tromboprofilaxia."
+   },
+   {
+    "id": "FEBRASGO-PROTOCOLO-ABORTAMENTO-ESPONTANEO-2025",
+    "detalhe": "Seção de classificação e conduta, na distinção entre abortamento esporádico e abortamento de repetição e no número de perdas que autoriza iniciar investigação."
+   }
+  ]
+ },
+ {
   "numero": 35,
   "conceito": "Metas pressóricas, momento de iniciar fármaco e periodicidade do seguimento na hipertensão estágio 2 do idoso de baixo risco.",
   "correta": "Questão anulada pelo INEP; o que segue é a leitura da Evidentia, e não a justificativa oficial da banca. O caso reúne três decisões que a prova tentou embutir numa única alternativa: iniciar ou não fármaco na hipertensão estágio 2, qual meta pressórica perseguir em um idoso de 68 anos com fragilidade leve e baixo risco, e em quanto tempo reavaliar. Na hipertensão estágio 2 a conduta usual é associar mudança de estilo de vida ao tratamento medicamentoso desde o início, o que enfraquece a opção puramente não medicamentosa; por outro lado, as alternativas que iniciam fármaco ora combinam a meta com esquemas que não são de primeira linha, ora propõem intervalos de retorno incompatíveis com o acompanhamento adequado. Como nenhuma opção reúne simultaneamente a indicação terapêutica, a classe de fármaco e a meta aceitáveis, não há resposta inequívoca — motivo provável da anulação. Vale reter que, no idoso com fragilidade, as metas são individualizadas e os fármacos de ação central devem ser evitados.",
@@ -927,7 +989,7 @@
     "detalhe": "Capítulo de diagnóstico da hepatite B — interpretação combinada dos marcadores sorológicos (AgHBs, anti-HBc total e anti-HBs) e definição das fases da infecção, incluindo o padrão de anti-HBs isolado reagente como imunidade vacinal."
    },
    {
-    "id": "MS-GVS-VOL2-2024",
+    "id": "MS-GVS-2024-V2",
     "detalhe": "Capítulo Hepatites virais, seção de diagnóstico laboratorial — quadro de interpretação dos marcadores sorológicos da hepatite B e indicação de vacinação para os perfis de suscetibilidade."
    }
   ]
@@ -971,6 +1033,27 @@
    {
     "id": "SOGC-TRAUMA-GESTANTE-2015",
     "detalhe": "Seção sobre parada cardiorrespiratória materna: recomendações de reanimação com deslocamento uterino e de cesariana perimortem conforme idade gestacional e tempo de parada."
+   }
+  ]
+ },
+ {
+  "numero": 43,
+  "conceito": "Interpretar a gasometria arterial de um lactente com diarreia e rebaixamento de consciência para identificar um distúrbio ácido-básico misto.",
+  "correta": "O pH de 7,22 indica acidemia, e o bicarbonato de 12,5 mEq/L com excesso de bases de -13 mostra o componente metabólico, compatível com a perda fecal de bicarbonato da diarreia abundante de 2 dias. Se houvesse apenas acidose metabólica bem compensada, o paciente estaria hiperventilando e a pCO2 deveria cair para cerca de 27 mmHg; encontrar pCO2 de 48 mmHg significa que há retenção de CO2, ou seja, um segundo distúrbio acidificante de origem respiratória. O rebaixamento do nível de consciência até o coma explica essa hipoventilação, e a saturação de 94% em ar ambiente confirma que o problema é de ventilação, não de doença pulmonar primária. Logo, o diagnóstico é acidose mista, respiratória e metabólica.",
+  "distratores": {
+   "B": "Hiperventilação alveolar implicaria pCO2 baixa; neste paciente a pCO2 está em 48 mmHg, acima do normal, de modo que a compensação respiratória esperada não está ocorrendo.",
+   "C": "Alcalose respiratória exigiria pCO2 reduzida e tendência do pH ao lado alcalino; os dois achados contrariam frontalmente a gasometria apresentada, com pCO2 alta e pH de 7,22.",
+   "D": "Essa seria a resposta se a pCO2 estivesse baixa, em torno de 27 mmHg; como o CO2 está retido, o componente respiratório soma-se à acidose metabólica em vez de compensá-la."
+  },
+  "pontos_chave": [
+   "Na acidose metabólica, espere pCO2 baixa: pCO2 normal ou alta já indica componente respiratório associado.",
+   "pCO2 esperada na acidose metabólica é aproximadamente 1,5 × bicarbonato + 8, com margem de 2 mmHg.",
+   "Diarreia com sonolência ou coma: a criança perde bicarbonato e deixa de compensar, evoluindo para acidose mista."
+  ],
+  "referencias": [
+   {
+    "id": "WHO-TRATAMENTO-DIARREIA-2005",
+    "detalhe": "Seção sobre os distúrbios eletrolíticos e ácido-básicos associados à diarreia: acidose metabólica por perda fecal de bicarbonato e sua reversão com a reidratação adequada."
    }
   ]
  },
@@ -1410,6 +1493,38 @@
   ]
  },
  {
+  "numero": 63,
+  "conceito": "Conduta inicial diante da ingestão recente de substância potencialmente cáustica em criança clinicamente estável.",
+  "correta": "A criança está consciente, corada, hidratada, eupneica e hemodinamicamente estável, sem sialorreia, estridor, disfagia ou vômitos, ou seja, sem sinais que indiquem lesão significativa até o momento. Nesse cenário, a conduta inicial é examinar a cavidade oral e a orofaringe em busca de lesões e manter observação clínica por algumas horas, com jejum e vigilância para o aparecimento de sialorreia, dor à deglutição, recusa alimentar ou desconforto respiratório. Essa janela de observação é o que define a necessidade de avaliação endoscópica e de suporte adicional. Todas as medidas de descontaminação gástrica são contraindicadas na suspeita de cáustico, o que deixa a observação vigilante como única opção correta.",
+  "distratores": {
+   "A": "Neutralizar um cáustico é perigoso, porque a reação ácido-base é exotérmica e pode aprofundar a lesão; oferecer volume para diluir também não é conduta de rotina, pois distende o estômago e pode desencadear vômito com reexposição do esôfago.",
+   "B": "O carvão ativado não adsorve substâncias cáusticas e ainda escurece a mucosa, atrapalhando uma eventual endoscopia; a sonda de lavagem gástrica pode perfurar tecido já lesado e provocar novo contato do agente com o esôfago.",
+   "C": "Induzir vômito é formalmente contraindicado nesse contexto: o agente volta a percorrer esôfago e faringe, duplicando a área de queimadura, e ainda aumenta o risco de aspiração e de lesão respiratória em uma criança que agora está bem."
+  },
+  "pontos_chave": [
+   "Ingestão de cáustico: não induza vômito, não faça lavagem gástrica, não use carvão ativado, não neutralize.",
+   "Criança estável com mucosa oral íntegra: exame da orofaringe e observação clínica com jejum.",
+   "Sialorreia, disfagia, recusa alimentar, estridor ou dor torácica mudam o rumo e indicam avaliação endoscópica."
+  ],
+  "referencias": []
+ },
+ {
+  "numero": 64,
+  "conceito": "A questão cobra a classificação da apresentação cefálica pelo grau de deflexão da cabeça fetal, a partir do ponto de referência identificado ao toque.",
+  "correta": "A cabeça fetal se apresenta em quatro situações conforme a deflexão: fletida, occipital, com o lambda como referência; defletida de primeiro grau, bregmática; defletida de segundo grau, de fronte, com a glabela como referência; e defletida de terceiro grau, de face, com o mento como referência. Na deflexão máxima o pescoço fica em extensão completa e o toque encontra estruturas faciais, como rebordos orbitários, nariz, boca e mento, exatamente o que a imagem mostra. Trata-se, portanto, de apresentação cefálica defletida de terceiro grau, de face. Reconhecer isso importa porque a apresentação de face muda o prognóstico do parto: apenas a variedade mento-anterior tem chance de evoluir por via vaginal.",
+  "distratores": {
+   "A": "A defletida de primeiro grau, bregmática, é deflexão parcial: o que se alcança ao toque é o bregma, com a fontanela anterior no centro da apresentação, e não as estruturas faciais mostradas na imagem.",
+   "B": "Na apresentação de fronte, deflexão de segundo grau, o toque alcança a glabela e a raiz do nariz, mas a boca e o mento permanecem fora do alcance. Aqui a face inteira se apresenta, o que traduz grau maior de deflexão.",
+   "D": "A cefálica fletida, occipital, é o oposto do quadro descrito: o queixo está encostado no tórax e o que se palpa é a pequena fontanela, posterior e triangular, com o occipício como ponto de referência."
+  },
+  "pontos_chave": [
+   "O grau de deflexão define o ponto de referência: fletida e lambda, primeiro grau e bregma, segundo grau e glabela, terceiro grau e mento.",
+   "Palpar nariz, boca e rebordos orbitários ao toque fecha o diagnóstico de apresentação de face.",
+   "Face em variedade mento-posterior persistente não se desprende e é indicação de cesariana."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 65,
   "conceito": "Reconhecer a intoxicação crônica por mercúrio em criança ribeirinha exposta ao garimpo, a partir do quadro neurológico progressivo e da dieta baseada em peixe de rio.",
   "correta": "A criança vive em comunidade ribeirinha do Tapajós, tem o peixe de rio como base alimentar e o território está ocupado por garimpo ilegal há anos, com alteração visível das águas — a cadeia de exposição clássica ao metilmercúrio, que se bioacumula nos peixes. O quadro é neurológico, insidioso e progressivo: parestesia e fraqueza em membros inferiores, desequilíbrio, tremor, tontura, irritabilidade, queda no aprendizado e, mais recentemente, dificuldade de fala. Essa combinação de acometimento central e periférico em criança cronicamente exposta define a intoxicação por mercúrio. Na prática do SUS, o caso deve ser tratado como intoxicação exógena, agravo de notificação compulsória, e o mercúrio está entre as substâncias químicas priorizadas pela vigilância nacional.",
@@ -1541,7 +1656,7 @@
   ],
   "referencias": [
    {
-    "id": "MS-GVS-VOL3-2024",
+    "id": "MS-GVS-2024-V3",
     "detalhe": "Capítulo Febre maculosa brasileira e outras riquetsioses — seções de definição de caso suspeito e notificação, de diagnóstico laboratorial (imunofluorescência indireta em amostras pareadas, a segunda colhida 14 a 21 dias após a primeira) e de tratamento com doxiciclina iniciado à suspeita clínica."
    },
    {
@@ -1574,6 +1689,38 @@
     "detalhe": "Tabela dos achados típicos do líquor na meningite bacteriana aguda — pleocitose de milhares de células por mm³ com predomínio de neutrófilos —, que serve de contraste ao padrão linfocítico apresentado pelo paciente."
    }
   ]
+ },
+ {
+  "numero": 72,
+  "conceito": "Reconhecer a embolia aérea venosa como complicação imediata da punção de veia central e saber a conduta de resgate à beira do leito.",
+  "correta": "Hipoxemia inexplicada seguida de colapso cardiocirculatório logo após a inserção do cateter em subclávia, num paciente ventilado e com baixa pressão venosa por hipovolemia relativa, caracteriza embolia aérea venosa: o ar entra pelo sistema venoso e se acumula na via de saída do ventrículo direito, funcionando como uma rolha que impede a ejeção. A conduta imediata é posicionar o paciente em Trendelenburg e decúbito lateral esquerdo, o que desloca a bolha para o ápice do ventrículo direito e desobstrui a via de saída, e aspirar o ar pelo próprio cateter já locado, cuja ponta está exatamente na circulação central. Somam-se a oclusão do sítio de punção para interromper a entrada de ar, oxigênio a 100% e suporte hemodinâmico. A alternativa C reúne justamente as duas medidas executáveis em segundos, sem transporte e sem novo procedimento.",
+  "distratores": {
+   "A": "O procedimento endovascular sob radioscopia exige transporte e sala de hemodinâmica, tempo que um paciente em colapso circulatório não tem. Além disso, o dispositivo necessário para aspirar o ar já está posicionado: o próprio cateter central recém-inserido.",
+   "B": "Toracotomia com punção cardíaca sob visão direta é medida heroica, sem indicação na embolia aérea venosa por cateter, e trocaria uma complicação potencialmente reversível à beira do leito por um procedimento de altíssima morbidade em paciente séptico e instável.",
+   "D": "Puncionar a subclávia contralateral repete o mesmo risco que originou o evento, consome tempo precioso e não retira o ar já presente nas câmaras direitas. Para aspirar, interessa o cateter que já está na circulação central, e não um novo acesso."
+  },
+  "pontos_chave": [
+   "Hipoxemia súbita e colapso logo após punção, manipulação ou retirada de cateter central: pense em embolia aérea venosa.",
+   "Resgate: Trendelenburg com decúbito lateral esquerdo, aspiração pelo próprio cateter, oclusão do sítio e oxigênio a 100%.",
+   "Prevenção: puncionar veia central com o paciente em Trendelenburg e ocluir o canhão durante conexões e retirada."
+  ],
+  "referencias": []
+ },
+ {
+  "numero": 73,
+  "conceito": "Reconhecer a invaginação intestinal no lactente e identificar a infecção viral prévia como condição habitualmente associada.",
+  "correta": "Um lactente de 9 meses com dor abdominal intensa em crises, separadas por períodos de acalmia, fezes com sangue e muco e abdome distendido com peristalse aumentada reúne o quadro clássico da invaginação intestinal, principal causa de obstrução intestinal entre 3 meses e 2 anos. A dor intermitente traduz as ondas peristálticas contra o segmento invaginado, e o sangue com muco resulta do sofrimento vascular da alça telescopada. A condição classicamente associada é a infecção viral recente, sobretudo de vias aéreas: a hipertrofia do tecido linfoide da parede intestinal funciona como cabeça de invaginação. A irritabilidade, a desidratação e a palidez descritas indicam que já há repercussão sistêmica e reforçam a urgência do diagnóstico.",
+  "distratores": {
+   "B": "A aganglionose do cólon se manifesta desde o período neonatal, com retardo na eliminação do mecônio, constipação crônica e distensão progressiva; nada disso consta na história de uma criança até então bem, que abriu o quadro há 12 horas com dor em cólica e enterorragia.",
+   "C": "A estenose hipertrófica de piloro aparece entre a terceira e a sexta semana de vida, com vômitos não biliosos em jato, avidez alimentar e alcalose; não se inicia aos 9 meses nem produz fezes com sangue e muco.",
+   "D": "A apendicite é rara nessa faixa etária e cursaria com dor contínua e progressiva, febre e sinais de irritação peritoneal, e não com o padrão intermitente de dor e acalmia com fezes em geleia de framboesa descrito no caso."
+  },
+  "pontos_chave": [
+   "Lactente com dor em cólica intermitente e fezes com sangue e muco é invaginação até prova em contrário.",
+   "O gatilho habitual é a infecção viral recente, que hipertrofia o tecido linfoide e cria a cabeça de invaginação.",
+   "A ultrassonografia de abdome confirma o diagnóstico e a maioria dos casos sem perfuração é resolvida por redução hidrostática ou pneumática."
+  ],
+  "referencias": []
  },
  {
   "numero": 74,
@@ -1668,6 +1815,27 @@
    {
     "id": "MS-SAMU-SAV-2014",
     "detalhe": "Protocolos de trauma torácico do sumário, especificamente Pneumotórax simples e Pneumotórax hipertensivo: reconhecimento clínico do pneumotórax e conduta de descompressão e drenagem torácica."
+   }
+  ]
+ },
+ {
+  "numero": 78,
+  "conceito": "Diferenciar a dermatite seborreica do lactente da dermatite atópica pelas características clínicas e laboratoriais.",
+  "correta": "Escamas gordurosas, espessas e aderentes no couro cabeludo de um lactente de 30 dias, estendendo-se para a região retroauricular e as sobrancelhas, correspondem à dermatite seborreica infantil, a crosta láctea, que ocupa justamente as áreas ricas em glândulas sebáceas. O que a define clinicamente, e é o que a questão cobra, é ser uma dermatose habitualmente não pruriginosa, sem eosinofilia e sem elevação de IgE sérica, com curso benigno e autolimitado. A própria história corrobora isso: a mãe amoleceu as crostas com óleo antes do banho para removê-las, e não há relato de irritabilidade ou coçadura. O manejo é a remoção suave das escamas e a higiene, sem necessidade de investigação alérgica.",
+  "distratores": {
+   "A": "Exsudação e vesículas caracterizam eczemas agudos, como o atópico e o de contato; as lesões descritas são escamocrostosas, secas e de base gordurosa, sem qualquer menção a vesiculação ou secreção.",
+   "B": "A liquenificação é consequência de coçadura crônica e não pode existir em uma dermatose com 3 dias de evolução em um lactente de 30 dias, que sequer coordena o ato de coçar.",
+   "C": "A descamação de fato está presente, mas o segundo componente invalida a alternativa: aumento de IgE sérica é marcador de atopia, e a dermatite seborreica não cursa com essa alteração."
+  },
+  "pontos_chave": [
+   "Crosta láctea: escamas gordurosas e aderentes no couro cabeludo e demais áreas seborreicas, sem prurido.",
+   "Prurido, eosinofilia e IgE elevada apontam para dermatite atópica, não para dermatite seborreica.",
+   "O tratamento é remoção suave das escamas com emoliente e higiene; o quadro tende a resolver espontaneamente."
+  ],
+  "referencias": [
+   {
+    "id": "MS-ATENCAO-RECEM-NASCIDO-VOL3-2014",
+    "detalhe": "Volume 3, capítulo de problemas dermatológicos do recém-nascido: dermatite seborreica (crosta láctea), sua apresentação em áreas seborreicas e o manejo com emolientes e higiene."
    }
   ]
  },

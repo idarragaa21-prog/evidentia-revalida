@@ -919,16 +919,6 @@
   "verificado_em": "2026-08-05",
   "verificacao": "WebFetch sobre https://api.crossref.org/works/10.1227/NEU.0000000000001432 (registro Crossref). Confirmado literalmente: title = 'Guidelines for the Management of Severe Traumatic Brain Injury, Fourth Edition'; journal = 'Neurosurgery'; issued 20-set-2016 (impresso jan-2017); DOI = 10.1227/neu.0000000000001432."
  },
- "BTF-TCE-GRAVE-2017": {
-  "tipo": "diretriz_internacional",
-  "titulo": "Guidelines for the Management of Severe Traumatic Brain Injury, Fourth Edition",
-  "autor": "Brain Trauma Foundation (BTF)",
-  "ano": 2017,
-  "url": "https://doi.org/10.1227/NEU.0000000000001432",
-  "doi": "10.1227/NEU.0000000000001432",
-  "verificado_em": "2026-08-05",
-  "verificacao": "Crossref confirmou o título exato, Neurosurgery vol 80, issue 1, pág 6-15, published-print 2017-01. DOI resolve (302) para journals.lww.com/00006123-201701000-00003."
- },
  "BTS-DOENCA-PLEURAL-2023": {
   "tipo": "diretriz_sociedade",
   "titulo": "British Thoracic Society Guideline for pleural disease",
@@ -938,16 +928,6 @@
   "doi": "10.1136/thorax-2022-219784",
   "verificado_em": "2026-08-05",
   "verificacao": "WebFetch sobre https://api.crossref.org/works/10.1136/thorax-2022-219784 (registro Crossref). Confirmado literalmente: title = 'British Thoracic Society Guideline for pleural disease'; journal = 'Thorax'; year = 2023; publisher = BMJ; DOI = 10.1136/thorax-2022-219784."
- },
- "CDC-IST-2021": {
-  "tipo": "diretriz_internacional",
-  "titulo": "Sexually Transmitted Infections Treatment Guidelines, 2021",
-  "autor": "Centers for Disease Control and Prevention (CDC)",
-  "ano": 2021,
-  "url": "https://doi.org/10.15585/mmwr.rr7004a1",
-  "doi": "10.15585/mmwr.rr7004a1",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch de https://api.crossref.org/works/10.15585/mmwr.rr7004a1 devolvió title «Sexually Transmitted Infections Treatment Guidelines, 2021», container-title «MMWR Recomm. Rep.», publisher Centers for Disease Control MMWR Office, año 2021."
  },
  "CDC-RICKETTSIOSES-2016": {
   "tipo": "diretriz_internacional",
@@ -1229,16 +1209,6 @@
   "verificado_em": "2026-08-05",
   "verificacao": "Crossref confirmou título exato, European Heart Journal, vol 42(6):563-645, published-online 2020-08-29 e published-print 2021-02-11 (o ano do título da diretriz é 2020). DOI resolve (302) para academic.oup.com/eurheartj/article/42/6/563/5898606."
  },
- "ESC-DOENCAS-PERICARDIO-2015": {
-  "tipo": "diretriz_sociedade",
-  "titulo": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
-  "autor": "European Society of Cardiology (ESC)",
-  "ano": 2015,
-  "url": "https://doi.org/10.1093/eurheartj/ehv318",
-  "doi": "10.1093/eurheartj/ehv318",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch sobre https://api.crossref.org/works/10.1093/eurheartj/ehv318 (registro Crossref). Confirmado literalmente: title = '2015 ESC Guidelines for the diagnosis and management of pericardial diseases'; journal = 'European Heart Journal'; year = 2015; publisher = Oxford University Press; DOI = 10.1093/eurheartj/ehv318."
- },
  "ESC-PERICARDIO-2015": {
   "tipo": "diretriz_internacional",
   "titulo": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
@@ -1247,7 +1217,7 @@
   "url": "https://doi.org/10.1093/eurheartj/ehv318",
   "doi": "10.1093/eurheartj/ehv318",
   "verificado_em": "2026-08-05",
-  "verificacao": "Crossref confirmou título exato, European Heart Journal 2015;36(42):2921-2964, OUP. DOI resolve (302) para academic.oup.com/eurheartj/article/36/42/2921/2293375."
+  "verificacao": "WebFetch sobre https://api.crossref.org/works/10.1093/eurheartj/ehv318 (registro Crossref). Confirmado literalmente: title = '2015 ESC Guidelines for the diagnosis and management of pericardial diseases'; journal = 'European Heart Journal'; year = 2015; publisher = Oxford University Press; DOI = 10.1093/eurheartj/ehv318."
  },
  "ESC-SCA-2023": {
   "tipo": "diretriz_internacional",
@@ -1629,16 +1599,6 @@
   "verificado_em": "2026-08-05",
   "verificacao": "Descarga directa de la página (HTTP 200) y extracción del texto. <title> y H1: «Versão para profissionais de saúde — Instituto Nacional de Câncer - INCA», ruta oficial .../assuntos/cancer/tipos/testiculo. Sello de fecha: «Publicado em 05/06/2022 … Atualizado em 12/12/2025». Contenido clínico verificado literalmente: diagnóstico por nódulo palpable y ecografía escrotal con lesiones hipoecoicas, marcadores tumorales «alfafetoproteína, beta-HCG e LDH», TC de tórax/abdomen/pelvis para estadificación «pós-orquiectomia», y clasificación «Tumores de células germinativas representam cerca de 95% dos tumores malignos de testículo … classificados em seminomas e não seminomas»."
  },
- "INCA-DETECCAO-PRECOCE-2021": {
-  "tipo": "diretriz_oficial_br",
-  "titulo": "Detecção Precoce do Câncer",
-  "autor": "Instituto Nacional de Câncer (INCA), Ministério da Saúde (Brasil)",
-  "ano": 2021,
-  "url": "https://www.inca.gov.br/publicacoes/livros/deteccao-precoce-do-cancer",
-  "doi": "",
-  "verificado_em": "2026-08-05",
-  "verificacao": "Página oficial del INCA abierta con curl (HTTP 200) y texto extraído. Título literal de la página: «Detecção Precoce do Câncer | INCA - Instituto Nacional de Câncer»; año de publicación indicado en la ficha: 2021, tipo «Livros», formato PDF. Descripción literal verificada: presenta «os conceitos básicos da detecção precoce do câncer, como rastreamento e diagnóstico precoce, suas premissas e implicações, e as atuais recomendações para os cânceres mais incidentes que são passíveis de ações de detecção precoce (próstata, mama, pele, cólon e reto, colo do útero, cavidade oral e pulmão)»."
- },
  "INCA-DETECCAO-PRECOCE-CANCER-2021": {
   "tipo": "diretriz_oficial_br",
   "titulo": "Detecção Precoce do Câncer",
@@ -1647,7 +1607,7 @@
   "url": "https://www.inca.gov.br/publicacoes/livros/deteccao-precoce-do-cancer",
   "doi": "",
   "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch a la página oficial de publicaciones del INCA. Confirmado literalmente: título \"Detecção Precoce do Câncer\"; institución INCA / Ministério da Saúde; año 2021; contenido confirmado: aborda \"conceitos básicos da detecção precoce do câncer, como rastreamento e diagnóstico precoce\" y cubre los cánceres de próstata, mama, piel, colorrectal (cólon y recto), cuello uterino, cavidad oral y pulmón; elaborado por la Divisão de Detecção Precoce e Apoio à Organização de Redes / Coordenação de Prevenção e Vigilância del INCA."
+  "verificacao": "Página oficial del INCA abierta con curl (HTTP 200) y texto extraído. Título literal de la página: «Detecção Precoce do Câncer | INCA - Instituto Nacional de Câncer»; año de publicación indicado en la ficha: 2021, tipo «Livros», formato PDF. Descripción literal verificada: presenta «os conceitos básicos da detecção precoce do câncer, como rastreamento e diagnóstico precoce, suas premissas e implicações, e as atuais recomendações para os cânceres mais incidentes que são passíveis de ações de detecção precoce (próstata, mama, pele, cólon e reto, colo do útero, cavidade oral e pulmão)»."
  },
  "INCA-DETECCAO-PRECOCE-MAMA-2015": {
   "tipo": "diretriz_oficial_br",
@@ -2128,56 +2088,6 @@
   "doi": "",
   "verificado_em": "2026-08-05",
   "verificacao": "Descargado con curl (HTTP 200, application/pdf, 1,25 MB) desde la URL + /@@download/file y extraído con pdftotext. Ficha catalográfica literal: «Guia de vigilância em saúde : volume 3 [recurso eletrônico] ... – 6. ed. rev. – Brasília : Ministério da Saúde, 2024», ISBN 978-65-5993-503-1. Sumario verificado, Cap. 12: «Acidente de trabalho» (1163), «Intoxicação exógena» (1181), «Dermatoses ocupacionais» (1195), «Pneumoconioses» (1213), «Violências interpessoais e autoprovocadas» (1221), «Transtornos mentais relacionados ao trabalho» (1231)."
- },
- "MS-GVS-6ED-VOL1-2024": {
-  "tipo": "protocolo_ms",
-  "titulo": "Guia de Vigilância em Saúde – Volume 1",
-  "autor": "Ministério da Saúde (Brasil), Secretaria de Vigilância em Saúde e Ambiente, Departamento de Ações Estratégicas de Epidemiologia e Vigilância em Saúde e Ambiente",
-  "ano": 2024,
-  "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigilancia/guia-de-vigilancia-em-saude-volume-1-6a-edicao",
-  "doi": "",
-  "verificado_em": "2026-08-05",
-  "verificacao": "PDF descargado desde la URL oficial gov.br (HTTP 200, 4.351.482 bytes) y texto extraído con pdftotext. Portada literal: 'MINISTÉRIO DA SAÚDE / GUIA DE VIGILÂNCIA EM SAÚDE / 6ª edição revisada / VOLUME 1 / Brasília DF 2024 / Departamento de Ações Estratégicas de Epidemiologia e Vigilância em Saúde e Ambiente'. Sumario verificado: capítulos con 'Sarampo', 'Rubéola', 'Síndrome da rubéola congênita', 'Coqueluche', 'Difteria', 'Poliomielite/paralisia flácida aguda', 'Varicela/herpes-zóster', 'Tétano neonatal', 'Outras meningites' y 'Toxoplasmose adquirida na gestação e toxoplasmose congênita'. Conteo en texto completo: 'sarampo' 179, 'toxoplasmose congênita' 28, 'vitamina a' 3."
- },
- "MS-GVS-6ED-VOL2-2024": {
-  "tipo": "protocolo_ms",
-  "titulo": "Guia de Vigilância em Saúde – Volume 2",
-  "autor": "Ministério da Saúde (Brasil), Secretaria de Vigilância em Saúde e Ambiente, Departamento de Ações Estratégicas de Epidemiologia e Vigilância em Saúde e Ambiente",
-  "ano": 2024,
-  "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigilancia/guia-de-vigilancia-em-saude-volume-2-6a-edicao",
-  "doi": "",
-  "verificado_em": "2026-08-05",
-  "verificacao": "PDF descargado desde la URL oficial gov.br (HTTP 200, 4.171.174 bytes) y texto extraído con pdftotext. Portada literal: 'MINISTÉRIO DA SAÚDE / GUIA DE VIGILÂNCIA EM SAÚDE / 6ª edição revisada / VOLUME 2 / Brasília DF 2024' con 'Secretaria de Vigilância em Saúde e Ambiente'. Sumario verificado incluye los capítulos 'Sífilis adquirida e em gestante' y 'SÍFILIS CONGÊNITA'; 'sífilis congênita' aparece 58 veces en el texto completo."
- },
- "MS-GVS-VOL1-6ED-2024": {
-  "tipo": "protocolo_ms",
-  "titulo": "Guia de Vigilância em Saúde: volume 1 (6ª edição revisada)",
-  "autor": "Ministério da Saúde (Brasil), Secretaria de Vigilância em Saúde e Ambiente",
-  "ano": 2024,
-  "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigilancia/guia-de-vigilancia-em-saude-volume-1-6a-edicao",
-  "doi": "",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch de la página oficial (título «Guia de vigilância em saúde: volume 1 (6ª edição - revisada)», Ministério da Saúde) y descarga del PDF desde el enlace @@download/file que la propia página indica. Portada del PDF: «MINISTÉRIO DA SAÚDE — GUIA DE VIGILÂNCIA EM SAÚDE — 6ª edição revisada — VOLUME 1 — Brasília DF 2024 — Secretaria de Vigilância em Saúde e Ambiente». En el sumario figura el capítulo «Tétano acidental» (p. 325) y en el cuerpo verifiqué literalmente los apartados «Soro antitetânico (SAT)», «IMUNOGLOBULINA HUMANA ANTITETÂNICA – IGHAT» y el cuadro de conducta profiláctica según el tipo de herida («FERIMENTOS COM RISCO MÍNIMO») e historia vacunal."
- },
- "MS-GVS-VOL2-2024": {
-  "tipo": "protocolo_ms",
-  "titulo": "Guia de Vigilância em Saúde: volume 2 (6ª edição revisada)",
-  "autor": "Ministério da Saúde (Brasil), Secretaria de Vigilância em Saúde e Ambiente, Departamento de Ações Estratégicas de Epidemiologia e Vigilância em Saúde e Ambiente",
-  "ano": 2024,
-  "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigilancia/guia-de-vigilancia-em-saude-volume-2-6a-edicao/",
-  "doi": "",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch de la URL oficial gov.br descargó el PDF; extraído con pdftotext confirmé literalmente en portada: 'MINISTÉRIO DA SAÚDE / GUIA DE VIGILÂNCIA EM SAÚDE / 6ª edição revisada / VOLUME 2 / Brasília DF 2024'. En el SUMÁRIO confirmé los capítulos con paginación: 'Febre amarela 797', 'Doença de Chagas 851', 'Leishmaniose tegumentar americana 885', 'Malária 921', 'Esquistossomose mansoni 957', además de capítulos de Dengue/chikungunya/Zika, Hepatites virais, Hanseníase y Tuberculose."
- },
- "MS-GVS-VOL3-2024": {
-  "tipo": "protocolo_ms",
-  "titulo": "Guia de Vigilância em Saúde: volume 3 (6ª edição revisada)",
-  "autor": "Ministério da Saúde (Brasil), Secretaria de Vigilância em Saúde e Ambiente, Departamento de Ações Estratégicas de Epidemiologia e Vigilância em Saúde e Ambiente",
-  "ano": 2024,
-  "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigilancia/guia-de-vigilancia-em-saude-volume-3-6a-edicao/",
-  "doi": "",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch de la URL oficial gov.br descargó el PDF; extraído con pdftotext confirmé en portada: 'MINISTÉRIO DA SAÚDE / GUIA DE VIGILÂNCIA EM SAÚDE / 6ª edição revisada / 3 / Brasília DF 2024 / VOLUME'. Grep sobre el texto completo confirmó los encabezados de capítulo 'LEPTOSPIROSE', 'FEBRE MACULOSA BRASILEIRA' y 'Febre maculosa brasileira e outras rickettsioses', además de Hantavirose, Peste, Raiva y Acidentes por animais peçonhentos."
  },
  "MS-IN-CALENDARIO-VACINACAO-2025": {
   "tipo": "protocolo_ms",
@@ -2699,26 +2609,6 @@
   "verificado_em": "2026-08-05",
   "verificacao": "WebFetch de la página del artículo en abccardiol.org (revista Arquivos Brasileiros de Cardiologia) confirmó: título portugués 'Diretriz Brasileira de Fibrilação Atrial 2025', título inglés 'Brazilian Atrial Fibrillation Guidelines – 2025', año 2025, cita 'Arq. Bras. Cardiol. 2025; 122(9): e20250618', DOI 10.36660/abc.20250618i, autoría de la Sociedade Brasileira de Cardiologia con coordinación de Fatima Dumas Cintra. Además, WebFetch de https://doi.org/10.36660/abc.20250618i resolvió (302) exactamente a esa misma página del artículo, confirmando la correspondencia DOI–título. NOTA: no pude confirmar en el texto completo la cobertura de flutter atrial, por lo que ese tema NO se le atribuye."
  },
- "SBC-DIRETRIZ-HAS-2020": {
-  "tipo": "diretriz_sociedade",
-  "titulo": "Diretrizes Brasileiras de Hipertensão Arterial – 2020",
-  "autor": "Sociedade Brasileira de Cardiologia (Departamento de Hipertensão Arterial), Sociedade Brasileira de Hipertensão e Sociedade Brasileira de Nefrologia",
-  "ano": 2020,
-  "url": "https://doi.org/10.36660/abc.20201238",
-  "doi": "10.36660/abc.20201238",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch em https://pmc.ncbi.nlm.nih.gov/articles/PMC9949730/ confirmou literalmente: título 'Diretrizes Brasileiras de Hipertensão Arterial – 2020', Arquivos Brasileiros de Cardiologia 2021;116(3):516-658, sociedades DHA-SBC/SBH/SBN, DOI 10.36660/abc.20201238. Registro Crossref (api.crossref.org/works/10.36660/abc.20201238) devolveu o mesmo título, publisher 'Sociedade Brasileira de Cardiologia', vol 116, issue 3, pág 516-658, published-print 2021-03-03. https://doi.org/10.36660/abc.20201238 responde HTTP 302 para abccardiol.org/article/diretrizes-brasileiras-de-hipertensao-arterial-2020/. O ano '2020' é o do próprio título da diretriz; o fascículo é de 2021."
- },
- "SBC-DIRETRIZ-RCP-2019": {
-  "tipo": "diretriz_sociedade",
-  "titulo": "Atualização da Diretriz de Ressuscitação Cardiopulmonar e Cuidados Cardiovasculares de Emergência da Sociedade Brasileira de Cardiologia - 2019",
-  "autor": "Sociedade Brasileira de Cardiologia",
-  "ano": 2019,
-  "url": "https://doi.org/10.5935/abc.20190203",
-  "doi": "10.5935/abc.20190203",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch em https://www.scielo.br/j/abc/a/7hYYNQk4XHwckmPbFcFD7kP/ confirmou título exato, Arquivos Brasileiros de Cardiologia, 2019, vol 113 n.3, DOI 10.5935/abc.20190203, com conteúdo de suporte básico e avançado de vida, terapias elétricas e causas reversíveis. Crossref confirmou o mesmo título e publisher 'Sociedade Brasileira de Cardiologia', published-print 2019. DOI resolve (302) para scielo.br (pid S0066-782X2019000900449)."
- },
  "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019": {
   "tipo": "diretriz_sociedade",
   "titulo": "Atualização da Diretriz de Ressuscitação Cardiopulmonar e Cuidados Cardiovasculares de Emergência da Sociedade Brasileira de Cardiologia – 2019",
@@ -2728,16 +2618,6 @@
   "doi": "10.5935/abc.20190203",
   "verificado_em": "2026-08-05",
   "verificacao": "WebFetch de la página del artículo en abccardiol.org confirmó título exacto, 'Arq. Bras. Cardiol. 2019; 113(3): 449-663' y DOI 10.5935/abc.20190203. Además, WebFetch de https://doi.org/10.5935/abc.20190203 redirigió (302) a la versión SciELO (PID S0066-782X2019000900449), cuya lectura confirmó el título resuelto y los encabezados de sección: '3. Terapias Elétricas: Desfibrilação, Cardioversão e Marca-Passo Transcutâneo', '5. Suporte Avançado de Vida em Cardiologia no Adulto', sección '5.6 Assistolia e Atividade Elétrica sem Pulso' ('AESP e assistolia podem ser causadas por condições reversíveis'), el cuadro 5.3 de los 'cinco Hs e cinco Ts' (incluye tamponamento cardíaco, pneumotórax hipertensivo e hipercalemia) y la indicación de cardioversión 'para reversão das taquiarritmias com instabilidade hemodinâmica'."
- },
- "SBC-DIRETRIZ-SCA-SSST-2021": {
-  "tipo": "diretriz_sociedade",
-  "titulo": "Diretrizes da Sociedade Brasileira de Cardiologia sobre Angina Instável e Infarto Agudo do Miocárdio sem Supradesnível do Segmento ST – 2021",
-  "autor": "Sociedade Brasileira de Cardiologia",
-  "ano": 2021,
-  "url": "https://doi.org/10.36660/abc.20210180",
-  "doi": "10.36660/abc.20210180",
-  "verificado_em": "2026-08-05",
-  "verificacao": "Registro Crossref (api.crossref.org/works/10.36660/abc.20210180) devolveu literalmente o título 'Diretrizes da Sociedade Brasileira de Cardiologia sobre Angina Instável e Infarto Agudo do Miocárdio sem Supradesnível do Segmento ST – 2021', Arquivos Brasileiros de Cardiologia 2021;117(1):181-264, publisher 'Sociedade Brasileira de Cardiologia'. https://doi.org/10.36660/abc.20210180 responde HTTP 302 para a página do artigo em abccardiol.org."
  },
  "SBC-SBH-SBEM-SBD-ABESO-SINDROME-METABOLICA-2005": {
   "tipo": "diretriz_sociedade",
@@ -2758,16 +2638,6 @@
   "doi": "10.36660/abc.20201238",
   "verificado_em": "2026-08-05",
   "verificacao": "WebFetch de la página SciELO del artículo confirmó literalmente: título 'Diretrizes Brasileiras de Hipertensão Arterial – 2020', revista 'Arquivos Brasileiros de Cardiologia', volumen 116, número 3, año 2021, DOI https://doi.org/10.36660/abc.20201238. Una segunda consulta WebFetch al texto completo confirmó la existencia del 'Capítulo 13: Crise Hipertensiva' (pp. 596-599), con subsecciones de definición y clasificación, tratamiento general y 'Emergências em Situações Especiais' incluyendo 'Encefalopatia Hipertensiva', además de los capítulos 3 (Diagnóstico e Classificação) y 8-9 (tratamiento). NOTA: mcp__Scholar_Sidekick__verifyCitation devolvió error 'You are not subscribed to this API', por lo que la verificación del DOI se hizo abriendo el registro de la revista."
- },
- "SBC-SINDROME-METABOLICA-2005": {
-  "tipo": "diretriz_sociedade",
-  "titulo": "I Diretriz Brasileira de Diagnóstico e Tratamento da Síndrome Metabólica",
-  "autor": "Sociedade Brasileira de Cardiologia (SBC)",
-  "ano": 2005,
-  "url": "https://doi.org/10.1590/s0066-782x2005000700001",
-  "doi": "10.1590/s0066-782x2005000700001",
-  "verificado_em": "2026-08-05",
-  "verificacao": "Localizada y verificada con la API de Crossref (api.crossref.org/works/10.1590/s0066-782x2005000700001): título literal «I Diretriz Brasileira de Diagnóstico e Tratamento da Síndrome Metabólica», revista «Arquivos Brasileiros de Cardiologia» (órgano oficial de la SBC), fecha 2005-04. Título, revista y año confirmados en el registro del DOI."
  },
  "SBMT-CONSENSO-CHAGAS-2015": {
   "tipo": "diretriz_sociedade",
@@ -2905,16 +2775,6 @@
   "autor": "Sociedade Brasileira de Pneumologia e Tisiologia (Comissão de Infecções Respiratórias)",
   "ano": 2018,
   "url": "https://doi.org/10.1590/S1806-37562018000000130",
-  "doi": "10.1590/S1806-37562018000000130",
-  "verificado_em": "2026-08-05",
-  "verificacao": "WebFetch em https://www.scielo.br/j/jbpneu/a/9S7zVZvTdSw5DBs7nC3JV5J/?lang=pt confirmou os títulos em português e inglês, Jornal Brasileiro de Pneumologia 2018;44(5), autoria da Comissão de Infecções Respiratórias da SBPT (13 membros) e DOI 10.1590/S1806-37562018000000130. Crossref confirmou título em inglês, vol 44, issue 5, pág 405-423, ano 2018. DOI resolve (302) para scielo.br."
- },
- "SBPT-PNEUMONIA-ADQUIRIDA-COMUNIDADE-2018": {
-  "tipo": "diretriz_sociedade",
-  "titulo": "Recomendações para o manejo da pneumonia adquirida na comunidade 2018",
-  "autor": "Sociedade Brasileira de Pneumologia e Tisiologia (Comissão de Infecções Respiratórias)",
-  "ano": 2018,
-  "url": "https://www.scielo.br/j/jbpneu/a/9S7zVZvTdSw5DBs7nC3JV5J/?lang=pt",
   "doi": "10.1590/S1806-37562018000000130",
   "verificado_em": "2026-08-05",
   "verificacao": "WebFetch de la página SciELO del artículo confirmó literalmente: título portugués 'Recomendações para o manejo da pneumonia adquirida na comunidade 2018', título inglés '2018 recommendations for the management of community acquired pneumonia', revista 'Jornal Brasileiro de Pneumologia', año 2018, 44(5), DOI https://doi.org/10.1590/S1806-37562018000000130, autoría de la Sociedade Brasileira de Pneumologia e Tisiologia – Comissão de Infecções Respiratórias. El resumen confirma los doce temas cubiertos (imagen diagnóstica, investigación etiológica, evaluación de gravedad, biomarcadores, antibioticoterapia y duración, corticoides, vacunación)."

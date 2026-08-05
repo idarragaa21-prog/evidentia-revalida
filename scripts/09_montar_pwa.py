@@ -10,7 +10,11 @@ index.html montado mais o manifesto e os icones. Como o nome do cache
 deriva de VERSAO, cada publicacao invalida sozinha o cache anterior --
 sem isso quem ja instalou o aplicativo ficaria preso na primeira versao.
 
-Uso: python3 scripts/09_montar_pwa.py
+A PWA publicada e a EDICAO LIVRE: e a pagina publica, aberta a qualquer um, e
+serve de funil. A edicao completa nao vai para o Pages -- ela se distribui por
+download depois da compra e pede licenca para abrir.
+
+Uso: python3 scripts/09_montar_pwa.py [--edicao livre|completo]
 """
 import os, re, sys, hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -85,7 +89,16 @@ DESTINOS_ANDROID = [
 
 
 def main():
-    puro = open(os.path.join(APLICATIVO, "Revalida_Evidentia.html"), encoding="utf-8").read()
+    qual = "livre"
+    for i, a in enumerate(sys.argv):
+        if a == "--edicao" and i + 1 < len(sys.argv):
+            qual = sys.argv[i + 1]
+    nome = "Revalida_Evidentia.html" if qual == "completo" else "Revalida_Evidentia_livre.html"
+    origem = os.path.join(APLICATIVO, nome)
+    if not os.path.exists(origem):
+        raise SystemExit(f"nao encontrei {origem}; rode antes o 08_montar_aplicativo.py")
+    print(f"origem: {nome} (edicao {qual})")
+    puro = open(origem, encoding="utf-8").read()
     idx = puro.find("<title>")
     html = puro[:idx] + HEAD + puro[idx:]
     html = html.replace("</body>", SW, 1)
@@ -97,10 +110,18 @@ def main():
     print(f"gerado: {destino}  ({round(len(html)/1048576, 2)} MB)")
     print(f"sw.js: cache versionado como evidentia-revalida-{versao}")
 
-    for caminho in DESTINOS_ANDROID:
-        if os.path.isdir(os.path.dirname(caminho)):
-            open(caminho, "w", encoding="utf-8").write(puro)
-            print(f"sincronizado: {os.path.relpath(caminho, RAIZ)}")
+    # O aplicativo de celular NAO leva a edicao livre: ele e o produto pago, baixado
+    # depois da compra e liberado com a conta. Por isso o Android recebe a edicao
+    # completa, e nao o que acabou de ir para o Pages.
+    completo = os.path.join(APLICATIVO, "Revalida_Evidentia.html")
+    if os.path.exists(completo):
+        conteudo = open(completo, encoding="utf-8").read()
+        for caminho in DESTINOS_ANDROID:
+            if os.path.isdir(os.path.dirname(caminho)):
+                open(caminho, "w", encoding="utf-8").write(conteudo)
+                print(f"sincronizado (edicao completa): {os.path.relpath(caminho, RAIZ)}")
+    else:
+        print("aviso: sem a edicao completa montada, o Android nao foi sincronizado")
     print("os arquivos manifest.webmanifest e icons/ ja estao em app-web/")
 
 

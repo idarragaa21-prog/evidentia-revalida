@@ -17,13 +17,19 @@ import os from 'node:os';
 
 const AQUI = path.dirname(fileURLToPath(import.meta.url));
 export const RAIZ = path.resolve(AQUI, '..');
-export const CAMINHO_APP = path.join(RAIZ, 'aplicativo', 'Revalida_Evidentia.html');
+/* A edição distribuída pede licença antes de mostrar qualquer questão, então os testes de
+   interface correm contra a build de teste: o banco inteiro, sem a porta de ativação.
+   Ela sai de `08_montar_aplicativo.py --edicao teste` e não é distribuída. */
+export const CAMINHO_APP = path.join(
+  RAIZ, 'aplicativo',
+  process.env.REVALIDA_APP_TESTE || 'Revalida_Evidentia_teste.html',
+);
 
 export function urlDoApp() {
   if (!fs.existsSync(CAMINHO_APP)) {
     throw new Error(
       'Aplicativo não encontrado em ' + CAMINHO_APP +
-      '\nGere-o com: python3 scripts/08_montar_aplicativo.py'
+      '\nGere-o com: python3 scripts/08_montar_aplicativo.py --edicao teste'
     );
   }
   return pathToFileURL(CAMINHO_APP).href;

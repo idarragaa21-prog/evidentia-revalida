@@ -108,6 +108,26 @@
   ]
  },
  {
+  "numero": 6,
+  "conceito": "Traduzir o exame neurológico de uma lombociatalgia com déficit em um padrão de acometimento nervoso: quais fibras estão comprometidas e em que topografia.",
+  "correta": "A dor em queimação e pontada, irradiada da região glútea para coxa e perna, com sinal de Lasègue positivo, indica sofrimento do trajeto do ciático a partir da raiz comprometida. O exame mostra dois componentes simultâneos: diminuição de força na perna direita, que é motora, e alteração da sensibilidade tátil e dolorosa no pé direito, que é sensitiva. O território afetado é distal, perna e pé, e não a musculatura proximal da cintura pélvica. Entre as opções oferecidas, apenas a alternativa A reúne os dois componentes com essa distribuição, e por isso é o gabarito.",
+  "distratores": {
+   "B": "Um padrão motor proximal significaria fraqueza de cintura pélvica e coxa, com dificuldade para levantar-se da cadeira e subir degraus. O déficit descrito é na perna, e essa alternativa ainda deixa a alteração de sensibilidade do pé sem explicação.",
+   "C": "Contempla apenas fibras sensitivas, mas a paciente tem diminuição objetiva de força na perna direita e marcha claudicante. Um quadro puramente sensitivo não produziria esse déficit motor.",
+   "D": "O acometimento autonômico se manifestaria por alterações de sudorese, tróficas, vasomotoras ou de controle esfincteriano, nenhuma delas presente. Além disso, não explicaria a dor irradiada nem a perda de força."
+  },
+  "pontos_chave": [
+   "Sinal de Lasègue positivo aponta para sofrimento radicular do ciático, e não para dor muscular ou articular.",
+   "Antes de nomear a doença, classifique o déficit: quais fibras (sensitiva, motora, autonômica) e qual topografia (proximal ou distal)."
+  ],
+  "referencias": [
+   {
+    "id": "NASS-HERNIA-DISCO-RADICULOPATIA-2014",
+    "detalhe": "Seção de diagnóstico, história e exame físico: valor do teste de elevação da perna estendida (Lasègue) e do padrão de déficit sensitivo e motor do membro na caracterização da radiculopatia lombar."
+   }
+  ]
+ },
+ {
   "numero": 7,
   "conceito": "Massa renal sólida, única e com realce ao contraste no adulto é carcinoma de células renais até prova em contrário.",
   "correta": "Homem de 72 anos com lesão renal sólida, nodular, hipervascular, de 3,8 cm, unifocal e parcialmente exofítica, sem linfonodomegalias e sem doença a distância no estadiamento torácico. Esse é o padrão do carcinoma de células renais, que responde pela grande maioria dos tumores renais malignos do adulto e hoje é descoberto sobretudo de forma incidental em exames de imagem pedidos por outra queixa — como a dor lombar inespecífica aqui — e não pela tríade clássica de dor, hematúria e massa palpável. A ausência de hematúria, portanto, não afasta o diagnóstico. Massa renal sólida com realce nessa faixa etária é conduzida como carcinoma de células renais, e a nefrectomia parcial ou radical permanece como tratamento padrão mesmo sem confirmação histopatológica prévia.",
@@ -129,6 +149,31 @@
    {
     "id": "EAU-CARCINOMA-RENAL-2026",
     "detalhe": "Capítulo de diagnóstico e estadiamento: massas renais sólidas com realce após contraste devem ser consideradas carcinoma de células renais até prova em contrário, com tomografia de tórax para o estadiamento a distância."
+   }
+  ]
+ },
+ {
+  "numero": 8,
+  "conceito": "Conduta inicial no recém-nascido assintomático com risco de hipoglicemia neonatal: rastrear com glicemia capilar em vez de tratar ou esperar sintomas.",
+  "correta": "Peso de nascimento de 4.200 gramas e mãe com diabetes gestacional colocam este recém-nascido a termo no grupo de risco clássico para hipoglicemia por hiperinsulinismo transitório. Ele está assintomático, em alojamento conjunto, com 6 horas de vida, e nesse cenário a conduta inicial é o rastreamento com glicemia capilar seriada nas primeiras horas e dias, associado a aleitamento materno precoce e frequente. A triagem existe justamente para detectar a queda glicêmica enquanto ela ainda é silenciosa e para definir quem precisa de intervenção. Sem a medida, não há como saber se e quando tratar.",
+  "distratores": {
+   "B": "Complementar rotineiramente com fórmula não é a conduta inicial em recém-nascido assintomático: o que se preconiza é a amamentação precoce e frequente sob monitorização. A fórmula sistemática compete com o estabelecimento da lactação e, sozinha, não informa nada sobre a glicemia do bebê.",
+   "C": "O valor de 60 mg/dL não é limiar de glicose venosa nas primeiras horas de vida, quando a glicemia fisiologicamente cai após o clampeamento do cordão; os limiares que disparam intervenção nesse período são bem menores. Além disso, mesmo abaixo do alvo, o recém-nascido assintomático com boa aceitação é manejado com alimentação e nova medida antes de se pensar em veia.",
+   "D": "Aguardar letargia ou convulsão é abrir mão da prevenção. Quando esses sinais aparecem, o sistema nervoso já foi exposto à neuroglicopenia, e o objetivo do acompanhamento de um recém-nascido de risco é exatamente evitar que se chegue a esse ponto."
+  },
+  "pontos_chave": [
+   "Recém-nascido de risco e assintomático: glicemia capilar seriada mais alimentação precoce, não fórmula de rotina.",
+   "Glicose venosa se reserva à hipoglicemia sintomática, muito baixa ou que não responde à alimentação.",
+   "Filho de mãe diabética e recém-nascido grande para a idade gestacional são os dois gatilhos mais cobrados de hiperinsulinismo transitório."
+  ],
+  "referencias": [
+   {
+    "id": "MS-ATENCAO-RECEM-NASCIDO-VOL3-2014",
+    "detalhe": "Capítulo de distúrbios metabólicos, seção de hipoglicemia neonatal: fatores de risco (filho de mãe diabética e macrossomia), triagem com glicemia capilar no recém-nascido assintomático e critérios para reposição de glicose."
+   },
+   {
+    "id": "AAP-GLICEMIA-NEONATAL-2011",
+    "detalhe": "Algoritmo de triagem e manejo da glicemia nas primeiras 24 horas em recém-nascidos de risco (filho de mãe diabética, grande e pequeno para a idade gestacional, pré-termo tardio): medida após a primeira mamada e limiares de intervenção por faixa de horas de vida."
    }
   ]
  },
@@ -179,6 +224,31 @@
   ]
  },
  {
+  "numero": 11,
+  "conceito": "Reconhecer instabilidade hemodinâmica em taquiarritmia e priorizar a cardioversão elétrica sincronizada sobre qualquer droga.",
+  "correta": "Pressão sistólica de 70 mmHg com palidez e taquipneia, em paciente com frequência cardíaca média de 170 bpm, define taquiarritmia com instabilidade hemodinâmica. O ritmo irregularmente irregular, com variação da intensidade da primeira bulha entre os batimentos, aponta para fibrilação atrial de alta resposta ventricular, favorecida pela cardiopatia congênita operada e precipitada pelo abuso agudo de álcool e pela desidratação. Quando a arritmia é a causa da hipotensão, o tratamento é imediato e elétrico: cardioversão sincronizada, sem esperar a resposta de medicamentos. A conduta independe do mecanismo exato da taquiarritmia.",
+  "distratores": {
+   "B": "A desidratação é de apenas 1+/4+ e não explica choque com sistólica de 70 mmHg e 170 bpm. Oferecer somente volume trata um fator agravante e atrasa a medida que reverte a causa da instabilidade.",
+   "C": "Metoprolol endovenoso é opção de controle de frequência no paciente estável. Com sistólica de 70 mmHg, o betabloqueador aprofunda a hipotensão pelo efeito inotrópico negativo e vasodilatador.",
+   "D": "Amiodarona endovenosa é alternativa de cardioversão química no paciente estável. Demora a agir e pode causar hipotensão adicional, o que é inaceitável em quem já está em choque."
+  },
+  "pontos_chave": [
+   "Taquiarritmia somada a hipotensão, dor isquêmica, congestão aguda ou rebaixamento de consciência exige cardioversão elétrica sincronizada imediata.",
+   "Ritmo irregularmente irregular com variação da intensidade da primeira bulha sugere fibrilação atrial.",
+   "Antiarrítmico é conversa de paciente estável."
+  ],
+  "referencias": [
+   {
+    "id": "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
+    "detalhe": "Seção 3, Terapias Elétricas: Desfibrilação, Cardioversão e Marca-Passo Transcutâneo, na indicação de cardioversão sincronizada para reversão das taquiarritmias com instabilidade hemodinâmica."
+   },
+   {
+    "id": "SBC-DIRETRIZ-FA-2025",
+    "detalhe": "Seção de manejo agudo da fibrilação atrial: cardioversão elétrica imediata quando a arritmia cursa com instabilidade hemodinâmica."
+   }
+  ]
+ },
+ {
   "numero": 12,
   "conceito": "A indicação de antibioticoprofilaxia depende da classe da ferida cirúrgica e do risco do procedimento, não de comorbidade avulsa, regime de internação ou tipo de anestesia.",
   "correta": "A herniorrafia umbilical eletiva não abre trato digestivo, respiratório nem geniturinário e ocorre em campo sem inflamação: é cirurgia limpa, com o menor risco basal de infecção de sítio cirúrgico. O anel de 1,5 cm permitiu o reparo sem tela, o que retira o único elemento que costuma justificar profilaxia em cirurgia limpa, que é o implante de prótese. A paciente tem índice de massa corporal de 20 kg/m2 e hipertensão controlada, sem diabetes, imunossupressão, desnutrição ou tabagismo. Nesse conjunto não há indicação de antibiótico profilático, e o motivo correto é exatamente a classe da ferida.",
@@ -200,6 +270,27 @@
    {
     "id": "ASHP-IDSA-SIS-SHEA-PROFILAXIA-CIRURGICA-2013",
     "detalhe": "Seção de princípios gerais e tabela de classificação das feridas cirúrgicas (limpa, potencialmente contaminada, contaminada e infectada), base da decisão de profilaxia por classe de ferida."
+   }
+  ]
+ },
+ {
+  "numero": 13,
+  "conceito": "Escolha do antibiótico de primeira linha para erradicar o estreptococo beta-hemolítico do grupo A da orofaringe e prevenir a febre reumática.",
+  "correta": "A criança de 5 anos com odinofagia, febre e exsudato amigdaliano com hiperemia acentuada tem quadro compatível com faringoamigdalite estreptocócica. O que previne a febre reumática é a erradicação do estreptococo do grupo A da orofaringe, e a penicilina permanece como droga de escolha, pois não há resistência descrita dessa bactéria a ela. A apresentação benzatina, por via intramuscular, encerra o tratamento em dose única e elimina o principal ponto de falha da prevenção, que é o abandono do curso oral de 10 dias. Entre as opções, é a única penicilina, portanto é a resposta.",
+  "distratores": {
+   "A": "Cefalexina é opção aceitável para quem tem alergia não anafilática à penicilina, mas não é a primeira linha pedida no enunciado e amplia o espectro sem necessidade em uma criança sem alergia relatada.",
+   "B": "A amoxicilina é alternativa oral eficaz e muito usada na prática, porém exige 10 dias completos de tratamento; como a questão pede o antibiótico de primeira linha para erradicação com vistas à profilaxia da febre reumática, a penicilina em dose única é superior justamente por garantir a adesão.",
+   "C": "Eritromicina é reservada ao paciente com alergia comprovada à penicilina. Nada no caso indica alergia, e trocar a droga de escolha por um macrolídeo ainda expõe o tratamento à resistência descrita nessa classe."
+  },
+  "pontos_chave": [
+   "Quem previne febre reumática é a erradicação do estreptococo do grupo A, e a penicilina segue como droga de escolha.",
+   "Penicilina benzatina intramuscular em dose única resolve o problema da adesão ao curso oral de 10 dias.",
+   "Macrolídeo só entra quando há alergia à penicilina."
+  ],
+  "referencias": [
+   {
+    "id": "AHA-FEBRE-REUMATICA-FARINGITE-2009",
+    "detalhe": "Tabela de esquemas antimicrobianos para a faringite estreptocócica e prevenção primária da febre reumática: penicilina G benzatina intramuscular em dose única e penicilina V oral por 10 dias como primeira escolha, com cefalosporina de espectro estreito ou macrolídeo apenas nos alérgicos."
    }
   ]
  },
@@ -296,6 +387,31 @@
   ]
  },
  {
+  "numero": 18,
+  "conceito": "Técnica correta e ponto de corte da prova do laço na criança com suspeita de dengue.",
+  "correta": "A prova do laço avalia fragilidade capilar e é feita assim: medir a pressão arterial, calcular o valor médio entre a sistólica e a diastólica, insuflar o manguito até esse valor e mantê-lo por 5 minutos no adulto e 3 minutos na criança; depois se delimita um quadrado de 2,5 centímetros no antebraço e contam-se as petéquias, sendo o teste positivo com 20 ou mais no adulto e 10 ou mais na criança. Como a paciente tem 6 anos, a única alternativa que reúne pressão média, 3 minutos de insuflação e o ponto de corte pediátrico é a A. Vale lembrar que, com sangramento nasal importante já em curso, o teste apenas complementa a avaliação e não deve atrasar a estratificação de risco nem a hidratação.",
+  "distratores": {
+   "B": "Insuflar até a pressão sistólica oclui o fluxo arterial e foge da técnica padronizada, que usa o valor médio. O ponto de corte de 20 petéquias também é o do adulto, e a paciente tem 6 anos.",
+   "C": "Não existe 'valor máximo' como parâmetro da prova, e 10 minutos de insuflação excedem o tempo preconizado, que é de 5 minutos no adulto e 3 minutos na criança. Prolongar o tempo não torna o teste mais sensível, apenas produz achado e desconforto sem padronização.",
+   "D": "A pressão diastólica é baixa demais para gerar o estresse capilar que o teste pretende avaliar, o tempo de 10 minutos está fora da técnica e 20 petéquias é o limiar do adulto, não o desta criança."
+  },
+  "pontos_chave": [
+   "Insufle o manguito na média entre sistólica e diastólica: 5 minutos no adulto, 3 minutos na criança.",
+   "Quadrado de 2,5 centímetros no antebraço; positivo com 20 ou mais petéquias no adulto e 10 ou mais na criança.",
+   "Prova do laço negativa não afasta dengue nem dispensa a busca ativa de sinais de alarme."
+  ],
+  "referencias": [
+   {
+    "id": "MS-DENGUE-MANEJO-CLINICO-6ED-2024",
+    "detalhe": "Seção 'Prova do laço' no capítulo de diagnóstico e avaliação clínica: cálculo da pressão arterial média, tempo de insuflação de 5 minutos no adulto e 3 minutos na criança, quadrado de 2,5 centímetros e pontos de corte de 20 e 10 petéquias."
+   },
+   {
+    "id": "WHO-DENGUE-2009",
+    "detalhe": "Capítulo de avaliação clínica do caso suspeito, descrição do teste do torniquete: insuflação no ponto médio entre a pressão sistólica e a diastólica, manutenção cronometrada e contagem de petéquias em quadrado de 2,5 centímetros."
+   }
+  ]
+ },
+ {
   "numero": 19,
   "conceito": "Condições de aplicabilidade do fórceps.",
   "correta": "O fórceps só pode ser aplicado com todas as condições preenchidas: dilatação cervical completa, membranas rotas, apresentação cefálica insinuada com variedade de posição conhecida, proporção cefalopélvica adequada, bexiga vazia, analgesia — que a obstetra já providenciou — e feto vivo. Entre as opções, a única compatível com essa lista é a presença de concepto vivo; as outras três enunciam justamente o contrário do que se exige. O caso é uma indicação clássica: multigesta cardiopata de 39 semanas, com exaustão e ausência de força expulsiva, situação em que abreviar o período expulsivo poupa o esforço materno e protege o feto.",
@@ -346,6 +462,27 @@
   ]
  },
  {
+  "numero": 21,
+  "conceito": "Escolher o exame complementar inicial a partir da etiologia mais provável de megaesôfago em paciente procedente de área endêmica.",
+  "correta": "Disfagia progressiva ao longo de um ano, regurgitação de restos alimentares sem sangue e perda de 12% do peso compõem o quadro de megaesôfago, com estase e esvaziamento esofágico prejudicado. Homem de 65 anos, natural da Bahia e procedente da zona rural, tem exposição epidemiológica clássica ao Trypanosoma cruzi, e a forma digestiva crônica da doença de Chagas é a principal causa de acalasia secundária no Brasil. Como na fase crônica o diagnóstico é sorológico, a sorologia é o exame inicial coerente com a etiologia mais provável, exatamente o que o enunciado pede. A confirmação exige dois testes sorológicos com princípios ou antígenos diferentes.",
+  "distratores": {
+   "A": "A radiografia simples de tórax pode sugerir alargamento do mediastino pelo esôfago dilatado, mas é achado inespecífico e não estabelece a etiologia, que é o ponto da questão.",
+   "B": "O CA 19-9 é marcador de neoplasia pancreatobiliar, não tem papel na investigação de disfagia esofágica e não serve como rastreamento de câncer.",
+   "C": "A ressonância de tórax não avalia motilidade esofágica nem define a causa do megaesôfago. Para a função do esôfago usam-se o esofagograma contrastado e a manometria; para a etiologia, a sorologia."
+  },
+  "pontos_chave": [
+   "Megaesôfago em paciente de área rural endêmica: pense em doença de Chagas antes de qualquer outra causa.",
+   "Na fase crônica, o diagnóstico de doença de Chagas é sorológico e exige dois testes de princípios distintos.",
+   "Disfagia com perda de peso também pede exclusão de neoplasia por endoscopia, mas o exame que responde à etiologia mais provável aqui é a sorologia."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PCDT-DOENCA-DE-CHAGAS-2018",
+    "detalhe": "Seção de diagnóstico da fase crônica e de manejo das formas digestivas, com o megaesôfago chagásico codificado como K23.1."
+   }
+  ]
+ },
+ {
   "numero": 22,
   "conceito": "Manejo inicial da fístula colo-cutânea pós-operatória de baixo débito, em que a prioridade é controle de foco, correção hidroeletrolítica e suporte nutricional antes de qualquer reintervenção.",
   "correta": "Questão anulada pelo INEP e, portanto, sem pontuação; a leitura a seguir é da Evidentia e não reproduz a justificativa oficial da banca. O caso descreve fístula colo-cutânea de baixo débito, 150 mL/dia, no 4º dia após colectomia direita com anastomose primária, em paciente com radioterapia pélvica prévia, abdome distendido mas sem defesa e ferida sem sinais flogísticos. Nesse cenário o manejo inicial é clínico — controle do foco infeccioso, reposição hidroeletrolítica e terapia nutricional —, reservando-se a reabordagem cirúrgica para peritonite, sepse não controlada ou falha do tratamento conservador. A anulação provavelmente decorre da coexistência de febre de 39 °C e distensão abdominal, que sustenta tanto a leitura conservadora quanto a de sepse abdominal com necessidade de abordagem cirúrgica, deixando mais de uma alternativa defensável.",
@@ -356,6 +493,31 @@
    "Cirurgia precoce sobre trajeto fistuloso em abdome recém-operado e irradiado tem alta taxa de falha."
   ],
   "referencias": []
+ },
+ {
+  "numero": 23,
+  "conceito": "Diagnóstico etiológico da icterícia neonatal prolongada com hemólise e teste de antiglobulina direto negativo.",
+  "correta": "Os exames mostram hiperbilirrubinemia de padrão indireto, com bilirrubina total de 12,8 mg/dL e direta de apenas 0,8 mg/dL, acompanhada de anemia (hemoglobina 12 g/dL e hematócrito 36%, ambos abaixo da referência) e reticulócitos de 6,4%, acima do limite superior — ou seja, hemólise com resposta medular. O Coombs direto negativo afasta as causas imunes, inclusive a incompatibilidade ABO que a tipagem mãe O e recém-nascido A sugeriria. Com hemólise não imune em um menino afrodescendente, filho de pais consanguíneos e com icterícia desde o terceiro dia que se prolonga até os 26 dias, a hipótese mais provável é a deficiência de glicose-6-fosfato desidrogenase, enzimopatia ligada ao cromossomo X e principal causa enzimática de icterícia hemolítica neonatal.",
+  "distratores": {
+   "A": "A esferocitose hereditária cursa tipicamente com concentração de hemoglobina corpuscular média elevada, e aqui ela está reduzida (25 g/dL). A herança habitual é autossômica dominante, com história familiar de anemia, icterícia ou esplenectomia, e não é o padrão sugerido pela consanguinidade descrita.",
+   "C": "Nos primeiros meses predomina a hemoglobina fetal, que impede a falcização, de modo que a doença falciforme não se manifesta com hemólise e icterícia nessa idade. Seu diagnóstico é feito pela triagem neonatal, e não por este quadro de icterícia prolongada.",
+   "D": "A galactosemia cursaria com colestase, ou seja, elevação da bilirrubina direta, além de hepatomegalia, vômitos, hipoglicemia e má evolução após a introdução do leite. Neste caso a bilirrubina direta é de apenas 0,8 mg/dL e o ganho de peso está adequado em uso de fórmula láctea."
+  },
+  "pontos_chave": [
+   "Icterícia indireta com anemia e reticulocitose significa hemólise; Coombs direto negativo tira a causa imune do caminho.",
+   "Deficiência de G6PD é ligada ao cromossomo X: pense em recém-nascido do sexo masculino, e a consanguinidade aumenta a chance de doenças recessivas.",
+   "Concentração de hemoglobina corpuscular média elevada sugere esferocitose; reduzida, como aqui, fala contra."
+  ],
+  "referencias": [
+   {
+    "id": "SBP-HIPERBILIRRUBINEMIA-INDIRETA-2021",
+    "detalhe": "Seção de investigação etiológica da hiperbilirrubinemia indireta e da icterícia prolongada: roteiro com tipagem sanguínea, teste de antiglobulina direto, hematócrito, reticulócitos e morfologia eritrocitária, com a deficiência de G6PD como causa de hemólise não imune a ser pesquisada."
+   },
+   {
+    "id": "AAP-HIPERBILIRRUBINEMIA-2022",
+    "detalhe": "Recomendação de dosar a atividade da glicose-6-fosfato desidrogenase no lactente com icterícia sem causa esclarecida ou com evidência de hemólise e teste de antiglobulina direto negativo."
+   }
+  ]
  },
  {
   "numero": 24,
@@ -408,6 +570,22 @@
   ]
  },
  {
+  "numero": 26,
+  "conceito": "Escolher o exame de imagem capaz de excluir lesão compressiva da medula baixa, cone medular ou cauda equina diante de paraparesia progressiva.",
+  "correta": "A paciente tem fraqueza de membros inferiores há pelo menos um ano, com agravamento nas últimas duas semanas até a perda da marcha: evolução progressiva com piora subaguda obriga a excluir lesão estrutural compressiva antes de atribuir o quadro à neuropatia diabética. Força grau 3, tônus reduzido em panturrilhas e reflexos patelar e aquileu abolidos bilateralmente localizam o problema abaixo do encéfalo, no eixo medula torácica, cone medular e cauda equina. A ressonância magnética da coluna tóraco-lombar cobre exatamente esse território e mostra medula, cone, raízes, canal vertebral, discos e partes moles, permitindo identificar compressão potencialmente tratável. O monofilamento alterado confirma a polineuropatia diabética, mas ela não explica perda de deambulação em duas semanas.",
+  "distratores": {
+   "A": "A radiografia de coluna lombo-sacra mostra apenas estruturas ósseas: não visualiza medula, cone, raízes nem tecido compressivo. Um exame normal não afastaria a hipótese que precisa ser excluída.",
+   "B": "Lesão encefálica não produz déficit restrito e simétrico aos membros inferiores com arreflexia e hipotonia. O enunciado ainda registra paciente lúcida, orientada e sem alteração da rima labial, ou seja, sem sinais que apontem para o encéfalo.",
+   "D": "O biotesiômetro quantifica a sensibilidade vibratória para estadiar polineuropatia. Repetiria a informação que o monofilamento já forneceu e deixaria sem resposta a fraqueza progressiva, que é o problema urgente."
+  },
+  "pontos_chave": [
+   "Paraparesia progressiva com perda da marcha é urgência diagnóstica: exclua compressão medular com ressonância magnética.",
+   "Hipotonia e reflexos abolidos em membros inferiores apontam para cone medular e cauda equina, território da ressonância tóraco-lombar.",
+   "Neuropatia diabética conhecida não justifica deixar de investigar um déficit motor novo e progressivo."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 27,
   "conceito": "Identificar a síndrome da cauda equina pela disfunção esfincteriana com anestesia em sela e tratá-la como emergência cirúrgica.",
   "correta": "Retenção urinária com massa palpável em região suprapúbica, anestesia perineal bilateral e dor lombar irradiada após queda fecham o quadro de síndrome da cauda equina, mesmo com força muscular e reflexos patelar e aquileu preservados, que não afastam o diagnóstico. A ressonância documenta o substrato compressivo: protrusão discal volumosa em L4-L5 sobre canal já degenerado, com osteófitos posteriores e estenose foraminal. A conduta é descompressão cirúrgica de urgência, porque a recuperação da função vesical e da sensibilidade perineal depende diretamente do tempo até a descompressão; o analgésico comum é apenas suporte enquanto se prepara a cirurgia.",
@@ -425,6 +603,31 @@
    {
     "id": "NASS-HERNIA-DISCO-RADICULOPATIA-2014",
     "detalhe": "Seção de bandeiras vermelhas e indicações cirúrgicas da hérnia de disco lombar com radiculopatia: a síndrome da cauda equina é a exceção que retira o paciente do algoritmo de tratamento conservador e indica descompressão de urgência."
+   }
+  ]
+ },
+ {
+  "numero": 28,
+  "conceito": "Diferenciação das reações transfusionais agudas em paciente politransfundido que apresenta febre durante a transfusão.",
+  "correta": "O escolar é politransfundido e desenvolve febre de 38,4 °C com calafrios quase ao término da transfusão, permanecendo hemodinamicamente estável, acianótico, anictérico, sem outras alterações ao exame e com radiografia de tórax normal. Esse conjunto é o da reação febril não hemolítica, mediada por anticorpos do receptor contra antígenos leucocitários do doador e por citocinas acumuladas no hemocomponente durante a estocagem. É a reação transfusional aguda mais comum e um diagnóstico de exclusão: como não há hipoxemia, congestão nem evidência de hemólise, ela se torna a hipótese mais provável. Vale notar que a desleucocitação reduz a frequência dessas reações, mas não as elimina.",
+  "distratores": {
+   "A": "A sobrecarga circulatória se manifesta com dispneia, taquipneia, hipertensão, estase jugular e congestão na radiografia, em geral com transfusão rápida ou de grande volume. Aqui a radiografia é normal e o menino está estável e sem qualquer sinal respiratório.",
+   "B": "A lesão pulmonar aguda relacionada à transfusão exige insuficiência respiratória aguda com hipoxemia e infiltrado pulmonar bilateral dentro de 6 horas da transfusão. A radiografia de tórax deste paciente está sem alterações e ele se mantém acianótico, o que descarta o diagnóstico.",
+   "D": "A dor nos flancos realmente lembra hemólise aguda, mas ela viria acompanhada de hipotensão, hemoglobinúria, icterícia, queda adicional da hemoglobina e, com frequência, sangramento por coagulopatia de consumo. O paciente está estável e anictérico, e as hemácias foram fenotipadas, o que reduz ainda mais o risco de incompatibilidade neste politransfundido."
+  },
+  "pontos_chave": [
+   "Febre e calafrios durante ou logo após a transfusão, sem hipoxemia, congestão ou hemólise, indicam reação febril não hemolítica.",
+   "Radiografia de tórax normal e estabilidade hemodinâmica separam essa reação da lesão pulmonar aguda e da sobrecarga circulatória.",
+   "Hemácias desleucocitadas e fenotipadas reduzem reações febris e aloimunização no politransfundido, mas não as abolem."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PCDT-DOENCA-FALCIFORME-2024",
+    "detalhe": "Seção de suporte transfusional na doença falciforme: indicação de concentrado de hemácias fenotipado e desleucocitado no paciente politransfundido e vigilância das reações transfusionais e da aloimunização."
+   },
+   {
+    "id": "SBP-HEMOCOMPONENTES-NEONATOLOGIA-2026",
+    "detalhe": "Seção sobre o concentrado de hemácias desleucocitado: finalidade da remoção dos leucócitos do hemocomponente e limites dessa medida diante das reações transfusionais."
    }
   ]
  },
@@ -472,6 +675,64 @@
     "detalhe": "Diretriz relativa à organização e à composição dos Conselhos de Saúde — 50% das vagas para entidades e movimentos representativos de usuários e 50% distribuídos entre trabalhadores da saúde, gestores e prestadores de serviços."
    }
   ]
+ },
+ {
+  "numero": 31,
+  "conceito": "Definir a etapa seguinte diante de nódulo pulmonar sólido maior que 8 mm em tabagista pesado, isto é, um nódulo de alto risco.",
+  "correta": "O paciente tem 66 anos e carga tabágica de 39 anos-maço, e o nódulo sólido único mede 18 mm, bem acima do limiar de 8 mm a partir do qual a probabilidade de malignidade deixa de autorizar simples vigilância. Nesse cenário a recomendação é caracterizar ativamente a lesão, e a tomografia inicial foi feita sem contraste, o que limita a avaliação. Repetir a tomografia com contraste permite estudar o realce do nódulo, sua relação com estruturas vasculares e brônquicas, o mediastino e os linfonodos, informação que orienta o estadiamento e a escolha do método de amostragem. Entre as alternativas oferecidas, é a única que avança na investigação sem atrasar o diagnóstico.",
+  "distratores": {
+   "A": "Controle anual é conduta de nódulo pequeno e de baixo risco. Em nódulo sólido de 18 mm em tabagista pesado, esperar um ano permitiria a progressão de um câncer provavelmente ainda ressecável.",
+   "B": "O lavado brônquico tem rendimento baixo em lesão periférica do parênquima, sem comunicação brônquica evidente, e um resultado negativo não excluiria malignidade nem encerraria a investigação.",
+   "D": "O ultrassom não atravessa o pulmão aerado, servindo apenas a lesões que tocam a pleura ou a parede torácica. Um nódulo intraparenquimatoso no lobo inferior esquerdo exige punção guiada por tomografia."
+  },
+  "pontos_chave": [
+   "Nódulo sólido acima de 8 mm em paciente de risco não se acompanha passivamente: caracteriza-se.",
+   "O ultrassom não enxerga através do pulmão aerado; nódulo no meio do parênquima é território da tomografia.",
+   "Carga tabágica elevada aumenta a probabilidade pré-teste de malignidade e encurta o caminho até o diagnóstico."
+  ],
+  "referencias": [
+   {
+    "id": "FLEISCHNER-NODULO-PULMONAR-2017",
+    "detalhe": "Recomendações para nódulo sólido único maior que 8 mm: caracterização adicional com tomografia em três meses, tomografia por emissão de pósitrons ou amostragem tecidual conforme a probabilidade de malignidade, em vez de vigilância anual."
+   }
+  ]
+ },
+ {
+  "numero": 32,
+  "conceito": "Saber que a febre das primeiras 24 a 48 horas de pós-operatório de grande porte tem foco pulmonar como causa mais prevalente e orientar por ela o primeiro exame.",
+  "correta": "O paciente foi submetido a laparotomia de 8 horas, com incisão abdominal alta, e segue em ventilação mecânica: a queda da capacidade residual funcional, a hipoventilação e a retenção de secreções favorecem atelectasias, causa mais prevalente de pico febril no primeiro dia. A investigação deve começar, portanto, pelo foco pulmonar, e a radiografia de tórax é o exame que mostra atelectasia, derrame pleural e consolidação, feita à beira do leito e sem transportar um paciente crítico. Ela é também o primeiro degrau quando se cogita pneumonia associada à ventilação mecânica, o outro diagnóstico pulmonar relevante nesse cenário. Por isso o exame a solicitar é o da alternativa B.",
+  "distratores": {
+   "A": "A ultrassonografia de abdome procura coleções e complicações vasculares ou biliares do enxerto, que praticamente não se estabelecem em 24 horas. No primeiro dia ela costuma mostrar apenas líquido e ar residuais do próprio ato cirúrgico, achados que não mudam a conduta.",
+   "C": "A hemocultura investiga infecção de corrente sanguínea, que não é a causa mais prevalente de febre no primeiro dia, e ainda demora dias para resultar. Pode compor o rastreio se houver deterioração clínica, mas não é o exame dirigido à etiologia mais frequente pedida no enunciado.",
+   "D": "A infecção urinária associada à sonda vesical costuma surgir a partir do terceiro ao quinto dia de cateterização. Pedir urocultura no primeiro dia tem baixo rendimento e não contempla a causa mais prevalente de febre nesse momento."
+  },
+  "pontos_chave": [
+   "Febre nas primeiras 24 a 48 horas de pós-operatório: pense primeiro no pulmão, e o exame inicial é a radiografia de tórax.",
+   "A cronologia orienta o foco: pulmão nas primeiras 48 horas, cateteres e ferida operatória do terceiro ao quinto dia, coleções e abscessos depois do quinto ao sétimo dia.",
+   "No paciente sob ventilação mecânica, a imagem de tórax é também o primeiro passo para caracterizar pneumonia associada à ventilação."
+  ],
+  "referencias": [
+   {
+    "id": "ANVISA-CADERNO2-CRITERIOS-IRAS-2017",
+    "detalhe": "Seção 3 (Trato Respiratório Inferior), critérios diagnósticos de pneumonia associada à ventilação mecânica: o componente de imagem exige radiografia de tórax com infiltrado, opacificação ou cavitação novos, persistentes ou progressivos, o que firma a radiografia como exame inicial do foco pulmonar no paciente ventilado com febre."
+   }
+  ]
+ },
+ {
+  "numero": 33,
+  "conceito": "Reconhecer a torção testicular pelo exame físico e entender que ela é emergência cirúrgica com janela curta para salvar a gônada.",
+  "correta": "Dor escrotal de início súbito há 3 horas, sem trauma, em escolar eutrófico, com testículo esquerdo elevado em direção ao anel inguinal externo, edema local, reflexo cremastérico abolido e piora da dor à elevação do testículo compõe o quadro clássico de torção do cordão espermático. O diagnóstico é clínico e o tratamento é a exploração cirúrgica imediata, com distorção e orquidopexia bilateral, porque a taxa de salvamento cai rapidamente depois de cerca de 6 horas de isquemia. Como o pronto-atendimento não dispõe de cirurgia infantil, a conduta correta é o encaminhamento imediato ao centro de referência mais próximo, com o paciente em jejum e analgesia. Nesse cenário, qualquer medida que consuma tempo compete diretamente com a viabilidade do testículo.",
+  "distratores": {
+   "B": "Antibiótico e analgésico oral com retorno ambulatorial tratariam orquiepididimite, hipótese improvável em menino de 10 anos sem sintomas urinários, sem febre e com instalação súbita da dor; além disso, mandar para casa uma torção significa perder a gônada.",
+   "C": "Anti-inflamatório, analgésico e repouso podem até reduzir a dor e dar falsa sensação de melhora, mas não desfazem a torção do cordão nem restabelecem o fluxo sanguíneo, apenas consumindo as horas restantes de viabilidade testicular.",
+   "D": "Com testículo alto, cremastérico abolido e elevação dolorosa, a probabilidade clínica de torção é alta e a ultrassonografia não deve atrasar a exploração; pior ainda é liberar a criança para retorno ambulatorial, já que exame com Doppler normal não exclui torção intermitente ou de baixo grau."
+  },
+  "pontos_chave": [
+   "Testículo alto, horizontalizado, com reflexo cremastérico abolido e dor que piora à elevação: torção até prova em contrário.",
+   "Quando a suspeita clínica é alta, exame de imagem não pode atrasar a exploração cirúrgica.",
+   "A chance de salvar o testículo cai muito após cerca de 6 horas do início da dor."
+  ],
+  "referencias": []
  },
  {
   "numero": 34,
@@ -558,6 +819,31 @@
   ]
  },
  {
+  "numero": 38,
+  "conceito": "Saber qual é o esquema padronizado de profilaxia das infecções sexualmente transmissíveis não virais após violência sexual.",
+  "correta": "Adolescente com relação anal forçada e fissura anal sangrando tem exposição sexual de risco e deve receber, já no primeiro atendimento, a profilaxia das infecções sexualmente transmissíveis não virais, associada à profilaxia pós-exposição ao vírus da imunodeficiência humana, à avaliação da situação vacinal para hepatite B e à notificação compulsória. O esquema padronizado no país cobre os quatro agentes-alvo: sífilis com benzilpenicilina benzatina, gonorreia com ceftriaxona, clamídia com azitromicina e tricomoníase com metronidazol. É exatamente a combinação da alternativa A, e ela é iniciada de forma empírica, sem esperar resultado de exames, porque a coleta inicial serve como linha de base e não como condição para tratar.",
+  "distratores": {
+   "B": "Amoxicilina com clavulanato não substitui a penicilina benzatina para sífilis e o cefaclor não tem atividade confiável contra o gonococo; o ciprofloxacino foi abandonado como tratamento de gonorreia pela resistência elevada, e o esquema ainda deixa a tricomoníase sem cobertura.",
+   "C": "O esquema acerta em sífilis e tricomoníase, mas o cefaclor é cefalosporina oral sem cobertura adequada para gonorreia, e a clindamicina não trata clamídia, que exige azitromicina ou doxiciclina.",
+   "D": "Cobre a gonorreia com ceftriaxona, mas falha nos outros três alvos: amoxicilina com clavulanato não trata sífilis, clindamicina não trata clamídia, o ciprofloxacino é inadequado para o gonococo e não há cobertura para tricomoníase."
+  },
+  "pontos_chave": [
+   "Profilaxia das infecções não virais após violência sexual: benzilpenicilina benzatina, ceftriaxona, azitromicina e metronidazol.",
+   "A profilaxia é empírica e imediata; exames iniciais servem de linha de base e não podem atrasar as medicações.",
+   "O atendimento inclui profilaxia pós-exposição ao vírus da imunodeficiência humana, avaliação vacinal para hepatite B e notificação compulsória, sem exigir boletim de ocorrência."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PCDT-IST-2022",
+    "detalhe": "Capítulo 17 (Violência Sexual e IST), seção 17.1 sobre prevenção das IST na violência sexual e o quadro de profilaxia das IST não virais, que padroniza benzilpenicilina benzatina, ceftriaxona, azitromicina e metronidazol."
+   },
+   {
+    "id": "MS-PCDT-PEP-2024",
+    "detalhe": "Quadro de cuidados às pessoas vítimas de violência sexual e quadro de sinais de violência sexual em crianças e adolescentes, que articulam a profilaxia das IST não virais com a profilaxia pós-exposição e a avaliação vacinal para hepatite B."
+   }
+  ]
+ },
+ {
   "numero": 39,
   "conceito": "Momento da resolução da gestação na hipertensão gestacional com idade gestacional de termo, vitalidade fetal preservada e colo favorável.",
   "correta": "A idade gestacional de 40 semanas é confiável porque foi estabelecida por ultrassonografia de 10 semanas, e a paciente tem hipertensão gestacional em uso de metildopa, com pressão de 127 por 66 mmHg. A cardiotocografia descrita é reativa: acelerações com ápice de pelo menos 15 batimentos por minuto e duração mínima de 15 segundos, linha de base de 130 e variabilidade de 20 batimentos por minuto, ou seja, não há indício de comprometimento fetal agudo. Em doença hipertensiva da gestação não há benefício em prolongar a gravidez a termo, e o índice de Bishop de 8 indica colo favorável, com boa probabilidade de indução bem-sucedida. A conduta é, portanto, indicar a indução do trabalho de parto.",
@@ -583,6 +869,47 @@
   ]
  },
  {
+  "numero": 40,
+  "conceito": "Reconhecer asbestose pela combinação de exposição ocupacional prolongada, fibrose intersticial e placas pleurais calcificadas.",
+  "correta": "São 25 anos de trabalho na construção civil, setor em que o amianto foi amplamente empregado em telhas, caixas d'água e revestimentos, com a latência longa que a doença exige. As placas pleurais calcificadas bilaterais na parede torácica e no diafragma são o marcador radiológico mais característico de exposição ao asbesto, e a tomografia de alta resolução mostra fibrose difusa do parênquima, ou seja, doença intersticial já estabelecida. Dispneia progressiva, tosse seca e fadiga em paciente não tabagista completam o quadro de pneumopatia ocupacional fibrosante. É a soma de exposição compatível, fibrose intersticial e placas pleurais que sustenta o diagnóstico de asbestose.",
+  "distratores": {
+   "B": "A paracoccidioidomicose acomete tipicamente trabalhadores rurais e cursa com lesões mucosas, adenomegalias e infiltrados peri-hilares, frequentemente com nódulos e cavitações, justamente o que a tomografia afasta ao descrever fibrose difusa sem nódulos nem cavitações.",
+   "C": "A intoxicação por chumbo produz manifestações hematológicas, digestivas e neuropsiquiátricas, expressamente negadas no enunciado, e não causa fibrose pulmonar nem placas pleurais.",
+   "D": "A doença pulmonar obstrutiva crônica é obstrutiva e fortemente ligada ao tabagismo, que o paciente nega. Também não gera placas pleurais calcificadas nem o padrão reticular de fibrose descrito."
+  },
+  "pontos_chave": [
+   "Placas pleurais calcificadas bilaterais são a impressão digital da exposição ao amianto.",
+   "Diante de doença intersticial em paciente não tabagista, pergunte sempre ocupação, material manipulado e tempo de exposição."
+  ],
+  "referencias": [
+   {
+    "id": "ATS-AMIANTO-2004",
+    "detalhe": "Critérios diagnósticos das doenças não malignas relacionadas ao asbesto: evidência de exposição com latência adequada, alterações intersticiais na tomografia de alta resolução e placas pleurais como marcador de exposição."
+   }
+  ]
+ },
+ {
+  "numero": 41,
+  "conceito": "Reconhecer que um quadro depressivo acompanhado de sinais sistêmicos e sem resposta a antidepressivo em dose plena deve ser investigado como manifestação de doença orgânica de base.",
+  "correta": "O caso reúne fadiga, sonolência, ganho de 7 kg, constipação, irregularidade menstrual e frequência cardíaca de 48 batimentos por minuto em repouso, um conjunto que aponta para hipotireoidismo e não para um transtorno primário do humor. Reforçam essa leitura a ausência de resposta à fluoxetina levada até 60 mg por dia durante dois meses e a ausência de culpa, menos-valia e ideação de morte, que são os sintomas mais caracteristicamente psíquicos da depressão maior. Quando o humor deprimido é explicado por uma condição clínica, o diagnóstico correto é transtorno depressivo secundário, e a prioridade passa a ser dosar TSH e T4 livre e tratar a causa de base, e não trocar de antidepressivo. Por isso a resposta é a alternativa B.",
+  "distratores": {
+   "A": "O transtorno depressivo persistente exige humor deprimido na maior parte dos dias por pelo menos dois anos; aqui os sintomas têm seis meses e, além disso, vêm acompanhados de bradicardia, ganho de peso e constipação, achados que a distimia não explica.",
+   "C": "No transtorno de somatização o sofrimento gira em torno de queixas físicas múltiplas sem substrato orgânico; nesta paciente há achado objetivo ao exame, a frequência cardíaca de 48 batimentos por minuto, e um conjunto de sinais coerentes entre si com hipofunção tireoidiana, ou seja, exatamente o oposto.",
+   "D": "A síndrome de burnout se define pelo contexto ocupacional, com exaustão ligada ao trabalho, distanciamento mental do emprego e queda do desempenho profissional; nada no relato aponta para sobrecarga laboral, e burnout não produz bradicardia, ganho de peso nem irregularidade menstrual."
+  },
+  "pontos_chave": [
+   "Depressão que não responde a antidepressivo em dose plena obriga a reabrir o diagnóstico e procurar causa orgânica.",
+   "Fadiga, ganho de peso, constipação, irregularidade menstrual e bradicardia formam o retrato clássico do hipotireoidismo: peça TSH e T4 livre.",
+   "Antes de rotular como depressão, exclua as condições clínicas e os medicamentos capazes de produzir o mesmo quadro."
+  ],
+  "referencias": [
+   {
+    "id": "WHO-MHGAP-IG-2.0",
+    "detalhe": "Módulo DEP (Depressão), primeira etapa da avaliação: excluir condições físicas capazes de simular ou agravar o quadro depressivo, entre elas hipotireoidismo, anemia, desnutrição e efeitos de medicamentos, antes de firmar o diagnóstico."
+   }
+  ]
+ },
+ {
   "numero": 42,
   "conceito": "Diagnóstico da fístula pancreática pós-operatória pela dosagem de amilase no líquido do dreno.",
   "correta": "No 5º dia após gastroduodenopancreatectomia, um dreno com 500 mL em 24 horas de secreção clara e límpida, em paciente afebril, normocárdico e com ferida sem flogose, é o quadro típico de fístula pancreática. A confirmação é bioquímica, barata e imediata: dosagem de amilase no líquido drenado, considerando-se fístula quando o valor supera três vezes o limite superior da normalidade da amilase sérica, a partir do terceiro dia de pós-operatório. A ausência de repercussão clínica não afasta o diagnóstico; ela apenas define, junto com a evolução, se o achado ficará como vazamento bioquímico ou exigirá mudança de conduta.",
@@ -600,6 +927,27 @@
    {
     "id": "ISGPS-FISTULA-PANCREATICA-2016",
     "detalhe": "Seção de definição e graduação: fístula pancreática pós-operatória definida por amilase no líquido do dreno superior a três vezes o limite superior da normalidade sérica a partir do terceiro dia de pós-operatório, com reclassificação do antigo grau A como vazamento bioquímico e manutenção dos graus B e C."
+   }
+  ]
+ },
+ {
+  "numero": 43,
+  "conceito": "Aplicar as regras da herança autossômica recessiva ao aconselhamento de um recém-nascido de pai com traço falciforme e mãe com padrão HbAA.",
+  "correta": "A doença falciforme tem herança autossômica recessiva: o pai heterozigoto carrega um alelo HbA e um alelo HbS, de modo que cada gameta que ele produz tem 50% de chance de levar o alelo S. Como a eletroforese materna mostra padrão HbAA, a mãe só pode transmitir HbA. Logo, o pai teve 50% de chance de ter transmitido a hemoglobina S a esse recém-nascido, e os únicos genótipos possíveis são HbAA ou HbAS, ou seja, a criança pode ter o traço falciforme, mas não pode ter a doença. A alternativa D é a única que descreve corretamente essa probabilidade, que será esclarecida pela triagem neonatal.",
+  "distratores": {
+   "A": "A chance de traço falciforme nesse casal não é de 25%, e sim de 50%, porque a mãe HbAA transmite obrigatoriamente o alelo normal e a probabilidade depende apenas do gameta paterno.",
+   "B": "Não há chance alguma de anemia falciforme neste caso: a doença exige dois alelos alterados, e a mãe com padrão HbAA não tem alelo S para transmitir.",
+   "C": "A afirmação inverte o padrão de herança: a doença falciforme é autossômica recessiva e não ligada ao sexo, e o pai heterozigoto pode, sim, transmitir o alelo da hemoglobina S a um filho de qualquer sexo."
+  },
+  "pontos_chave": [
+   "Genitor heterozigoto transmite o alelo alterado a 50% dos filhos, qualquer que seja o genótipo do outro genitor.",
+   "Cruzamento HbAS com HbAA: 50% HbAA e 50% HbAS, nenhum filho com doença falciforme.",
+   "O risco de 25% de doença só existe quando os dois genitores são heterozigotos."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PCDT-DOENCA-FALCIFORME-2024",
+    "detalhe": "Seções introdutórias sobre conceito e genética da doença, que definem a herança autossômica recessiva da hemoglobina S e distinguem o traço falciforme (heterozigose HbAS) das formas homozigotas, e a seção de diagnóstico, que trata da triagem neonatal e da eletroforese de hemoglobina."
    }
   ]
  },
@@ -653,6 +1001,27 @@
   ]
  },
  {
+  "numero": 46,
+  "conceito": "Definir a conduta na síndrome coronariana aguda a partir do eletrocardiograma seriado e da curva de troponina.",
+  "correta": "Questão anulada pelo INEP: não pontua e não tem gabarito oficial. A leitura que segue é da Evidentia, não a justificativa do INEP. A resposta fica indecidível porque toda a conduta depende do que mostram os dois eletrocardiogramas seriados: a alternativa A descreve o manejo de uma síndrome coronariana sem supradesnivelamento do segmento ST, enquanto a alternativa C só se sustenta se houver supradesnivelamento persistente, e o enunciado não permite firmar qual dos dois cenários está em jogo. As duas troponinas normais colhidas com três horas de intervalo, em paciente com dor iniciada há quatro horas, não desempatam as opções nem excluem isquemia em curso, já que a segunda dor começou há apenas 20 minutos. Restam, assim, duas alternativas defensáveis conforme a leitura dos traçados, o que é motivo suficiente de anulação; as alternativas B e D são inadequadas em qualquer cenário, pois o paciente está em serviço de pronto-atendimento e apresenta dor torácica de alto risco.",
+  "distratores": {},
+  "pontos_chave": [
+   "Na dor torácica aguda o eletrocardiograma de 12 derivações deve sair em até 10 minutos e ser repetido a cada recorrência da dor.",
+   "Troponina normal na admissão não exclui infarto: o que indica reperfusão imediata é o supradesnivelamento do segmento ST, não o marcador.",
+   "Fibrinólise pré-hospitalar e alta para ambulatório não cabem em paciente sintomático dentro de um pronto-atendimento."
+  ],
+  "referencias": [
+   {
+    "id": "SBC-DIRETRIZ-ANGINA-INSTAVEL-IAMSSST-2021",
+    "detalhe": "Seção de abordagem inicial na emergência: eletrocardiograma de 12 derivações em até 10 minutos, curva de troponina e estratificação de risco pelo escore HEART para definir a estratégia invasiva."
+   },
+   {
+    "id": "ESC-SCA-2023",
+    "detalhe": "Capítulo sobre estratégia de reperfusão: angioplastia primária como reperfusão de escolha diante de supradesnivelamento persistente do segmento ST, dentro dos prazos recomendados."
+   }
+  ]
+ },
+ {
   "numero": 47,
   "conceito": "Correlacionar o músculo-chave testado no exame motor padronizado da lesão medular com o miótomo correspondente.",
   "correta": "A extensão do joelho é realizada pelo quadríceps femoral, músculo do compartimento anterior da coxa inervado pelo nervo femoral e utilizado como músculo-chave do miótomo L3 no exame motor padronizado. Como é justamente nesse movimento que o membro inferior direito apresenta contração apenas palpável, grau 1, o achado marca o segmento comprometido desse lado. Os demais grupos musculares examinados estão simétricos e com força maior, o que reforça a leitura segmentar do déficit.",
@@ -672,6 +1041,22 @@
     "detalhe": "Seção do exame motor: os dez músculos-chave por hemicorpo e seus miótomos (extensão do joelho, quadríceps, como L3; flexão do quadril, iliopsoas, como L2; dorsiflexão do tornozelo como L4), a escala de graduação motora de 0 a 5 e a definição de nível motor."
    }
   ]
+ },
+ {
+  "numero": 48,
+  "conceito": "Reconhecer a larva migrans cutânea pela lesão linear serpiginosa e pruriginosa após contato com solo ou areia e indicar o tratamento anti-helmíntico.",
+  "correta": "Duas crianças que passearam juntas e, cerca de uma semana depois, desenvolveram lesões eritematosas lineares e serpiginosas, muito pruriginosas, em pés e mãos, têm o quadro típico de larva migrans cutânea, causada pela penetração na pele de larvas de ancilostomídeos de cães e gatos presentes em areia ou solo contaminado. O acometimento de áreas que tocaram diretamente o solo, o intervalo de incubação de dias e a ausência de lesões nos adultos que não brincaram na areia reforçam o diagnóstico. Corticoide tópico não age sobre a larva, o que explica a falta de resposta à dexametasona usada em casa. O tratamento das formas localizadas e com poucas lesões é o tiabendazol tópico, reservando-se albendazol ou ivermectina por via oral para formas extensas, múltiplas ou refratárias.",
+  "distratores": {
+   "A": "A escabiose cursa com pápulas, vesículas e túneis em espaços interdigitais, punhos, axilas e região genital, com prurido de predomínio noturno e forte tendência a acometer outros moradores da casa, inclusive adultos, e não produz trajeto serpiginoso migratório.",
+   "B": "A pediculose do corpo relaciona-se a más condições de higiene e a roupas infestadas, com lesões pruriginosas e escoriações no tronco e nas áreas cobertas, e não explica lesões lineares migratórias em pés e mãos após um passeio.",
+   "C": "A dermatite atópica é crônica e recidivante, com placas eczematosas em áreas flexurais e história pessoal ou familiar de atopia; além de não ter aspecto serpiginoso, ela costuma responder ao corticoide tópico, que aqui não trouxe qualquer melhora."
+  },
+  "pontos_chave": [
+   "Lesão linear serpiginosa, migratória e muito pruriginosa em área que teve contato com areia ou solo é larva migrans cutânea.",
+   "Corticoide tópico não trata: a falha terapêutica com corticoide é pista diagnóstica.",
+   "Formas localizadas: tiabendazol tópico; formas extensas ou múltiplas: albendazol ou ivermectina por via oral."
+  ],
+  "referencias": []
  },
  {
   "numero": 49,
@@ -719,6 +1104,31 @@
   ]
  },
  {
+  "numero": 51,
+  "conceito": "Reconhecer o pneumotórax hipertensivo como causa reversível de parada cardiorrespiratória e tratá-lo com descompressão torácica imediata.",
+  "correta": "Os achados descritos são de pneumotórax hipertensivo: turgência jugular, hemitórax direito sem expansibilidade mesmo sob ventilação com bolsa-máscara e timpanismo à percussão, em paciente enfisematoso, cujo pulmão tem bolhas que se rompem com facilidade sob pressão positiva. Esse é um dos Ts das causas reversíveis de parada, e o diagnóstico é clínico: a descompressão não espera radiografia. A punção descrita na alternativa B, no 5º espaço intercostal direito, é exatamente essa descompressão de urgência, que deve ser seguida de drenagem torácica. Manter o algoritmo de reanimação sem corrigir a causa mecânica não recupera débito, porque o retorno venoso permanece bloqueado pela pressão intratorácica.",
+  "distratores": {
+   "A": "A fibrilação atrial é permanente e já conhecida, e o paciente está em parada, sem pulso a ser restabelecido por cardioversão sincronizada, que não é terapia de ritmo de parada; sobretudo, chocar não desfaz o pneumotórax que provocou a deterioração.",
+   "C": "A amiodarona só entra no algoritmo na fibrilação ventricular ou taquicardia ventricular sem pulso refratárias ao choque; aqui o ritmo é organizado sem pulso por obstáculo mecânico ao retorno venoso, e nenhum antiarrítmico substitui a descompressão do tórax.",
+   "D": "A massagem cardíaca interna por esternotomia é recurso de exceção, ligada sobretudo ao intraoperatório e ao trauma torácico penetrante em serviços preparados; propô-la em um pronto-atendimento, diante de uma causa reversível resolvida com uma agulha, troca o simples pelo inexequível."
+  },
+  "pontos_chave": [
+   "Turgência jugular com hemitórax silencioso, timpânico e sem expansibilidade durante a reanimação é pneumotórax hipertensivo até prova em contrário.",
+   "Pneumotórax hipertensivo é diagnóstico clínico: descomprima primeiro e confirme por imagem depois, com drenagem em seguida.",
+   "Em toda parada, percorra os 5 Hs e 5 Ts; enfisema pulmonar sob ventilação com pressão positiva é cenário de alto risco de barotrauma."
+  ],
+  "referencias": [
+   {
+    "id": "SBC-DIRETRIZ-RCP-EMERGENCIAS-2019",
+    "detalhe": "Capítulo 5 (Suporte Avançado de Vida em Cardiologia no Adulto), item 5.6 sobre atividade elétrica sem pulso e assistolia e quadro 5.3 das causas reversíveis (5 Hs e 5 Ts), que inclui o pneumotórax hipertensivo."
+   },
+   {
+    "id": "ERC-PCR-CIRCUNSTANCIAS-ESPECIAIS-2021",
+    "detalhe": "Seção de causas reversíveis e de parada cardiorrespiratória traumática: descompressão torácica imediata do pneumotórax hipertensivo, por punção com agulha ou toracostomia, antes de qualquer confirmação por imagem."
+   }
+  ]
+ },
+ {
   "numero": 52,
   "conceito": "Escolher o exame de imagem com maior sensibilidade na fase precoce da suspeita de infecção osteoarticular do quadril.",
   "correta": "Politraumatizado acamado há 10 dias, com escoriações na coxa, febre e inapetência há 5 dias, dor intensa de início súbito refratária a analgésico comum, eritema em região inguinal e limitação dolorosa da amplitude de movimento coxofemoral: o quadro é de infecção óssea e articular do quadril. A ressonância magnética é o exame de melhor desempenho nessa fase, porque demonstra edema da medular óssea, derrame articular, coleções e comprometimento de partes moles antes de qualquer alteração radiográfica. Confirmado o envolvimento articular, a aspiração do líquido sinovial deve ser obtida antes do início do antibiótico sempre que possível, para não perder o agente etiológico.",
@@ -740,6 +1150,31 @@
    {
     "id": "BSR-ARTICULACAO-QUENTE-2006",
     "detalhe": "Seção de abordagem da articulação quente e edemaciada no adulto: a aspiração com análise do líquido sinovial deve preceder o início da antibioticoterapia na suspeita de artrite séptica."
+   }
+  ]
+ },
+ {
+  "numero": 53,
+  "conceito": "Conduta na infecção urinária febril do recém-nascido: internação e antibiótico parenteral imediatos, sem esperar a urocultura, com ultrassonografia como imagem inicial.",
+  "correta": "Recém-nascido de 25 dias com febre alta, recusa alimentar, vômitos e irritabilidade já está fora de qualquer critério de baixo risco, que se aplica apenas a lactentes com bom estado geral. A urina com piúria, esterase e nitrito positivos, somada a bacilos Gram-negativos no Gram de gota de urina não centrifugada e à leucocitose com neutrofilia, permite o diagnóstico presuntivo de infecção do trato urinário e obriga a tratar de imediato. A conduta é internar, colher as culturas pertinentes e iniciar antibioticoterapia parenteral empírica sem aguardar a urocultura, que servirá depois para confirmar o agente e ajustar o esquema. A ultrassonografia de rins e vias urinárias é a investigação de imagem indicada após esse primeiro episódio de infecção urinária febril e pode ser realizada ao término do tratamento, o que corresponde exatamente à alternativa C.",
+  "distratores": {
+   "A": "Repetir todos os exames antes de tratar adia horas de antibiótico em um recém-nascido febril e irritado, com risco real de bacteriemia e meningite; os achados já disponíveis são suficientes para o diagnóstico presuntivo e para iniciar a terapia.",
+   "B": "Acerta ao iniciar antibiótico parenteral imediato, mas não interna o recém-nascido, condiciona a conduta à confirmação pela urocultura e programa cintigrafia com ácido dimercaptossuccínico de rotina, exame que não faz parte da investigação inicial após o primeiro episódio de infecção urinária febril.",
+   "D": "Antibiótico oral em regime ambulatorial é inaceitável nessa faixa etária, em que a absorção é imprevisível e o risco de infecção bacteriana grave é alto; a alternativa ainda acrescenta cintigrafia de rotina, não indicada nessa etapa."
+  },
+  "pontos_chave": [
+   "Febre em lactente com menos de 1 mês: internação, culturas e antibiótico parenteral empírico imediato.",
+   "Critérios de baixo risco só valem para lactente com bom estado geral; criança irritada ou toxemiada sai do algoritmo.",
+   "Após o primeiro episódio de infecção urinária febril no lactente, a imagem inicial é a ultrassonografia; a cintigrafia com ácido dimercaptossuccínico fica para casos selecionados."
+  ],
+  "referencias": [
+   {
+    "id": "AAP-FEBRE-LACTENTE-8-60-DIAS-2021",
+    "detalhe": "Delimitação do escopo (recomendações restritas a lactentes febris com bom estado geral) e algoritmos por faixa etária de 8 a 21 e de 22 a 28 dias, que preveem culturas, hospitalização e antimicrobiano parenteral no lactente febril mais jovem."
+   },
+   {
+    "id": "SBP-ITU-PEDIATRIA-2021",
+    "detalhe": "Seções sobre tratamento da infecção urinária febril no lactente jovem, com indicação de internação e antibiótico parenteral, e sobre investigação por imagem após o primeiro episódio, com a ultrassonografia como exame inicial e a cintigrafia renal em indicações selecionadas."
    }
   ]
  },
@@ -798,6 +1233,27 @@
   ]
  },
  {
+  "numero": 56,
+  "conceito": "Identificar a emergência hipertensiva com encefalopatia e saber que a conduta imediata é reduzir a pressão de forma controlada com anti-hipertensivo intravenoso sob monitorização.",
+  "correta": "Pressão arterial de 230 × 150 mmHg com estado confusional, agitação e edema de papila, tendo tomografia de crânio e líquor afastado hemorragia e infecção, caracteriza encefalopatia hipertensiva, ou seja, lesão aguda de órgão-alvo e, portanto, emergência hipertensiva. O contexto explica o pico: a substituição da clonidina por metoprolol favorece hipertensão de rebote, e o betabloqueio isolado deixa a vasoconstrição adrenérgica sem oposição. A conduta imediata é monitorizar, obter acesso venoso calibroso, oferecer oxigênio, já que a saturação está em 89%, e iniciar anti-hipertensivo intravenoso titulável, como o nitroprussiato de sódio, com queda pressórica gradual e controlada. É exatamente o que descreve a alternativa B.",
+  "distratores": {
+   "A": "Intubar não é a prioridade, porque a paciente ventila e a hipoxemia de 89% tende a responder ao oxigênio sob máscara e à redução da pressão; dosar enzimas cardíacas investiga um órgão-alvo que não é o comprometido neste caso e adia a única medida que muda o desfecho, que é baixar a pressão de modo controlado.",
+   "C": "Anti-hipertensivos orais em enfermaria não permitem titular a queda pressórica minuto a minuto, como exige uma encefalopatia hipertensiva, e a ressonância é redundante depois de tomografia e líquor já terem afastado hemorragia e infecção; manter apenas betabloqueador ainda deixa sem tratamento o rebote provocado pela retirada da clonidina.",
+   "D": "Aguardar 24 horas por melhora espontânea trataria o caso como elevação pressórica assintomática, quando já há confusão mental e edema de papila instalados; a demora expõe a paciente a dano neurológico e visual irreversível."
+  },
+  "pontos_chave": [
+   "Emergência hipertensiva se define pela lesão aguda de órgão-alvo, não pelo valor absoluto da pressão.",
+   "Confusão mental com edema de papila e neuroimagem sem sangramento é encefalopatia hipertensiva: anti-hipertensivo intravenoso titulável, com redução de cerca de 20% a 25% na primeira hora.",
+   "Suspender clonidina de forma abrupta, ainda mais substituindo-a por betabloqueador, provoca hipertensão de rebote."
+  ],
+  "referencias": [
+   {
+    "id": "SBC-SBH-SBN-DIRETRIZ-HIPERTENSAO-2020",
+    "detalhe": "Capítulo 13 (Crise Hipertensiva): definição e classificação de urgência e emergência hipertensiva, tratamento com anti-hipertensivo intravenoso em ambiente monitorizado e subseção 'Emergências em Situações Especiais', que trata da encefalopatia hipertensiva."
+   }
+  ]
+ },
+ {
   "numero": 57,
   "conceito": "Reconhecer o padrão de diarreia mucossanguinolenta com urgência fecal em adulto jovem como doença inflamatória intestinal de acometimento retal.",
   "correta": "Diarreia com muco e sangue, urgência fecal e dor abdominal em mulher de 29 anos, com evolução arrastada e perda de 10% do peso corporal em 12 meses, configuram doença inflamatória intestinal. O acometimento retal com sangramento e urgência é a marca da retocolite ulcerativa, que compromete a mucosa de forma contínua e ascendente a partir do reto. A ausência de febre e de defesa ou descompressão brusca ao exame afasta um processo inflamatório agudo localizado e reforça o caráter crônico e recidivante do quadro. O tabagismo ativo é epidemiologicamente menos frequente nessa doença, mas não a exclui diante de uma apresentação tão característica.",
@@ -821,6 +1277,22 @@
     "detalhe": "Seção de diagnóstico e diagnóstico diferencial da colite ulcerativa em adultos, que a separa da colite infecciosa, da colite isquêmica e da doença de Crohn."
    }
   ]
+ },
+ {
+  "numero": 58,
+  "conceito": "Identificar a hipovitaminose A pelos sinais oculares e associá-la ao sarampo recente e à dieta pobre em fontes de retinol.",
+  "correta": "Manchas esbranquiçadas com aspecto de espuma na conjuntiva, as manchas de Bitot, associadas a xeroftalmia, são sinais clássicos de deficiência de vitamina A. O contexto fecha o raciocínio: dieta restrita a guloseimas e carboidratos, com recusa de frutas, verduras, legumes e carne, ausência de suplementação prévia de micronutrientes e sarampo há 3 meses, doença que consome as reservas hepáticas de retinol e precipita a xeroftalmia. Justamente por isso a suplementação de vitamina A é recomendada a toda criança com sarampo, medida que não foi feita nessa paciente não vacinada.",
+  "distratores": {
+   "A": "A deficiência de ferro é a carência mais comum na infância, mas se manifesta como anemia microcítica, palidez, irritabilidade e queda do desempenho, e não produz manchas de Bitot nem xeroftalmia.",
+   "B": "A deficiência de zinco cursa com lesões cutâneas periorificiais e acrais, diarreia prolongada, alopecia, déficit de crescimento e infecções de repetição, sem o achado conjuntival descrito.",
+   "D": "A deficiência de vitamina D leva a raquitismo, com alargamento de metáfises, rosário raquítico, deformidades de membros inferiores e alterações do metabolismo do cálcio, não a alterações da conjuntiva e da córnea."
+  },
+  "pontos_chave": [
+   "Manchas de Bitot com xeroftalmia são sinal de hipovitaminose A até prova em contrário.",
+   "Sarampo depleta as reservas de vitamina A: toda criança com sarampo deve receber suplementação.",
+   "Cegueira noturna, xeroftalmia e ceratomalácia formam o espectro ocular da deficiência de vitamina A."
+  ],
+  "referencias": []
  },
  {
   "numero": 59,
@@ -884,6 +1356,43 @@
    {
     "id": "SBR-FIBROMIALGIA-2017",
     "detalhe": "Seção dos critérios diagnósticos revisados: dor generalizada por pelo menos três meses associada a fadiga, sono não reparador e sintomas cognitivos, dispensando a contagem de tender points."
+   }
+  ]
+ },
+ {
+  "numero": 62,
+  "conceito": "Prioridade do atendimento inicial da queimadura química ocular: irrigação imediata e abundante antes de qualquer outra medida.",
+  "correta": "Diante de exposição ocular a agente químico, com ardência intensa, hiperemia e fotofobia iniciadas logo após o contato, a lesão continua progredindo enquanto o produto permanecer em contato com a superfície ocular. Por isso a prioridade absoluta é a irrigação copiosa e imediata com solução salina fisiológica ou ringer lactato, iniciada antes mesmo do exame oftalmológico detalhado e mantida por tempo prolongado, com reavaliação posterior. Nenhuma outra medida antecede a diluição e a remoção mecânica do agente.",
+  "distratores": {
+   "B": "Corticoide e antibiótico tópicos podem entrar no tratamento posterior, conforme a avaliação especializada, mas não removem o agente químico nem interrompem a lesão em curso, e usá-los como medida inicial atrasa a irrigação.",
+   "C": "Pomada antibiótica isolada apenas cria uma barreira sobre a superfície ocular, sem diluir nem eliminar o produto, e a profilaxia de infecção não é o problema das primeiras horas.",
+   "D": "Colírio analgésico alivia a dor e mascara a gravidade da lesão, reduzindo o estímulo para a irrigação prolongada; anestésicos tópicos de uso repetido ainda retardam a reepitelização da córnea."
+  },
+  "pontos_chave": [
+   "Queimadura química ocular: irrigar primeiro, examinar depois.",
+   "Use solução salina fisiológica ou ringer lactato, em volume abundante e por tempo prolongado.",
+   "Colírio anestésico ou analgésico não substitui a irrigação e pode mascarar a gravidade do quadro."
+  ],
+  "referencias": []
+ },
+ {
+  "numero": 63,
+  "conceito": "Diferenciar transtorno do déficit de atenção e hiperatividade do transtorno opositor-desafiador e saber como se faz o diagnóstico na atenção primária.",
+  "correta": "Escolar de 8 anos com desatenção, agitação, impulsividade, tarefas não concluídas e prejuízo do desempenho escolar, com sintomas presentes desde os 4 anos e observados tanto pela escola quanto pela mãe, configura caso suspeito de transtorno do déficit de atenção e hiperatividade. O diagnóstico é clínico e cabe ao pediatra iniciar a avaliação: anamnese ampla, avaliação clínica e psicossocial, exclusão de causas alternativas e coleta de informações em mais de um ambiente por meio de escalas validadas respondidas por pais e professores. A alternativa B é a única que reúne corretamente a hipótese diagnóstica, o tipo de avaliação e a tríade de sintomas exigida: desatenção, hiperatividade e impulsividade.",
+  "distratores": {
+   "A": "Erra a hipótese diagnóstica e também a descrição dos sintomas: o transtorno opositor-desafiador não se define por desatenção, e o relato não traz padrão persistente de desafio a figuras de autoridade, tanto que os episódios de agressividade nunca ocorreram na escola.",
+   "C": "Descreve corretamente o transtorno opositor-desafiador (desobediência, desafio e hostilidade dirigidos a figuras de autoridade), mas esse não é o quadro apresentado, em que predominam desatenção e agitação; além disso, restringe a investigação à avaliação psiquiátrica, quando a avaliação inicial pode e deve ser feita na atenção pediátrica.",
+   "D": "Acerta a hipótese diagnóstica, mas troca os critérios: dificuldade em aceitar regras e irritação não são o núcleo do transtorno do déficit de atenção e hiperatividade, que exige desatenção, hiperatividade e impulsividade, e limita a investigação à avaliação psiquiátrica completa."
+  },
+  "pontos_chave": [
+   "O diagnóstico exige sintomas de desatenção, hiperatividade e impulsividade em mais de um ambiente, com início na infância e prejuízo funcional.",
+   "A avaliação inicial é do pediatra: clínica e psicossocial, com escalas validadas respondidas por pais e professores.",
+   "Padrão de desobediência e hostilidade a figuras de autoridade aponta para transtorno opositor-desafiador, que pode coexistir mas não explica a desatenção."
+  ],
+  "referencias": [
+   {
+    "id": "AAP-TDAH-2019",
+    "detalhe": "Recomendações de ação inicial da diretriz sobre iniciar a avaliação de transtorno do déficit de atenção e hiperatividade em crianças de 4 a 18 anos com problemas escolares ou comportamentais, e sobre documentar os sintomas em mais de um ambiente com informações de pais e professores obtidas por escalas validadas."
    }
   ]
  },
@@ -1049,7 +1558,7 @@
   ],
   "referencias": [
    {
-    "id": "MS-GVS-VOL2-2024",
+    "id": "MS-GVS-2024-V2",
     "detalhe": "Capítulo 'Malária' (a partir da p. 921), itens de manifestações clínicas, diagnóstico laboratorial por gota espessa e esfregaço e tratamento conforme a espécie."
    },
    {
@@ -1080,6 +1589,22 @@
   ]
  },
  {
+  "numero": 72,
+  "conceito": "Reconhecer secção de tendão flexor pelo déficit funcional e definir o que cabe à atenção básica: cuidado local e encaminhamento, não reparo improvisado.",
+  "correta": "Ferimento cortante na face volar da falange proximal do polegar acompanhado de déficit de flexão do segmento significa secção do tendão flexor até prova em contrário: o dado que faz o diagnóstico é a perda de função, não o tamanho da ferida. O reparo tendíneo é cirúrgico e depende de campo exangue, ampliação da incisão, fio e técnica de sutura específicos e protocolo de reabilitação posterior, nada disso disponível em posto de saúde. A conduta correta é limpeza e curativo, avaliação da profilaxia antitetânica conforme o tipo de ferimento e a situação vacinal, e encaminhamento ao ortopedista ou cirurgião de mão para reparo em tempo adequado. O sangramento de pequeno volume, sem sinais de isquemia distal, reforça que o problema é tendíneo. Daí a alternativa C.",
+  "distratores": {
+   "A": "Suturar apenas a pele fecha a ferida sobre um tendão seccionado: o déficit de flexão permanece, o diagnóstico fica mascarado para quem receber o paciente depois e o coto tendíneo retrai, tornando o reparo tardio mais difícil.",
+   "B": "A imobilização pode servir como medida de transporte, mas gesso não aproxima nem cicatriza tendão seccionado. Associada à sutura da pele, transmite a falsa impressão de tratamento concluído e atrasa o reparo especializado, que é o que de fato resolve o caso.",
+   "D": "Não há indício de lesão arterial: o sangramento é de pequeno volume, sem jato pulsátil, hematoma expansivo ou sinais de isquemia do dedo. O achado que define o caso é o déficit de flexão, problema tendíneo, de alçada da ortopedia ou da cirurgia da mão."
+  },
+  "pontos_chave": [
+   "Ferida volar em dedo com perda da flexão ativa é secção de tendão flexor até que se prove o contrário.",
+   "Na unidade básica: limpeza, curativo, checagem da profilaxia antitetânica e encaminhamento, sem sutura que feche a ferida e esconda a lesão.",
+   "Antes de suturar qualquer ferida da mão, teste a flexão de cada articulação separadamente e a sensibilidade das bordas do dedo."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 73,
   "conceito": "Reconhecer a indicação de exsanguineotransfusão na doença hemolítica por incompatibilidade Rh e escolher o hemocomponente correto.",
   "correta": "O recém-nascido é de 36 semanas e, às 36 horas de vida, está com bilirrubina total de 15 mg/dL, a 1 mg/dL do limiar de exsanguineotransfusão que a tabela traz para a faixa de 35 a 37 semanas e 6 dias, e subiu 2 mg/dL em 4 horas, ou seja, 0,5 mg/dL por hora, já sob fototerapia de alta intensidade. Essa velocidade de ascensão com fototerapia máxima em curso caracteriza hemólise em plena atividade e é, por si só, critério de exsanguineotransfusão, sem esperar cruzar o número da tabela. O Coombs direto positivo em filho de mãe O negativo, com antígeno D positivo, confirma a doença hemolítica por incompatibilidade Rh. O sangue precisa ser D negativo, para não oferecer hemácias que os anticorpos anti-D maternos circulantes destruiriam, e compatível com o grupo ABO do recém-nascido — entre as opções, B negativo. Na prática, quando há também incompatibilidade ABO, o serviço de hemoterapia frequentemente opta por hemácias O negativo reconstituídas com plasma AB; a alternativa cobrada aqui testa o ponto essencial, que é o Rh negativo.",
@@ -1107,6 +1632,22 @@
     "detalhe": "Seção sobre exsanguineotransfusão: seleção do hemocomponente quanto aos sistemas ABO e Rh na doença hemolítica perinatal."
    }
   ]
+ },
+ {
+  "numero": 74,
+  "conceito": "A questão cobra que, na amenorreia primária com puberdade completa e genitália externa normal, a investigação se desloca do eixo hormonal para as causas anatômicas do trato genital.",
+  "correta": "Telarca aos dez anos, pubarca em seguida, pilificação axilar e púbica normais, acne e estatura de 1,68 m mostram eixo hipotálamo-hipófise-ovário funcionante, com ação estrogênica e androgênica preservadas. Com puberdade completa e nenhuma menstruação aos dezesseis anos, o problema deixa de ser endócrino e passa a ser de trato de saída: agenesia ou hipoplasia uterovaginal, septo vaginal transverso ou obstrução baixa. O hímen permeável e a genitália externa sem alterações tornam a obstrução himenal improvável, mas não afastam uma anomalia mülleriana mais alta, que só se identifica por imagem, com ultrassonografia pélvica e, quando necessário, ressonância magnética. É por isso que a alternativa correta manda investigar anomalia mülleriana apesar do aspecto externo normal.",
+  "distratores": {
+   "A": "A síndrome de Turner cursa com disgenesia gonadal, baixa estatura e ausência de desenvolvimento puberal espontâneo. A paciente tem 1,68 m, mamas desenvolvidas e pilificação normal, ou seja, o oposto do fenótipo descrito na alternativa.",
+   "B": "Na insensibilidade androgênica há mamas desenvolvidas, mas pelos pubianos e axilares escassos ou ausentes e nenhuma acne, porque falta resposta periférica aos androgênios. Aqui a pilificação é adequada para o sexo feminino e existe acne grau II, o que torna o fenótipo incompatível.",
+   "C": "Dosar estradiol e hormônio do crescimento não acrescenta nada neste caso: o desenvolvimento mamário já comprova produção estrogênica e a estatura de 1,68 m afasta déficit de crescimento. Esses exames apenas adiariam a investigação anatômica que o quadro pede."
+  },
+  "pontos_chave": [
+   "Amenorreia primária com caracteres sexuais secundários presentes leva a pensar primeiro em causa anatômica.",
+   "Pilificação púbica e axilar normais falam contra insensibilidade androgênica.",
+   "Hímen permeável não exclui malformação mülleriana mais alta; o próximo passo é a imagem pélvica."
+  ],
+  "referencias": []
  },
  {
   "numero": 75,
@@ -1295,6 +1836,22 @@
     "detalhe": "Seção de manejo do ressangramento na hemorragia digestiva alta não varicosa: repetir a endoscopia com nova tentativa de hemostasia, reservando embolização transcateter ou cirurgia para a falha dessa segunda endoscopia"
    }
   ]
+ },
+ {
+  "numero": 83,
+  "conceito": "Identificar o agente da intoxicação a partir do antídoto prescrito: a N-acetilcisteína é o antídoto específico do paracetamol.",
+  "correta": "A N-acetilcisteína é o antídoto específico da intoxicação por paracetamol: ela repõe as reservas hepáticas de glutationa e neutraliza o metabólito N-acetil-p-benzoquinona imina, que se acumula quando as vias de conjugação saturam na superdose e provoca necrose hepatocelular centrolobular. O enunciado pede o raciocínio de trás para frente: se a médica escolheu esse antídoto, o antitérmico administrado em dose elevada só pode ter sido o paracetamol. O contexto reforça a hipótese, porque o paracetamol é o antitérmico mais usado em crianças pequenas e a mãe repetiu doses altas por conta própria diante da febre persistente. Além disso, a gastroenterite, com vômitos, jejum e desidratação, é fator agravante conhecido da hepatotoxicidade do paracetamol, o que torna o quadro ainda mais coerente nesta menina de 3 anos.",
+  "distratores": {
+   "A": "O ácido acetilsalicílico produz intoxicação salicílica, com taquipneia, alcalose respiratória seguida de acidose metabólica, zumbido e vômitos; o manejo é de suporte, com alcalinização urinária e, nos casos graves, hemodiálise — nunca N-acetilcisteína. Some-se a isso que ele não é o antitérmico que se usa em uma criança de 3 anos com quadro febril infeccioso, justamente pelo risco de síndrome de Reye.",
+   "C": "A superdose de ibuprofeno costuma cursar com dor abdominal, vômitos e, em doses muito altas, lesão renal aguda e acidose metabólica; não existe antídoto específico e o tratamento é de suporte, com hidratação e proteção gástrica. Como a conduta descrita no caso foi a prescrição de um antídoto, o ibuprofeno não explica a cena.",
+   "D": "A intoxicação aguda por dipirona manifesta-se sobretudo por hipotensão e sintomas gastrointestinais, e a reação mais temida do fármaco, a agranulocitose, é idiossincrásica e não dose-dependente. Também aqui o manejo é apenas de suporte, sem antídoto, de modo que a prescrição de N-acetilcisteína não faria sentido."
+  },
+  "pontos_chave": [
+   "N-acetilcisteína prescrita numa intoxicação aponta paracetamol: ela repõe glutationa e neutraliza o metabólito hepatotóxico.",
+   "Quanto mais precoce o antídoto, maior a proteção hepática; o ideal é iniciá-lo nas primeiras 8 horas após a ingestão.",
+   "Superdose de ibuprofeno e de dipirona não tem antídoto específico: o manejo é de suporte."
+  ],
+  "referencias": []
  },
  {
   "numero": 84,
@@ -1606,6 +2163,31 @@
    {
     "id": "ESMO-SARCOMA-OSSEO-2021",
     "detalhe": "Seção de diagnóstico e estadiamento dos sarcomas ósseos: ressonância magnética de todo o osso acometido e biópsia realizada no centro que fará o tratamento definitivo; seção de tratamento do osteossarcoma de alto grau: quimioterapia neoadjuvante seguida de cirurgia e quimioterapia adjuvante"
+   }
+  ]
+ },
+ {
+  "numero": 98,
+  "conceito": "Ligar a perda ponderal rápida do pós-operatório bariátrico à formação de cálculos biliares e escolher o exame de imagem inicial.",
+  "correta": "Dois meses após gastrectomia vertical, com perda de peso rápida, há aumento da saturação biliar de colesterol e estase vesicular, o que faz da colelitíase a complicação mais prevalente desse período, tipicamente nos primeiros 6 a 12 meses. Epigastralgia com náuseas e vômitos importantes, com abdome sem sinais de peritonite e sem ascite, encaixa-se em doença litiásica biliar sintomática, e não em complicação cirúrgica da própria gastrectomia. A ultrassonografia abdominal é o exame inicial: disponível, não invasiva, sem radiação, com alta sensibilidade para cálculos na vesícula, e ainda avalia parede vesicular e vias biliares. Por isso a dupla hipótese e exame da alternativa A é a correta.",
+  "distratores": {
+   "B": "A hérnia incisional se manifesta como abaulamento redutível na cicatriz cirúrgica, e o enunciado descreve abdome sem alterações à inspeção. Além disso, a radiografia simples de abdome não é o exame para diagnosticar hérnia de parede, que é diagnóstico clínico eventualmente complementado por ultrassonografia ou tomografia.",
+   "C": "A síndrome de dumping é desencadeada pelas refeições, dura de minutos a poucas horas e associa sintomas vasomotores a diarreia, o que não corresponde a um quadro contínuo de 4 dias. A dosagem de gordura e pH fecal investiga disabsorção, pouco esperada após gastrectomia vertical, procedimento essencialmente restritivo e sem desvio intestinal.",
+   "D": "Esofagite e dilatação esofágica podem ocorrer após gastrectomia vertical, por refluxo ou estenose do tubo gástrico, mas tendem a ser tardias e cursam com pirose, regurgitação e disfagia. Com apenas 2 meses de pós-operatório e diante de uma complicação muito mais prevalente ligada à perda rápida de peso, a endoscopia não é o primeiro exame."
+  },
+  "pontos_chave": [
+   "Perda ponderal rápida após cirurgia bariátrica é fator de risco maior para colelitíase, sobretudo nos primeiros 6 a 12 meses.",
+   "Suspeita de doença litiásica biliar: o primeiro exame é sempre a ultrassonografia abdominal.",
+   "Gastrectomia vertical é restritiva; dumping clássico e disabsorção são muito mais esperados após o desvio gástrico em Y de Roux."
+  ],
+  "referencias": [
+   {
+    "id": "TSRS-CIRURGIA-GERAL-ADULTO-2020",
+    "detalhe": "Protocolo 1 (Colelitíase e Coledocolitíase): define colelitíase sintomática como condição de encaminhamento à cirurgia geral e exige, no conteúdo descritivo mínimo do encaminhamento, o laudo do exame de imagem que documenta os cálculos."
+   },
+   {
+    "id": "WSES-COLECISTITE-2020",
+    "detalhe": "Seção de diagnóstico por imagem: recomendação da ultrassonografia abdominal como primeiro exame na suspeita de doença calculosa da vesícula, por disponibilidade, baixo custo, ausência de radiação e boa acurácia para detectar cálculos."
    }
   ]
  },

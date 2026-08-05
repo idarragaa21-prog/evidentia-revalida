@@ -50,7 +50,7 @@ def validar(parcial=False):
     edicoes = sorted({q["edicao"] for q in banco})
     just = carregar_justificativas(edicoes)
 
-    erros, avisos = [], []
+    erros, avisos, sem_fonte = [], [], []
 
     # 1. Catalogo de fontes
     for fid, f in sorted(catalogo.items()):
@@ -100,8 +100,11 @@ def validar(parcial=False):
                     erros.append(f"{onde}: distrator {letra} vazio ou curto demais")
 
         refs = reg.get("referencias") or []
+        # Ficar sem fonte e aceitavel e ate desejavel quando o catalogo nao cobre o ponto:
+        # o aplicativo mostra o selo "estudo" em vez de "N referencias" e ninguem e
+        # enganado. O que nao se admite e citar uma fonte que nao sustenta a afirmacao.
         if not refs and not q["anulada"]:
-            erros.append(f"{onde}: questao valida sem nenhuma referencia")
+            sem_fonte.append(onde)
         for r in refs:
             rid = r.get("id", "")
             citadas.add(rid)
@@ -120,6 +123,12 @@ def validar(parcial=False):
             erros.append(
                 f"{onde}: citacao solta na prosa ({achado.group(0)!r}) — use o campo referencias"
             )
+
+    if sem_fonte:
+        avisos.append(
+            f"{len(sem_fonte)} questoes com justificativa estruturada mas sem fonte no catalogo "
+            f"(mostram o selo 'estudo'): {sem_fonte[:6]}{' ...' if len(sem_fonte) > 6 else ''}"
+        )
 
     orfas = sorted(set(catalogo) - citadas)
     if orfas:

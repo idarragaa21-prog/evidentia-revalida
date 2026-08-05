@@ -93,7 +93,19 @@ await pagina.screenshot({ path: captura('escuro_resultado.png'), fullPage: true 
 await pagina.evaluate(() => go('review', 'todas'));
 await pagina.waitForSelector('.rev-card');
 await pagina.evaluate(() => document.querySelectorAll('details.just').forEach((d) => { d.open = true; }));
-const revisao = await medirContrastes(['.just .body', '.just .src', '.just summary .badge', '.alt.correct .mk']);
+/* A justificativa estruturada é o que o assinante compra: se o texto dela ou as
+   referências não tiverem contraste no tema escuro, o produto falha justamente
+   onde promete valor. Por isso cada parte do bloco entra na medição. */
+const revisao = await medirContrastes([
+  '.just .src', '.just summary .badge', '.alt.correct .mk',
+  '.jconceito', '.jsec p', '.jsec-h.ok', '.jsec-h.no', '.jsec-h.ref',
+  '.jdist .jletra', '.jpontos', '.jref-t a', '.jref-m', '.jref-d', '.fonteinep',
+]);
+/* Se o bloco estruturado não estiver na tela, os seletores acima somem em silêncio e o
+   teste passaria sem medir nada. Esta verificação impede esse falso verde. */
+rel.ok(Object.keys(revisao).some((s) => s.startsWith('.jref') || s === '.jconceito'),
+  'escuro · revisão · a justificativa estruturada com referências está na tela',
+  Object.keys(revisao));
 for (const [sel, valor] of Object.entries(revisao)) {
   rel.ok(valor >= AA_TEXTO_NORMAL, `escuro · revisão · ${sel} atinge AA (${valor}:1)`, valor);
 }

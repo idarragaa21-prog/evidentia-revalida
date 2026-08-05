@@ -41,6 +41,27 @@
   ]
  },
  {
+  "numero": 3,
+  "conceito": "Identificar nistagmo no lactente e tratá-lo como sinal de alerta que exige avaliação oftalmológica e neurológica, e não observação.",
+  "correta": "O movimento oscilatório, repetitivo e involuntário dos dois globos oculares descrito pela mãe é nistagmo, e nessa idade ele não é achado benigno: aos 3 meses a fixação e o seguimento já deveriam estar estabelecidos. O antecedente de teste do olhinho inconclusivo, sem reavaliação e sem orientação, reforça a necessidade de investigar a via visual, já que baixa visão precoce (opacidades de meios, alterações de retina ou de nervo óptico) é causa frequente de nistagmo no lactente. Ao mesmo tempo, o nistagmo pode ser a primeira manifestação de doença do sistema nervoso central, mesmo com o restante do exame neurológico normal e a criança eutrófica. Por isso a conduta correta soma os dois encaminhamentos, ao oftalmologista e ao neuropediatra, para investigação estrutural e funcional em paralelo.",
+  "distratores": {
+   "A": "Catarata congênita se traduz por reflexo vermelho ausente, assimétrico ou leucocoria, e não por movimento ocular de vaivém; além disso, diante de uma triagem já inconclusiva, a conduta não é simplesmente repetir o teste na unidade, e sim garantir exame oftalmológico especializado.",
+   "B": "Estrabismo é desalinhamento dos eixos visuais, com desvio de um dos olhos, constante ou intermitente, e não oscilação rítmica dos dois globos; tranquilizar a mãe deixaria sem investigação um lactente que já falhou na triagem visual.",
+   "D": "Xeroftalmia por deficiência de vitamina A cursa com cegueira noturna, xerose de conjuntiva e córnea, manchas de Bitot e, nos casos graves, ceratomalácia, quase sempre em criança desnutrida; a lactente está eutrófica, sem lesão de superfície ocular, e a dosagem de vitamina A não explicaria o nistagmo."
+  },
+  "pontos_chave": [
+   "Nistagmo em lactente não é achado banal: encaminhe ao mesmo tempo para oftalmologia e neuropediatria.",
+   "Teste do reflexo vermelho alterado ou inconclusivo nunca recebe alta: repete-se e encaminha-se ao oftalmologista.",
+   "Baixa visão precoce de qualquer causa pode se manifestar como nistagmo nos primeiros meses de vida."
+  ],
+  "referencias": [
+   {
+    "id": "MS-ATENCAO-RECEM-NASCIDO-VOL1-2014",
+    "detalhe": "Volume 1, capítulo de triagem neonatal, item do teste do reflexo vermelho (teste do olhinho): quando o resultado é alterado ou não conclusivo, a criança deve ser reavaliada e encaminhada ao oftalmologista, e não liberada sem seguimento."
+   }
+  ]
+ },
+ {
   "numero": 4,
   "conceito": "Diferenciar ameaça de abortamento de abortamento em evolução pelo estado do colo e definir o manejo por decisão compartilhada.",
   "correta": "Colo pérvio ao toque bimanual, sangramento vermelho vivo e saída de material sugestivo de restos ovulares, em útero compatível com 10 semanas, caracterizam abortamento em evolução: a perda gestacional já é irreversível. A paciente está hemodinamicamente estável e normocorada, com pressão arterial de 110 x 70 mmHg e frequência cardíaca de 82 bpm, o que permite discutir as opções sem urgência. Nesse cenário, a conduta correta é explicar o quadro em linguagem acessível e oferecer o esvaziamento por aspiração manual intrauterina ou curetagem, ou ainda a conduta expectante, respeitando a escolha da mulher.",
@@ -473,6 +494,22 @@
   ]
  },
  {
+  "numero": 23,
+  "conceito": "Reconhecer a estenose hipertrófica do piloro pelo padrão dos vômitos e pela gasometria, e ordenar corretamente a conduta: estabilizar primeiro, operar depois.",
+  "correta": "Vômitos em jato, de conteúdo leitoso e sem bile, que se intensificam a partir da terceira semana de vida, com perda de peso, desidratação e massa móvel palpável em epigástrio, a oliva pilórica, desenham a estenose hipertrófica do piloro. O laboratório confirma: pH de 7,58 com bicarbonato de 36 mEq/L e excesso de base de mais 13,5, ou seja, alcalose metabólica, acompanhada de cloro de 80 mEq/L e potássio de 3,0 mEq/L, o padrão hipoclorêmico e hipocalêmico da perda contínua de suco gástrico. O tratamento definitivo é a piloromiotomia, mas ela não é urgência cirúrgica: operar um lactente alcalótico e hipocalêmico aumenta o risco anestésico, inclusive de apneia pós-operatória. Por isso a sequência correta é reidratar, repor cloro e potássio, aguardar a correção do distúrbio e só então encaminhar ao procedimento.",
+  "distratores": {
+   "B": "A fundoplicatura trata doença do refluxo gastroesofágico refratária; o caso não é refluxo, e sim obstrução mecânica da saída gástrica, sinalizada pela oliva palpável e pela alcalose hipoclorêmica, que a fundoplicatura não resolve.",
+   "C": "Erros inatos do metabolismo de apresentação aguda costumam cursar com acidose metabólica, hipoglicemia, cetose ou hiperamonemia; aqui o distúrbio é exatamente o oposto, alcalose metabólica com hipocloremia e hipocalemia, plenamente explicada pelos vômitos, e há uma massa palpável que dá o diagnóstico.",
+   "D": "Alergia à proteína do leite de vaca não produz oliva palpável nem alcalose hipoclorêmica; ela se manifesta com sangue nas fezes, diarreia, eczema, irritabilidade ou má progressão ponderal. Trocar por fórmula de aminoácidos e excluir leite da dieta materna adiaria a correção hidroeletrolítica e a cirurgia já indicadas."
+  },
+  "pontos_chave": [
+   "Vômito não bilioso, em jato, com perda de peso entre a terceira e a sexta semana de vida: estenose hipertrófica do piloro.",
+   "Alcalose metabólica hipoclorêmica e hipocalêmica é a assinatura laboratorial da doença.",
+   "A piloromiotomia é urgência clínica, não cirúrgica: hidratar e corrigir eletrólitos antes do centro cirúrgico."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 24,
   "conceito": "Hipertensão de início após as 20 semanas exige investigação laboratorial de proteinúria e de disfunção de órgão-alvo antes de se fechar o diagnóstico de pré-eclâmpsia.",
   "correta": "Gestante de 35 semanas, previamente normotensa e com todas as medidas anteriores normais, apresenta 140 x 95 mmHg confirmada após quinze minutos de repouso: é hipertensão de início na gestação, e a pré-eclâmpsia é a principal hipótese. O edema importante de membros inferiores e o ganho de 3 quilos em duas semanas reforçam a suspeita clínica, mas não são critério diagnóstico. Para confirmar, é preciso documentar proteinúria significativa ou disfunção de órgão-alvo — plaquetas, creatinina, transaminases —, exatamente o que a alternativa B propõe; sem esses achados, o caso se classifica como hipertensão gestacional.",
@@ -684,7 +721,7 @@
   ],
   "referencias": [
    {
-    "id": "MS-GVS-VOL1-6ED-2024",
+    "id": "MS-GVS-2024-V1",
     "detalhe": "Capítulo 'Tétano acidental': quadro de conduta profilática segundo o tipo de ferimento e a história vacinal, com os itens 'Soro antitetânico (SAT)' e 'Imunoglobulina humana antitetânica (IGHAT)'."
    },
    {
@@ -734,6 +771,43 @@
   ]
  },
  {
+  "numero": 35,
+  "conceito": "Reconhecer a forma hepatoesplênica da esquistossomose mansônica como causa de hemorragia digestiva alta e escolher os exames iniciais que confirmam a etiologia e avaliam a hipertensão porta.",
+  "correta": "O contato repetido com águas de rio habitadas por caramujos no interior da Bahia, somado a hematêmese, melena, hipocorância e icterícia, aponta para esquistossomose mansônica na forma hepatoesplênica, em que a fibrose periportal produz hipertensão porta e varizes esofágicas sangrantes. Os três exames da alternativa B respondem às três perguntas do caso: a ultrassonografia abdominal demonstra a fibrose periportal e a hepatoesplenomegalia, a endoscopia digestiva alta localiza e permite tratar a fonte do sangramento, e a pesquisa de ovos nas fezes confirma o agente. São exames simples, disponíveis na rede básica e apropriados como investigação inicial. Nenhum outro conjunto proposto cobre ao mesmo tempo o sangramento digestivo e o diagnóstico parasitológico.",
+  "distratores": {
+   "A": "Deixa de fora justamente a ultrassonografia abdominal, exame que demonstra a fibrose periportal e a hipertensão porta responsáveis pelo sangramento; e a reação intradérmica não separa infecção ativa de contato antigo, o que a torna inútil para decidir a conduta neste paciente que já está sangrando.",
+   "C": "Ressonância magnética e biópsia retal são recursos de exceção, caros e invasivos, que não antecedem os exames básicos; em um paciente com hemorragia digestiva alta, nenhum dos dois identifica nem trata a fonte do sangramento, e a sorologia por imunofluorescência permanece reagente após o tratamento, não servindo para confirmar doença ativa.",
+   "D": "Radiografia de tórax, sorologia por Elisa e PCR no sangue não investigam a hemorragia digestiva nem a hipertensão porta; além disso, a confirmação diagnóstica de rotina no SUS é o encontro dos ovos nas fezes, e não métodos sorológicos ou moleculares."
+  },
+  "pontos_chave": [
+   "Banho em rio com caramujos em área endêmica mais hemorragia digestiva alta sugere forma hepatoesplênica da esquistossomose.",
+   "A investigação inicial reúne ultrassonografia abdominal, endoscopia digestiva alta e pesquisa de ovos nas fezes.",
+   "Sorologia e intradermorreação não distinguem infecção ativa de exposição passada."
+  ],
+  "referencias": [
+   {
+    "id": "WHO-ESQUISTOSSOMOSE-2022",
+    "detalhe": "Seção de recomendações sobre diagnóstico e sobre a definição de áreas endêmicas por limiares de prevalência, que sustenta o valor da exposição a coleções de água com caramujos como dado epidemiológico."
+   }
+  ]
+ },
+ {
+  "numero": 36,
+  "conceito": "Identificar a forma grave e ictérica da leptospirose, a síndrome de Weil, a partir do vínculo epidemiológico com enchente e do padrão laboratorial característico.",
+  "correta": "O paciente mora em área urbana sujeita a inundação e adoeceu em período de chuvas, o que já estabelece o vínculo epidemiológico. O quadro reúne febre, mialgia intensa de membros inferiores com CPK de 1.800 UI/L, sufusão hemorrágica conjuntival, icterícia com bilirrubina total de 13 mg/dL, plaquetopenia de 20.000/mm³ e insuficiência renal com ureia e creatinina elevadas acompanhada de hipocalemia de 2,0 mEq/L. A combinação de icterícia intensa com transaminases apenas discretamente alteradas, CPK elevada e lesão renal que perde potássio é a assinatura da forma grave da leptospirose. Nenhuma das outras hipóteses reproduz esse conjunto.",
+  "distratores": {
+   "A": "A dengue explica febre, mialgia e plaquetopenia, mas não a icterícia com bilirrubina de 13 mg/dL, a CPK de 1.800 UI/L, a sufusão hemorrágica conjuntival nem a insuficiência renal com hipocalemia; o caso também já ultrapassa a janela habitual de agravamento da dengue.",
+   "B": "Falta o antecedente de exposição em área endêmica — trata-se de morador urbano do Sudeste — e o padrão de febre em paroxismos; a malária cursaria com hemólise e não com mialgia acompanhada de CPK muito elevada, hipocalemia e sufusão conjuntival.",
+   "C": "Na hepatite A as transaminases sobem para centenas ou milhares de unidades, enquanto aqui TGO e TGP mal dobram o limite superior; além disso, a hepatite A não produz mialgia com CPK alta, sufusão conjuntival hemorrágica, plaquetopenia grave nem insuficiência renal com hipocalemia."
+  },
+  "pontos_chave": [
+   "Exposição a enchente em período de chuvas é o vínculo epidemiológico que abre a suspeita.",
+   "Icterícia intensa com transaminases pouco alteradas e CPK elevada aponta leptospirose, não hepatite viral.",
+   "Insuficiência renal aguda com hipocalemia é característica da forma grave da doença."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 37,
   "conceito": "Na criança em choque traumático, o acesso vascular inicial é periférico e percutâneo, e o fluido é cristaloide isotônico aquecido.",
   "correta": "A criança de 7 anos e 25 kg foi atropelada, tem dor e escoriações abdominais e sinais clínicos de choque, com reanimação já iniciada por via periférica no pré-hospitalar. No hospital mantém-se a mesma lógica: punção percutânea de acessos venosos periféricos, de preferência dois, e infusão de solução cristaloide isotônica aquecida em bólus calculado pelo peso. Aquecer o fluido previne hipotermia, que na criança se instala rápido e agrava acidose e coagulopatia. Se as tentativas periféricas falharem em poucos minutos, o passo seguinte é a via intraóssea, e não o acesso central.",
@@ -778,7 +852,7 @@
     "detalhe": "Seção de sífilis congênita: quadro das manifestações precoces (osteocondrite e periostite, hepatomegalia, icterícia e anemia), fluxo de investigação da criança exposta com teste não treponêmico comparado ao materno e quadro de tratamento com penicilina cristalina endovenosa."
    },
    {
-    "id": "MS-GVS-6ED-VOL2-2024",
+    "id": "MS-GVS-2024-V2",
     "detalhe": "Capítulo 'Sífilis congênita': definição e critérios de caso, interpretação dos testes treponêmicos e não treponêmicos na criança e notificação compulsória."
    },
    {
@@ -834,6 +908,31 @@
    {
     "id": "MS-PROTOCOLOS-AB-SAUDE-MULHERES-2016",
     "detalhe": "PARTE 2 (pré-natal de baixo risco): interpretação dos exames de rotina do primeiro trimestre — hemograma e reposição de ferro, tipagem sanguínea/fator Rh com coombs indireto e sorologia para toxoplasmose."
+   }
+  ]
+ },
+ {
+  "numero": 41,
+  "conceito": "Fechar o diagnóstico positivo de síndrome do intestino irritável pelo padrão dos sintomas e pela ausência de sinais de alarme, em vez de repetir investigação de causas orgânicas.",
+  "correta": "São quatro anos de dor abdominal em cólica que melhora com a evacuação e com a eliminação de flatos, alternando períodos de constipação e fezes amolecidas, sem sangue, sem muco, sem perda de peso e com exame físico normal. Essa relação da dor com o hábito intestinal, em paciente de 28 anos e sem sinais de alarme, é o próprio critério diagnóstico da síndrome do intestino irritável, um distúrbio funcional. A investigação já realizada foi ampla e inteiramente negativa, incluindo sangue oculto, parasitológico, hemograma, anticorpo antitransglutaminase, TSH, ultrassonografia e teste de tolerância à lactose. Repetir exames ou novos ciclos de antiparasitário não muda a conduta e alimenta a ansiedade da paciente, que já verbaliza o medo de ter câncer.",
+  "distratores": {
+   "A": "O anticorpo antitransglutaminase negativo torna a doença celíaca improvável, e não há esteatorreia, anemia nem perda de peso que justificassem insistir nessa hipótese.",
+   "B": "O câncer colorretal exigiria sinais de alarme — sangramento, anemia, emagrecimento, massa palpável ou idade mais avançada —, todos ausentes; sintomas estáveis por quatro anos, com peso preservado e sangue oculto negativo, não correspondem a neoplasia.",
+   "C": "A retocolite ulcerativa cursa com diarreia com sangue e muco, urgência evacuatória e evidência laboratorial e endoscópica de inflamação; aqui as fezes não têm sangue nem muco, o hemograma é normal e o exame físico não mostra alterações."
+  },
+  "pontos_chave": [
+   "Dor que alivia com a evacuação e alternância do hábito intestinal, sem sinais de alarme, sustentam o diagnóstico positivo.",
+   "Anticorpo antitransglutaminase negativo e investigação ampla normal afastam as causas orgânicas mais temidas.",
+   "Repetir exames e antiparasitários não altera a conduta e reforça a ansiedade da paciente."
+  ],
+  "referencias": [
+   {
+    "id": "ACG-SII-2021",
+    "detalhe": "Seção de diagnóstico, com a recomendação de estratégia diagnóstica positiva baseada nos sintomas e a orientação sobre quais exames são realmente necessários, restritos à sorologia para doença celíaca e a marcadores fecais em subgrupos selecionados."
+   },
+   {
+    "id": "ACG-RETOCOLITE-2019",
+    "detalhe": "Seção de apresentação clínica e diagnóstico, que exige diarreia com sangue e inflamação documentada por endoscopia e histologia para caracterizar a retocolite ulcerativa."
    }
   ]
  },
@@ -900,6 +999,43 @@
    {
     "id": "CDC-STI-GUIDELINES-2021",
     "detalhe": "Seção Pelvic Inflammatory Disease: critérios clínicos mínimos para diagnóstico presuntivo em mulher sexualmente ativa com dor pélvica e limiar baixo para iniciar tratamento empírico."
+   }
+  ]
+ },
+ {
+  "numero": 45,
+  "conceito": "Estratificar a gravidade da pneumonia adquirida na comunidade e escolher o esquema antimicrobiano ambulatorial para paciente com comorbidades.",
+  "correta": "O quadro é de pneumonia adquirida na comunidade: tosse produtiva, febre, dor pleurítica e estertores crepitantes localizados em base direita. Apesar dos 70 anos, o paciente está estável — consciente e orientado, pressão de 110 x 80 mmHg, frequência respiratória de 20 irpm e saturação de 96% em ar ambiente —, somando apenas o ponto da idade nos escores de gravidade e, portanto, elegível para tratamento domiciliar. Como tem hipertensão e diabetes, a cobertura empírica precisa ser ampliada: betalactâmico com inibidor de betalactamase associado a macrolídeo, exatamente a amoxicilina com clavulanato mais azitromicina por via oral. É o que a alternativa D propõe, com duração e via compatíveis com o manejo ambulatorial.",
+  "distratores": {
+   "A": "A azitromicina isolada é insuficiente para um idoso com diabetes e hipertensão, tanto pela cobertura limitada diante das comorbidades quanto pela resistência do pneumococo aos macrolídeos; o macrolídeo entra como parceiro do betalactâmico, não como monoterapia.",
+   "B": "Internar não se justifica em paciente estável, sem confusão mental, taquipneia, hipotensão ou hipoxemia; e a ceftriaxona isolada ainda deixaria descobertos os germes atípicos que motivam a associação com macrolídeo.",
+   "C": "Também interna sem necessidade um paciente de baixo risco, e a ampicilina com sulbactam é escolha voltada a pneumonia aspirativa e anaeróbios, cenário que não corresponde a este caso, sem rebaixamento de consciência nem disfagia."
+  },
+  "pontos_chave": [
+   "Paciente estável, sem confusão, taquipneia, hipotensão ou hipoxemia, pode ser tratado em casa.",
+   "Havendo comorbidades, o esquema oral combina betalactâmico com inibidor de betalactamase e macrolídeo.",
+   "Internação e antibiótico venoso em pneumonia de baixo risco é conduta desproporcional."
+  ],
+  "referencias": []
+ },
+ {
+  "numero": 46,
+  "conceito": "Definir a conduta diante de abscesso pulmonar que não responde ao tratamento clínico adequadamente instituído por semanas.",
+  "correta": "Situação de rua, uso abusivo de álcool e crack, higiene oral precária, escarro fétido com rajas de sangue e três semanas de evolução compõem o retrato clássico do abscesso pulmonar por aspiração, e o esquema com ceftriaxona e metronidazol cobria adequadamente a flora esperada, incluindo anaeróbios. Após vinte dias, porém, o paciente mantém febre e os mesmos sintomas, e a radiografia não mostra qualquer regressão da lesão: isso é falha do tratamento clínico, não resposta lenta. Diante da refratariedade, mantém-se o antibiótico e associa-se a abordagem cirúrgica, com remoção da lesão e do segmento pulmonar acometido. Prolongar a conduta expectante apenas manteria o foco supurativo e o risco de complicações como hemoptise volumosa e disseminação.",
+  "distratores": {
+   "A": "Assumir bactéria multirresistente sem qualquer isolamento microbiológico é empirismo sem base; o paciente não teve internações prévias nem uso recente de antibióticos, que são justamente os fatores de risco que autorizariam essa suposição.",
+   "B": "O teste rápido molecular foi não detectável e o escarro fétido fala a favor de infecção por anaeróbios; havendo dúvida, o caminho seria complementar a investigação com cultura para micobactérias, e não iniciar às cegas um esquema tóxico que deixaria a lesão supurativa sem tratamento.",
+   "D": "Chamar o quadro de resposta lenta e favorável contraria os dados: após vinte dias persistem febre, tosse produtiva fétida, fraqueza e a mesma imagem radiológica; a única melhora foi a redução da hemoptise, insuficiente para caracterizar boa evolução."
+  },
+  "pontos_chave": [
+   "Escarro fétido em paciente com risco de aspiração é abscesso pulmonar até prova em contrário.",
+   "Persistência de febre, sintomas e imagem após vinte dias de antibiótico adequado define falha terapêutica.",
+   "A falha do tratamento clínico é a principal indicação de ressecção cirúrgica do segmento acometido."
+  ],
+  "referencias": [
+   {
+    "id": "MS-MANUAL-TUBERCULOSE-2019",
+    "detalhe": "Capítulo de diagnóstico da tuberculose pulmonar, seção do teste rápido molecular (TRM-TB) e conduta diante de resultado não detectável em sintomático respiratório, que orienta prosseguir a investigação em vez de iniciar tratamento empírico."
    }
   ]
  },
@@ -995,6 +1131,31 @@
   ]
  },
  {
+  "numero": 51,
+  "conceito": "Reconhecer o eritema nodoso hansênico, ou reação hansênica tipo 2, pelo quadro de nódulos dolorosos com febre e artrite em paciente com sinais de hanseníase multibacilar.",
+  "correta": "Os nódulos eritematosos, firmes e dolorosos, distribuídos bilateralmente por braços, antebraços, coxas e dorso, acompanhados de febre e de dor e edema em punhos e tornozelos, compõem o eritema nodoso hansênico, a reação hansênica tipo 2, própria das formas multibacilares. A rarefação dos supercílios, a madarose, denuncia a hanseníase de base, muitas vezes ainda não diagnosticada. A histologia fecha o raciocínio: os granulomas dérmicos traduzem a doença granulomatosa subjacente e a vasculite leucocitoclástica traduz a reação imunomediada por deposição de imunocomplexos. Trata-se de quadro sistêmico, que exige tratamento específico da reação sem suspender a poliquimioterapia.",
+  "distratores": {
+   "B": "A granulomatose com poliangiite acomete tipicamente vias aéreas superiores e inferiores e os rins, com granulomas necrosantes e anticorpos anticitoplasma de neutrófilos; não explica a madarose nem a erupção nodular simétrica de membros e dorso descrita aqui.",
+   "C": "A leishmaniose tegumentar americana produz úlcera única ou poucas lesões, de bordas elevadas e fundo granuloso, em área exposta, e a histologia mostraria reação inflamatória com amastigotas, e não essa erupção nodular difusa e febril com artrite.",
+   "D": "As manifestações cutâneas da retocolite ulcerativa acompanham a atividade intestinal, ausente neste caso, e o eritema nodoso associado a ela predomina nas faces anteriores das pernas, sem madarose e sem granulomas dérmicos na biópsia."
+  },
+  "pontos_chave": [
+   "Nódulos dolorosos com febre e artrite em paciente com madarose indicam reação hansênica tipo 2.",
+   "Granulomas dérmicos com vasculite leucocitoclástica é a histologia esperada do eritema nodoso hansênico.",
+   "A reação tipo 2 é fenômeno imunomediado das formas multibacilares e se trata sem interromper a poliquimioterapia."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PCDT-HANSENIASE-2022",
+    "detalhe": "Seção dos estados reacionais, item do eritema nodoso hansênico ou reação tipo 2, com a descrição dos nódulos subcutâneos dolorosos acompanhados de febre e artralgia e o tratamento com talidomida segundo as restrições legais de uso."
+   },
+   {
+    "id": "WHO-HANSENIASE-2018",
+    "detalhe": "Seção de manejo das reações hansênicas, subitem da reação tipo 2 (eritema nodoso hansênico) e sua distinção clínica em relação à reação tipo 1."
+   }
+  ]
+ },
+ {
   "numero": 52,
   "conceito": "Hematúria em homem idoso, tabagista e com exposição ocupacional a aminas aromáticas é câncer de bexiga até prova em contrário, e quem confirma é a cistoscopia com biópsia.",
   "correta": "Homem de 68 anos, tabagista desde os 20 anos e aposentado de fábrica de tintas, soma os dois principais fatores de risco do carcinoma urotelial; hematúria por 3 meses com disúria e dois episódios rotulados como cistite no último semestre é a apresentação típica, não uma infecção urinária de repetição banal. O exame físico não ajuda a excluir nada: próstata sem nódulos e abdome sem massas são esperados no tumor vesical, que costuma não ter tradução semiológica. Diante desse perfil, a investigação exige visualização direta da mucosa vesical, e a cistoscopia identifica a lesão e permite biópsia ou ressecção para o diagnóstico histopatológico.",
@@ -1078,6 +1239,27 @@
    {
     "id": "BR-LEI-9836-1999-SAUDE-INDIGENA",
     "detalhe": "Dispositivos acrescentados à Lei nº 8.080/1990: instituição do Subsistema de Atenção à Saúde Indígena (art. 19-B) e sua organização descentralizada, hierarquizada e regionalizada tendo por base os distritos sanitários especiais indígenas, com atuação complementar de estados, municípios e outras instituições (art. 19-E)."
+   }
+  ]
+ },
+ {
+  "numero": 56,
+  "conceito": "Diagnosticar anorexia nervosa em adolescente com restrição alimentar, baixo peso e amenorreia e reconhecer a psicoterapia como base do tratamento inicial.",
+  "correta": "A adolescente perdeu 7 kg em um mês seguindo dietas retiradas de redes sociais, mantém musculação e corrida diárias, pesa 45 kg para 1,70 m — índice de massa corporal em torno de 15,6 kg/m² — e está sem menstruar há quatro meses, ao mesmo tempo em que afirma não ter problema algum. Restrição alimentar deliberada, baixo peso acentuado, amenorreia e a negação do próprio estado configuram anorexia nervosa, aqui do tipo restritivo, já que não há vômitos nem outros comportamentos purgativos. O diagnóstico é clínico e o tratamento de base é psicoterápico, com envolvimento da família e reabilitação nutricional, acompanhado da vigilância das complicações do baixo peso. Não há medicamento que ocupe o lugar da psicoterapia no início do manejo.",
+  "distratores": {
+   "A": "A bulimia nervosa exige episódios recorrentes de compulsão alimentar com comportamentos compensatórios, negados pela paciente, e costuma cursar com peso normal ou elevado; a bupropiona, além de não tratar o quadro, é contraindicada em transtornos alimentares pelo risco de convulsão.",
+   "B": "O hipertireoidismo causaria emagrecimento, mas o exame físico não mostra taquicardia, tremor, bócio ou qualquer sinal de tireotoxicose, e ele não explicaria a restrição alimentar voluntária nem a preocupação com dieta e exercício; o propiltiouracil não teria indicação.",
+   "D": "O transtorno de purgação pressupõe comportamentos purgativos recorrentes na ausência de compulsão, e a paciente nega vomitar; a metoclopramida, além disso, não trata transtorno alimentar algum."
+  },
+  "pontos_chave": [
+   "Restrição alimentar deliberada, baixo peso e amenorreia em adolescente definem anorexia nervosa.",
+   "Peso de 45 kg para 1,70 m corresponde a índice de massa corporal de cerca de 15,6 kg/m².",
+   "O tratamento inicial é psicoterapia com participação da família e reabilitação nutricional, não medicamento."
+  ],
+  "referencias": [
+   {
+    "id": "LANCET-TRANSTORNOS-ALIMENTARES-2020",
+    "detalhe": "Seções de apresentação clínica e de diagnóstico diferencial entre anorexia e bulimia nervosa e seção de manejo, que posiciona as psicoterapias, com terapia baseada na família em adolescentes, como tratamento de primeira linha."
    }
   ]
  },
@@ -1176,6 +1358,48 @@
   ]
  },
  {
+  "numero": 61,
+  "conceito": "Diferenciar transtorno depressivo acompanhado de ataques de pânico do transtorno de pânico, do transtorno bipolar e da ansiedade generalizada.",
+  "correta": "O eixo do quadro é depressivo: perda constante de interesse e prazer há dois meses, humor deprimido, emagrecimento, sonolência excessiva, fadiga, dificuldade de concentração e de pensar, com repercussão percebida por amigos e familiares. Sobre esse fundo surgiram duas crises súbitas de poucos minutos, com medo intenso, taquicardia, sufocação, tontura, sudorese e sensação de morte iminente, ou seja, ataques de pânico, já com causas orgânicas descartadas no pronto-socorro e com hemograma, TSH e T4 livre normais. Como os ataques são fenômeno acessório dentro de um episódio depressivo que domina o quadro, o diagnóstico correto é transtorno depressivo com ataques de pânico. O ataque de pânico funciona aqui como especificador, e não como diagnóstico principal.",
+  "distratores": {
+   "A": "No transtorno de pânico o núcleo é a recorrência de crises com medo persistente de novas crises, e a agorafobia exige esquiva de situações das quais seria difícil escapar; foram apenas duas crises, sem esquiva fóbica descrita, e o não sair de casa decorre da anedonia, não do medo de passar mal em público.",
+   "B": "O transtorno bipolar em fase depressiva exigiria episódio maníaco ou hipomaníaco atual ou pregresso, que não aparece em nenhum momento do relato; sem esse antecedente não se pode rotular o episódio como bipolar.",
+   "C": "A ansiedade generalizada caracteriza-se por preocupação excessiva e difusa, persistente por seis meses ou mais, com tensão contínua; o paciente descreve dois episódios agudos e delimitados, e o que se arrasta há dois meses é a síndrome depressiva, não a preocupação crônica."
+  },
+  "pontos_chave": [
+   "Anedonia e sintomas neurovegetativos por mais de duas semanas definem o episódio depressivo, que é o diagnóstico principal.",
+   "Ataques de pânico dentro de um episódio depressivo funcionam como especificador, não como transtorno de pânico.",
+   "Sem episódio de mania ou hipomania na história, não se diagnostica transtorno bipolar."
+  ],
+  "referencias": [
+   {
+    "id": "WHO-MHGAP-IG-2.0",
+    "detalhe": "Módulo de depressão, passos de avaliação que exigem sintomas nucleares por pelo menos duas semanas, exclusão de causas físicas e pesquisa obrigatória de episódio maníaco antes de firmar o diagnóstico, e módulo de outras queixas emocionais significativas."
+   }
+  ]
+ },
+ {
+  "numero": 62,
+  "conceito": "Reconhecer, pelos achados tomográficos, quando um nódulo pulmonar solitário tem padrão benigno e dispensa qualquer investigação invasiva.",
+  "correta": "O nódulo descrito tem 1,5 cm, contornos regulares e é calcificado, e a combinação de margem lisa com calcificação é a assinatura clássica de lesão benigna, como granuloma cicatricial ou hamartoma. Nódulos com padrão de calcificação benigno — central, difuso, laminado ou em pipoca — ficam fora dos algoritmos de seguimento por probabilidade de malignidade justamente porque a calcificação já define a natureza da lesão. O paciente está assintomático e o achado foi incidental, em tomografia pedida por trauma torácico, sem nenhum elemento clínico que aumente a suspeição. A conduta, portanto, é acompanhamento ambulatorial, com controle clínico e radiológico, sem submeter o paciente a procedimento diagnóstico.",
+  "distratores": {
+   "A": "A ressecção em cunha é procedimento para nódulo com alta probabilidade de malignidade. Retirar cirurgicamente um nódulo calcificado, de margens regulares, em paciente assintomático significa expor a videotoracoscopia ou toracotomia alguém que não tem lesão suspeita.",
+   "B": "A broncoscopia com biópsia tem rendimento baixo em nódulo periférico de 1,5 cm sem sinal do brônquio, e mesmo um resultado negativo não mudaria a conduta diante de uma lesão que já é radiologicamente benigna.",
+   "D": "Biópsia cirúrgica ou punção aspirativa por agulha fina se justificam quando a probabilidade de malignidade é intermediária ou alta. Aqui o padrão de calcificação afasta essa hipótese, e o procedimento invasivo só acrescentaria risco de pneumotórax e sangramento."
+  },
+  "pontos_chave": [
+   "Calcificação central, difusa, laminada ou em pipoca, com margens regulares, indica nódulo pulmonar benigno.",
+   "Nódulo incidental com padrão claramente benigno se acompanha: não se biopsia nem se resseca.",
+   "Tabagismo eleva o risco de câncer, mas não anula um padrão radiológico inequivocamente benigno."
+  ],
+  "referencias": [
+   {
+    "id": "FLEISCHNER-NODULO-PULMONAR-2017",
+    "detalhe": "Seção sobre morfologia do nódulo e escopo das recomendações: nódulos com padrão de calcificação de aspecto benigno e margens lisas são considerados benignos e não entram no algoritmo de seguimento por risco."
+   }
+  ]
+ },
+ {
   "numero": 63,
   "conceito": "Reconhecer a bronquiolite viral aguda no lactente jovem e saber que seu tratamento é de suporte.",
   "correta": "O gabarito é B. O bebê de 24 dias, nascido a termo e previamente hígido, teve dois dias de obstrução nasal e coriza clara antes de evoluir com taquipneia de 50 irpm, tiragem intercostal leve, sibilos difusos e hiperinsuflação com retificação de cúpulas e arcos costais na radiografia: é bronquiolite viral aguda, em geral pelo vírus sincicial respiratório. O tratamento é de suporte, e as três medidas da alternativa respondem exatamente ao que o caso mostra — hidratação pela recusa às mamadas, oxigenoterapia pela saturação de 91% em ar ambiente e higiene nasal porque o lactente respira preferencialmente pelo nariz e a obstrução aumenta o trabalho respiratório.",
@@ -1245,6 +1469,27 @@
    {
     "id": "PIDS-IDSA-PNEUMONIA-2011",
     "detalhe": "Seção de manejo do local de cuidado (site-of-care management): recomendações de hospitalização da criança com pneumonia adquirida na comunidade diante de hipoxemia, desconforto respiratório moderado a grave, desidratação ou incapacidade de aceitar medicação por via oral."
+   }
+  ]
+ },
+ {
+  "numero": 66,
+  "conceito": "Identificar flutter atrial com condução atrioventricular variável no eletrocardiograma e escolher o controle de frequência no paciente hemodinamicamente estável.",
+  "correta": "A linha de base serrilhada com ondas F e frequência ventricular em torno de 125 bpm caracteriza flutter atrial, e o intervalo RR irregular indica condução atrioventricular variável, o que explica o pulso irregular ao exame. O paciente tem 26 anos, pressão de 118 x 68 mmHg, sem dor torácica, sem congestão e sem rebaixamento do nível de consciência, ou seja, está estável. Nessa situação a prioridade inicial é controlar a resposta ventricular, e o betabloqueador cumpre exatamente esse papel ao frear a condução pelo nó atrioventricular. O alívio dos sintomas dá tempo para definir a duração da arritmia e a estratégia de reversão.",
+  "distratores": {
+   "B": "Desfibrilação é choque não sincronizado, reservado a fibrilação ventricular e taquicardia ventricular sem pulso. Aqui há pulso, pressão preservada e uma taquiarritmia supraventricular; o choque sem sincronização ainda poderia deflagrar fibrilação ventricular ao incidir sobre o período vulnerável.",
+   "C": "A massagem do seio carotídeo lentifica transitoriamente o nó atrioventricular e ajuda a expor as ondas F, mas o circuito do flutter é macrorreentrante e atrial. A manobra tem valor diagnóstico neste caso, não terapêutico.",
+   "D": "A lidocaína atua sobre arritmias ventriculares e não interfere na condução atrioventricular nem no circuito atrial do flutter, de modo que não controlaria a frequência deste paciente."
+  },
+  "pontos_chave": [
+   "Linha de base serrilhada com ondas F e RR irregular: flutter atrial com condução atrioventricular variável.",
+   "Taquiarritmia com paciente estável começa por controle de frequência; instabilidade muda tudo para cardioversão elétrica sincronizada.",
+   "Manobra vagal no flutter serve para enxergar as ondas F, não para reverter a arritmia."
+  ],
+  "referencias": [
+   {
+    "id": "SBC-DIRETRIZ-FA-2025",
+    "detalhe": "Seção de manejo agudo e controle da frequência ventricular, que abrange o flutter atrial: betabloqueadores como primeira escolha no paciente sem instabilidade hemodinâmica."
    }
   ]
  },
@@ -1394,6 +1639,22 @@
   ]
  },
  {
+  "numero": 73,
+  "conceito": "Diagnosticar dermatite atópica pela combinação de prurido intenso, morfologia e distribuição das lesões por faixa etária e histórico familiar de atopia.",
+  "correta": "O eixo do caso é o prurido intenso o bastante para atrapalhar o sono, sintoma sem o qual não se fala em dermatite atópica. A distribuição fecha o quadro: eczema em região malar poupando o maciço central da face, padrão típico da criança pequena, e lesão liquenificada em fossa cubital, mostrando que a doença já é crônica e assumiu a topografia flexural esperada a partir dos 2 anos. O ambiente atópico completa o raciocínio, com mãe com rinite alérgica, pai asmático e dois episódios de bronquiolite, dentro da chamada marcha alérgica. Não é preciso exame complementar: o diagnóstico é clínico e as demais dermatoses não reproduzem esse conjunto.",
+  "distratores": {
+   "B": "Tinea corporis forma placas anulares com borda descamativa ativa e clareamento central, em geral em pequeno número; não explica eczema malar que poupa o maciço central nem liquenificação simétrica de dobra.",
+   "C": "Escabiose também coça muito à noite, mas as lesões predominam em punhos, espaços interdigitais, axilas, região genital e, nos lactentes, palmas e plantas, e é doença de transmissão domiciliar; a mãe nega qualquer caso semelhante na família, o que torna o diagnóstico improvável.",
+   "D": "Psoríase produz placas eritematosas bem delimitadas com escama prateada aderente, preferindo superfícies extensoras, couro cabeludo e região sacra, distribuição oposta à flexural descrita, além de ser incomum nessa idade e de não cursar com esse grau de prurido."
+  },
+  "pontos_chave": [
+   "Sem prurido não se diagnostica dermatite atópica: ele é critério obrigatório.",
+   "A topografia muda com a idade: face e extensoras no lactente, dobras a partir dos 2 anos, sempre poupando o maciço central da face.",
+   "Rinite, asma e eczema na mesma família reforçam a marcha alérgica e sustentam o diagnóstico clínico."
+  ],
+  "referencias": []
+ },
+ {
   "numero": 74,
   "conceito": "Quando abreviar o segundo período do parto com parto vaginal instrumentado em vez de cesariana.",
   "correta": "A paciente está com colo totalmente dilatado, cabeça fletida e encaixada no plano +2 de De Lee, em occipto-púbica, com proporção cefalopélvica adequada, membranas rotas e analgesia neuroaxial instalada: todos os pré-requisitos do parto vaginal operatório estão preenchidos. Surgem bradicardia na segunda cardiotocografia e contrações ineficientes após duas horas e meia de segundo período, o que impõe abreviar o nascimento. Com equipe experiente e apresentação já baixa, o fórceps de Simpson, adequado à variedade direta, é a via mais rápida e segura para concluir o parto.",
@@ -1486,6 +1747,31 @@
   ]
  },
  {
+  "numero": 78,
+  "conceito": "Reconhecer a vasculite por imunoglobulina A pela tétrade púrpura palpável, artralgia, dor abdominal e plaquetas normais, e diferenciá-la das demais vasculites da infância.",
+  "correta": "A púrpura palpável que não desaparece à digitopressão, distribuída em membros inferiores e nádegas, é o achado obrigatório da vasculite por imunoglobulina A, e no menino ela vem acompanhada dos outros dois domínios clássicos: artralgia de joelhos e dor abdominal intensa com enterorragia, sinal de vasculite da parede intestinal. O antecedente de infecção de vias aéreas superiores dez dias antes é o gatilho habitual dessa vasculite, a mais frequente na infância. As plaquetas normais são a chave que afasta as púrpuras trombocitopênicas, e provas inflamatórias apenas discretamente elevadas com função renal e hepática preservadas são compatíveis com a doença. Nesse cenário, a dor abdominal intensa merece vigilância ativa por risco de invaginação intestinal, e a função renal precisa de acompanhamento seriado mesmo estando normal na admissão.",
+  "distratores": {
+   "A": "Poliarterite nodosa acomete vasos de médio calibre e se apresenta com febre, emagrecimento, nódulos subcutâneos, livedo, mononeurite múltipla, hipertensão e provas inflamatórias muito elevadas; o caso traz VHS e PCR apenas discretamente alterados e uma púrpura de distribuição gravitacional típica de vasculite de pequenos vasos.",
+   "B": "Arterite de Takayasu envolve a aorta e seus ramos principais e se manifesta em crianças maiores e adolescentes com claudicação de membros, assimetria de pulsos e de pressão arterial, sopros vasculares e hipertensão; nada disso é relatado, e ela não produz púrpura palpável.",
+   "C": "Doença de Kawasaki depende de febre persistente somada a conjuntivite não exsudativa, alterações de lábios e cavidade oral, exantema polimorfo, alterações de extremidades e linfonodomegalia cervical; o paciente não tem febre nem esse conjunto mucocutâneo, e púrpura palpável com enterorragia não compõe o quadro."
+  },
+  "pontos_chave": [
+   "Púrpura palpável em membros inferiores e nádegas com plaquetas normais em criança: vasculite por imunoglobulina A.",
+   "Dor abdominal intensa nessa vasculite obriga a pensar em invaginação intestinal e a manter avaliação cirúrgica próxima.",
+   "O seguimento é com pressão arterial e exame de urina seriados por meses, porque a nefrite pode aparecer depois da púrpura."
+  ],
+  "referencias": [
+   {
+    "id": "SHARE-VASCULITE-IGA-2019",
+    "detalhe": "Recomendações de diagnóstico e de seguimento: púrpura palpável de predomínio em membros inferiores como critério obrigatório, associada a pelo menos um entre dor abdominal, artrite ou artralgia, acometimento renal e biópsia com depósito de imunoglobulina A, além da monitorização seriada de pressão arterial e urina."
+   },
+   {
+    "id": "AHA-KAWASAKI-2017",
+    "detalhe": "Seção de diagnóstico da doença de Kawasaki clássica: febre persistente associada a pelo menos quatro dos cinco critérios clínicos principais (conjuntivite bulbar não exsudativa, alterações de lábios e mucosa oral, exantema polimorfo, alterações de extremidades e linfonodomegalia cervical), critérios ausentes neste caso."
+   }
+  ]
+ },
+ {
   "numero": 79,
   "conceito": "Reconhecer a mastite puerperal e tratá-la sem interromper a amamentação.",
   "correta": "Puérpera de 14 dias, em aleitamento exclusivo, com fissuras mamilares servindo de porta de entrada e um setor da mama direita com hiperemia, calor e dor, acompanhados de febre de 37,8 °C, tem mastite puerperal. A ausência de flutuação afasta abscesso mamário. O tratamento reúne analgesia, manutenção da amamentação com esvaziamento eficaz da mama acometida e antibioticoterapia por via oral com cobertura para Staphylococcus aureus, além do cuidado das fissuras e da correção da pega.",
@@ -1507,6 +1793,27 @@
    {
     "id": "ABM-PROTOCOLO-36-MASTITE-2022",
     "detalhe": "Seção sobre o espectro da mastite: distinção entre mastite inflamatória e bacteriana, critérios para antibioticoterapia, manutenção do aleitamento e definição do abscesso pela coleção flutuante com necessidade de drenagem."
+   }
+  ]
+ },
+ {
+  "numero": 80,
+  "conceito": "Saber o esquema de vacinas meningocócicas do calendário nacional por faixa etária, incluindo o que já deve estar registrado na caderneta em cada idade.",
+  "correta": "No calendário nacional, a meningocócica C conjugada tem esquema básico de duas doses no primeiro ano de vida, aos 3 e aos 5 meses, seguido de reforço aos 12 meses. Logo, a criança de 9 meses, que ainda não atingiu a idade do reforço, deve ter apenas as duas doses do esquema básico registradas. A criança de 4 anos já passou pelas três aplicações e deve ter duas doses mais o reforço. A adolescente de 15 anos entra em outra estratégia: recebe a meningocócica ACWY conjugada em dose única, e não meningocócica C. A alternativa que reproduz exatamente essa sequência é a única correta.",
+  "distratores": {
+   "A": "Atribui uma só dose de meningocócica C ao lactente de 9 meses e à criança de 4 anos, subestimando o esquema básico, que tem duas doses, aos 3 e aos 5 meses, antes do reforço.",
+   "C": "Cobra do lactente de 9 meses um reforço que só é devido aos 12 meses, inventa uma terceira dose do esquema básico para a criança de 4 anos e duplica a dose de ACWY da adolescente, que é única.",
+   "D": "Dá ao lactente de 9 meses apenas uma dose do esquema básico somada a um reforço ainda não devido, e acrescenta um reforço de ACWY para a adolescente que não está previsto no calendário nacional."
+  },
+  "pontos_chave": [
+   "Meningocócica C conjugada: 3 e 5 meses, com reforço aos 12 meses.",
+   "Antes de completar 12 meses, a caderneta deve mostrar somente as duas doses do esquema básico.",
+   "Adolescente recebe meningocócica ACWY conjugada em dose única, não meningocócica C."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PNI-IN-CALENDARIO-NACIONAL-VACINACAO-2026",
+    "detalhe": "Quadro do calendário da criança e do adolescente, linhas da vacina meningocócica C conjugada (duas doses aos 3 e 5 meses e reforço aos 12 meses) e da meningocócica ACWY conjugada (dose para adolescentes)."
    }
   ]
  },
@@ -1553,6 +1860,23 @@
    {
     "id": "MS-SAMU-SBV-2014",
     "detalhe": "Protocolo BT7 – Trauma ocular: mesma orientação de irrigação copiosa imediata com água ou soro fisiológico na queimadura química ocular, no nível do atendimento pré-hospitalar básico."
+   }
+  ]
+ },
+ {
+  "numero": 83,
+  "conceito": "Conduta na conjuntivite neonatal purulenta filha de mãe com cervicite, em que a diferenciação entre gonococo e clamídia muda o antibiótico e a via de administração.",
+  "correta": "Questão anulada pelo INEP; o que segue é a leitura da Evidentia sobre o provável motivo, e não a justificativa oficial da banca. O recém-nascido tem secreção purulenta abundante e bilateral com edema bipalpebral iniciada no oitavo dia de vida, filho de mãe com pré-natal irregular e leucorreia purulenta atual, ou seja, uma conjuntivite neonatal adquirida no canal de parto, em que os dois agentes a cobrir são o gonococo e a clamídia. O ponto de conflito é que o início no oitavo dia recai na janela típica da clamídia, enquanto a apresentação hiperaguda com edema palpebral sugere gonococo, e as alternativas obrigam a escolher um único agente. Além disso, a opção que acerta a urgência de tratar sem esperar o swab prescreve colírio antibiótico como parte da conduta, quando o tratamento tanto da oftalmia gonocócica quanto da clamidiana é sistêmico, acompanhado apenas de irrigação ocular com solução salina, e nenhuma alternativa contempla a cobertura para clamídia nem o tratamento dos pais. Sem uma opção que reúna diagnóstico e conduta completos, a anulação é compreensível.",
+  "distratores": {},
+  "pontos_chave": [
+   "Conjuntivite purulenta no recém-nascido não espera resultado de cultura: trata-se empiricamente.",
+   "Gonococo aparece entre o segundo e o quinto dia e exige ceftriaxona parenteral em dose única com irrigação ocular; clamídia aparece entre o quinto e o décimo quarto dia e exige macrolídeo por via oral.",
+   "Colírio isolado não trata nenhuma das duas, e o caso sempre inclui tratar a mãe e o parceiro."
+  ],
+  "referencias": [
+   {
+    "id": "MS-PCDT-IST-2022",
+    "detalhe": "Capítulo de corrimento vaginal e cervicite, item sobre cervicite por Neisseria gonorrhoeae e Chlamydia trachomatis: cervicite materna não tratada como fonte de infecção do recém-nascido no parto e necessidade de tratar a mulher e as parcerias sexuais."
    }
   ]
  },
@@ -1645,6 +1969,27 @@
    {
     "id": "ACG-RETOCOLITE-2019",
     "detalhe": "Seção de diagnóstico e avaliação inicial, com os sintomas cardinais da colite ulcerativa e a diferenciação em relação à doença de Crohn quanto à extensão contínua e à profundidade da inflamação."
+   }
+  ]
+ },
+ {
+  "numero": 88,
+  "conceito": "Classificar a gravidade do crupe viral pelo estridor em repouso e aplicar o tratamento da obstrução alta: corticoide sistêmico associado à adrenalina nebulizada.",
+  "correta": "O lactente teve 24 horas de pródromo catarral com febre baixa e evoluiu com rouquidão, tosse persistente e estridor inspiratório, quadro de laringotraqueíte viral. Estridor presente em repouso, tiragem intercostal, agitação e cianose ao esforço classificam o caso como pelo menos moderado, e é justamente essa faixa que indica associar corticoide sistêmico, que reduz o edema e o retorno ao serviço, à adrenalina nebulizada, que alivia o edema subglótico em minutos. Como o efeito da adrenalina é transitório e a criança tem apenas 5 meses, ela precisa permanecer sob observação hospitalar pelo risco de retorno dos sintomas depois que o efeito passa. A conduta correta reúne, portanto, corticoide parenteral, adrenalina inalatória e internação.",
+  "distratores": {
+   "A": "O agonista beta-2 atua sobre broncoespasmo de vias inferiores, e a ausculta mostra boa entrada de ar bilateral, sem sibilos: o problema é edema laríngeo, que o beta-2 não desfaz. Diante de estridor em repouso com cianose, a nebulização necessária é a de adrenalina.",
+   "C": "A intubação orotraqueal fica reservada à falência respiratória ou à ausência de resposta ao tratamento clínico; aqui a saturação é de 96%, a entrada de ar é boa e a frequência respiratória de 42 irpm, situação que costuma responder a corticoide com adrenalina.",
+   "D": "Corticoide inalatório com alta imediata é conduta de quadro leve, sem estridor em repouso; este lactente tem estridor mesmo parado, tiragem e cianose quando se agita, perfil que exige adrenalina nebulizada e permanência em observação."
+  },
+  "pontos_chave": [
+   "Estridor em repouso indica crupe pelo menos moderado: corticoide sistêmico mais adrenalina nebulizada.",
+   "Corticoide é para todos os graus, inclusive o leve, porque reduz sintomas e retornos ao pronto-socorro.",
+   "Depois da adrenalina, mantenha observação por pelo menos 2 horas pelo risco de recorrência do estridor."
+  ],
+  "referencias": [
+   {
+    "id": "COCHRANE-CORTICOIDES-CRUPE-2018",
+    "detalhe": "Resultados principais e conclusões dos autores: glicocorticoides melhoram o escore de Westley em 2, 6 e 12 horas e reduzem retornos ao serviço de saúde e novas internações em crianças com crupe."
    }
   ]
  },
@@ -1749,6 +2094,27 @@
   ]
  },
  {
+  "numero": 93,
+  "conceito": "Conduta inicial diante de dificuldade escolar isolada em criança de 6 anos, depois de afastadas causas orgânicas e ambientais.",
+  "correta": "A queixa da escola é específica: o menino não avança na memorização de letras e não associa cores e imagens às palavras, ou seja, falha no reconhecimento e no processamento de símbolos, justamente o que caracteriza um transtorno específico de aprendizagem. A avaliação médica afastou o que competiria com esse diagnóstico — não há estigmas genéticos, déficit visual ou auditivo, morbidade perinatal, atraso do desenvolvimento neuropsicomotor, convulsões, meningite ou uso de medicamentos —, e o ambiente familiar é estruturado, com irmão de 9 anos sem queixas escolares. Sobrando apenas a hipótese de transtorno específico, o passo seguinte é caracterizá-lo, e isso se faz com avaliação psicopedagógica, que testa leitura, escrita e cálculo de forma dirigida. Por isso o encaminhamento inicial correto é para essa avaliação, que define o perfil da dificuldade e orienta o plano de intervenção na escola.",
+  "distratores": {
+   "B": "Aos 6 anos a criança já está em alfabetização formal, e é exatamente nessa fase que as dificuldades específicas de leitura e escrita se tornam visíveis e avaliáveis. Não existe impedimento etário para investigar; devolver o caso à escola sem avaliação apenas adia o diagnóstico em um menino que já está sem progredir.",
+   "C": "O enunciado já exclui, um a um, os achados que motivariam o neuropediatra: não há atraso do desenvolvimento, convulsões, antecedente de meningite, sofrimento perinatal, déficit sensorial nem dismorfias. Sem sinal neurológico para investigar, essa consulta não é o primeiro passo e não mudaria a conduta neste caso.",
+   "D": "A alternativa parte de uma premissa falsa ao afirmar que a criança não apresenta problemas aparentes — o problema existe e é persistente. Reforço pedagógico genérico, sem caracterizar antes o tipo de transtorno, trata o sintoma sem plano individualizado e faz perder o diagnóstico."
+  },
+  "pontos_chave": [
+   "Dificuldade escolar específica, com exame físico, sensorial e desenvolvimento normais, aponta para transtorno específico de aprendizagem.",
+   "O primeiro passo é a avaliação psicopedagógica; o neuropediatra entra quando há sinal neurológico, atraso global ou regressão.",
+   "Antes de rotular, sempre afaste déficit visual e auditivo, intercorrências perinatais e vulnerabilidade do ambiente."
+  ],
+  "referencias": [
+   {
+    "id": "AAP-TDAH-2019",
+    "detalhe": "Key action statements sobre a avaliação da criança em idade escolar com queixa de dificuldade acadêmica e sobre a triagem obrigatória de condições coexistentes, incluindo transtornos de aprendizagem e de linguagem, que exigem testagem psicoeducacional dirigida."
+   }
+  ]
+ },
+ {
   "numero": 94,
   "conceito": "Rastreamento mamário de mulher de risco habitual no SUS: idade de início e periodicidade.",
   "correta": "A tia de 65 anos é parente de segundo grau e adoeceu em idade tardia, o que não caracteriza história familiar de alto risco; nuliparidade, uso prolongado de contraceptivo oral e índice de massa corporal de 32 também não retiram a paciente do grupo de risco habitual. Para esse grupo, a política oficial brasileira mantém a mamografia de rastreamento a cada dois anos dos 50 aos 69 anos, com acompanhamento clínico na atenção básica, e a alternativa D é a única que reproduz essa idade de início e essa periodicidade. Aos 35 anos, portanto, essa mulher ainda não tem indicação de exame de imagem de rastreamento. A mastalgia de dez dias com exame das mamas normal é queixa benigna e não antecipa nem intensifica o rastreamento.",
@@ -1774,6 +2140,31 @@
    {
     "id": "MS-PROTOCOLOS-AB-SAUDE-MULHERES-2016",
     "detalhe": "PARTE 5 (prevenção do câncer de mama): organização do rastreamento e da avaliação clínica das mamas na atenção básica, incluindo a identificação das mulheres de risco elevado que fogem ao rastreamento habitual."
+   }
+  ]
+ },
+ {
+  "numero": 95,
+  "conceito": "Manejo ambulatorial da criança com suspeita de dengue sem sinais de alarme, incluindo prova do laço, exame físico dirigido e orientação sobre o período crítico.",
+  "correta": "Febre de 5 dias com mal-estar, mialgia, cefaleia, hiporexia e exantema em criança procedente de área com transmissão fecha o quadro de caso suspeito de dengue, e a prova do laço faz parte da avaliação inicial de todo caso suspeito, por rastrear fragilidade capilar. A otalgia merece otoscopia, e não antibiótico às cegas — a mãe já usou antibiótico otológico por conta própria, sem melhora, e o ouvido segue sem ser examinado. Como a criança está apenas levemente desidratada, sem sinais de alarme descritos e capaz de aceitar líquidos, o tratamento é hidratação oral com antitérmico. Falta então a peça que mais salva vida: orientar o retorno no dia em que a febre ceder, porque a defervescência marca o início do período crítico, quando ocorre o extravasamento plasmático.",
+  "distratores": {
+   "A": "Prescreve antibiótico sem sequer olhar a membrana timpânica, tratando uma otite que ninguém documentou, e ignora o essencial neste caso: hidratação e reavaliação programada para o período crítico da dengue. O retorno marcado para 3 dias também não é ancorado no momento de risco, que é a queda da febre.",
+   "B": "A otoscopia está certa, mas manter o antibiótico continua sendo tratamento empírico sem indicação demonstrada, e o hemograma isolado não substitui a hidratação nem a orientação de retorno. Uma criança já desidratada e no quinto dia de febre não pode sair da consulta apenas com receita e reavaliação em 3 dias.",
+   "D": "Hidratação parenteral e observação por 24 horas são para o paciente com sinais de alarme, choque ou incapacidade de ingerir líquidos. Aqui a desidratação é leve e a criança aceita via oral, de modo que a conduta é desproporcional; além disso, a otalgia permaneceria sem avaliação."
+  },
+  "pontos_chave": [
+   "Em todo caso suspeito de dengue, a prova do laço entra já na primeira avaliação.",
+   "Sem sinais de alarme e com boa aceitação oral, o manejo é hidratação por via oral com retorno garantido no dia da defervescência.",
+   "Queixa focal como otalgia se resolve com exame físico dirigido, não com antibiótico empírico."
+  ],
+  "referencias": [
+   {
+    "id": "MS-DENGUE-MANEJO-CLINICO-6ED-2024",
+    "detalhe": "Capítulo de manejo clínico, estadiamento e classificação de risco: caso suspeito sem sinais de alarme (Grupo A) recebe prova do laço na avaliação inicial, hidratação oral com antitérmico e orientação de retorno imediato no desaparecimento da febre."
+   },
+   {
+    "id": "WHO-DENGUE-2009",
+    "detalhe": "Capítulo de manejo clínico, grupo A (pacientes que podem ser acompanhados em domicílio): hidratação oral, sinais de retorno e alerta de que a fase crítica começa com a defervescência."
    }
   ]
  },
@@ -1819,6 +2210,31 @@
    {
     "id": "ASIA-ISNCSCI-2021",
     "detalhe": "Mapa dos pontos-chave sensitivos e definição de nível neurológico da lesão: T4 na linha intermamilar, T10 na cicatriz umbilical, T12 no ponto médio do ligamento inguinal e L2 na face anterior média da coxa."
+   }
+  ]
+ },
+ {
+  "numero": 98,
+  "conceito": "Conduta imediata diante de sinais precoces de alteração da comunicação social em lactente de 9 meses com história familiar de transtorno do espectro autista.",
+  "correta": "O lactente tem dois achados que são marcos esperados para a idade e estão ausentes: não estende os braços para pedir colo e faz pouco contato visual quando estimulado, somados a irritabilidade e a um tio paterno com transtorno do espectro autista, que aumenta o risco familiar. O desenvolvimento motor e o estado nutricional estão adequados, então não há atraso global a investigar às pressas, mas há um risco identificado que não pode ser ignorado. A conduta imediata é iniciar estimulação precoce das habilidades sociais e de comunicação e agendar retorno em curto prazo para vigilância do desenvolvimento, porque a intervenção começa assim que surge a preocupação, sem esperar diagnóstico fechado — que aos 9 meses ainda não pode ser firmado.",
+  "distratores": {
+   "A": "Neuropediatria e genética seriam justificáveis diante de dismorfias, atraso motor, regressão ou suspeita sindrômica, e nada disso está presente. Encaminhar de imediato transfere o cuidado e deixa o lactente meses na fila sem receber o que muda prognóstico agora, que é o estímulo e a reavaliação próxima.",
+   "C": "Tranquilizar e manter só a puericultura de rotina desconsidera dois sinais de alerta objetivos e um antecedente familiar relevante. A queixa materna sobre a diferença em relação aos irmãos tem alto valor preditivo e deve gerar ação, não apenas acolhimento.",
+   "D": "Não há diagnóstico estabelecido e, mesmo quando há, o antipsicótico é usado para irritabilidade e agressividade em crianças maiores, dentro de um plano terapêutico. Iniciar essa medicação em um lactente de 9 meses é conduta sem indicação e com risco desnecessário."
+  },
+  "pontos_chave": [
+   "Sinal de alerta no desenvolvimento pede estimulação precoce e reavaliação em curto prazo, sem esperar a confirmação diagnóstica.",
+   "Aos 9 meses, contato visual pobre e ausência do gesto de pedir colo são falhas de comunicação social que devem ser valorizadas.",
+   "Preocupação dos pais sobre o desenvolvimento é dado clínico e deve mudar a conduta."
+  ],
+  "referencias": [
+   {
+    "id": "MS-LINHA-CUIDADO-TEA-CRIANCA",
+    "detalhe": "Ponto de atenção da Atenção Primária à Saúde: identificação dos sinais de alerta do desenvolvimento, condutas iniciais de estimulação e reavaliação programada antes e durante o encaminhamento à atenção especializada."
+   },
+   {
+    "id": "AAP-TEA-2020",
+    "detalhe": "Seção de vigilância e rastreamento do desenvolvimento: recomendação de iniciar intervenção precoce assim que houver preocupação com o desenvolvimento social e de comunicação, sem aguardar a confirmação diagnóstica."
    }
   ]
  },

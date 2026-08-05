@@ -110,9 +110,12 @@ def main():
 
     os.makedirs(APLICATIVO, exist_ok=True)
     for alvo in alvos:
-        if alvo not in ("completo", "livre"):
+        if alvo not in ("completo", "livre", "teste"):
             raise SystemExit(f"edicao desconhecida: {alvo}")
         qs = recorte_livre(questoes) if alvo == "livre" else questoes
+        # A build de teste tem o banco inteiro e nao pede licenca: e o alvo da suite
+        # automatizada, que precisa chegar as telas sem uma assinatura de verdade.
+        modo = "livre" if alvo == "teste" else alvo
 
         # So viajam para o aplicativo as figuras e as fontes que aquela edicao usa.
         citadas = {
@@ -143,7 +146,7 @@ def main():
                  .replace("/*__FIGS__*/ {}", json.dumps(figs), 1)
                  .replace("/*__NUVEM__*/ {}", json.dumps(nuvem, ensure_ascii=False), 1)
                  .replace("__CHAVE_LICENCA__", chave_pub)
-                 .replace("__EDICAO__", alvo)
+                 .replace("__EDICAO__", modo)
                  .replace("__FAVICON__", favicon)
                  .replace("__LOGO__", logo))
 
@@ -151,7 +154,9 @@ def main():
                          "/*__NUVEM__*/", "__CHAVE_LICENCA__", "__EDICAO__", "__LOGO__", "__FAVICON__"]:
             assert marcador not in saida, f"marcador nao substituido: {marcador}"
 
-        nome = "Revalida_Evidentia.html" if alvo == "completo" else "Revalida_Evidentia_livre.html"
+        nome = {"completo": "Revalida_Evidentia.html",
+                "livre": "Revalida_Evidentia_livre.html",
+                "teste": "Revalida_Evidentia_teste.html"}[alvo]
         destino = os.path.join(APLICATIVO, nome)
         open(destino, "w", encoding="utf-8").write(saida)
         print(f"gerado ({alvo}): {destino}")
