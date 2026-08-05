@@ -272,14 +272,16 @@ acceso al vencer la licencia vigente — como máximo 30 días después. Es el e
 
 | Canal | Estado | Qué falta |
 |:--|:--|:--|
-| **PWA / web** | Funcionando y publicada | Pasa a ser la edición gratuita de 40 preguntas |
-| **Computador (Windows, macOS, Linux)** | Por construir | Electron + electron-builder |
-| **Android** | Proyecto Capacitor listo, APK desactualizado | **[Verificado]** Falta el SDK de Android y un JDK 17 o 21 (el JDK 24 instalado no funciona con Gradle 8.2.1) |
-| **iPhone / iPad** | Solo PWA | `cap add ios`; para publicar en la App Store hace falta cuenta Apple Developer (US$ 99/año) |
+| **PWA / web** | **Hecho** — publica la edición libre de 40 preguntas | Nada; es el embudo |
+| **Computador (macOS)** | **Hecho** — DMG arm64 y x64 construidos y abiertos | Firma Developer ID para evitar la advertencia de Gatekeeper |
+| **Computador (Windows, Linux)** | Configurado en electron-builder | Ejecutar `npm run empacotar:win` / `:linux`; Windows además pide certificado de firma |
+| **Android** | **Hecho** — APK de 7 MB con la edición completa, versionCode 2 | Llave de firma de producción y cuenta de Google Play (US$ 25) para publicar |
+| **iPhone / iPad** | Solo PWA | `cap add ios`; para la App Store hace falta cuenta Apple Developer (US$ 99/año) |
 
-**[Verificado] Estado del Mac de Diego**: Xcode 26.6 con SDK iOS 26.5 instalado y funcionando;
-Node 24; Java 24 (incompatible con el Gradle del proyecto); **sin** Android SDK; **cero**
-identidades de firma de código.
+**Toolchain resuelto en el Mac de Diego**: se instalaron `openjdk@17` (fórmula de Homebrew,
+sin contraseña de administrador) y `android-commandlinetools` con la plataforma 34. El JDK 24
+que ya estaba no sirve: el Gradle del proyecto soporta hasta Java 20. Xcode 26.6 está
+instalado; siguen faltando **cero** identidades de firma de código, que son de pago.
 
 ---
 
@@ -334,18 +336,23 @@ producto entero, que es justamente lo único que lo diferencia.
 
 ---
 
-## 11. Orden de trabajo
+## 11. Estado del trabajo
 
-1. ~~Mapear el proyecto~~ **hecho**
-2. ~~Esquema de justificaciones + porta de calidad~~ **hecho**
-3. ~~Backend de suscripciones con pruebas~~ **hecho**
-4. Catálogo de fuentes verificadas
-5. Las 400 justificaciones referenciadas
-6. Rediseño de la interfaz + pantalla de cuenta y activación
-7. Apps empaquetadas: computador, Android, iPhone
-8. Edición gratuita de 40 preguntas + página de venta
-9. QA integral y revisión adversarial
-10. Runbook de activación: qué cuentas abre Diego, qué claves pega, qué comandos corre
+| | |
+|:--|:--|
+| Mapa del proyecto | **hecho** |
+| Esquema de justificaciones + porta de calidad | **hecho** |
+| Backend de suscripciones, con 34 pruebas contra PostgreSQL | **hecho** |
+| Catálogo de fuentes verificadas | **hecho** — 318 fuentes, 183 con DOI conferido |
+| Las 400 justificaciones referenciadas | **hecho** — 94 % citan al menos una fuente |
+| Interfaz: bloque de referencias, pantalla de cuenta, atribución por ítem | **hecho** |
+| Panel de administración | **hecho** |
+| Apps empaquetadas: macOS y Android | **hecho**; Windows y Linux configurados; iPhone por PWA |
+| Edición gratuita de 40 preguntas | **hecho** |
+| Suite automatizada | **hecho** — 116 pruebas pasando |
+| Runbook de activación | **hecho** — `produto/RUNBOOK_ATIVACAO.md` |
+| Edición 2026/1 (100 preguntas nuevas) | preguntas, figuras y gabarito **hechos**; clasificación y justificaciones en curso |
+| Página de venta | pendiente — depende de la respuesta de Hotmart sobre la moneda |
 
 ---
 
