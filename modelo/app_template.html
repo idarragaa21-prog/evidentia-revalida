@@ -596,6 +596,12 @@ button.alt:not(:disabled):active,.modecard:active,.secbtn:active,
 /* o pino do interruptor estica ao ser pressionado, como no iOS */
 .switch:active::after{width:30px}
 
+/* So na tela: a revisao monta ate 570 tarjetas de uma vez e o navegador
+   calculava o layout de todas, mesmo vendo uma. Fora de @media screen isto
+   truncaria a impressao do caderno de erros. */
+@media screen{
+  .rev-card{content-visibility:auto;contain-intrinsic-size:auto 900px}
+}
 .stack{display:flex;flex-direction:column;gap:18px}
 .rowbtns{display:flex;gap:10px;flex-wrap:wrap}
 .rowbtns .btn{flex:1;min-width:150px}
@@ -695,13 +701,30 @@ let S = null;          // sessão atual do simulado
 let cfg = { modo:"aleatorio", areas:[], edicoes:[], n:20, embaralhar:false, incluirAnuladas:false, cronometro:true, feedback:false, autoAvancar:false };
 
 /*==================== ARMAZENAMENTO (com fallback) ====================*/
+/* A degradação tem que ser PEGAJOSA. Antes, quando o disco enchia, set()
+   gravava em `mem` mas `ok` continuava true, então get() seguia lendo do disco
+   cheio e devolvia o valor VELHO: a pessoa ia na questão 46, fechava o
+   aplicativo, reabria e «Continuar simulado» a devolvia à 4, com 42 respostas
+   apagadas. Sem alerta e sem erro. Agora, na primeira falha de escrita, `mem`
+   passa a ser a fonte da verdade para tudo o que ele já conhece. */
 const store = (()=>{ let ok=true; try{localStorage.setItem("_t","1");localStorage.removeItem("_t");}catch(e){ok=false;}
-  const mem={};
+  const mem={}; let degradado=!ok;
   return {
-    ok,
-    get(k){ try{return ok?localStorage.getItem(k):mem[k];}catch(e){return mem[k];} },
-    set(k,v){ try{ ok?localStorage.setItem(k,v):(mem[k]=v);}catch(e){mem[k]=v;} },
-    del(k){ try{ ok?localStorage.removeItem(k):delete mem[k];}catch(e){} }
+    get ok(){ return !degradado; },
+    get cheio(){ return degradado && localStorage!==undefined; },
+    get(k){
+      if(k in mem) return mem[k];              // memória primeiro: é o mais novo
+      try{ return degradado?undefined:localStorage.getItem(k); }catch(e){ return undefined; }
+    },
+    /* Devolve false quando não conseguiu gravar no disco, para quem chama poder
+       avisar em vez de falhar mudo. */
+    set(k,v){
+      mem[k]=v;                                 // sempre em memória, sempre atual
+      if(degradado) return false;
+      try{ localStorage.setItem(k,v); return true; }
+      catch(e){ degradado=true; return false; }
+    },
+    del(k){ delete mem[k]; try{ localStorage.removeItem(k); }catch(e){} }
   };
 })();
 function loadHist(){ try{return JSON.parse(store.get("revalida_hist")||"[]");}catch(e){return [];} }

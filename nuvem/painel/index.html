@@ -211,7 +211,7 @@ async function mostrarPainel(){
 }
 
 const reais = c=>(Number(c||0)/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-let PLANOS = [];
+let PLANOS = [], PESSOAS = [];
 
 async function listarPlanos(){
   try{
@@ -273,7 +273,7 @@ async function listar(){
   try{
     const linhas = await rpc("listar_pessoas", {p_busca:$("#busca").value.trim()||null, p_limite:100});
     const corpo = $("#corpo");
-    corpo.innerHTML = (linhas||[]).map(p=>{
+    corpo.innerHTML = (linhas||[]).map((p,i)=>{
       const a = p.acesso||{};
       const estado = a.ativo
         ? `<span class="pill ${a.origem==="pagamento"?"ativo":"cortesia"}">${a.origem==="pagamento"?"pagante":esc(a.origem)}</span>`
@@ -283,11 +283,25 @@ async function listar(){
         <td>${estado}</td>
         <td>${a.ativo?fmt(a.fim):"—"}</td>
         <td><div class="linha-acoes">
-          <button class="acao sec" onclick="preencher('${esc(p.email)}')">conceder…</button>
-          ${a.ativo?`<button class="acao perigo" onclick="revogar('${esc(p.email)}')">revogar</button>`:""}
+          <button class="acao sec" data-acao="conceder" data-i="${i}">conceder…</button>
+          ${a.ativo?`<button class="acao perigo" data-acao="revogar" data-i="${i}">revogar</button>`:""}
         </div></td>
       </tr>`;
     }).join("");
+
+    /* O e-mail viaja por índice, nunca interpolado dentro de um onclick.
+       Antes ia como onclick="preencher('${esc(email)}')", e esc() converte a
+       aspa simples em &#39; — que o navegador decodifica de volta a ' ao ler o
+       atributo, ANTES de executar o JS. Como o GoTrue aceita aspa no e-mail e a
+       lista mostra as contas mais recentes primeiro, bastava alguém se
+       cadastrar para que o código dele rodasse sozinho ao você abrir o painel:
+       daria acesso à lista de clientes, a conceder acesso e a mudar preços. */
+    PESSOAS = linhas || [];
+    for(const b of $("#corpo").querySelectorAll("button[data-acao]")){
+      const email = PESSOAS[Number(b.dataset.i)]?.email;
+      if(!email) continue;
+      b.addEventListener("click", () => b.dataset.acao === "conceder" ? preencher(email) : revogar(email));
+    }
     $("#tabela").classList.toggle("hidden", !(linhas||[]).length);
     diz("#msgLista", (linhas||[]).length ? "" : "Nenhuma conta encontrada.");
   }catch(e){ diz("#msgLista","Não deu: "+e.message, true); }
