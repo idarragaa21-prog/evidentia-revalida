@@ -140,7 +140,10 @@ self.addEventListener("fetch", (evento) => {
   if (!url.href.startsWith(BASE)) return;
 
   if (pedido.mode === "navigate") {
-    if (url.href.startsWith(ASSINAR)) {
+    // Sem barra final (`/assinar`) a comparacao por prefixo falharia e o desvio
+    // devolveria o aplicativo no lugar da pagina de planos -- todo anuncio que
+    // omitisse a barra levaria o comprador ao lugar errado.
+    if (url.href === ASSINAR.slice(0, -1) || url.href.startsWith(ASSINAR)) {
       evento.respondWith(paginaDeVenda(evento));
       return;
     }

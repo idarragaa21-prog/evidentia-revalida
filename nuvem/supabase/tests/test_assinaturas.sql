@@ -36,6 +36,7 @@ declare
   v_carla uuid;
   v_novo uuid;
   v_jti uuid;
+  v_n integer;
 begin
   -- pessoas
   insert into auth.users (email) values ('dono@evidentia.co') returning id into v_dono;
@@ -361,6 +362,98 @@ begin
     and not has_function_privilege('anon', 'public.registrar_checkout(text, text, text)', 'execute'));
   perform pg_temp.checa('o servidor (service role) registra checkout',
     has_function_privilege('service_role', 'public.registrar_checkout(text, text, text)', 'execute'));
+
+  -- ---------------------------------------------------------------------------
+  -- 7. Buracos que a revisao adversarial do fluxo de cobranca encontrou
+  -- ---------------------------------------------------------------------------
+
+  -- 7a. [ALTA] Sequestro por e-mail alheio. A pagina de venda aceita qualquer e-mail
+  --     (quem compra ainda pode nao ter conta). Se o pagamento novo absorvesse o tempo
+  --     ja pago da vitima, bastaria comprar o plano mais barato com o e-mail dela e
+  --     pedir reembolso para apagar meses que ela pagou.
+  perform pg_temp.vira(null);
+  perform public.registrar_pagamento('dlocalgo', 'pay_vitima', 'PAYMENT_PAID',
+                                     'vitima@exemplo.com', 'semestral', 180, 'DP-vitima');
+  insert into auth.users (email) values ('vitima@exemplo.com') returning id into v_carla;
+  perform pg_temp.vira(v_carla);
+  v_fim1 := (public.meu_acesso() ->> 'fim')::timestamptz;
+  perform pg_temp.checa('a vitima tem seu semestre pago', v_fim1 > now() + interval '179 days');
+
+  perform pg_temp.vira(null);
+  perform public.registrar_pagamento('dlocalgo', 'pay_atacante', 'PAYMENT_PAID',
+                                     'vitima@exemplo.com', 'mensal', 30, 'DP-atacante');
+  perform public.encerrar_pagamento('dlocalgo', 'refund_atacante', 'REFUND_SUCCESS',
+                                    '', 'DP-atacante');
+  perform pg_temp.vira(v_carla);
+  perform pg_temp.checa('o estorno do atacante NAO derruba o acesso da vitima',
+    (public.meu_acesso() ->> 'ativo') = 'true');
+  v_fim2 := (public.meu_acesso() ->> 'fim')::timestamptz;
+  perform pg_temp.checa('e devolve exatamente o semestre que ela pagou',
+    v_fim2 between v_fim1 - interval '1 minute' and v_fim1 + interval '1 minute');
+
+  -- 7b. [MEDIA] Passes empilhados: estornar o primeiro de tres tem que tirar os dias
+  --     daquele passe — nem zero (acesso quase ilimitado por um passe) nem tudo.
+  perform pg_temp.vira(null);
+  insert into auth.users (email) values ('empilha@exemplo.com') returning id into v_novo;
+  perform public.registrar_pagamento('dlocalgo', 'pay_e1', 'PAYMENT_PAID',
+                                     'empilha@exemplo.com', 'semestral', 180, 'DP-e1');
+  perform public.registrar_pagamento('dlocalgo', 'pay_e2', 'PAYMENT_PAID',
+                                     'empilha@exemplo.com', 'semestral', 180, 'DP-e2');
+  perform public.registrar_pagamento('dlocalgo', 'pay_e3', 'PAYMENT_PAID',
+                                     'empilha@exemplo.com', 'mensal', 30, 'DP-e3');
+  perform pg_temp.vira(v_novo);
+  v_fim1 := (public.meu_acesso() ->> 'fim')::timestamptz;
+  perform pg_temp.checa('tres passes somam 390 dias',
+    v_fim1 > now() + interval '389 days' and v_fim1 < now() + interval '391 days');
+
+  perform pg_temp.vira(null);
+  perform public.encerrar_pagamento('dlocalgo', 'refund_e1', 'REFUND_SUCCESS',
+                                    '', 'DP-e1');
+  perform pg_temp.vira(v_novo);
+  v_fim2 := (public.meu_acesso() ->> 'fim')::timestamptz;
+  perform pg_temp.checa('estornar o PRIMEIRO passe tira 180 dias, nao zero nem tudo',
+    v_fim2 between v_fim1 - interval '181 days' and v_fim1 - interval '179 days');
+  perform pg_temp.checa('e o acesso continua vivo com o que sobrou',
+    (public.meu_acesso() ->> 'ativo') = 'true');
+
+  -- 7b-bis. O tempo ja consumido nao ressuscita. Duas compras de 180, a primeira
+  --     comecada ha 30 dias: estornar a primeira tem que deixar 150 dias
+  --     (360 comprados − 180 estornados − 30 ja usados), nao 180.
+  perform pg_temp.vira(null);
+  insert into auth.users (email) values ('gasto@exemplo.com') returning id into v_novo;
+  perform public.registrar_pagamento('dlocalgo', 'pay_g1', 'PAYMENT_PAID',
+                                     'gasto@exemplo.com', 'semestral', 180, 'DP-g1');
+  perform public.registrar_pagamento('dlocalgo', 'pay_g2', 'PAYMENT_PAID',
+                                     'gasto@exemplo.com', 'semestral', 180, 'DP-g2');
+  -- envelhece a fila em 30 dias, como se a compra tivesse sido feita naquele dia
+  update public.assinaturas set inicio = inicio - interval '30 days',
+                                fim = fim - interval '30 days'
+   where user_id = v_novo and origem = 'pagamento';
+  perform public.encerrar_pagamento('dlocalgo', 'refund_g1', 'REFUND_SUCCESS',
+                                    '', 'DP-g1');
+  perform pg_temp.vira(v_novo);
+  v_fim1 := (public.meu_acesso() ->> 'fim')::timestamptz;
+  perform pg_temp.checa('o estorno desconta os dias ja consumidos, nao os devolve',
+    v_fim1 between now() + interval '149 days' and now() + interval '151 days');
+
+  -- 7c. Cada pagamento guarda quantos dias aportou: sem isso nao da para desfazer
+  --     um estorno com exatidao.
+  perform pg_temp.checa('a assinatura registra os dias do pagamento',
+    (select dias = 30 from public.assinaturas
+      where provedor_assinatura_id = 'DP-e3' and status = 'ativa'));
+
+  -- 7d. [MEDIA] Ritmo do checkout: a porta e publica, entao o banco corta o excesso.
+  perform pg_temp.vira(null);
+  for v_n in 1..8 loop
+    perform public.registrar_checkout('ev-mensal-limite' || lpad(v_n::text, 6, '0'),
+                                      'ritmo@exemplo.com', 'mensal');
+  end loop;
+  begin
+    perform public.registrar_checkout('ev-mensal-limite999999', 'ritmo@exemplo.com', 'mensal');
+    raise exception 'FALHOU: o limite de pedidos por e-mail nao pegou';
+  exception when configuration_limit_exceeded then
+    raise notice 'ok: pedidos demais no mesmo e-mail sao recusados';
+  end;
 
   raise notice 'TODAS AS PROVAS PASSARAM';
 end

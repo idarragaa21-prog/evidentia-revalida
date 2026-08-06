@@ -69,16 +69,6 @@ interface Traduzido {
   tipo: string;
 }
 
-// `planos.id` e chave estrangeira: mandar um id fora do catalogo derruba a
-// ativacao inteira com erro de integridade. Só viaja um id conhecido; o resto
-// vira nulo, que a coluna aceita, e o prazo continua vindo dos dias calculados.
-const PLANOS_CONHECIDOS = new Set(["mensal", "trimestral", "semestral", "anual", "cortesia"]);
-
-function planoValido(bruto: unknown): string | null {
-  const id = String(bruto ?? "").trim().toLowerCase();
-  return PLANOS_CONHECIDOS.has(id) ? id : null;
-}
-
 function diasPadrao(): number {
   const n = Number(Deno.env.get("REVALIDA_DIAS_PADRAO") ?? "365");
   return Number.isFinite(n) && n > 0 ? n : 365;
@@ -137,15 +127,18 @@ async function dlocalgoApi(caminho: string): Promise<Record<string, any> | null>
   }
 }
 
-/** Reembolsos deste pagamento. O endpoint lista por página; o volume de um
- * produto de nicho cabe nas primeiras — e cada notificação re-executa a busca,
- * então um reembolso que caísse fora de uma página entra na tentativa seguinte
- * (o dLocal Go reenvia a cada 10 minutos até receber 200). */
+/** Reembolsos deste pagamento. O dLocal Go não expõe «reembolsos de um pagamento»:
+ * só a lista global, paginada e filtrável por estado. Filtrar por SUCCESS reduz o
+ * universo ao que de fato revoga acesso, e a varredura vai até o fim das páginas
+ * (com um teto de sanidade) — parar cedo, como se fazia antes, significava que a
+ * partir de certo volume um estorno deixava de cortar o acesso em silêncio. */
 async function reembolsosDoPagamento(paymentId: string): Promise<Record<string, any>[]> {
   const achados: Record<string, any>[] = [];
-  for (let pagina = 0; pagina < 3; pagina++) {
-    const r = await dlocalgoApi(`/v1/refunds?page=${pagina}`);
-    const dados = Array.isArray(r?.data) ? r!.data : [];
+  const TETO_PAGINAS = 200;
+  for (let pagina = 0; pagina < TETO_PAGINAS; pagina++) {
+    const r = await dlocalgoApi(`/v1/refunds?status=SUCCESS&page=${pagina}`);
+    if (!r) break;
+    const dados = Array.isArray(r?.data) ? r.data : [];
     for (const reembolso of dados) {
       if (String(reembolso?.payment_id ?? "") === paymentId) achados.push(reembolso);
     }
@@ -155,25 +148,21 @@ async function reembolsosDoPagamento(paymentId: string): Promise<Record<string, 
   return achados;
 }
 
-/** O plano viaja no prefixo do order_id (`ev-<plano>-<aleatorio>`) como reserva;
- * a fonte da verdade é a tabela checkouts, escrita na criação do pedido. */
-function planoDoOrderId(orderId: string): string | null {
-  const m = orderId.match(/^ev-([a-z0-9_]+)-/);
-  return m ? planoValido(m[1]) : null;
-}
-
-async function diasDoPlano(planoId: string | null): Promise<number | null> {
-  if (!planoId) return null;
+/** O plano tem que existir no catálogo: `assinaturas.plano_id` é chave estrangeira.
+ * Perguntamos à tabela em vez de manter uma lista no código — senão um plano novo
+ * criado pelo painel entraria como nulo e a venda ficaria sem atribuição. */
+async function planoDoCatalogo(bruto: unknown): Promise<string | null> {
+  const id = String(bruto ?? "").trim().toLowerCase();
+  if (!/^[a-z0-9_-]{2,40}$/.test(id)) return null;
   const url = Deno.env.get("SUPABASE_URL");
   const service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   const r = await fetch(
-    `${url}/rest/v1/planos?id=eq.${encodeURIComponent(planoId)}&select=dias`,
+    `${url}/rest/v1/planos?id=eq.${encodeURIComponent(id)}&select=id`,
     { headers: { Authorization: `Bearer ${service}`, apikey: service ?? "" } },
   );
   if (!r.ok) return null;
   const linhas = await r.json();
-  const dias = Number(linhas?.[0]?.dias ?? NaN);
-  return Number.isFinite(dias) && dias > 0 ? dias : null;
+  return linhas?.[0]?.id ? String(linhas[0].id) : null;
 }
 
 /** Trata a notificação do dLocal Go de ponta a ponta. Devolve a resposta HTTP. */
@@ -205,27 +194,41 @@ async function tratarDlocalgo(evento: Record<string, any>): Promise<Response> {
   }
 
   if (status === "PAID") {
-    const email = String(checkout?.email ?? pagamento?.payer?.email ?? "").toLowerCase().trim();
-    const plano = planoValido(checkout?.plano_id) ?? planoDoOrderId(orderId);
-    const dias = Number(checkout?.dias ?? NaN);
-    const diasFinal = Number.isFinite(dias) && dias > 0
-      ? dias
-      : ((await diasDoPlano(plano)) ?? diasPadrao());
+    // Só se ativa o que NÓS criamos. Sem a linha de `checkouts` não há preço, plano
+    // nem prazo combinados para conferir — e ativar «no benefício da dúvida» daria a
+    // qualquer cobrança avulsa criada no painel do provedor um acesso que ninguém
+    // dimensionou. Fica anotado e sem efeito, em vez de virar acesso de graça.
+    if (!orderId || !checkout) {
+      if (orderId) {
+        await rpcServico("anotar_checkout", {
+          p_order_id: orderId,
+          p_payment_id: paymentId,
+          p_status: "sem_checkout",
+        });
+      }
+      return texto("pagamento sem pedido correspondente; nao ativado", 200);
+    }
 
-    if (!email) return texto("pagamento sem email do cliente", 200);
+    const email = String(checkout.email ?? "").toLowerCase().trim();
+    const diasFinal = Number(checkout.dias);
+    if (!email || !Number.isFinite(diasFinal) || diasFinal <= 0) {
+      return texto("pedido incompleto; nao ativado", 200);
+    }
 
-    // Conferência de valor: um pagamento menor que o preço registrado no pedido
-    // não ativa nada. (O valor é fixado pelo servidor na criação, então uma
-    // divergência aqui significa manipulação ou erro grave — fica auditado.)
+    // Conferência de valor e de moeda, sem exceções: o preço foi fixado pelo servidor
+    // na criação do pedido, então qualquer divergência aqui significa manipulação ou
+    // erro grave — não ativa e fica registrada.
     const pagoCentavos = Math.round(Number(pagamento.amount ?? 0) * 100);
-    const devido = Number(checkout?.preco_centavos ?? 0);
-    if (checkout && pagoCentavos + 1 < devido) {
+    const devido = Number(checkout.preco_centavos ?? 0);
+    const moedaPaga = String(pagamento.currency ?? "").toUpperCase();
+    const moedaDevida = String(checkout.moeda ?? "BRL").toUpperCase();
+    if (pagoCentavos + 1 < devido || moedaPaga !== moedaDevida) {
       await rpcServico("anotar_checkout", {
         p_order_id: orderId,
         p_payment_id: paymentId,
         p_status: "valor_divergente",
       });
-      return texto("valor pago menor que o preco do plano; nao ativado", 200);
+      return texto("valor ou moeda divergentes do pedido; nao ativado", 200);
     }
 
     const r = await rpcServico("registrar_pagamento", {
@@ -233,7 +236,7 @@ async function tratarDlocalgo(evento: Record<string, any>): Promise<Response> {
       p_evento_id: paymentId,
       p_tipo: "PAYMENT_PAID",
       p_email: email,
-      p_plano_id: plano,
+      p_plano_id: await planoDoCatalogo(checkout.plano_id),
       p_dias: diasFinal,
       p_assinatura_provedor: paymentId,
       p_cliente_provedor: orderId || null,
@@ -269,7 +272,10 @@ async function tratarDlocalgo(evento: Record<string, any>): Promise<Response> {
       p_provedor: "dlocalgo",
       p_evento_id: String(reembolso.id ?? `${paymentId}-reembolso`),
       p_tipo: "REFUND_SUCCESS",
-      p_email: String(checkout?.email ?? pagamento?.payer?.email ?? "").toLowerCase().trim(),
+      // O identificador do pagamento é o que amarra o estorno à compra certa; o
+      // e-mail é só um apoio. Sem isso, um estorno cancelaria a compra errada de
+      // quem tem vários passes empilhados.
+      p_email: String(checkout?.email ?? "").toLowerCase().trim(),
       p_assinatura_provedor: paymentId,
       p_cliente_provedor: orderId || null,
       p_carga: { tipo: "REFUND_SUCCESS", reembolso: String(reembolso.id ?? "") },
@@ -369,7 +375,9 @@ function traduzirStripe(evento: Record<string, any>): Traduzido {
   return {
     acao: acaoStripe(tipo, objeto),
     email,
-    plano: planoValido(plano),
+    // Validado contra o catalogo em tratarStripe: `planos.id` e chave estrangeira,
+    // e um id inexistente derrubaria a ativacao inteira por erro de integridade.
+    plano,
     dias,
     assinaturaProvedor: objeto.subscription ? String(objeto.subscription) : null,
     clienteProvedor: objeto.customer ? String(objeto.customer) : null,
@@ -401,7 +409,7 @@ async function tratarStripe(traduzido: Traduzido): Promise<Response> {
       p_evento_id: traduzido.eventoId,
       p_tipo: traduzido.tipo,
       p_email: traduzido.email,
-      p_plano_id: traduzido.plano,
+      p_plano_id: await planoDoCatalogo(traduzido.plano),
       p_dias: traduzido.dias,
       p_assinatura_provedor: traduzido.assinaturaProvedor,
       p_cliente_provedor: traduzido.clienteProvedor,
@@ -434,8 +442,18 @@ Deno.serve(async (req: Request) => {
   const service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (!url || !service) return texto("servidor mal configurado", 500);
 
+  // Tope de tamanho antes de ler ou interpretar nada: a notificação do dLocal Go é
+  // `{"payment_id":"..."}` e a do Stripe cabe de sobra em 64 KB. Sem isto, qualquer
+  // um manda megabytes por uma porta que ainda não verificou assinatura nenhuma.
+  const LIMITE_CARGA = 64 * 1024;
+  const declarado = Number(req.headers.get("content-length") ?? NaN);
+  if (Number.isFinite(declarado) && declarado > LIMITE_CARGA) {
+    return texto("corpo grande demais", 413);
+  }
+
   // A carga crua tem que ser lida como texto: reserializar quebra o HMAC.
   const carga = await req.text();
+  if (carga.length > LIMITE_CARGA) return texto("corpo grande demais", 413);
   const caminho = new URL(req.url).pathname;
 
   const pareceDlocalgo = caminho.endsWith("/dlocalgo") ||
