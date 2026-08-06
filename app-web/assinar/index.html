@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Evidentia · Revalida — Planos e assinatura</title>
-<meta name="description" content="Banco de 500 questões oficiais do Revalida (INEP), cada uma conferida contra o caderno oficial e justificada com fonte citada. Funciona offline. Planos a partir de R$ 57.">
+<meta name="description" content="Banco de 600 questões oficiais do Revalida (INEP), de seis edições, cada uma conferida contra o caderno oficial e justificada com fonte citada. Funciona offline. Planos a partir de R$ 57.">
 <style>
 :root{
   --navy:#1b2e22; --sky:#2f6047; --sky-100:#e2ede7; --gold:#b08d4c; --gold-100:#f3ead2; --gold-ink:#6a5410;
@@ -105,8 +105,8 @@ table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
     nome. Qualquer dúvida, escreva para o e-mail de suporte no rodapé.</p>
   </div>
 
-  <h1>500 questões oficiais do Revalida, conferidas uma a uma — e justificadas com a fonte citada</h1>
-  <p class="lead">Monte simulados com as questões objetivas reais do INEP (2023/1 a 2026/1), com
+  <h1>600 questões oficiais do Revalida, conferidas uma a uma — e justificadas com a fonte citada</h1>
+  <p class="lead">Monte simulados com as questões objetivas reais do INEP (2023/1 a 2026/1, seis edições), com
   correção detalhada e uma justificativa por questão ancorada em literatura verificável.
   Funciona <b>sem internet</b>, no computador e no celular.</p>
 
@@ -114,7 +114,7 @@ table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
     <div class="card"><b>Conferido palavra por palavra</b><span>Cada enunciado e alternativa é
       comparado, por script, com o caderno oficial do INEP — sem erro de digitação, sem questão
       truncada.</span></div>
-    <div class="card"><b>Nenhuma fonte inventada</b><span>295 fontes verificadas — diretrizes,
+    <div class="card"><b>Nenhuma fonte inventada</b><span>300 fontes verificadas — diretrizes,
       PCDT do Ministério da Saúde, artigos — citadas questão a questão. Quando o catálogo não
       cobre um ponto, dizemos «estudo» em vez de forçar uma citação.</span></div>
     <div class="card"><b>Funciona offline de verdade</b><span>Arquivo único, sem servidor. No
@@ -123,7 +123,7 @@ table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
       trazem a figura recortada do caderno original do exame.</span></div>
   </div>
 
-  <div class="aviso-honesto"><b>Por que 500 questões, e não 20 mil?</b> Porque cada uma daqui
+  <div class="aviso-honesto"><b>Por que 600 questões, e não 20 mil?</b> Porque cada uma daqui
   foi verificada, uma a uma, contra a prova oficial. Vendemos certeza, não volume — e por isso
   custamos uma fração das plataformas que cobram de R$ 129,99 a R$ 249 por mês. Você já investe
   R$ 4.516 só nas taxas do exame; estudar por questões sem conferência oficial pode custar uma
@@ -156,7 +156,7 @@ table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
       <thead><tr><th>Produto</th><th>Mensal</th><th>Proposta</th></tr></thead>
       <tbody>
         <tr><td><b>Evidentia Revalida</b></td><td><b>R$ 57</b> (ou R$ 41/mês no semestral)</td>
-          <td>500 questões oficiais, conferidas contra o caderno do INEP, justificativa com fonte citada</td></tr>
+          <td>600 questões oficiais, conferidas contra o caderno do INEP, justificativa com fonte citada</td></tr>
         <tr><td>Revalida Resolve</td><td>R$ 147</td><td>Questões oficiais comentadas</td></tr>
         <tr><td>Meedik Learn</td><td>R$ 129,99</td><td>Banco de questões</td></tr>
         <tr><td>MedTask</td><td>R$ 249</td><td>«+90 mil questões», correção por IA</td></tr>
@@ -241,7 +241,7 @@ function cartaoPlano(p, precoMensalCentavos){
     <div class="preco">${reais(p.preco_centavos)}</div>
     <div class="pormes">${m > 1 ? `sai por ${reais(Math.round(porMes))}/mês` : "por 30 dias de acesso"}</div>
     ${economia > 0 ? `<div class="econ">economize ${economia}% vs. mensal</div>` : "<div class='econ'>&nbsp;</div>"}
-    <div class="desc">${esc(p.descricao || "")}. Acesso completo: 500 questões, justificativas
+    <div class="desc">${esc(p.descricao || "")}. Acesso completo: 600 questões, justificativas
       referenciadas, simulados e estatísticas. PIX ou cartão, pagamento único.</div>
     <button class="comprar" data-plano="${esc(p.id)}" onclick="comprar(this.dataset.plano, this)">
       Comprar ${esc(p.nome.toLowerCase())}</button>

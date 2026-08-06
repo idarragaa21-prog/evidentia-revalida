@@ -627,7 +627,7 @@ function viewHome(){
     <div class="section-t">Você está na edição livre</div>
     <p class="muted" style="margin:2px 0 12px;font-size:14px">
       Estas ${META.gratuitas||40} questões são uma amostra. A edição completa tem
-      <b>500 questões oficiais de 5 edições</b> (2023/1 a 2026/1) — 473 válidas e 27 anuladas pelo
+      <b>600 questões oficiais de 6 edições</b> (2023/1 a 2026/1) — 570 válidas e 30 anuladas pelo
       próprio INEP, que ficam no banco com o motivo —, todas conferidas palavra por palavra contra
       o caderno oficial e justificadas com a fonte citada. E funciona sem internet, no computador
       e no celular.</p>
@@ -1504,7 +1504,7 @@ async function contaCriar(){
     contaDiz("Conta criada. Conferindo o acesso…");
     const r=await LIC.buscarLicenca();
     if(r.ativo){ entrarNoAplicativo("Conta criada e acesso liberado. Bom estudo!"); return; }
-    contaDiz("Conta criada. Ainda não há assinatura ativa nela — assine para liberar as 500 questões, ou peça acesso de cortesia.");
+    contaDiz(`Conta criada. Ainda não há assinatura ativa nela — assine para liberar as ${META.total||600} questões, ou peça acesso de cortesia.`);
   }catch(err){
     contaDiz(/already registered|User already/i.test(String(err.message||err))
       ? "Já existe conta com esse e-mail. Use «Entrar e ativar»."
