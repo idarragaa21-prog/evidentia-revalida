@@ -1457,9 +1457,22 @@ async function contaCriar(){
   if(!email||senha.length<8){ contaDiz("Informe o e-mail e uma senha de pelo menos 8 caracteres.",true); return; }
   contaDiz("Criando a conta…");
   try{
-    await LIC.criarConta(email,senha);
-    contaDiz("Conta criada. Confirme o e-mail que enviamos e depois entre aqui.");
-  }catch(err){ contaDiz("Não foi possível criar a conta: "+(err.message||err),true); }
+    const jaEntrou=await LIC.criarConta(email,senha);
+    if(!jaEntrou){
+      contaDiz("Conta criada. Confirme o e-mail que enviamos e depois entre aqui.");
+      return;
+    }
+    /* A conta já nasceu com sessão: não faz sentido pedir que a pessoa «entre»
+       de novo com o que acabou de digitar. */
+    contaDiz("Conta criada. Conferindo o acesso…");
+    const r=await LIC.buscarLicenca();
+    if(r.ativo){ render("conta"); return; }
+    contaDiz("Conta criada. Ainda não há assinatura ativa nela — assine para liberar as 500 questões, ou peça acesso de cortesia.");
+  }catch(err){
+    contaDiz(/already registered|User already/i.test(String(err.message||err))
+      ? "Já existe conta com esse e-mail. Use «Entrar e ativar»."
+      : "Não foi possível criar a conta: "+(err.message||err), true);
+  }
 }
 async function contaEsqueci(){
   const {email}=contaCampos();
@@ -1574,8 +1587,17 @@ const LIC = (()=>{
     guardarSessao({access_token:r.access_token,refresh_token:r.refresh_token,email});
     return r;
   }
+  /* Devolve `true` quando a conta já nasce utilizável. O Supabase responde ao cadastro
+     com sessão quando não há confirmação de e-mail pendente; nesse caso guardá-la aqui
+     é o que permite entrar direto, sem mandar a pessoa procurar um e-mail que nunca
+     vai chegar. Quando a confirmação está exigida, não vem token e devolvemos false. */
   async function criarConta(email,senha){
-    return nuvem("/auth/v1/signup",{method:"POST",body:JSON.stringify({email,password:senha})});
+    const r=await nuvem("/auth/v1/signup",{method:"POST",body:JSON.stringify({email,password:senha})});
+    if(r?.access_token){
+      guardarSessao({access_token:r.access_token,refresh_token:r.refresh_token,email});
+      return true;
+    }
+    return false;
   }
   async function recuperarSenha(email){
     return nuvem("/auth/v1/recover",{method:"POST",body:JSON.stringify({email})});

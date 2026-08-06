@@ -10,10 +10,15 @@
 //          SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 //          REVALIDA_DIAS_LICENCA (opcional, padrao 30).
 
+// `apikey` tem que estar aqui. O aplicativo manda esse cabecalho em toda chamada ao
+// projeto, e o navegador pergunta por ele no preflight: sem a permissao explicita, o
+// pedido morre antes de sair e a pessoa ve «Failed to fetch» ao ativar. Nao aparece em
+// teste com curl, que nao faz preflight — so num navegador de verdade.
 const CORS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, content-type",
+  "Access-Control-Allow-Headers": "authorization, content-type, apikey, x-client-info",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Max-Age": "86400",
 };
 
 function json(corpo: unknown, status = 200): Response {

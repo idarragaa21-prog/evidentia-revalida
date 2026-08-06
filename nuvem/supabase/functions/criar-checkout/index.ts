@@ -16,7 +16,8 @@
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, content-type, apikey",
+  "Access-Control-Allow-Headers": "authorization, content-type, apikey, x-client-info",
+  "Access-Control-Max-Age": "86400",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 

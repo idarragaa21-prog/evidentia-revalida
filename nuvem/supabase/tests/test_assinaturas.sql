@@ -455,6 +455,60 @@ begin
     raise notice 'ok: pedidos demais no mesmo e-mail sao recusados';
   end;
 
+  -- ---------------------------------------------------------------------------
+  -- 8. Modo de avaliacao: um interruptor, nao uma mudanca de comportamento
+  -- ---------------------------------------------------------------------------
+
+  perform pg_temp.vira(null);
+  perform pg_temp.checa('desligado por padrao', public.revalida_dias_de_avaliacao() = 0);
+  insert into auth.users (email) values ('sem-modo@exemplo.com') returning id into v_novo;
+  perform pg_temp.vira(v_novo);
+  perform pg_temp.checa('com o modo desligado, conta nova continua sem acesso',
+    (public.meu_acesso() ->> 'ativo') = 'false');
+
+  perform pg_temp.vira(v_ana);
+  begin
+    perform public.definir_modo_avaliacao(30);
+    raise exception 'FALHOU: pessoa comum ligou o modo de avaliacao';
+  exception when insufficient_privilege then
+    raise notice 'ok: so o dono liga o modo de avaliacao';
+  end;
+
+  perform pg_temp.vira(v_dono);
+  v_r := public.definir_modo_avaliacao(15);
+  perform pg_temp.checa('o dono liga o modo', (v_r ->> 'ligado') = 'true');
+  perform pg_temp.checa('ligar o modo fica auditado',
+    exists (select 1 from public.auditoria where acao = 'avaliacao.modo'));
+
+  perform pg_temp.vira(null);
+  insert into auth.users (email) values ('avaliador@exemplo.com') returning id into v_novo;
+  perform pg_temp.vira(v_novo);
+  v_r := public.meu_acesso();
+  perform pg_temp.checa('com o modo ligado, criar conta ja da acesso',
+    (v_r ->> 'ativo') = 'true');
+  perform pg_temp.checa('e o acesso e marcado como teste, nao cortesia',
+    (v_r ->> 'origem') = 'teste');
+  perform pg_temp.checa('pelos dias configurados',
+    (v_r ->> 'fim')::timestamptz between now() + interval '14 days' and now() + interval '16 days');
+
+  -- Um pagamento resgatado vale mais que a cortesia de teste: nao se sobrepoe.
+  perform pg_temp.vira(null);
+  perform public.registrar_pagamento('dlocalgo', 'pay_avaliador', 'PAYMENT_PAID',
+                                     'pagante-antes@exemplo.com', 'semestral', 180, 'DP-av');
+  insert into auth.users (email) values ('pagante-antes@exemplo.com') returning id into v_novo;
+  perform pg_temp.vira(v_novo);
+  perform pg_temp.checa('quem ja pagou entra como pagante, nao como teste',
+    (public.meu_acesso() ->> 'origem') = 'pagamento');
+
+  perform pg_temp.vira(v_dono);
+  v_r := public.definir_modo_avaliacao(0);
+  perform pg_temp.checa('e o dono volta a desligar', (v_r ->> 'ligado') = 'false');
+  perform pg_temp.vira(null);
+  insert into auth.users (email) values ('depois@exemplo.com') returning id into v_novo;
+  perform pg_temp.vira(v_novo);
+  perform pg_temp.checa('desligado, conta nova volta a nascer sem acesso',
+    (public.meu_acesso() ->> 'ativo') = 'false');
+
   raise notice 'TODAS AS PROVAS PASSARAM';
 end
 $prova$;
