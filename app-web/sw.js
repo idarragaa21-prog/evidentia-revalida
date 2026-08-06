@@ -17,12 +17,17 @@
  *     falha continua falhando, em vez de devolver 2,8 MB de HTML no lugar.
  */
 
-const VERSAO = "a00630d2e64e";
+const VERSAO = "f0f4d4b99b2d";
 const CACHE = "evidentia-revalida-" + VERSAO;
 const PREFIXO = "evidentia-revalida-";
 
 const BASE = new URL("./", self.location.href).href;
 const INDEX = new URL("./index.html", self.location.href).href;
+/* A página de venda vive no mesmo escopo mas NÃO é o aplicativo: sem esta
+ * exceção, o desvio de navegação devolveria o index.html do app no lugar de
+ * /assinar/, e ninguém conseguiria ver os planos. Ela vai pela rede primeiro
+ * (preço muda; cache só como reserva offline). */
+const ASSINAR = new URL("./assinar/", self.location.href).href;
 
 const COMPLEMENTOS = [
   "./manifest.webmanifest",
@@ -135,11 +140,30 @@ self.addEventListener("fetch", (evento) => {
   if (!url.href.startsWith(BASE)) return;
 
   if (pedido.mode === "navigate") {
+    if (url.href.startsWith(ASSINAR)) {
+      evento.respondWith(paginaDeVenda(evento));
+      return;
+    }
     evento.respondWith(documento(evento));
     return;
   }
   evento.respondWith(estatico(evento));
 });
+
+/* Página de venda: rede primeiro (o preço pode ter mudado), cache como reserva. */
+async function paginaDeVenda(evento) {
+  const cache = await caches.open(CACHE);
+  try {
+    const resposta = await fetch(evento.request);
+    if (guardavel(resposta)) {
+      evento.waitUntil(cache.put(evento.request, resposta.clone()));
+    }
+    return resposta;
+  } catch (e) {
+    const guardado = await cache.match(evento.request, { ignoreSearch: true });
+    return guardado || respostaSemRede();
+  }
+}
 
 self.addEventListener("message", (evento) => {
   if (evento.data && evento.data.tipo === "pular-espera") self.skipWaiting();

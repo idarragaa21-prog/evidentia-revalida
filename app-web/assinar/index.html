@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidentia · Revalida — Planos e assinatura</title>
+<meta name="description" content="Banco de 500 questões oficiais do Revalida (INEP), cada uma conferida contra o caderno oficial e justificada com fonte citada. Funciona offline. Planos a partir de R$ 57.">
+<style>
+:root{
+  --navy:#1b2e22; --sky:#2f6047; --sky-100:#e2ede7; --gold:#b08d4c; --gold-100:#f3ead2; --gold-ink:#6a5410;
+  --good:#0f6b45; --good-100:#e3f3ec; --bad:#9d3a2b; --bad-100:#f8e9e5;
+  --bg:#f4f3ec; --card:#fff; --ink:#1a2620; --ink-2:#4d5a51; --ink-3:#69756b;
+  --line:#d3e1d8; --r:14px;
+  --ff:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#141a16; --card:#1c241f; --ink:#e8ede9; --ink-2:#b3bfb6; --ink-3:#8d998f;
+    --line:#31413a; --sky-100:#243830; --gold-100:#3a3021; --gold-ink:#e5cf9b;
+    --good-100:#1d3a2d; --bad-100:#40261f;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--ff);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header{background:var(--card);border-bottom:2px solid var(--sky);padding:14px 0}
+header .wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+header b{font-family:var(--serif);font-size:19px;letter-spacing:.06em}
+header small{color:var(--ink-3)}
+header a{margin-left:auto;font-size:13.5px;color:var(--sky);text-decoration:underline}
+main{padding:34px 0 90px}
+h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,38px);line-height:1.2;margin:0 0 14px}
+h2{font-family:var(--serif);font-size:22px;margin:44px 0 12px}
+p.lead{font-size:17.5px;color:var(--ink-2);margin:0 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;
+  box-shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.07)}
+.pontos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:22px 0 0}
+.pontos .card{padding:16px}
+.pontos b{display:block;margin-bottom:4px}
+.pontos span{font-size:14px;color:var(--ink-2)}
+.aviso-honesto{border-left:4px solid var(--gold);padding:14px 16px;background:var(--gold-100);
+  color:var(--gold-ink);border-radius:0 10px 10px 0;margin:22px 0;font-size:15px}
+.aviso-honesto b{color:inherit}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin:0 0 5px}
+input{width:100%;font:inherit;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+input:focus{outline:2.5px solid var(--sky);outline-offset:1px}
+.planos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.plano{position:relative;display:flex;flex-direction:column;gap:6px;padding:20px}
+.plano .selo{position:absolute;top:-11px;right:14px;background:var(--gold);color:#2e2404;
+  font-size:11px;font-weight:800;letter-spacing:.06em;padding:3px 10px;border-radius:8px}
+.plano.heroi{border:2px solid var(--gold)}
+.plano h3{margin:0;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--sky)}
+.plano .preco{font-family:var(--serif);font-size:34px;line-height:1.1}
+.plano .pormes{font-size:13.5px;color:var(--ink-3)}
+.plano .econ{font-size:13px;font-weight:700;color:var(--good)}
+.plano .desc{font-size:14px;color:var(--ink-2);flex:1}
+button.comprar{font:inherit;font-weight:700;border:none;border-radius:11px;padding:13px 16px;cursor:pointer;
+  background:var(--gold);color:#2e2404;margin-top:8px}
+button.comprar:disabled{opacity:.55;cursor:default}
+.msg{margin-top:12px;font-size:14px;color:var(--ink-3);min-height:20px}
+.msg.erro{color:var(--bad)}
+.passos{counter-reset:p;margin:16px 0 0;padding:0;list-style:none}
+.passos li{counter-increment:p;position:relative;padding:0 0 16px 44px}
+.passos li::before{content:counter(p);position:absolute;left:0;top:-2px;width:30px;height:30px;
+  border-radius:50%;background:var(--sky-100);color:var(--sky);font-weight:800;display:grid;place-items:center}
+.faq details{border-bottom:1px solid var(--line);padding:12px 0}
+.faq summary{cursor:pointer;font-weight:700}
+.faq p{color:var(--ink-2);font-size:15px;margin:10px 0 2px}
+.metodos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.metodos span{font-size:12.5px;font-weight:700;background:var(--sky-100);color:var(--sky);
+  padding:4px 10px;border-radius:8px}
+.obrigado{border:2px solid var(--good);background:var(--good-100)}
+.hidden{display:none!important}
+footer{border-top:1px solid var(--line);padding:26px 0 60px;font-size:13px;color:var(--ink-3)}
+footer p{margin:6px 0}
+a{color:var(--sky)}
+table.compara{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+table.compara th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);
+  text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <b>EVIDENTIA</b><small>Revalida · planos</small>
+  <a href="../">Experimentar grátis (40 questões)</a>
+</div></header>
+<main><div class="wrap">
+
+  <div class="card obrigado hidden" id="cartaoObrigado">
+    <h2 style="margin-top:0">Pagamento recebido — falta só ativar</h2>
+    <ol class="passos">
+      <li><b>Aguarde a confirmação.</b> No PIX é quase na hora; no cartão pode levar alguns
+        minutos. Você receberá a confirmação do pagamento por e-mail.</li>
+      <li><b>Crie sua conta (ou entre)</b> no aplicativo com o <b>mesmo e-mail usado na
+        compra</b>. Se pagou antes de criar a conta, o acesso é aplicado sozinho assim que a
+        conta existir.</li>
+      <li><b>Entre e ative.</b> Na tela «Ativar», use seu e-mail e senha. Pronto: o
+        aplicativo funciona offline por até 30 dias por vez e se renova sozinho quando houver
+        internet.</li>
+    </ol>
+    <p style="font-size:14px;color:var(--ink-2)">Na fatura do cartão ou no extrato, a cobrança
+    aparece como <b>DL*/DLOCAL</b>, nossa processadora de pagamentos no Brasil — não estranhe o
+    nome. Qualquer dúvida, escreva para o e-mail de suporte no rodapé.</p>
+  </div>
+
+  <h1>500 questões oficiais do Revalida, conferidas uma a uma — e justificadas com a fonte citada</h1>
+  <p class="lead">Monte simulados com as questões objetivas reais do INEP (2023/1 a 2026/1), com
+  correção detalhada e uma justificativa por questão ancorada em literatura verificável.
+  Funciona <b>sem internet</b>, no computador e no celular.</p>
+
+  <div class="pontos">
+    <div class="card"><b>Conferido palavra por palavra</b><span>Cada enunciado e alternativa é
+      comparado, por script, com o caderno oficial do INEP — sem erro de digitação, sem questão
+      truncada.</span></div>
+    <div class="card"><b>Nenhuma fonte inventada</b><span>Justificativas com referência
+      identificável (diretriz, PCDT, artigo). Quando o catálogo não cobre um ponto, dizemos
+      «estudo» — não fabricamos citação.</span></div>
+    <div class="card"><b>Funciona offline de verdade</b><span>Arquivo único, sem servidor. No
+      plantão, no avião ou no interior sem sinal, o aplicativo abre e funciona.</span></div>
+    <div class="card"><b>Figuras oficiais incluídas</b><span>As questões que dependem de imagem
+      trazem a figura recortada do caderno original do exame.</span></div>
+  </div>
+
+  <div class="aviso-honesto"><b>Por que 500 questões, e não 20 mil?</b> Porque cada uma daqui
+  foi verificada, uma a uma, contra a prova oficial. Vendemos certeza, não volume — e por isso
+  custamos uma fração das plataformas que cobram de R$ 129,99 a R$ 249 por mês. Você já investe
+  R$ 4.516 só nas taxas do exame; estudar por questões sem conferência oficial pode custar uma
+  edição inteira do Revalida.</div>
+
+  <h2 id="planos">Escolha seu plano</h2>
+  <div class="card">
+    <label for="email">Seu e-mail (o mesmo que você usará para ativar o aplicativo)</label>
+    <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com">
+    <div class="metodos"><span>PIX</span><span>Cartão de crédito</span><span>Preços em reais</span><span>Sem renovação automática</span></div>
+    <div class="msg" id="msgCompra" role="status" aria-live="polite"></div>
+  </div>
+  <div class="planos" id="listaPlanos"><div class="card"><p class="msg">Carregando os planos…</p></div></div>
+
+  <h2>Como funciona</h2>
+  <div class="card">
+    <ol class="passos" style="margin-top:4px">
+      <li><b>Compre no site</b> com PIX ou cartão, em reais. Sem renovação automática: quando o
+        acesso estiver perto de vencer, avisamos por e-mail e você decide se renova.</li>
+      <li><b>Crie sua conta gratuita</b> no aplicativo com o mesmo e-mail da compra (pode criar
+        antes ou depois de pagar — a ordem não importa).</li>
+      <li><b>Entre e ative.</b> O aplicativo guarda uma licença assinada e funciona offline;
+        perto do vencimento, renova sozinho quando houver internet.</li>
+    </ol>
+  </div>
+
+  <h2>Compare com honestidade</h2>
+  <div class="card" style="overflow-x:auto">
+    <table class="compara">
+      <thead><tr><th>Produto</th><th>Mensal</th><th>Proposta</th></tr></thead>
+      <tbody>
+        <tr><td><b>Evidentia Revalida</b></td><td><b>R$ 57</b> (ou R$ 41/mês no semestral)</td>
+          <td>500 questões oficiais, conferidas contra o caderno do INEP, justificativa com fonte citada</td></tr>
+        <tr><td>Revalida Resolve</td><td>R$ 147</td><td>Questões oficiais comentadas</td></tr>
+        <tr><td>Meedik Learn</td><td>R$ 129,99</td><td>Banco de questões</td></tr>
+        <tr><td>MedTask</td><td>R$ 249</td><td>«+90 mil questões», correção por IA</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13.5px;color:var(--ink-3);margin:10px 0 0">Preços dos concorrentes
+    verificados em agosto de 2026, nos sites públicos de cada um. Eles têm mais volume; nós
+    temos conferência oficial e fonte citada em cada questão. Escolha o que combina com você —
+    e três meses de Evidentia custam o que o comparável direto cobra por um mês.</p>
+  </div>
+
+  <h2>Perguntas frequentes</h2>
+  <div class="card faq">
+    <details><summary>Tem garantia?</summary>
+      <p>Sim: 7 dias com devolução total, sem perguntas. Escreva para o e-mail de suporte com o
+      e-mail da compra e devolvemos o valor. O acesso é encerrado no reembolso.</p></details>
+    <details><summary>O pagamento é seguro? Que nome aparece na fatura?</summary>
+      <p>O pagamento é processado pela dLocal, processadora internacional que opera no Brasil —
+      seus dados de cartão nunca passam pelo nosso servidor. No extrato, a cobrança aparece como
+      <b>DL*/DLOCAL</b>.</p></details>
+    <details><summary>Preciso de internet para estudar?</summary>
+      <p>Não. Depois de ativar, o aplicativo funciona totalmente offline por até 30 dias por
+      vez; quando houver internet, ele renova a licença sozinho, sem interromper você.</p></details>
+    <details><summary>Em quantos aparelhos posso usar?</summary>
+      <p>No seu computador e no seu celular, com a mesma conta. A licença é nominal, ligada ao
+      seu e-mail.</p></details>
+    <details><summary>A renovação é automática?</summary>
+      <p>Não. Você compra um período fechado (30, 90 ou 180 dias). Perto do vencimento, avisamos
+      por e-mail e você decide se renova. Sem surpresa na fatura.</p></details>
+    <details><summary>Vocês são ligados ao INEP?</summary>
+      <p>Não. A Evidentia não tem vínculo com o INEP nem com o MEC. As questões são conteúdo
+      público oficial, reproduzido sem alteração e com atribuição, sob a licença CC BY-ND 3.0
+      declarada pelo próprio INEP. As justificativas, a conferência e o aplicativo são obra
+      independente da Evidentia.</p></details>
+    <details><summary>O que acontece quando sai uma edição nova do exame?</summary>
+      <p>Cada edição nova do Revalida soma ~100 questões ao banco. Quem tem acesso ativo recebe
+      a atualização sem pagar nada a mais.</p></details>
+  </div>
+
+</div></main>
+<footer><div class="wrap">
+  <p><b>EVIDENTIA</b> · Revalida — material de estudo independente.</p>
+  <p>Questões: Inep — Revalida, Provas Objetivas 2023/1 a 2026/1, reproduzidas sem alteração,
+  sob a licença <a href="https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR" rel="noopener noreferrer" target="_blank">CC BY-ND 3.0</a>
+  declarada em <a href="https://download.inep.gov.br/" rel="noopener noreferrer" target="_blank">download.inep.gov.br</a>.
+  A Evidentia não é afiliada ao INEP nem ao MEC; este material não substitui os documentos oficiais.</p>
+  <p>Suporte: <a href="mailto:idarragaa21@gmail.com">idarragaa21@gmail.com</a></p>
+</div></footer>
+<script>
+"use strict";
+/* Página de venda: os planos vêm AO VIVO da tabela `planos` (o dono edita preço e
+   periodicidade pelo painel, sem republicar nada). O preço mostrado é informativo:
+   o valor cobrado sai do servidor na criação do pedido — o navegador nunca manda preço. */
+
+const NUVEM = {
+  url: "https://flnawwzkmttsxuozjwar.supabase.co",
+  chave: "sb_publishable_JZzZRrMH3M4jm55sr3j8Gg_0oiLYJi5",
+};
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const reais = c => (Number(c || 0) / 100).toLocaleString("pt-BR", {style:"currency", currency:"BRL"});
+
+function diz(txt, erro){
+  const el = $("#msgCompra");
+  el.textContent = txt || "";
+  el.classList.toggle("erro", !!erro);
+}
+
+/* ~meses de um plano em dias: 30→1, 90→3, 180→6. */
+const meses = dias => Math.max(1, Math.round(dias / 30));
+
+function cartaoPlano(p, precoMensalCentavos){
+  const m = meses(p.dias);
+  const porMes = p.preco_centavos / m;
+  const economia = precoMensalCentavos > 0 && m > 1
+    ? Math.round((1 - porMes / precoMensalCentavos) * 100) : 0;
+  const heroi = m >= 6;
+  return `<div class="card plano ${heroi ? "heroi" : ""}">
+    ${heroi ? '<span class="selo">UM CICLO COMPLETO</span>' : ""}
+    <h3>${esc(p.nome)}</h3>
+    <div class="preco">${reais(p.preco_centavos)}</div>
+    <div class="pormes">${m > 1 ? `sai por ${reais(Math.round(porMes))}/mês` : "por 30 dias de acesso"}</div>
+    ${economia > 0 ? `<div class="econ">economize ${economia}% vs. mensal</div>` : "<div class='econ'>&nbsp;</div>"}
+    <div class="desc">${esc(p.descricao || "")}. Acesso completo: 500 questões, justificativas
+      referenciadas, simulados e estatísticas. PIX ou cartão, pagamento único.</div>
+    <button class="comprar" data-plano="${esc(p.id)}" onclick="comprar(this.dataset.plano, this)">
+      Comprar ${esc(p.nome.toLowerCase())}</button>
+  </div>`;
+}
+
+async function carregarPlanos(){
+  try{
+    const r = await fetch(`${NUVEM.url}/rest/v1/planos?select=id,nome,descricao,dias,preco_centavos&ativo=eq.true&preco_centavos=gt.0&order=dias`, {
+      headers: { apikey: NUVEM.chave }
+    });
+    if(!r.ok) throw new Error("erro " + r.status);
+    const planos = await r.json();
+    if(!planos.length){
+      $("#listaPlanos").innerHTML = `<div class="card"><p class="msg">As vendas abrem em breve.
+        Enquanto isso, <a href="../">estude grátis com 40 questões</a>.</p></div>`;
+      return;
+    }
+    const mensal = planos.find(p => meses(p.dias) === 1);
+    $("#listaPlanos").innerHTML = planos.map(p => cartaoPlano(p, mensal ? mensal.preco_centavos / meses(mensal.dias) : 0)).join("");
+  }catch(e){
+    $("#listaPlanos").innerHTML = `<div class="card"><p class="msg erro">Não foi possível carregar os
+      planos agora (${esc(e.message)}). Recarregue a página ou tente mais tarde.</p></div>`;
+  }
+}
+
+async function comprar(planoId, botao){
+  const email = ($("#email").value || "").trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
+    diz("Escreva seu e-mail primeiro — é com ele que você ativa o aplicativo.", true);
+    $("#email").focus();
+    return;
+  }
+  botao.disabled = true;
+  diz("Preparando seu pagamento…");
+  try{
+    const r = await fetch(`${NUVEM.url}/functions/v1/criar-checkout`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ plano_id: planoId, email })
+    });
+    const corpo = await r.json().catch(() => null);
+    if(r.status === 503 && corpo?.erro === "pagamentos_nao_ativados"){
+      diz("As vendas ainda não abriram. Deixe seu e-mail salvo e volte em breve — ou estude grátis com as 40 questões.", true);
+      return;
+    }
+    if(!r.ok || !corpo?.redirect_url){
+      diz("Não foi possível criar o pagamento agora. Tente de novo em instantes.", true);
+      return;
+    }
+    diz("Levando você ao pagamento seguro…");
+    location.href = corpo.redirect_url;
+  }catch(e){
+    diz("Sem conexão com o servidor de pagamentos. Confira sua internet e tente de novo.", true);
+  }finally{
+    botao.disabled = false;
+  }
+}
+
+(function init(){
+  const q = new URLSearchParams(location.search);
+  if(q.get("compra") === "confirmada"){
+    $("#cartaoObrigado").classList.remove("hidden");
+    document.title = "Evidentia · Revalida — Pagamento recebido";
+  }
+  carregarPlanos();
+})();
+</script>
+</body>
+</html>

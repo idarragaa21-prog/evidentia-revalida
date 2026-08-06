@@ -522,8 +522,12 @@ const FIGS = {"2026/1|5": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLD
 /* "livre" = edição gratuita, já traz só o recorte de questões e não pede conta.
    "completo" = edição assinada, exige licença válida. */
 const EDICAO = "livre";
-const NUVEM = {"url": "https://exemplo-de-teste.supabase.co", "chave": "sb_publishable_TESTE"};
-const CHAVE_LICENCA = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+6JD6q+NJoU1OrRg2SzSwAdXoAoz9/LwRZthnRJnJG/+zZg18zKC/OIPaV9SJc1mgp+qkwxwAZIDrvouU+/yGw==";
+/* Página pública de planos e compra. A edição livre leva para cá; a edição completa
+   também, quando a conta ainda não tem assinatura. */
+const URL_ASSINAR = "https://idarragaa21-prog.github.io/evidentia-revalida/assinar/";
+function abrirAssinar(){ window.open(URL_ASSINAR, "_blank", "noopener"); }
+const NUVEM = {"url": "https://flnawwzkmttsxuozjwar.supabase.co", "chave": "sb_publishable_JZzZRrMH3M4jm55sr3j8Gg_0oiLYJi5"};
+const CHAVE_LICENCA = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEvGy1/xaggZoNgqX/dr9HQROdmLmQZwWQfQ3dcniuihFk6A/0IQ0ZZQ+yxQfRbbP1z6RZKqoAYLPdChrulc1Rdg==";
 
 /*==================== ESTADO ====================*/
 const AREAS = ["Clínica Médica","Cirurgia","Pediatria","Ginecologia e Obstetrícia","Medicina da Família, Comunidade e Saúde Coletiva"];
@@ -605,6 +609,16 @@ function viewHome(){
       <div><b>5</b><span>ÁREAS</span></div>
     </div>
   </div>
+
+  ${EDICAO!=="completo"?`<div class="card pad" style="margin-top:16px;border-color:var(--gold)">
+    <div class="section-t">Você está na edição livre</div>
+    <p class="muted" style="margin:2px 0 12px;font-size:14px">
+      Estas ${META.gratuitas||40} questões são um décimo do banco. A edição completa tem
+      <b>500 questões oficiais de 5 edições</b> (2023/1 a 2026/1), todas conferidas palavra por
+      palavra contra o caderno do INEP e justificadas com a fonte citada — e funciona sem internet
+      no computador e no celular.</p>
+    <button class="btn btn-gold block" onclick="abrirAssinar()">Conhecer os planos</button>
+  </div>`:""}
 
   ${(inprog||ultimo)?`<button class="secbtn" style="width:100%;margin-top:16px;border-color:var(--gold)" onclick="resumeRun()">
      <span class="ic" style="background:var(--gold-100);color:var(--gold-ink)">
@@ -1409,8 +1423,10 @@ function viewConta(aviso){
       <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaEsqueci()">Esqueci a senha</button>
     </div>
     <p class="muted" style="margin-top:18px;font-size:13px">
-      Sem assinatura? A <b>edição livre</b>, com ${META.gratuitas||40} questões e as mesmas
-      justificativas referenciadas, é gratuita e não precisa de conta.
+      Ainda não assinou? <button class="linklike" onclick="abrirAssinar()">Veja os planos e preços</button>
+      — a compra é feita no site e ativa aqui com o mesmo e-mail. A <b>edição livre</b>, com
+      ${META.gratuitas||40} questões e as mesmas justificativas referenciadas, é gratuita e não
+      precisa de conta.
     </p>
   </div>`;
 }

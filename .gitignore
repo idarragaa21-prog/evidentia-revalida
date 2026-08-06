@@ -50,3 +50,7 @@ aplicativo/Revalida_Evidentia.html
 app-android/www/index.html
 app-android/android/app/src/main/assets/public/index.html
 app-android/*.apk
+
+# Estado local del CLI de Supabase (enlace del proyecto): no se versiona
+nuvem/supabase/.temp/
+supabase/.temp/

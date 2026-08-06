@@ -104,6 +104,32 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
     </div>
 
     <div class="card">
+      <h2>Planos de venda</h2>
+      <p class="mini">O aplicativo, a página de venda e o webhook leem daqui. Mudar o preço aqui muda
+      o que o cliente novo vê; quem já pagou mantém o prazo que comprou. Desativar um plano só o
+      esconde da venda — não corta o acesso de ninguém.</p>
+      <div style="overflow-x:auto"><table id="tabelaPlanos" class="hidden">
+        <thead><tr><th>Plano</th><th>Dias</th><th>Preço</th><th>Estado</th><th></th></tr></thead>
+        <tbody id="corpoPlanos"></tbody>
+      </table></div>
+      <div class="msg" id="msgPlanos" role="status" aria-live="polite"></div>
+      <div class="duo">
+        <div><label>Identificador</label><input id="pId" placeholder="ex.: trimestral" autocomplete="off"></div>
+        <div><label>Nome</label><input id="pNome" placeholder="ex.: Trimestral" autocomplete="off"></div>
+      </div>
+      <div class="duo">
+        <div><label>Dias de acesso</label><input id="pDias" type="number" min="1" max="3650"></div>
+        <div><label>Preço (R$)</label><input id="pPreco" type="number" min="0" step="0.01"></div>
+      </div>
+      <label>Descrição (aparece na venda)</label>
+      <input id="pDescricao" autocomplete="off">
+      <label>À venda?</label>
+      <select id="pAtivo"><option value="true">Sim — aparece para comprar</option><option value="false">Não — escondido</option></select>
+      <button class="acao principal" id="btnSalvarPlano" onclick="salvarPlano()">Salvar plano</button>
+      <div class="msg" id="msgSalvarPlano" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
       <h2>Pessoas</h2>
       <label>Buscar por e-mail ou nome</label>
       <input id="busca" placeholder="deixe vazio para ver as mais recentes" autocomplete="off"
@@ -181,7 +207,53 @@ async function mostrarPainel(){
   $("#cardConfig").classList.add("hidden");
   $("#painel").classList.remove("hidden");
   $("#btnSair").classList.remove("hidden");
-  await Promise.all([resumo(), listar()]);
+  await Promise.all([resumo(), listar(), listarPlanos()]);
+}
+
+const reais = c=>(Number(c||0)/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+let PLANOS = [];
+
+async function listarPlanos(){
+  try{
+    PLANOS = (await rpc("listar_planos_admin"))||[];
+    $("#corpoPlanos").innerHTML = PLANOS.map(p=>`<tr>
+      <td><b>${esc(p.nome)}</b><br><span class="mini">${esc(p.id)}</span></td>
+      <td>${Number(p.dias)}</td>
+      <td>${reais(p.preco_centavos)}</td>
+      <td><span class="pill ${p.ativo?"ativo":"inativo"}">${p.ativo?"à venda":"escondido"}</span></td>
+      <td><button class="acao sec" data-plano="${esc(p.id)}" onclick="editarPlano(this.dataset.plano)">editar…</button></td>
+    </tr>`).join("");
+    $("#tabelaPlanos").classList.toggle("hidden", !PLANOS.length);
+    diz("#msgPlanos", PLANOS.length ? "" : "Nenhum plano ainda — crie o primeiro abaixo.");
+  }catch(e){ diz("#msgPlanos","Planos indisponíveis: "+e.message, true); }
+}
+
+function editarPlano(id){
+  const p = PLANOS.find(x=>x.id===id);
+  if(!p) return;
+  $("#pId").value=p.id; $("#pNome").value=p.nome||""; $("#pDescricao").value=p.descricao||"";
+  $("#pDias").value=p.dias; $("#pPreco").value=(Number(p.preco_centavos||0)/100).toFixed(2);
+  $("#pAtivo").value=String(!!p.ativo);
+  $("#pId").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+async function salvarPlano(){
+  const id=$("#pId").value.trim().toLowerCase();
+  const nome=$("#pNome").value.trim();
+  const dias=parseInt($("#pDias").value,10);
+  const preco=Math.round(parseFloat($("#pPreco").value||"0")*100);
+  if(!/^[a-z0-9_-]{2,40}$/.test(id)){ diz("#msgSalvarPlano","Identificador: só letras minúsculas, números, hífen (2–40).",true); return; }
+  if(!nome){ diz("#msgSalvarPlano","Escreva o nome.",true); return; }
+  if(!(dias>=1&&dias<=3650)){ diz("#msgSalvarPlano","Dias entre 1 e 3650.",true); return; }
+  if(!(preco>=0&&Number.isFinite(preco))){ diz("#msgSalvarPlano","Preço inválido.",true); return; }
+  $("#btnSalvarPlano").disabled=true; diz("#msgSalvarPlano","Salvando…");
+  try{
+    await rpc("salvar_plano", {p_id:id, p_nome:nome, p_descricao:$("#pDescricao").value.trim()||null,
+      p_dias:dias, p_preco_centavos:preco, p_ativo:$("#pAtivo").value==="true"});
+    diz("#msgSalvarPlano","Feito.");
+    await listarPlanos();
+  }catch(e){ diz("#msgSalvarPlano","Não deu: "+e.message, true); }
+  finally{ $("#btnSalvarPlano").disabled=false; }
 }
 
 async function resumo(){

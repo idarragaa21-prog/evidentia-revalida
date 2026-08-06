@@ -8,52 +8,32 @@
 
 ---
 
-## 0. Antes de nada: regenera la llave de licencia
+## 0. Llave de licencia — **HECHO (2026-08-06)**
 
-La llave que hay en `nuvem/chaves/` se generó durante el desarrollo y **su parte privada
-quedó impresa en un registro de trabajo**. Sirve para probar, no para vender.
+La llave de desarrollo (cuya parte privada quedó impresa en un registro de trabajo) fue
+**regenerada, cargada como secreto del servidor y embebida en las apps reconstruidas**.
+No tienes que hacer nada aquí.
 
-```bash
-cd ~/evidentia-revalida && python3 scripts/gerar_chaves_licenca.py --forcar
-```
-
-El script imprime dos cosas: el comando `supabase secrets set …` (paso 2) y la llave pública.
-Pega la llave pública en `nuvem/chaves/licenca_publica.txt` — el script ya lo hace — y
-reconstruye la aplicación al final (paso 6).
-
-**Cómo saber que quedó bien**: `ls -la nuvem/chaves/` muestra `licenca_privada.pem` con
-permisos `-rw-------`, y `git status` no la lista (está en `.gitignore`).
+> Si algún día necesitas rotarla de nuevo (p. ej. ante una sospecha de filtración):
+> `cd ~/evidentia-revalida && python3 scripts/gerar_chaves_licenca.py --forcar`, luego
+> `supabase secrets set REVALIDA_CHAVE_PRIVADA=...` y reconstruir las apps (paso 6).
+> Rotarla invalida TODAS las licencias entregadas: los usuarios reactivan al conectarse.
 
 ---
 
-## 1. Proyecto de Supabase **(solo tú)**
+## 1. Proyecto de Supabase — **HECHO, salvo nombrarte administrador**
 
-1. Entra a <https://supabase.com/dashboard> y crea un proyecto **nuevo**.
-   No reutilices el de Atlas: son productos distintos y mezclarlos rompe tu propio runbook.
-   Región sugerida: `South America (São Paulo)` — tus usuarios están en Brasil.
-2. Guarda la contraseña de la base de datos donde guardas las demás.
-3. En *Project Settings → API* copia:
-   - **Project URL** → `https://xxxx.supabase.co`
-   - **anon / publishable key** → `sb_publishable_…`
-4. Escribe esos dos valores en `nuvem/supabase/client_config.local.json`
-   (cópialo de `client_config.example.json`). Ese archivo **no se versiona**.
+El proyecto **`evidentia-revalida`** existe (ref `flnawwzkmttsxuozjwar`, región São Paulo),
+el esquema completo está aplicado (incluidas la escalera de planos 57/147/247 y la tabla
+`checkouts`), la configuración del cliente está en `client_config.local.json`, y las apps ya
+se reconstruyeron apuntando a él.
 
-> La `service_role key` no se copia a ningún archivo del repositorio ni de la aplicación.
-> Solo vive como secreto del servidor, en el paso 2.
+**Cómo comprobarlo tú mismo**: en <https://supabase.com/dashboard/project/flnawwzkmttsxuozjwar>,
+*Table Editor* muestra `perfis`, `admins`, `planos`, `assinaturas`, `licencas`,
+`eventos_pagamento`, `checkouts` y `auditoria`; en `planos`, el mensal está a R$ 57, el
+trimestral a R$ 147 y el semestral a R$ 247.
 
-### Aplicar el esquema
-
-```bash
-cd ~/evidentia-revalida/nuvem/supabase
-supabase link --project-ref <la-referencia-de-tu-proyecto>
-supabase db push
-```
-
-**Cómo saber que quedó bien**: en el panel de Supabase, *Table Editor* muestra las tablas
-`perfis`, `admins`, `planos`, `assinaturas`, `licencas`, `eventos_pagamento` y `auditoria`.
-En `planos` ya hay tres filas.
-
-### Convertirte en administrador
+### Convertirte en administrador **(solo tú)**
 
 Crea tu cuenta primero desde la propia aplicación (botón «Criar conta»), confirma el correo,
 y luego, en el *SQL Editor* de Supabase:
@@ -68,70 +48,91 @@ select id, 'dono do produto' from auth.users where email = 'TU-CORREO@ejemplo.co
 
 ---
 
-## 2. Secretos y funciones del servidor
+## 2. Secretos y funciones del servidor — **HECHO, salvo las credenciales de dLocal Go**
+
+Ya están configurados `REVALIDA_CHAVE_PRIVADA` y `REVALIDA_DIAS_LICENCA=30`, y desplegadas
+las **tres** funciones: `emitir-licenca`, `webhook-pagamento` y `criar-checkout`. Mientras
+no existan las credenciales de dLocal Go, la página de venta muestra «as vendas abrem em
+breve» — nada se rompe.
+
+Cuando termines el paso 3, lo único que falta aquí es:
 
 ```bash
-cd ~/evidentia-revalida/nuvem/supabase
-supabase secrets set REVALIDA_CHAVE_PRIVADA='<lo que imprimió el paso 0>'
-supabase secrets set REVALIDA_DIAS_LICENCA=30
-supabase secrets set HOTMART_HOTTOK='<paso 3>'
-supabase functions deploy emitir-licenca
-supabase functions deploy webhook-pagamento
+cd ~/evidentia-revalida/nuvem
+supabase secrets set DLOCALGO_API_KEY='<de tu panel de dLocal Go>' \
+  DLOCALGO_SECRET_KEY='<idem>' --project-ref flnawwzkmttsxuozjwar
 ```
+
+> Para probar primero en el **sandbox** de dLocal Go añade también
+> `DLOCALGO_API_HOST='https://api-sbx.dlocalgo.com'` con las llaves de sandbox, y quítalo
+> al pasar a producción.
 
 `SUPABASE_URL`, `SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` las inyecta Supabase sola:
 no las configures a mano.
 
-**Cómo saber que quedó bien**: `supabase functions list` muestra las dos como `ACTIVE`.
+**Cómo saber que quedó bien**: `supabase functions list --project-ref flnawwzkmttsxuozjwar`
+muestra las tres como activas, y el botón «Comprar» de la página de venta te lleva a un
+checkout real en vez del aviso.
 
 ---
 
-## 3. Cobro con Hotmart **(solo tú)**
+## 3. Cobro con dLocal Go **(solo tú)**
 
-Hotmart es la elección de lanzamiento porque acepta productores colombianos, ofrece PIX,
-boleto y cuotas, y actúa como *merchant of record* — resuelve los impuestos por ti. La
-comisión es 9,9 % + R$ 1,00 por venta.
+dLocal Go es la elección de lanzamiento (investigación y verificación adversarial del
+2026-08-06, en `PLANO_PRODUTO.md` §6): acepta persona física colombiana, tu comprador paga
+**en reales como transacción doméstica** — PIX ~1,17 % o tarjeta local ~3,53 %, sin IOF — y
+tú retiras **en COP directo a tu banco**, gratis sobre US$ 10. Hotmart quedó descartado por
+decisión tuya. Plan B si el onboarding te rechaza: Paddle (el código no cambia; me pides el
+adaptador y lo escribo).
 
-1. Crea tu cuenta de productor en <https://app.hotmart.com>.
-2. **Pregunta primero, antes de publicar precios**: escribe al soporte de Hotmart y
-   confirma si, con la cuenta registrada en Colombia, puedes vender un producto con precio
-   **en reales** y recibir PIX de compradores brasileños. La documentación dice que al
-   registrar la cuenta fuera de Brasil «suas novas vendas e comissões passarão a ser geradas
-   em Dólares (USD) ou Euros (EUR)», y no queda claro si eso solo cambia la moneda en que te
-   liquidan o si también pierdes el precio en reales. **Esta respuesta cambia el precio de
-   tu producto**, así que va antes que todo lo demás.
-3. Crea el producto (tipo: suscripción) con dos planes:
-   - **Mensal** — R$ 39,00
-   - **Anual** — R$ 247,00
-   Garantía: 7 días (es el estándar del mercado y elimina la objeción principal).
-4. En *Ferramentas → Webhook (Postback)*:
-   - URL: `https://<tu-proyecto>.supabase.co/functions/v1/webhook-pagamento/hotmart`
-   - Versión: la más reciente
-   - Eventos: `PURCHASE_APPROVED`, `PURCHASE_COMPLETE`, `PURCHASE_REFUNDED`,
-     `PURCHASE_CHARGEBACK`, `PURCHASE_PROTEST`, `SUBSCRIPTION_CANCELLATION`,
-     `SUBSCRIPTION_REACTIVATION`
-   - Copia el **hottok** que te da Hotmart y ponlo en `HOTMART_HOTTOK` (paso 2).
+1. **Regístrate** en <https://dlocalgo.com> como **Emprendedor Individual (Persona Física)**,
+   país Colombia. Para el KYC completo necesitarás: cédula, comprobante de domicilio con
+   menos de 6 meses, y certificación bancaria en PDF de una cuenta a tu nombre. Hasta
+   completar el KYC hay tope de US$ 3.000 procesados y no puedes retirar.
+2. **Antes de publicar precios, pregunta por escrito a su soporte** (respuestas que cambian
+   decisiones): (a) condiciones reales de la reserva de garantía — ¿5 o 10 %, y cuándo se
+   libera?; (b) si la categoría «aplicación descargable de estudio, con licencias» pasa
+   compliance sin objeción; (c) qué descriptor verá el comprador en el extracto y si
+   «DL\*EVIDENTIA» es posible; (d) — para la fase 2 — si las ejecuciones de assinatura
+   disparan la notificación a `notification_url` o hay que hacer polling.
+3. En el panel de dLocal Go, copia el **API Key** y el **Secret Key** y cárgalos como
+   secretos (paso 2). No hay nada más que configurar: el checkout lo crea tu servidor
+   (`criar-checkout`) con el precio de tu tabla `planos`, y la URL de notificación viaja en
+   cada pago que creamos — no hace falta registrarla a mano.
+4. **Prueba primero en sandbox** (llaves de sandbox + `DLOCALGO_API_HOST` de sandbox,
+   paso 2): compra un pase mensal con el PIX de prueba, mira que en el panel (paso 5)
+   apareces como «pagante», pide un reembolso de prueba y confirma que el acceso cae.
+   El ciclo entero: pago → notificación → GET payment PAID → licencia emitida; reembolso →
+   notificación → licencia revocada.
 
-**Cómo probarlo de verdad**: compra tu propio producto con un cupón del 100 %, o pide a un
-conocido que compre y luego pide reembolso dentro de los 7 días. Después mira en el panel
-(paso 5) que la persona aparece como «pagante», y tras el reembolso, sin acceso.
+**Cómo probarlo de verdad en producción**: una primera venta real pequeña — idealmente un
+pase mensal pagado por un conocido con tarjeta brasileña. Verifica tres cosas: que NO
+aparece IOF ni cargo internacional en su extracto (antes de usar «sem IOF» como argumento
+de venta), que el reembolso real corta el acceso, y el spread BRL→COP de tu primer retiro
+contra la tasa del día.
 
+> Sin renovación automática, la recompra depende de recordatorios: programa (o pídeme) los
+> correos D-7 y D-1 antes del vencimiento de cada licencia. El backend sabe la fecha exacta.
+>
 > Cuando la facturación anual pase de unos R$ 100.000, revisa la ruta Stripe con una LLC
-> estadounidense: la comisión baja de 9,9 % a ~1,9 %. El webhook ya entiende Stripe; solo
-> hay que apuntar el otro sufijo (`/stripe`) y poner `STRIPE_WEBHOOK_SECRET`.
+> estadounidense: la comisión baja a ~1,9 %. El webhook ya entiende Stripe; solo hay que
+> apuntar el otro sufijo (`/stripe`) y poner `STRIPE_WEBHOOK_SECRET`.
 
 ---
 
-## 4. La página de venta
+## 4. La página de venta — **HECHA; falta publicarla**
 
-La aplicación gratuita ya vive en GitHub Pages. Conviértela en el embudo:
+Ya existe en `app-web/assinar/` y quedó integrada al embudo: la edición libre muestra
+«Conhecer os planos», la pantalla de activación de la edición completa enlaza «Veja os
+planos e preços», y la página lee los planos **en vivo** de tu tabla `planos` — cambias un
+precio en el panel y la página lo muestra sin republicar nada. El texto dice el número real
+(500 preguntas conferidas, comparación honesta con los competidores y sus precios) y avisa
+del descriptor DL*/DLOCAL para contener contracargos.
 
-1. La edición libre (`aplicativo/Revalida_Evidentia_livre.html`) es lo que se publica.
-   Tiene 40 preguntas con las mismas justificaciones referenciadas: no es una demo mutilada.
-2. Desde ella, el botón de compra lleva a tu página de Hotmart.
-3. En la página de venta, di el número real: **500 preguntas oficiales**, no «miles». Tu
-   argumento es que cada una está conferida contra el cuaderno del INEP y justificada con la
-   fuente citada. Es lo único que ningún competidor ofrece.
+Para publicarla: haz merge de la rama `produto-assinatura` a `main` — el workflow de Pages
+publica `app-web/` entero, incluida `/assinar/`. Publícala **después** de tener las
+credenciales de dLocal Go (paso 3); mientras tanto mostraría «as vendas abrem em breve»,
+que también es aceptable si quieres capturar interés temprano.
 
 ---
 
@@ -148,6 +149,9 @@ Desde ahí puedes:
 - **Revocar** un acceso. Ojo: la persona lo pierde cuando venza la licencia que ya tiene en
   su aparato, como máximo 30 días después. Es el precio de que la aplicación funcione sin
   internet.
+- **Editar los planos de venta** (tarjeta «Planos de venda»): crear un plan, cambiar precio,
+  días o descripción, y activarlo o esconderlo. La página de venta y el checkout obedecen al
+  instante; quien ya pagó conserva el plazo que compró.
 - Ver cuántas cuentas hay, cuántas pagan, cuántas son cortesía y cuántas vencen en 30 días.
 
 Una cortesía tuya **sobrevive** a un reembolso del proveedor: si tú se lo diste, solo tú se
@@ -264,8 +268,13 @@ No lo he ejecutado: es una decisión tuya y visible hacia afuera.
 - [ ] Me concedo acceso desde el panel y la aplicación se desbloquea.
 - [ ] Apago el wifi y la aplicación sigue funcionando.
 - [ ] Me revoco desde el panel y, tras vencer la licencia, pierdo el acceso.
-- [ ] Compro con un cupón del 100 % y aparezco como «pagante» en el panel.
-- [ ] Pido reembolso y pierdo el acceso.
-- [ ] La edición libre abre sin pedir cuenta y muestra 40 preguntas con referencias.
+- [ ] En el panel, la tarjeta «Planos de venda» muestra 57/147/247 y editar un precio se
+      refleja en la página de venta al recargarla.
+- [ ] En el **sandbox** de dLocal Go: compro un pase con el PIX de prueba, aparezco como
+      «pagante» en el panel, pido reembolso de prueba y pierdo el acceso.
+- [ ] En producción: una compra real pequeña con tarjeta brasileña — sin IOF en el extracto,
+      reembolso real corta el acceso, y el retiro a COP llega con spread aceptable.
+- [ ] La edición libre abre sin pedir cuenta, muestra 40 preguntas con referencias y el botón
+      «Conhecer os planos» lleva a `/assinar/`.
 - [ ] `python3 scripts/12_validar_justificativas.py` termina sin errores.
 - [ ] `nuvem/supabase/tests/rodar_testes.sh` termina con «TODAS AS PROVAS PASSARAM».

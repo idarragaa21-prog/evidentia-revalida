@@ -68,25 +68,43 @@ Cursos completos van de R$ 2.967 a R$ 8.767 (MedCof, Medway, Eu Médico) y hasta
 
 ## 3. Precio
 
-**[Hipótesis]** SKU único, dos periodicidades:
+**[Decisión de Diego, 2026-08-06]** El **semestral cuesta R$ 247** y es el plan héroe. La
+escalera entera se construyó hacia atrás desde ese número: el mensual anterior de R$ 39 la
+invertía (39×6 = 234 < 247 — pagar mes a mes salía más barato que comprometerse 6 meses).
 
-- **R$ 39/mês**
-- **R$ 247/ano** (equivale a R$ 20,58/mês — 47 % menos que el mensual)
+| Plan | Precio | Por mes | Descuento | Papel en la escalera |
+|:--|--:|--:|--:|:--|
+| **Mensal** (pase de 30 días) | **R$ 57** | R$ 57,00 | — | Puerta de entrada; fija el ancla interna |
+| **Trimestral** (pase de 90 días) | **R$ 147** | R$ 49,00 | 14 % | Puente: cuesta exactamente lo que Revalida Resolve cobra por UN mes |
+| **Semestral** (pase de 180 días) | **R$ 247** | R$ 41,17 | 28 % | **Héroe**: un ciclo completo de preparación hasta la prueba |
 
-Y una **capa gratuita permanente de 40 preguntas** (8 por área, mezcladas entre las 4 ediciones),
-con la justificación referenciada completa. No es una demo mutilada: es el producto entero sobre
-un décimo del banco.
+Familia terminada en 7, la convención del mercado digital brasileño. **Sin plan anual al
+lanzamiento**: el Revalida tiene dos ediciones al año, el ciclo real de preparación es ≤ 6
+meses, y un banco de 500 preguntas no sostiene honestamente una promesa de 12 meses.
+Reevaluar el anual (R$ 397) cuando el banco pase de ~1.000 preguntas o cuando ≥ 20 % de los
+semestrales renueven para un segundo ciclo — esos renovadores SON el mercado del anual.
 
-**Ancla explícita**: R$ 247/año es **la mitad** de Revalida Resolve (R$ 497), que es el producto
-más parecido y el que el candidato encontrará al comparar. La razón para estar por debajo es
-honesta y hay que decirla en la primera pantalla: *Evidentia tiene menos preguntas — solo las 400
-oficiales de las últimas cuatro ediciones — pero cada una está conferida contra el cuaderno del
-INEP y justificada con la fuente citada.*
+**Venta como pases de pago único, sin renovación automática** (fase 1): habilita PIX —
+dominante en Brasil —, elimina las disputas por renovaciones no deseadas, y el backend ya
+corta el acceso al vencer la licencia firmada. La recompra se dispara con recordatorios por
+correo (D-7 y D-1 del vencimiento). **La escalera vive en la tabla `planos` y Diego la edita
+desde el panel** — cambiar un precio no requiere republicar nada.
 
-**Criterio de falsación**: si en los primeros 60 días con tráfico real la conversión de la capa
-gratuita a pago es menor al 2 %, el problema es el precio o la promesa, no el volumen — y se
-prueba R$ 197/año antes de tocar el producto. Si la conversión supera el 6 %, el precio está bajo
-y se sube a R$ 297 en la cohorte siguiente, respetando el precio a quien ya renovó.
+Y una **capa gratuita permanente de 40 preguntas** (8 por área), con la justificación
+referenciada completa. No es una demo mutilada: es el producto entero sobre un décimo del banco.
+
+**Ancla explícita**: contra Revalida Resolve (R$ 147/mes o R$ 497/año), Meedik (R$ 129,99/mes)
+y MedTask (R$ 249/mes). La razón para estar por debajo es honesta y se dice en la primera
+pantalla: *Evidentia tiene menos preguntas — solo las 500 oficiales de las últimas cinco
+ediciones — pero cada una está conferida contra el cuaderno del INEP y justificada con la
+fuente citada.* Tres meses de Evidentia cuestan lo que el comparable directo cobra por un mes.
+
+**Criterio de falsación (primeros 60 días con tráfico real)**: si el semestral es < 30 % de
+las unidades vendidas, la escalera no empuja al plazo largo → subir el mensual a R$ 67 y medir
+30 días más. Si > 50 % de los mensuales no recompra al mes 2 mientras el reembolso semestral
+se mantiene < 5 %, el mensual funciona como prueba barata que fuga → eliminarlo y vender solo
+pases de 3 y 6 meses. Si la conversión total es < 1 % con ≥ 500 visitas cualificadas y PIX
+operativo, el problema es la propuesta o la página, no el precio.
 
 **Garantía**: 7 días con devolución total, igual que el mercado. Es barato de honrar y elimina la
 objeción principal de un producto nuevo sin reputación.
@@ -187,33 +205,57 @@ Brasil y México. Para usar Stripe habría que constituir entidad legal, obtener
 fiscal, dirección física y cuenta bancaria en un país soportado (típicamente una LLC
 estadounidense).
 
-**[Verificado] La comparación real**:
+**[Verificado 2026-08-06] La comparación real**, tras investigación con fuentes primarias y
+verificación adversarial (11 agentes, 16 plataformas). **Hotmart quedó descartado por decisión
+de Diego** — esto es una aplicación descargable, no un curso — y todas las plataformas
+brasileñas de su estilo (Kiwify, Cakto, Ticto, Eduzz, Monetizze) exigen CPF/CNPJ y banco en
+Brasil, así que ni siquiera son elegibles:
 
-| Ruta | Comisión | PIX recurrente | Boleto / parcelado | ¿Vendedor colombiano? |
+| Ruta | Comisión efectiva | PIX | ¿Persona natural colombiana? | Retiro a Colombia |
 |:--|:--|:--|:--|:--|
-| **Hotmart** | 9,9 % + R$ 1,00 | Sí (Pix Automático) | Sí, ambos | **Sí, verificado** |
-| Stripe (con LLC extranjera) | ~1,9 % (PIX 1,19 % + Billing 0,7 %) | Sí | No | Requiere constituir entidad |
-| Kiwify | 8,99 % + R$ 2,49 | Sí | Sí | No documentado |
-| Paddle | 5 % + US$ 0,50 | **Solo pago único** | No | Sí |
+| **dLocal Go** | PIX ~1,17 % · tarjeta ~3,53 % | Sí (pago único) | **Sí, documentado** («Emprendedor Individual», sin exigir RUT al registrarse) | **COP directo al banco, gratis sobre US$ 10** |
+| Paddle (plan B) | 5 % + US$ 0,50 | Solo pago único | Sí (Colombia no está excluida) | USD vía Payoneer/SWIFT (mín. US$ 100) |
+| FastSpring | a negociar con ventas | Sí, incluso recurrente | Inferido, sin confirmación positiva | — (hold de 45 días a nuevos) |
+| Lemon Squeezy | ~6,5-7 % en Brasil | No | Sí | Riesgo: en mantenimiento tras la compra por Stripe; su sucesor no soporta Colombia |
+| Stripe (con LLC extranjera) | ~1,9 % | Sí | Requiere constituir entidad | — |
 
-**Decisión: lanzar con Hotmart.** **[Estimado]** La diferencia de comisión (9,9 % frente a ~1,9 %)
-son unos R$ 24 por suscripción anual de R$ 247. Constituir una LLC estadounidense cuesta más que
-eso durante los primeros cientos de clientes, y añade contabilidad internacional. Además la ruta
-Stripe carga **3,5 % de IOF** al comprador brasileño **[Verificado]** y en su extracto aparece
-«Ebanx», no la marca — un costo de conversión y de confianza que probablemente supera el ahorro.
+**Decisión: lanzar con dLocal Go.** Es el único circuito donde todo funciona a la vez:
+(1) el comprador brasileño paga **en reales, como transacción doméstica** adquirida por dLocal
+Brasil — PIX o tarjeta local, sin IOF ni tarjeta habilitada para el exterior; (2) Diego retira
+**en COP directo a su banco colombiano**; (3) la documentación acepta explícitamente persona
+física colombiana sin sociedad; (4) la comisión es 3-5 puntos menor que las alternativas. El
+argumento clásico de Paddle — *merchant of record* — vale poco aquí: Brasil **no** está en su
+lista de jurisdicciones fiscales, así que tampoco liquidaría el impuesto brasileño del
+comprador, y su checkout es una compra internacional con IOF ~3,5 %.
 
-Hotmart, además: acepta productores colombianos con retiro en COP o USD **[Verificado]**, es la
-plataforma que el propio competidor ancla (Revalida Resolve) usa, ofrece PIX, boleto, parcelado en
-12x y Pix Automático, y actúa como *merchant of record* resolviendo los impuestos.
+**Modelo por fases, dictado por dos restricciones verificadas de dLocal Go** (el débito
+automático de suscripciones es solo con tarjeta, y no hay webhook push documentado para las
+ejecuciones recurrentes):
 
-**Advertencia [Verificado]**: al registrar la cuenta fuera de Brasil, «suas novas vendas e
-comissões passarão a ser geradas em Dólares (USD) ou Euros (EUR)». Queda por confirmar
-directamente con Hotmart si eso significa perder el precio en reales y el catálogo brasileño de
-medios de pago, o si solo cambia la moneda de liquidación. **Es la pregunta número uno antes de
-publicar precios.**
+- **Fase 1 — lanzamiento**: los tres planes como **pases de pago único** (30/90/180 días),
+  PIX o tarjeta. El flujo está 100 % cubierto por la notificación documentada
+  (`payment_id` → GET payment → PAID) y el backend ya corta el acceso al vencer la licencia.
+  Sin renovación automática: recordatorios de recompra por correo en D-7 y D-1.
+- **Fase 2 — assinatura mensual con tarjeta**: solo después de confirmar por escrito con
+  soporte de dLocal Go cómo se notifican las ejecuciones recurrentes (o de validar el polling
+  diario en sandbox). No se publica un modo de cobro cuyo aviso al backend no está confirmado.
 
-**Migración**: cuando el volumen anual supere ~R$ 100.000, la LLC + Stripe se amortiza. El código
-del webhook está escrito para admitir varios proveedores desde el día uno.
+**Estado técnico: hecho y desplegado.** `criar-checkout` crea el pedido con el precio leído de
+la tabla `planos` (nunca del navegador) y lo congela en `checkouts`; el webhook verifica la
+firma HMAC-SHA256 de la notificación, consulta el pago en el API del proveedor — el estado
+jamás se cree de la notificación — y activa o revoca. Falta solo el onboarding de Diego
+(runbook, paso 3).
+
+**Riesgos abiertos** (del dossier de verificación adversarial): la aprobación del onboarding es
+discrecional hasta pasar el KYC; reserva de garantía del 5-10 % sin plazo de liberación escrito;
+el extracto del comprador muestra «DL*/DLOCAL» y no la marca (avisado en el checkout y en el
+correo de compra para contener contracargos); spread BRL→COP no publicado (medirlo en el primer
+retiro real); sin *merchant of record*, los impuestos colombianos (RUT/DIAN, renta) son de
+Diego — cita con su contador.
+
+**Migración**: cuando la facturación anual supere ~R$ 100.000, revisar la LLC + Stripe
+(~1,9 %). El webhook ya entiende Stripe: solo hay que apuntar el sufijo `/stripe` y poner
+`STRIPE_WEBHOOK_SECRET`.
 
 **Tiendas móviles [Verificado]**: Apple y Google obligan a usar su facturación (30 %, o 15 % con
 el Small Business Program) para desbloquear contenido dentro de la app. Por eso la app móvil
@@ -253,18 +295,30 @@ clave pública embebida, sin llamar a nadie. Funciona un mes entero sin señal. 
 acceso al vencer la licencia vigente — como máximo 30 días después. Es el equilibrio entre
 «funciona offline» y «puedo cortar el acceso».
 
-**Estado: construido y probado.**
+**Estado: construido, probado y DESPLEGADO** (proyecto `evidentia-revalida`, ref
+`flnawwzkmttsxuozjwar`, región São Paulo — 2026-08-06).
 
-- `nuvem/supabase/migrations/202608050001_revalida_assinaturas.sql` — esquema completo. Ninguna
+- `nuvem/supabase/migrations/202608050001_revalida_assinaturas.sql` — esquema base. Ninguna
   escritura directa desde el cliente; toda mutación pasa por RPC `security definer` auditada;
   RLS activa en todas las tablas; el administrador vive en una tabla que solo la migración puebla.
-- `nuvem/supabase/tests/` — **26 pruebas contra un PostgreSQL real, todas pasando**, incluidas las
-  de seguridad (un usuario común no puede conceder acceso ni listar cuentas) y las de negocio
-  (idempotencia de pagos, renovación que suma al plazo vigente, revocación que corta las licencias
-  ya entregidas). Se corren con `nuvem/supabase/tests/rodar_testes.sh`, sin Docker y sin nube.
-- `nuvem/supabase/functions/emitir-licenca/` — emite la licencia firmada.
-- `nuvem/supabase/functions/webhook-pagamento/` — recibe los eventos de pago con verificación de
-  firma y tolerancia de tiempo contra ataques de repetición.
+- `nuvem/supabase/migrations/202608060002_planos_venda_e_checkouts.sql` — la escalera real en
+  datos (57/147/247), tabla `checkouts` (el pedido congela email, plan y precio), y las RPC de
+  administración de planos (`listar_planos_admin`, `salvar_plano`) para que Diego edite precios
+  desde el panel.
+- `nuvem/supabase/tests/` — **pruebas contra un PostgreSQL real, todas pasando** (~40), incluidas
+  las de seguridad (un usuario común no puede conceder acceso, listar cuentas ni tocar planos o
+  checkouts) y las de negocio (idempotencia de pagos, renovación que suma al plazo vigente,
+  revocación que corta licencias, escalera monótona por día). `nuvem/supabase/tests/rodar_testes.sh`.
+- `nuvem/supabase/functions/emitir-licenca/` — emite la licencia firmada. **Desplegada.**
+- `nuvem/supabase/functions/webhook-pagamento/` — dLocal Go (HMAC + estado leído del API, nunca
+  de la notificación; reembolsos revocan) y Stripe. **Desplegada.**
+- `nuvem/supabase/functions/criar-checkout/` — crea el pedido y devuelve la URL de pago; el
+  precio sale de la tabla `planos`. **Desplegada** (responde «vendas abrem em breve» hasta que
+  existan las credenciales de dLocal Go).
+- `app-web/assinar/` — la página de venta, con los planos leídos en vivo de la tabla. El
+  service worker fue ajustado para no desviarla al aplicativo.
+- `nuvem/painel/` — el panel del dueño ganó la tarjeta «Planos de venda»: crear, editar precio,
+  activar/desactivar planes sin tocar código.
 
 ---
 
@@ -342,17 +396,20 @@ producto entero, que es justamente lo único que lo diferencia.
 |:--|:--|
 | Mapa del proyecto | **hecho** |
 | Esquema de justificaciones + porta de calidad | **hecho** |
-| Backend de suscripciones, con 34 pruebas contra PostgreSQL | **hecho** |
+| Backend de suscripciones probado contra PostgreSQL | **hecho** — y **desplegado** en el proyecto real |
 | Catálogo de fuentes verificadas | **hecho** — 318 fuentes, 183 con DOI conferido |
-| Las 400 justificaciones referenciadas | **hecho** — 94 % citan al menos una fuente |
+| Las 500 justificaciones referenciadas | **hecho** — 500/500 estructuradas, 458 con fuente del catálogo, 42 con sello «estudo» honesto |
 | Interfaz: bloque de referencias, pantalla de cuenta, atribución por ítem | **hecho** |
-| Panel de administración | **hecho** |
+| Camino de compra en el app (edición libre y pantalla de activación → /assinar/) | **hecho** |
+| Panel de administración, con gestión de planos y precios | **hecho** |
 | Apps empaquetadas: macOS y Android | **hecho**; Windows y Linux configurados; iPhone por PWA |
 | Edición gratuita de 40 preguntas | **hecho** |
-| Suite automatizada | **hecho** — 116 pruebas pasando |
+| Suite automatizada | **hecho** — SQL (~40) + interfaz (116+) pasando |
 | Runbook de activación | **hecho** — `produto/RUNBOOK_ATIVACAO.md` |
-| Edición 2026/1 (100 preguntas nuevas) | preguntas, figuras y gabarito **hechos**; clasificación y justificaciones en curso |
-| Página de venta | pendiente — depende de la respuesta de Hotmart sobre la moneda |
+| Edición 2026/1 (100 preguntas nuevas) | **hecho** — integrada con figuras, gabarito y justificaciones |
+| Nube desplegada (esquema, secretos, 3 funciones) | **hecho** — 2026-08-06 |
+| Página de venta (`app-web/assinar/`) | **hecha** — planos en vivo; se publica al hacer merge a `main` |
+| Cobro real | **pendiente de Diego**: onboarding en dLocal Go + credenciales (runbook, paso 3) |
 
 ---
 
@@ -360,10 +417,20 @@ producto entero, que es justamente lo único que lo diferencia.
 
 Ninguna de estas se puede automatizar; todas requieren su identidad, su tarjeta o su firma.
 
-- Abrir cuenta de **Hotmart** como productor y confirmar con su soporte el punto de la moneda.
-- Crear el proyecto de **Supabase** de producción (uno nuevo, no el de Atlas).
+- **Onboarding en dLocal Go** como persona física (cédula, comprobante de domicilio < 6 meses,
+  certificación bancaria en PDF de cuenta a su nombre) y, aprobada la cuenta, poner las
+  credenciales como secretos (`DLOCALGO_API_KEY`, `DLOCALGO_SECRET_KEY`) — runbook, paso 3.
+- Confirmar por escrito con soporte de dLocal Go: condiciones reales de la reserva (¿5 o 10 %?,
+  ¿cuándo se libera?), si la categoría «aplicación de estudio con licencias» pasa compliance,
+  el descriptor del extracto (¿«DL\*EVIDENTIA» es posible?) y — para la fase 2 — cómo se
+  notifican las ejecuciones de assinatura.
+- ~~Crear el proyecto de **Supabase** de producción~~ — **hecho** (`evidentia-revalida`,
+  São Paulo). Falta solo crear su cuenta en el app y auto-nombrarse administrador (runbook, paso 1).
 - **Consulta al abogado brasileño** con las cuatro preguntas de la sección 4.
 - **Registrar «EVIDENTIA» en el INPI, clase 41** — la clase está libre hoy.
-- Decidir si el repositorio pasa a privado y cuándo.
+- Cita con su **contador en Colombia**: RUT/DIAN, facturación de exportación de servicios.
+- Decidir si el repositorio pasa a privado y cuándo, y publicar la página de venta (merge a `main`).
 - Cuenta **Apple Developer** (US$ 99/año) y **Google Play** (US$ 25 único), si quiere las tiendas.
 - Certificado **Developer ID** de Apple para firmar la app de escritorio sin advertencias.
+- La primera venta real pequeña: verificar que no aparece IOF en el extrato, ejecutar un
+  reembolso real, y medir el spread BRL→COP del primer retiro contra la tasa del día.

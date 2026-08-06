@@ -269,8 +269,8 @@ begin
 
   -- 3. Pagamento anterior ao cadastro nao se perde: e resgatado ao criar a conta.
   perform pg_temp.vira(null);
-  v_r := public.registrar_pagamento('hotmart', 'evt_antes', 'PURCHASE_APPROVED',
-                                    'novo@exemplo.com', 'anual', 365, 'sub_novo');
+  v_r := public.registrar_pagamento('dlocalgo', 'evt_antes', 'PAYMENT_PAID',
+                                    'novo@exemplo.com', 'semestral', 180, 'DP-antes');
   perform pg_temp.checa('pagamento sem conta fica pendente', (v_r ->> 'motivo') = 'sem_conta');
   insert into auth.users (email) values ('novo@exemplo.com') returning id into v_novo;
   perform pg_temp.vira(v_novo);
@@ -291,6 +291,76 @@ begin
   perform pg_temp.vira(v_novo);
   perform pg_temp.checa('licenca deixa de valer assim que o acesso e revogado',
     not public.licenca_valida(v_jti));
+
+  -- 5. A escada de lancamento vive em dados e so o dono a governa.
+  perform pg_temp.vira(null);
+  perform pg_temp.checa('escada de lancamento: mensal 30 dias por R$57',
+    (select dias = 30 and preco_centavos = 5700 and ativo from public.planos where id = 'mensal'));
+  perform pg_temp.checa('escada de lancamento: trimestral 90 dias por R$147',
+    (select dias = 90 and preco_centavos = 14700 and ativo from public.planos where id = 'trimestral'));
+  perform pg_temp.checa('escada de lancamento: semestral 180 dias por R$247',
+    (select dias = 180 and preco_centavos = 24700 and ativo from public.planos where id = 'semestral'));
+  perform pg_temp.checa('o anual esta fora de venda no lancamento',
+    (select not ativo from public.planos where id = 'anual'));
+  -- a razao de ser da escada: cada prazo maior custa menos por dia
+  perform pg_temp.checa('preco por dia decresce ao subir de plano',
+    (select (select preco_centavos::numeric / dias from public.planos where id = 'mensal')
+          > (select preco_centavos::numeric / dias from public.planos where id = 'trimestral')
+       and (select preco_centavos::numeric / dias from public.planos where id = 'trimestral')
+          > (select preco_centavos::numeric / dias from public.planos where id = 'semestral')));
+
+  perform pg_temp.vira(v_ana);
+  begin
+    perform public.listar_planos_admin();
+    raise exception 'FALHOU: pessoa comum listou os planos de administracao';
+  exception when insufficient_privilege then
+    raise notice 'ok: pessoa comum nao lista planos de administracao';
+  end;
+  begin
+    perform public.salvar_plano('promo', 'Promo', null, 30, 1000);
+    raise exception 'FALHOU: pessoa comum salvou um plano';
+  exception when insufficient_privilege then
+    raise notice 'ok: pessoa comum nao salva plano';
+  end;
+
+  perform pg_temp.vira(v_dono);
+  v_r := public.salvar_plano('mensal', 'Mensal', 'Acesso completo por 30 dias', 30, 6700, true);
+  perform pg_temp.checa('o dono muda o preco do mensal pelo painel',
+    (v_r ->> 'preco_centavos') = '6700');
+  perform pg_temp.checa('a mudanca de plano fica auditada',
+    exists (select 1 from public.auditoria where acao = 'plano.salvo'
+             and detalhes ->> 'plano' = 'mensal'));
+  perform public.salvar_plano('mensal', 'Mensal', 'Acesso completo por 30 dias', 30, 5700, true);
+  begin
+    perform public.salvar_plano('Plano Invalido!', 'X', null, 30, 1000);
+    raise exception 'FALHOU: identificador invalido foi aceito';
+  exception when invalid_parameter_value then
+    raise notice 'ok: identificador de plano invalido e recusado';
+  end;
+
+  -- 6. Checkout: o pedido congela email, plano e preco; o cliente nao o enxerga.
+  perform pg_temp.vira(null);
+  v_r := public.registrar_checkout('ev-semestral-abc123def456', 'compradora@exemplo.com', 'semestral');
+  perform pg_temp.checa('checkout registrado congela dias e preco',
+    (v_r ->> 'dias') = '180' and (v_r ->> 'preco_centavos') = '24700');
+  begin
+    perform public.registrar_checkout('ev-anual-abc123def456', 'compradora@exemplo.com', 'anual');
+    raise exception 'FALHOU: checkout aceitou plano fora de venda';
+  exception when no_data_found then
+    raise notice 'ok: plano fora de venda nao gera checkout';
+  end;
+  perform pg_temp.checa('anotar_checkout vincula o pagamento do provedor',
+    public.anotar_checkout('ev-semestral-abc123def456', 'DP-777', 'aguardando_pagamento'));
+  perform pg_temp.checa('consultar_checkout devolve o pedido inteiro',
+    (public.consultar_checkout('ev-semestral-abc123def456') ->> 'payment_id') = 'DP-777');
+  perform pg_temp.checa('checkouts sao invisiveis para o cliente',
+    not has_table_privilege('authenticated', 'public.checkouts', 'select')
+    and not has_table_privilege('anon', 'public.checkouts', 'select'));
+  perform pg_temp.checa('cliente nao registra checkout por conta propria',
+    not has_function_privilege('authenticated', 'public.registrar_checkout(text, text, text)', 'execute')
+    and not has_function_privilege('anon', 'public.registrar_checkout(text, text, text)', 'execute'));
+  perform pg_temp.checa('o servidor (service role) registra checkout',
+    has_function_privilege('service_role', 'public.registrar_checkout(text, text, text)', 'execute'));
 
   raise notice 'TODAS AS PROVAS PASSARAM';
 end
