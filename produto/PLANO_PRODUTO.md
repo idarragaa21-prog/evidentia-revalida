@@ -59,8 +59,16 @@ Evidentia vende *certeza verificable*, no cantidad.
 Cursos completos van de R$ 2.967 a R$ 8.767 (MedCof, Medway, Eu Médico) y hasta ~R$ 23.000
 (Estratégia MED). Ese no es el segmento de Evidentia.
 
-**[Verificado]** Tamaño: 17.121 inscritos en Revalida 2025.1, con 25,49 % de aprobación — unos
-12.700 candidatos por edición que no aprueban y vuelven el año siguiente. Dos ediciones al año.
+**[Sin fuente primaria — no usar en marketing]** La cifra de «17.121 inscritos en 2025.1 con
+25,49 % de aprobación» circulaba en este plan sin fuente localizable. Una revisión posterior
+encontró 17.776 inscritos confirmados en 2025/1 y no pudo localizar el origen del 25,49 %.
+**No cites ninguno de los dos hasta abrir el dato en gov.br/inep**: en un producto cuyo
+argumento es el rigor, un número mal citado en la página de venta destruye justo lo que vendes.
+
+**[Verificado 2026-08-06]** Lo que sí está confirmado y manda sobre el calendario: **la primera
+etapa del Revalida 2026/2 se aplica el 13 de septiembre de 2026**; las inscripciones fueron del
+16 al 23 de junio, con tasa de R$ 410, y la prueba teórica usa las mismas preguntas del ENAMED
+2026. Fuente: edital y noticias del INEP en gov.br. Dos ediciones al año.
 
 **[Verificado]** El estándar del mercado es prueba o garantía de **7 días** (Medway da 10).
 

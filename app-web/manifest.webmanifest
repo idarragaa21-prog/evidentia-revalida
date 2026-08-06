@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Evidentia · Revalida",
   "short_name": "Revalida",
-  "description": "Banco de 400 questões objetivas do Revalida (INEP) com simulados, correção detalhada e justificativa questão a questão. Funciona sem internet.",
+  "description": "Questões objetivas oficiais do Revalida (INEP) com simulados, correção detalhada e justificativa referenciada questão a questão. Funciona sem internet.",
   "lang": "pt-BR",
   "dir": "ltr",
   "start_url": "./index.html",
