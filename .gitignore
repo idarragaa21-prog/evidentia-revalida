@@ -41,3 +41,12 @@ nuvem/chaves/
 !nuvem/chaves/.gitkeep
 nuvem/supabase/client_config.local.json
 aplicativo/Revalida_Evidentia_teste.html
+
+# A edicao completa e o produto pago: nao entra em repositorio, nem sequer privado.
+# Publica-la aqui entregaria de graca o que se vende, e o portao de licenca do lado
+# do aparelho e uma barreira de honestidade, nao um cofre — quem tem o arquivo tem
+# o conteudo. O que se distribui e o instalador assinado, depois da compra.
+aplicativo/Revalida_Evidentia.html
+app-android/www/index.html
+app-android/android/app/src/main/assets/public/index.html
+app-android/*.apk

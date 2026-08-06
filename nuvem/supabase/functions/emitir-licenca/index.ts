@@ -120,7 +120,16 @@ Deno.serve(async (req: Request) => {
     return json({ ativo: false, motivo: "assinatura_vencida" }, 200);
   }
 
-  // 4. Registra a entrega para poder revogar e auditar depois.
+  // 4. Antes de registrar, garante que dá para assinar. A ordem importa: registrar
+  //    primeiro e descobrir depois que a chave não está configurada encheria de linhas
+  //    mortas justamente a tabela que serve para revogar e auditar.
+  try {
+    await chavePrivada();
+  } catch {
+    return json({ erro: "servidor sem chave de assinatura configurada" }, 500);
+  }
+
+  // 5. Registra a entrega para poder revogar e auditar depois.
   const registro = await fetch(`${url}/rest/v1/rpc/registrar_licenca`, {
     method: "POST",
     headers: {

@@ -41,8 +41,19 @@ interface Traduzido {
   plano: string | null;
   dias: number;
   assinaturaProvedor: string | null;
+  clienteProvedor: string | null;
   eventoId: string;
   tipo: string;
+}
+
+// `planos.id` e chave estrangeira: mandar o NOME do produto derruba a ativacao inteira
+// com erro de integridade. Só viaja um id que exista no catalogo; o resto vira nulo,
+// que a coluna aceita, e o prazo continua vindo dos dias calculados.
+const PLANOS_CONHECIDOS = new Set(["anual", "semestral", "mensal", "cortesia"]);
+
+function planoValido(bruto: unknown): string | null {
+  const id = String(bruto ?? "").trim().toLowerCase();
+  return PLANOS_CONHECIDOS.has(id) ? id : null;
 }
 
 function diasPadrao(): number {
@@ -104,11 +115,12 @@ function traduzirHotmart(evento: Record<string, any>): Traduzido {
   return {
     acao,
     email,
-    plano: dados?.subscription?.plan?.name ?? dados?.product?.name ?? null,
+    plano: planoValido(dados?.subscription?.plan?.name ?? dados?.product?.name),
     dias: PERIODO_EM_DIAS[recorrencia] ?? diasPadrao(),
     assinaturaProvedor: dados?.subscription?.subscriber_code
       ? String(dados.subscription.subscriber_code)
       : (dados?.purchase?.transaction ? String(dados.purchase.transaction) : null),
+    clienteProvedor: dados?.buyer?.ucode ? String(dados.buyer.ucode) : null,
     eventoId: String(evento?.id ?? dados?.purchase?.transaction ?? ""),
     tipo,
   };
@@ -157,38 +169,65 @@ async function stripeValido(req: Request, carga: string): Promise<boolean> {
   return assinaturas.some((a) => igualSeguro(a, esperada));
 }
 
-const STRIPE_ATIVA = new Set([
-  "checkout.session.completed",
-  "invoice.paid",
-  "invoice.payment_succeeded",
-]);
+// Um unico pagamento no Stripe dispara varios eventos (checkout.session.completed,
+// invoice.paid, invoice.payment_succeeded). Se todos ativassem, a mesma compra
+// somaria prazo tres vezes. Por isso `invoice.paid` e a unica porta de ativacao
+// recorrente: ela cobre a primeira cobranca e todas as renovacoes. O checkout entra
+// so quando e compra avulsa (mode = "payment"), que nao gera fatura.
 const STRIPE_ENCERRA = new Set([
   "charge.refunded",
   "charge.dispute.created",
   "customer.subscription.deleted",
 ]);
 
+function acaoStripe(tipo: string, objeto: Record<string, any>): Acao {
+  if (tipo === "invoice.paid") return "ativar";
+  if (tipo === "checkout.session.completed") {
+    return objeto.mode === "payment" ? "ativar" : "ignorar";
+  }
+  return STRIPE_ENCERRA.has(tipo) ? "encerrar" : "ignorar";
+}
+
+/** Dias cobertos pela fatura, lidos do periodo que o proprio Stripe cobrou. */
+function diasDaFatura(objeto: Record<string, any>): number | null {
+  const linha = objeto?.lines?.data?.[0];
+  const inicio = Number(linha?.period?.start ?? NaN);
+  const fim = Number(linha?.period?.end ?? NaN);
+  if (!Number.isFinite(inicio) || !Number.isFinite(fim) || fim <= inicio) return null;
+  const dias = Math.round((fim - inicio) / 86400);
+  return dias > 0 && dias <= 3650 ? dias : null;
+}
+
 function traduzirStripe(evento: Record<string, any>): Traduzido {
   const objeto = evento?.data?.object ?? {};
   const tipo = String(evento?.type ?? "");
+  const linha = objeto?.lines?.data?.[0];
 
   const email = String(
-    objeto.customer_email ?? objeto.customer_details?.email ?? objeto.receipt_email ?? "",
+    objeto.customer_email ?? objeto.customer_details?.email ??
+      objeto.receipt_email ?? objeto.billing_details?.email ?? "",
   ).toLowerCase().trim();
 
   // O plano viaja em metadata para nao depender do catalogo de precos do provedor.
-  const plano = objeto.metadata?.plano ??
-    evento?.data?.object?.lines?.data?.[0]?.metadata?.plano ?? null;
-  const diasMeta = Number(objeto.metadata?.dias ?? NaN);
+  const plano = objeto.metadata?.plano ?? linha?.metadata?.plano ?? null;
 
+  // A fatura de renovacao e gerada pelo proprio Stripe e nao carrega o metadata da
+  // compra original: sem ler o periodo cobrado, toda renovacao mensal viraria um ano.
+  const diasMeta = Number(objeto.metadata?.dias ?? linha?.metadata?.dias ?? NaN);
+  const dias = Number.isFinite(diasMeta) && diasMeta > 0
+    ? diasMeta
+    : (diasDaFatura(objeto) ?? diasPadrao());
+
+  // O estorno chega como cobranca (ch_...), que nunca casa com o sub_/cs_ guardado na
+  // ativacao. O cliente (cus_...) aparece nos dois lados e e o elo que permite achar a
+  // assinatura a cancelar; por isso ele viaja sempre, separado do id da assinatura.
   return {
-    acao: STRIPE_ATIVA.has(tipo) ? "ativar" : STRIPE_ENCERRA.has(tipo) ? "encerrar" : "ignorar",
+    acao: acaoStripe(tipo, objeto),
     email,
-    plano,
-    dias: Number.isFinite(diasMeta) && diasMeta > 0 ? diasMeta : diasPadrao(),
-    assinaturaProvedor: objeto.subscription
-      ? String(objeto.subscription)
-      : (objeto.id ? String(objeto.id) : null),
+    plano: planoValido(plano),
+    dias,
+    assinaturaProvedor: objeto.subscription ? String(objeto.subscription) : null,
+    clienteProvedor: objeto.customer ? String(objeto.customer) : null,
     eventoId: String(evento?.id ?? ""),
     tipo,
   };
@@ -235,7 +274,17 @@ Deno.serve(async (req: Request) => {
 
   if (traduzido.acao === "ignorar") return texto(`evento ignorado: ${traduzido.tipo}`, 200);
   if (!traduzido.eventoId) return texto("evento sem identificador", 400);
-  if (!traduzido.email) return texto("evento sem email do cliente", 200);
+
+  // Ativar exige saber de quem e a compra. Encerrar, nao: o evento de estorno do Stripe
+  // nao carrega e-mail, e o banco resolve o dono pelo id da assinatura ou do cliente.
+  // Descartar aqui, como se fazia antes, deixava todo reembolso sem efeito.
+  if (traduzido.acao === "ativar" && !traduzido.email) {
+    return texto("ativacao sem email do cliente", 200);
+  }
+  if (traduzido.acao === "encerrar" && !traduzido.email &&
+      !traduzido.assinaturaProvedor && !traduzido.clienteProvedor) {
+    return texto("encerramento sem nenhuma forma de identificar a assinatura", 200);
+  }
 
   const ativando = traduzido.acao === "ativar";
   const rpc = ativando ? "registrar_pagamento" : "encerrar_pagamento";
@@ -248,6 +297,7 @@ Deno.serve(async (req: Request) => {
       p_plano_id: traduzido.plano,
       p_dias: traduzido.dias,
       p_assinatura_provedor: traduzido.assinaturaProvedor,
+      p_cliente_provedor: traduzido.clienteProvedor,
       p_carga: { tipo: traduzido.tipo },
     }
     : {
@@ -256,6 +306,7 @@ Deno.serve(async (req: Request) => {
       p_tipo: traduzido.tipo,
       p_email: traduzido.email,
       p_assinatura_provedor: traduzido.assinaturaProvedor,
+      p_cliente_provedor: traduzido.clienteProvedor,
       p_carga: { tipo: traduzido.tipo },
     };
 

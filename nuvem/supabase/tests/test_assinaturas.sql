@@ -33,6 +33,9 @@ declare
   v_erro text;
   v_fim1 timestamptz;
   v_fim2 timestamptz;
+  v_carla uuid;
+  v_novo uuid;
+  v_jti uuid;
 begin
   -- pessoas
   insert into auth.users (email) values ('dono@evidentia.co') returning id into v_dono;
@@ -190,6 +193,104 @@ begin
   perform pg_temp.checa('resumo ve 1 assinatura ativa no total', (v_r ->> 'ativas') = '1');
   perform pg_temp.checa('busca por email encontra',
     (select count(*) = 1 from public.listar_pessoas('bruno')));
+
+  -- ---------------------------------------------------------------------------
+  -- O que o cliente alcanca. O PostgREST publica como /rpc/ tudo o que estiver em
+  -- `public` e for executavel pelo papel do token. O PostgreSQL concede EXECUTE a
+  -- PUBLIC em toda funcao nova, e revogar so de `authenticated` nao tira esse grant
+  -- herdado: sem revogar de PUBLIC, uma conta comum forjaria a propria assinatura.
+  -- ---------------------------------------------------------------------------
+  perform pg_temp.checa('registrar_pagamento fora do alcance do cliente',
+    not has_function_privilege('authenticated',
+      'public.registrar_pagamento(text, text, text, text, text, integer, text, jsonb, text)', 'execute'));
+  perform pg_temp.checa('encerrar_pagamento fora do alcance do cliente',
+    not has_function_privilege('authenticated',
+      'public.encerrar_pagamento(text, text, text, text, text, jsonb, text)', 'execute'));
+  perform pg_temp.checa('registrar_licenca fora do alcance do cliente',
+    not has_function_privilege('authenticated',
+      'public.registrar_licenca(uuid, timestamptz, text)', 'execute'));
+  perform pg_temp.checa('revalida_acesso_de fora do alcance do cliente',
+    not has_function_privilege('authenticated', 'public.revalida_acesso_de(uuid)', 'execute'));
+  perform pg_temp.checa('revalida_audita fora do alcance do cliente',
+    not has_function_privilege('authenticated', 'public.revalida_audita(text, uuid, jsonb)', 'execute'));
+  perform pg_temp.checa('visitante anonimo nao alcanca conceder_acesso',
+    not has_function_privilege('anon',
+      'public.conceder_acesso(text, integer, public.revalida_origem_acesso, text, text)', 'execute'));
+  perform pg_temp.checa('visitante anonimo nao alcanca meu_acesso',
+    not has_function_privilege('anon', 'public.meu_acesso()', 'execute'));
+
+  -- e o que ele precisa alcancar continua acessivel
+  perform pg_temp.checa('conta autenticada consulta o proprio acesso',
+    has_function_privilege('authenticated', 'public.meu_acesso()', 'execute'));
+  perform pg_temp.checa('conta autenticada pode tentar conceder (a funcao e quem barra)',
+    has_function_privilege('authenticated',
+      'public.conceder_acesso(text, integer, public.revalida_origem_acesso, text, text)', 'execute'));
+  perform pg_temp.checa('planos continuam legiveis sem sessao',
+    has_table_privilege('anon', 'public.planos', 'select'));
+  perform pg_temp.checa('eventos_pagamento invisivel ao cliente',
+    not has_table_privilege('authenticated', 'public.eventos_pagamento', 'select'));
+
+  -- ---------------------------------------------------------------------------
+  -- Buracos que a revisao adversarial encontrou
+  -- ---------------------------------------------------------------------------
+
+  -- 1. Pagar com o e-mail de outra pessoa nao apaga a cortesia dela.
+  --    (a Carla ganha cortesia; um estranho paga com o e-mail dela e pede reembolso)
+  insert into auth.users (email) values ('carla@exemplo.com') returning id into v_carla;
+  perform pg_temp.vira(v_dono);
+  perform public.conceder_acesso('carla@exemplo.com', 120, 'cortesia', null, 'bolsa');
+  perform pg_temp.vira(null);
+  perform public.registrar_pagamento('stripe', 'evt_ataque', 'checkout.completed',
+                                     'carla@exemplo.com', 'anual', 365, 'sub_ataque');
+  perform public.encerrar_pagamento('stripe', 'evt_ataque_est', 'charge.refunded',
+                                    'carla@exemplo.com', 'sub_ataque');
+  perform pg_temp.vira(v_carla);
+  v_r := public.meu_acesso();
+  perform pg_temp.checa('cortesia sobrevive a pagamento alheio seguido de estorno',
+    (v_r ->> 'ativo') = 'true');
+  perform pg_temp.checa('e o que sobra e a cortesia, nao o pagamento',
+    (v_r ->> 'origem') = 'cortesia');
+
+  -- 2. Estorno sem e-mail (o caso do Stripe) encontra o dono pelo id da assinatura.
+  perform pg_temp.vira(null);
+  perform public.registrar_pagamento('stripe', 'evt_semmail', 'invoice.paid',
+                                     'ana@exemplo.com', 'anual', 365, 'sub_ana');
+  perform pg_temp.vira(v_ana);
+  perform pg_temp.checa('ana volta a ter acesso pago',
+    (public.meu_acesso() ->> 'origem') = 'pagamento');
+  perform pg_temp.vira(null);
+  v_r := public.encerrar_pagamento('stripe', 'evt_semmail_est', 'charge.refunded',
+                                   '', 'sub_ana');
+  perform pg_temp.checa('estorno sem e-mail resolve pelo id da assinatura',
+    (v_r ->> 'ok') = 'true');
+  perform pg_temp.vira(v_ana);
+  perform pg_temp.checa('e o acesso pago realmente cai',
+    (public.meu_acesso() ->> 'ativo') = 'false');
+
+  -- 3. Pagamento anterior ao cadastro nao se perde: e resgatado ao criar a conta.
+  perform pg_temp.vira(null);
+  v_r := public.registrar_pagamento('hotmart', 'evt_antes', 'PURCHASE_APPROVED',
+                                    'novo@exemplo.com', 'anual', 365, 'sub_novo');
+  perform pg_temp.checa('pagamento sem conta fica pendente', (v_r ->> 'motivo') = 'sem_conta');
+  insert into auth.users (email) values ('novo@exemplo.com') returning id into v_novo;
+  perform pg_temp.vira(v_novo);
+  v_r := public.meu_acesso();
+  perform pg_temp.checa('ao criar a conta o pagamento e resgatado', (v_r ->> 'ativo') = 'true');
+  perform pg_temp.checa('e vem como pagamento', (v_r ->> 'origem') = 'pagamento');
+  perform pg_temp.checa('o evento deixa de estar pendente',
+    (select processado_em is not null and erro is null from public.eventos_pagamento
+      where provedor_evento_id = 'evt_antes'));
+
+  -- 4. A revogacao tem efeito no aparelho: licenca_valida passa a dizer nao.
+  perform pg_temp.vira(null);
+  v_jti := public.registrar_licenca(v_novo, now() + interval '30 days', 'mac do novo');
+  perform pg_temp.vira(v_novo);
+  perform pg_temp.checa('licenca recem-emitida e valida', public.licenca_valida(v_jti));
+  perform pg_temp.vira(v_dono);
+  perform public.revogar_acesso('novo@exemplo.com', 'teste de revogacao');
+  perform pg_temp.vira(v_novo);
+  perform pg_temp.checa('licenca deixa de valer assim que o acesso e revogado',
+    not public.licenca_valida(v_jti));
 
   raise notice 'TODAS AS PROVAS PASSARAM';
 end
