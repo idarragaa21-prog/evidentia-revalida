@@ -18,6 +18,7 @@
   /* tintas de texto sobre fundo tingido: garantem 4.5:1 (WCAG AA) */
   --good-ink:#0f6b45; --bad-ink:#9d3a2b; --gold-ink:#6a5410; --branco-ink:#6c7369;
   --gold-glow:rgba(176,141,76,.40); --gold-glow-2:rgba(176,141,76,.52);
+  --focus:#9a7530;
   --bg:#f4f3ec; --card:#ffffff; --ink:#1a2620; --ink-2:#4d5a51; --ink-3:#69756b;
   --line:#d3e1d8; --line-2:#bcd0c2;
   --shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.09);
@@ -57,6 +58,7 @@
   --branco:#93a08f; --branco-100:#1a2a20;
   --good-ink:#3fbb86; --bad-ink:#e0705f; --gold-ink:#cca862; --branco-ink:#a9b6a6;
   --gold-glow:rgba(0,0,0,.42); --gold-glow-2:rgba(0,0,0,.55);
+  --focus:#e2c98a;
   --bg:#08130d; --card:#0f1e16; --ink:#eaf1ea; --ink-2:#b6c6ba; --ink-3:#8fa094;
   --line:#1d3226; --line-2:#284735;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.35);
@@ -76,13 +78,31 @@ h3,h4{font-family:var(--ff);letter-spacing:0}
 p{margin:0}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus{outline:none}
-:focus-visible{outline:2.5px solid var(--sky);outline-offset:2px;border-radius:8px}
+/* Dourado e nao verde: o anel tem que se ver POR CIMA dos proprios estados
+   selecionados, que ja sao verdes (.chip.on, .modecard.on, .alt.sel). E sem
+   border-radius: o valor de 8px que havia aqui deformava tudo o que recebia
+   foco — um chip de 999px virava um retangulo de cantos suaves ao ser focado. */
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .switch:focus-visible,.chip:focus-visible,.preset:focus-visible{outline-offset:3px}
 .wrap{max-width:var(--maxw);margin:0 auto;
   padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 .hidden{display:none!important}
-.fade{animation:fade .32s ease both}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* Tres entradas em vez de uma: avancar entra pela direita, voltar pela esquerda,
+   e o resto sobe. Da a leitura de "onde estou indo" sem fingir uma continuidade
+   que nao existe — render() destroi o DOM anterior, entao nao ha tela saindo
+   para empurrar. 18px bastam para ler a direcao; um deslize de tela inteira
+   pediria as duas telas vivas ao mesmo tempo.
+
+   As tres terminam em opacity:1 e transform:none, que e exatamente o que a
+   suite espera antes de medir transbordo horizontal ou clicar em nada. */
+.fade,.enter-f,.enter-b{animation-duration:var(--t-screen);
+  animation-timing-function:var(--e-out);animation-fill-mode:both}
+.fade{animation-name:fade}
+.enter-f{animation-name:enter-fwd}
+.enter-b{animation-name:enter-back}
+@keyframes fade{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:none}}
+@keyframes enter-fwd{from{opacity:0;transform:translate3d(18px,0,0)}to{opacity:1;transform:none}}
+@keyframes enter-back{from{opacity:0;transform:translate3d(-18px,0,0)}to{opacity:1;transform:none}}
 
 /* ===================== TOPO ===================== */
 .appbar{position:sticky;top:0;z-index:40;background:var(--card);padding-top:var(--safe-t);
@@ -142,10 +162,19 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .stepper button:hover{background:var(--sky-100)}
 .stepper input{width:78px;height:48px;border:none;text-align:center;font-size:20px;font-weight:800;color:var(--navy);background:var(--card);font-family:inherit}
 [data-theme="dark"] .stepper input{color:var(--ink)}
-.stepper input:focus{outline:none}
+/* Offset negativo porque .stepper tem overflow:hidden e recortaria um anel
+   desenhado para fora. Antes aqui so havia outline:none, sem substituto: quem
+   navegava por teclado perdia o cursor ao chegar neste campo. */
+.stepper input:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
 .presetrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .preset{padding:11px 16px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
-.preset.on,.preset:hover{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100)}
+/* Separados de proposito: estavam na mesma regra, e por isso o atalho escolhido
+   ficava identico ao que estava apenas sob o cursor — nao dava para saber qual
+   estava valendo. O hover so insinua a borda; o selecionado tem fundo, peso e
+   um anel interno. */
+.preset:hover{border-color:var(--gold);color:var(--gold-ink)}
+.preset.on{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100);
+  font-weight:800;box-shadow:0 0 0 1px var(--gold) inset}
 
 /* toggle */
 .tg{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 2px;border-bottom:1px solid var(--line)}
@@ -300,7 +329,8 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .alt .key{width:30px;height:30px;flex:none;border-radius:9px;border:1.8px solid var(--line-2);display:grid;place-items:center;
   font-weight:800;font-size:15px;color:var(--ink-2);transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
 .alt .txt{font-size:15.5px;line-height:1.5;color:var(--ink);padding-top:3px}
-.alt.sel{border-color:var(--sky);background:var(--sky-100);box-shadow:0 4px 16px rgba(47,96,71,.20)}
+.alt.sel{border-color:var(--sky);background:var(--sky-100);
+  box-shadow:0 0 0 1px var(--sky) inset,0 4px 16px rgba(47,96,71,.20)}
 .alt.sel .key{background:var(--sky);border-color:var(--sky);color:#fff}
 [data-theme="dark"] .alt.sel .key,[data-theme="dark"] .alt.correct .key,[data-theme="dark"] .alt.wrong .key{color:#08130d}
 /* estados de revisão/estudo */
@@ -329,7 +359,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .qgrid button.answered{background:var(--sky);border-color:var(--sky);color:#fff}
 [data-theme="dark"] .qgrid button.answered{color:#08130d}
 .qgrid button.flagged::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.qgrid button.current{outline:3px solid var(--gold);outline-offset:1px}
+.qgrid button.current{box-shadow:0 0 0 2px var(--gold),0 0 0 5px var(--gold-glow)}
 
 /* ===================== RESULTADO ===================== */
 .result-hero{text-align:center;padding:30px 22px}
@@ -460,7 +490,7 @@ footer .brandline b{color:var(--navy)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .fade{animation:none}
+  .fade,.enter-f,.enter-b{animation:none}
 }
 /* estados de hover só onde existe cursor: evita hover "grudado" no toque */
 @media(hover:none){
@@ -468,7 +498,8 @@ footer .brandline b{color:var(--navy)}
     border-color:var(--line-2);background:var(--card);color:inherit;transform:none;box-shadow:none}
   .alt.sel:hover{border-color:var(--sky);background:var(--sky-100)}
   .chip.on:hover{background:var(--sky);border-color:var(--sky);color:#fff}
-  .preset.on:hover{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100)}
+  .preset.on:hover{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100);
+    box-shadow:0 0 0 1px var(--gold) inset}
   .modecard.on:hover{border-color:var(--sky);background:var(--sky-050)}
   .navbtn.primary:hover,.navbtn.finish:hover{border-color:transparent;color:inherit}
   /* Sem estes, o hover fica grudado depois do toque nestes controles tambem. */
@@ -639,7 +670,12 @@ function esc(t){return (t==null?"":String(t)).replace(/[&<>"]/g,c=>({"&":"&amp;"
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function fmtTime(s){s=Math.max(0,Math.floor(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
   return (h?h+":":"")+String(m).padStart(h?2:1,"0")+":"+String(ss).padStart(2,"0");}
-function go(scr,arg){ if(S&&S.timer&&scr!=="quiz"){/*keep*/} window.scrollTo(0,0); render(scr,arg); }
+function go(scr,arg){
+  if(S&&S.timer&&scr!=="quiz"){/*keep*/}
+  if(dirTela===0) dirTela=Math.sign((NIVEL[scr]??1)-(NIVEL[telaAtual]??0));
+  window.scrollTo(0,0);   // instantaneo: scroll suave brigaria com a entrada
+  render(scr,arg);
+}
 function poolFor(c){
   return QUESTOES.filter(q=>{
     if(!c.incluirAnuladas && q.anulada) return false;
@@ -651,10 +687,15 @@ function poolFor(c){
 
 /*==================== RENDER PRINCIPAL ====================*/
 let telaAtual="home";
+/* Direcao da proxima entrada: 1 avanca, -1 volta, 0 sobe, null nao anima.
+   NIVEL da a profundidade de cada tela; a diferenca entre a de destino e a
+   atual decide o sentido, sem precisar de historico. */
+let dirTela=0;
+const NIVEL={home:0,about:1,history:1,conta:1,quiz:1,result:2,review:3};
 function render(scr,arg){
   /* "wrap" precisa sobreviver ao render: é ela que dá a largura máxima e a margem
      lateral da coluna de conteúdo. Sem ela o conteúdo cola nas bordas da tela. */
-  const el=$("#screen"); el.className="wrap"; el.classList.add("fade");
+  const el=$("#screen"); el.className="wrap";
   if(scr!=="quiz") unbindQuizKeys();   // fora da prova, A–D e as setas voltam a ser teclas comuns
   /* Na edição assinada, sem licença válida só existe a tela de conta. */
   if(EDICAO==="completo" && !LIC.estado().liberado && scr!=="conta" && scr!=="about") scr="conta";
@@ -667,7 +708,11 @@ function render(scr,arg){
   else if(scr==="history") el.innerHTML=viewHistory();
   else if(scr==="about") el.innerHTML=viewAbout();
   else if(scr==="conta") el.innerHTML=viewConta(arg);
-  el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
+  /* Reinicia a animacao num DOM recem-construido: sem o reflow forcado o
+     navegador nao ve mudanca de classe e nao anima. */
+  void el.offsetWidth;
+  if(dirTela!==null) el.classList.add(dirTela>0?"enter-f":dirTela<0?"enter-b":"fade");
+  dirTela=0;
 }
 
 /*==================== INÍCIO ====================*/
@@ -951,19 +996,19 @@ function answer(orig){
   const it=curItem();
   if(S.cfg.feedback && it.resp) return;            // já corrigida em modo estudo
   it.resp=orig; persistRun();
-  if(S.cfg.feedback){ render("quiz"); return; }    // revela correção + justificativa
+  if(S.cfg.feedback){ dirTela=null; render("quiz"); return; }  // revela correção: cresce na própria tela, não navega
   // modo prova: atualiza a seleção no lugar (sem re-render → sem piscar)
   const alts=document.querySelectorAll('#alts .alt');
   if(alts.length){
     alts.forEach(b=>b.classList.toggle('sel', b.getAttribute('data-o')===orig));
     const rc=$("#respCount"); if(rc) rc.textContent=S.items.filter(x=>x.resp).length;
-  } else render("quiz");
+  } else { dirTela=null; render("quiz"); }
   if(S.cfg.autoAvancar){ setTimeout(()=>{ if(!S||S.finished)return; S.idx<S.items.length-1?nextQ():finishRun(); },240); }
 }
-function toggleFlag(){ curItem().flag=!curItem().flag; persistRun(); render("quiz"); }
-function nextQ(){ if(S.idx<S.items.length-1){S.idx++;persistRun();render("quiz");} }
-function prevQ(){ if(S.idx>0){S.idx--;persistRun();render("quiz");} }
-function gotoQ(i){ S.idx=i; persistRun(); closeModal(); render("quiz"); }
+function toggleFlag(){ curItem().flag=!curItem().flag; persistRun(); dirTela=null; render("quiz"); }
+function nextQ(){ if(S.idx<S.items.length-1){S.idx++;persistRun();dirTela=1;render("quiz");} }
+function prevQ(){ if(S.idx>0){S.idx--;persistRun();dirTela=-1;render("quiz");} }
+function gotoQ(i){ dirTela=Math.sign(i-S.idx); S.idx=i; persistRun(); closeModal(); render("quiz"); }
 function bindQuizKeys(){ document.onkeydown=(e)=>{
   if(!S||S.finished)return;
   if(e.ctrlKey||e.metaKey||e.altKey)return;        // Cmd+C copia, não responde a alternativa C
