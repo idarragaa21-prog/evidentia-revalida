@@ -18,6 +18,11 @@ from config import DADOS
 
 JUST_DIR = os.path.join(DADOS, "justificativas")
 CATALOGO = os.path.join(DADOS, "referencias.json")
+ALGORITMOS = os.path.join(DADOS, "algoritmos.json")
+
+CAMPOS_ALGORITMO = ("titulo", "fonte_id", "detalhe", "verificado_em", "verificacao",
+                    "no_inicial", "nos")
+TIPOS_NO = {"inicio", "decisao", "grupo", "conduta", "fim"}
 
 TIPOS = {
     "protocolo_ms", "diretriz_oficial_br", "lei_norma", "diretriz_sociedade",
@@ -51,6 +56,7 @@ def validar(parcial=False):
     just = carregar_justificativas(edicoes)
 
     erros, avisos, sem_fonte = [], [], []
+    citadas = set()
 
     # 1. Catalogo de fontes
     for fid, f in sorted(catalogo.items()):
@@ -70,7 +76,58 @@ def validar(parcial=False):
         if not isinstance(f["ano"], int) or not (1980 <= f["ano"] <= 2027):
             erros.append(f"{onde}: ano implausivel {f['ano']!r}")
 
-    citadas = set()
+    # 1b. Algoritmos clinicos. A regra e a mesma das referencias: nada desenhado de
+    #     memoria. Sem fonte verificada no catalogo, o algoritmo nao entra no produto.
+    algoritmos = json.load(open(ALGORITMOS, encoding="utf-8")) if os.path.exists(ALGORITMOS) else {}
+    for aid, alg in sorted(algoritmos.items()):
+        onde = f"algoritmos.json[{aid}]"
+        faltando = [c for c in CAMPOS_ALGORITMO if c not in alg]
+        if faltando:
+            erros.append(f"{onde}: campos ausentes {faltando}")
+            continue
+        if alg["fonte_id"] not in catalogo:
+            erros.append(f"{onde}: fonte_id {alg['fonte_id']!r} nao existe no catalogo")
+        else:
+            citadas.add(alg["fonte_id"])
+        if len(str(alg.get("verificacao", "")).strip()) < 20:
+            erros.append(f"{onde}: campo verificacao vazio ou generico demais")
+        if not str(alg.get("detalhe", "")).strip():
+            erros.append(f"{onde}: sem detalhe — a fonte precisa dizer ONDE esta cada ramo")
+
+        nos = alg.get("nos") or {}
+        if alg.get("no_inicial") not in nos:
+            erros.append(f"{onde}: no_inicial {alg.get('no_inicial')!r} nao existe em nos")
+            continue
+
+        for chave, no in sorted(nos.items()):
+            if no.get("tipo") not in TIPOS_NO:
+                erros.append(f"{onde}.{chave}: tipo invalido {no.get('tipo')!r}")
+            if not str(no.get("texto", "")).strip():
+                erros.append(f"{onde}.{chave}: sem texto")
+            destinos = [o.get("vai") for o in (no.get("opcoes") or [])]
+            if no.get("vai"):
+                destinos.append(no["vai"])
+            for destino in destinos:
+                if destino not in nos:
+                    erros.append(f"{onde}.{chave}: aponta para no inexistente {destino!r}")
+            if no.get("tipo") == "decisao" and len(no.get("opcoes") or []) < 2:
+                erros.append(f"{onde}.{chave}: decisao com menos de dois ramos")
+
+        # No orfao e sinal de estrutura mal transcrita: um ramo da fonte que se perdeu.
+        alcancados, fila = set(), [alg["no_inicial"]]
+        while fila:
+            atual = fila.pop()
+            if atual in alcancados or atual not in nos:
+                continue
+            alcancados.add(atual)
+            no = nos[atual]
+            fila.extend(o["vai"] for o in (no.get("opcoes") or []) if o.get("vai"))
+            if no.get("vai"):
+                fila.append(no["vai"])
+        orfaos = sorted(set(nos) - alcancados)
+        if orfaos:
+            erros.append(f"{onde}: nos inalcancaveis a partir de no_inicial: {orfaos}")
+
 
     # 2. Justificativas
     for q in banco:
@@ -98,6 +155,12 @@ def validar(parcial=False):
             for letra, texto in distratores.items():
                 if len(str(texto).strip()) < 15:
                     erros.append(f"{onde}: distrator {letra} vazio ou curto demais")
+
+        # O algoritmo e opcional, mas se citado tem que existir — e ele ja carrega a
+        # propria fonte verificada, conferida no bloco 1b.
+        alg_id = reg.get("algoritmo")
+        if alg_id and alg_id not in algoritmos:
+            erros.append(f"{onde}: algoritmo {alg_id!r} nao existe em algoritmos.json")
 
         refs = reg.get("referencias") or []
         # Ficar sem fonte e aceitavel e ate desejavel quando o catalogo nao cobre o ponto:
