@@ -221,6 +221,26 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
   border:1px solid #e9d68f;color:#6a5410;font-size:13px;font-weight:500;line-height:1.45}
 [data-theme="dark"] .notice{color:var(--gold);border-color:#4a4220}
 .notice svg{width:19px;height:19px;flex:none;margin-top:1px}
+/* Saudação de boas-vindas ao ativar. Flutua acima de tudo, some sozinha e nunca
+   rouba o foco: quem acabou de entrar quer ver o menu, não confirmar um aviso. */
+/* O estado base e VISIVEL, e a animacao so enfeita a entrada. O contrario — comecar
+   invisivel e contar com a animacao para aparecer — deixa a saudacao apagada sempre que
+   a animacao nao corre: aba em segundo plano, `prefers-reduced-motion`, navegador que
+   as ignora. Aqui, se a animacao falhar, o pior caso e aparecer sem deslizar. */
+.saudacao{position:fixed;left:50%;bottom:26px;transform:translate(-50%,0);z-index:9999;
+  max-width:min(92vw,420px);padding:13px 20px;border-radius:999px;pointer-events:none;
+  background:var(--navy);color:#f4f3ec;font-size:14.5px;font-weight:600;text-align:center;
+  box-shadow:0 6px 26px rgba(27,46,34,.28);opacity:1;
+  animation:saudacao-entra .32s ease-out}
+.saudacao.saindo{opacity:0;transition:opacity .34s ease-in,transform .34s ease-in;
+  transform:translate(-50%,10px)}
+/* So o deslocamento e animado, nunca a opacidade: um navegador com a aba em segundo
+   plano congela a animacao no primeiro quadro, e se esse quadro fosse transparente a
+   saudacao nunca apareceria. Congelada assim, o pior caso e ficar 14 px mais abaixo. */
+@keyframes saudacao-entra{from{transform:translate(-50%,14px)}
+  to{transform:translate(-50%,0)}}
+[data-theme="dark"] .saudacao{background:var(--gold);color:#2e2404}
+@media (prefers-reduced-motion:reduce){.saudacao{animation:none}}
 
 /* ===================== QUIZ ===================== */
 .qtop{position:sticky;top:calc(var(--bar-h) + var(--safe-t));z-index:30;background:var(--bg);padding:12px 0 8px;border-bottom:1px solid var(--line)}
@@ -1398,7 +1418,8 @@ function viewConta(aviso){
       </p>
       ${e.renovarLogo?`<div class="notice" style="margin-top:14px">Conecte-se à internet nos próximos ${e.diasRestantes} dia(s) para reconferir a assinatura.</div>`:""}
       <div style="margin-top:18px">
-        <button class="btn btn-navy block" onclick="contaAtualizar()">Reconferir agora</button>
+        <button class="btn btn-gold block" onclick="go('home')">Começar a estudar</button>
+        <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaAtualizar()">Reconferir agora</button>
         <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaSair()">Sair desta conta</button>
       </div>
     </div>`;
@@ -1431,6 +1452,21 @@ function viewConta(aviso){
   </div>`;
 }
 
+/* Ativou: entra no aplicativo. Deixar a pessoa parada na tela de conta depois de
+   liberar o acesso é um beco sem saída — ela acabou de pagar (ou de se cadastrar) e
+   o que quer é estudar, não administrar a assinatura. A saudação some sozinha. */
+function entrarNoAplicativo(saudacao){
+  go("home");
+  if(!saudacao) return;
+  document.querySelector(".saudacao")?.remove();
+  const el=document.createElement("div");
+  el.className="saudacao";
+  el.setAttribute("role","status");
+  el.textContent=saudacao;
+  document.body.appendChild(el);
+  setTimeout(()=>{ el.classList.add("saindo"); setTimeout(()=>el.remove(),400); },3600);
+}
+
 function contaDiz(txt,erro){
   const el=$("#contaMsg"); if(!el) return;
   el.textContent=txt||"";
@@ -1453,7 +1489,7 @@ async function contaEntrar(){
       contaDiz("A conta existe, mas não encontramos assinatura ativa nela. Se você acabou de comprar, aguarde um instante e tente de novo.",true);
       return;
     }
-    render("conta");
+    entrarNoAplicativo("Tudo certo. Bom estudo!");
   }catch(err){
     contaDiz(String(err.message||err).includes("Invalid login")
       ? "E-mail ou senha incorretos." : "Não foi possível entrar: "+(err.message||err), true);
@@ -1473,7 +1509,7 @@ async function contaCriar(){
        de novo com o que acabou de digitar. */
     contaDiz("Conta criada. Conferindo o acesso…");
     const r=await LIC.buscarLicenca();
-    if(r.ativo){ render("conta"); return; }
+    if(r.ativo){ entrarNoAplicativo("Conta criada e acesso liberado. Bom estudo!"); return; }
     contaDiz("Conta criada. Ainda não há assinatura ativa nela — assine para liberar as 500 questões, ou peça acesso de cortesia.");
   }catch(err){
     contaDiz(/already registered|User already/i.test(String(err.message||err))
