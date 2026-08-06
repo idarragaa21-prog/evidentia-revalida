@@ -166,6 +166,24 @@ cd app-desktop && npm install && npm run empacotar:mac
 
 Los instaladores quedan en `app-desktop/dist/`.
 
+> **La edición completa no está en el repositorio.** `aplicativo/Revalida_Evidentia.html`,
+> el APK y `app-android/www/` están en `.gitignore`: son el producto que vendes. El portón
+> de licencia corre en el aparato y es una barrera de honestidad, no una caja fuerte —
+> quien tiene el archivo tiene las 500 preguntas. Los comandos de arriba los regeneran en
+> tu disco cuando los necesites; lo que se versiona es lo que los construye.
+
+### Android
+
+El SDK y el JDK 17 ya quedaron instalados en este Mac. Para recompilar:
+
+```bash
+export JAVA_HOME=/opt/homebrew/opt/openjdk@17
+export ANDROID_HOME=$HOME/Library/Android/sdk
+cd ~/evidentia-revalida/app-android && npx cap sync android && cd android && ./gradlew assembleDebug
+```
+
+El APK sale en `android/app/build/outputs/apk/debug/app-debug.apk`.
+
 ### Firma **(solo tú)**
 
 Hoy los instaladores salen **sin firmar**: macOS y Windows mostrarán una advertencia al
@@ -177,21 +195,6 @@ abrirlos. Para venderlos sin fricción necesitas:
 
 Puedes vender sin firmar al principio, explicando en la página de descarga cómo abrir la
 aplicación la primera vez. Es incómodo, no imposible.
-
-### Android
-
-Falta el SDK. En este Mac:
-
-```bash
-brew install --cask android-commandlinetools temurin@17
-sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
-cd ~/evidentia-revalida/app-android && npm install && npx cap sync android
-./gradlew assembleDebug
-```
-
-Ojo con Java: el JDK 24 que tienes instalado **no funciona** con el Gradle de este proyecto
-(soporta hasta Java 20). Por eso el `temurin@17`.
 
 Para Google Play hace falta cuenta de desarrollador (US$ 25, pago único) y una llave de
 firma de producción.
