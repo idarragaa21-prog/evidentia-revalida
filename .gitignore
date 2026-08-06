@@ -54,3 +54,8 @@ app-android/*.apk
 # Estado local del CLI de Supabase (enlace del proyecto): no se versiona
 nuvem/supabase/.temp/
 supabase/.temp/
+
+# iOS: dependencias y contenido gerado (o app completa nao entra no repo)
+app-android/ios/App/Pods/
+app-android/ios/App/App/public/
+app-android/ios/App/Podfile.lock
