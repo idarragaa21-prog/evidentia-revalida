@@ -268,6 +268,22 @@ async function carregarPlanos(){
   }
 }
 
+/* Lista de espera. É o único valor que a visita deixa enquanto a cobrança não abre,
+   e a promessa da tela só se faz depois de o banco confirmar que guardou. */
+async function guardarInteresse(email, planoId){
+  try{
+    const r = await fetch(`${NUVEM.url}/rest/v1/rpc/registrar_interesse`, {
+      method: "POST",
+      headers: { apikey: NUVEM.chave, "content-type": "application/json" },
+      body: JSON.stringify({ p_email: email, p_plano_id: planoId, p_origem: "pagina_de_vendas" })
+    });
+    if(!r.ok) throw new Error("erro " + r.status);
+    diz("Guardamos seu e-mail. Avisamos assim que as vendas abrirem — e, enquanto isso, você pode estudar de graça com as 40 questões.");
+  }catch(e){
+    diz("As vendas ainda não abriram e não conseguimos guardar seu e-mail agora. Tente de novo em instantes, ou escreva para idarragaa21@gmail.com.", true);
+  }
+}
+
 async function comprar(planoId, botao){
   const email = ($("#email").value || "").trim().toLowerCase();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
@@ -285,7 +301,9 @@ async function comprar(planoId, botao){
     });
     const corpo = await r.json().catch(() => null);
     if(r.status === 503 && corpo?.erro === "pagamentos_nao_ativados"){
-      diz("As vendas ainda não abriram. Deixe seu e-mail salvo e volte em breve — ou estude grátis com as 40 questões.", true);
+      /* Prometer guardar o e-mail e nao guardar seria a pior forma de comecar uma
+         relacao com quem quis pagar. Guarda de verdade, e so entao promete. */
+      await guardarInteresse(email, planoId);
       return;
     }
     if(!r.ok || !corpo?.redirect_url){
