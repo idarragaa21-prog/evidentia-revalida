@@ -687,9 +687,18 @@ const FIGS = {"2026/1|5": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLD
    "completo" = edição assinada, exige licença válida. */
 const EDICAO = "livre";
 /* Página pública de planos e compra. A edição livre leva para cá; a edição completa
-   também, quando a conta ainda não tem assinatura. */
+   também, quando a conta ainda não tem assinatura.
+
+   NA APP STORE ISTO NÃO PODE EXISTIR. A diretriz 3.1.1 proíbe que um aplicativo
+   de iOS leve o usuário a comprar fora da loja — e proíbe até *dizer onde* se
+   compra. Por isso a build de iOS entra com VENDE_AQUI falso e some com os
+   botões e com a frase, ficando como Netflix ou Spotify: entra-se com a conta e
+   usa-se o que já foi comprado, sem uma palavra sobre onde comprar (é a exceção
+   3.1.3(b), Multiplatform Services). Android, computador e a versão web mantêm
+   o caminho de compra, que é onde ele funciona sem comissão de 15 a 30%. */
+const VENDE_AQUI = true;
 const URL_ASSINAR = "https://idarragaa21-prog.github.io/evidentia-revalida/assinar/";
-function abrirAssinar(){ window.open(URL_ASSINAR, "_blank", "noopener"); }
+function abrirAssinar(){ if(VENDE_AQUI) window.open(URL_ASSINAR, "_blank", "noopener"); }
 const NUVEM = {"url": "https://flnawwzkmttsxuozjwar.supabase.co", "chave": "sb_publishable_JZzZRrMH3M4jm55sr3j8Gg_0oiLYJi5"};
 const CHAVE_LICENCA = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEvGy1/xaggZoNgqX/dr9HQROdmLmQZwWQfQ3dcniuihFk6A/0IQ0ZZQ+yxQfRbbP1z6RZKqoAYLPdChrulc1Rdg==";
 
@@ -805,7 +814,7 @@ function viewHome(){
     </div>
   </div>
 
-  ${EDICAO!=="completo"?`<div class="card pad" style="margin-top:16px;border-color:var(--gold)">
+  ${(EDICAO!=="completo" && VENDE_AQUI)?`<div class="card pad" style="margin-top:16px;border-color:var(--gold)">
     <div class="section-t">Você está na edição livre</div>
     <p class="muted" style="margin:2px 0 12px;font-size:14px">
       Estas ${META.gratuitas||40} questões são uma amostra. A edição completa tem
@@ -1465,7 +1474,7 @@ function viewAbout(){
     <div><div class="section-t">Pontuação</div>
       <p class="muted" style="margin-top:8px;line-height:1.6">As questões <b>anuladas não entram na pontuação</b>. O aproveitamento é calculado como acertos ÷ questões válidas do simulado. O alvo de ${Math.round(APROV*100)}% é apenas orientativo; o critério oficial de aprovação é definido a cada edição pelo INEP.</p></div>
     <div><div class="section-t">Privacidade</div>
-      <p class="muted" style="margin-top:8px;line-height:1.6">Todo o seu histórico e progresso ficam salvos <b>apenas neste dispositivo</b> (armazenamento local do navegador). Nada é enviado para servidores. ${store.ok?"":"<br><b>Atenção:</b> o armazenamento local está indisponível neste contexto, então o histórico não será mantido ao fechar."}</p></div>
+      <p class="muted" style="margin-top:8px;line-height:1.6">Todo o seu histórico e progresso ficam salvos <b>apenas neste dispositivo</b> (armazenamento local do navegador): as suas respostas, os seus simulados e o seu desempenho nunca saem daqui.${EDICAO==="completo"?" A única coisa que viaja é o seu e-mail e a sua senha, para verificar a assinatura no servidor de licenças — e só quando há internet. <a href='https://idarragaa21-prog.github.io/evidentia-revalida/privacidade/' target='_blank' rel='noopener noreferrer'>Política de privacidade</a>.":""} ${store.ok?"":"<br><b>Atenção:</b> o armazenamento local está indisponível neste contexto, então o histórico não será mantido ao fechar."}</p></div>
     <div><div class="section-t">Edições incluídas</div>
       <p class="muted" style="margin-top:8px">${(META.edicoes||[]).map(e=>'Edição '+esc(e)).join(' · ')} — total de ${QUESTOES.length} questões (${QUESTOES.filter(q=>!q.anulada).length} válidas e ${QUESTOES.filter(q=>q.anulada).length} anuladas no acervo).</p></div>
     <div><div class="section-t">Backup do progresso</div>
@@ -1597,6 +1606,8 @@ function viewConta(aviso){
         <button class="btn btn-gold block" onclick="go('home')">Começar a estudar</button>
         <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaAtualizar()">Reconferir agora</button>
         <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaSair()">Sair desta conta</button>
+        <button class="linklike" style="margin:14px auto 0;display:block;color:var(--bad-ink)"
+                onclick="contaExcluir()">Excluir minha conta</button>
       </div>
     </div>`;
   }
@@ -1619,12 +1630,14 @@ function viewConta(aviso){
       <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaCriar()">Criar conta</button>
       <button class="btn btn-ghost block" style="margin-top:10px" onclick="contaEsqueci()">Esqueci a senha</button>
     </div>
-    <p class="muted" style="margin-top:18px;font-size:13px">
+    ${VENDE_AQUI?`<p class="muted" style="margin-top:18px;font-size:13px">
       Ainda não assinou? <button class="linklike" onclick="abrirAssinar()">Veja os planos e preços</button>
       — a compra é feita no site e ativa aqui com o mesmo e-mail. A <b>edição livre</b>, com
       ${META.gratuitas||40} questões e as mesmas justificativas referenciadas, é gratuita e não
       precisa de conta.
-    </p>
+    </p>`:`<p class="muted" style="margin-top:18px;font-size:13px">
+      Entre com a conta da sua assinatura. O acesso vale em todos os seus aparelhos.
+    </p>`}
   </div>`;
 }
 
@@ -1662,7 +1675,9 @@ async function contaEntrar(){
     contaDiz("Conferindo a assinatura…");
     const r=await LIC.buscarLicenca();
     if(!r.ativo){
-      contaDiz("A conta existe, mas não encontramos assinatura ativa nela. Se você acabou de comprar, aguarde um instante e tente de novo.",true);
+      contaDiz(VENDE_AQUI
+        ? "A conta existe, mas não encontramos assinatura ativa nela. Se você acabou de comprar, aguarde um instante e tente de novo."
+        : "A conta existe, mas não encontramos assinatura ativa nela. Verifique se é o mesmo e-mail da sua assinatura.", true);
       return;
     }
     entrarNoAplicativo("Tudo certo. Bom estudo!");
@@ -1686,7 +1701,9 @@ async function contaCriar(){
     contaDiz("Conta criada. Conferindo o acesso…");
     const r=await LIC.buscarLicenca();
     if(r.ativo){ entrarNoAplicativo("Conta criada e acesso liberado. Bom estudo!"); return; }
-    contaDiz(`Conta criada. Ainda não há assinatura ativa nela — assine para liberar as ${META.total||600} questões, ou peça acesso de cortesia.`);
+    contaDiz(VENDE_AQUI
+      ? `Conta criada. Ainda não há assinatura ativa nela — assine para liberar as ${META.total||600} questões, ou peça acesso de cortesia.`
+      : "Conta criada. Ainda não há assinatura ativa nela.");
   }catch(err){
     contaDiz(/already registered|User already/i.test(String(err.message||err))
       ? "Já existe conta com esse e-mail. Use «Entrar e ativar»."
@@ -1706,6 +1723,48 @@ async function contaAtualizar(){
     render("conta", r.ativo?null:"Não encontramos assinatura ativa nesta conta.");
   }catch(err){ contaDiz("Sem conexão agora. Sua licença atual continua valendo.",true); }
 }
+/* Apagar a propria conta, de dentro do aplicativo. A diretriz 5.1.1(v) da App
+   Store exige isto de todo aplicativo que permite criar conta — nao basta um
+   e-mail para o suporte, e a revisao procura o botao de proposito.
+   Duas confirmacoes porque e irreversivel, e a segunda pede para escrever a
+   palavra: um toque acidental no celular nao pode apagar meses de estudo. */
+async function contaExcluir(){
+  showModal(`<div class="mh"><h3>Excluir sua conta?</h3>
+    <p class="muted" style="margin-top:6px;font-size:14px">
+      Isto apaga a sua conta e a sua assinatura no servidor, e não pode ser desfeito.
+      O histórico de simulados guardado neste aparelho continua aqui até você desinstalar.
+      <b>Se você tem uma assinatura ativa, ela será perdida sem reembolso.</b></p>
+    <p class="muted" style="margin-top:10px;font-size:14px">Para confirmar, escreva
+      <b>EXCLUIR</b> abaixo.</p>
+    <label class="campo" style="margin-top:10px"><span>Confirmação</span>
+      <input id="excConf" autocomplete="off" placeholder="EXCLUIR"></label>
+    <div id="excMsg" class="muted" style="margin-top:10px;font-size:13.5px" role="status" aria-live="polite"></div></div>
+    <div class="mb"><button class="btn btn-ghost block" onclick="closeModal()">Cancelar</button>
+    <button class="btn block" id="excBtn" style="margin-top:10px;background:var(--bad);color:#fff"
+            onclick="_doExcluir()">Excluir definitivamente</button></div>`);
+
+  window._doExcluir=async ()=>{
+    const conf=($("#excConf")?.value||"").trim().toUpperCase();
+    const msg=$("#excMsg");
+    if(conf!=="EXCLUIR"){ if(msg){msg.textContent="Escreva EXCLUIR para confirmar.";msg.style.color="var(--bad-ink)";} return; }
+    const btn=$("#excBtn"); if(btn) btn.disabled=true;
+    if(msg){ msg.textContent="Excluindo…"; msg.style.color=""; }
+    try{
+      const s=LIC.sessao();
+      if(!s?.access_token) throw new Error("sessão ausente");
+      await LIC.nuvem("/functions/v1/excluir-conta",{method:"POST",
+        headers:{Authorization:"Bearer "+s.access_token},body:"{}"});
+      LIC.sair();
+      delete window._doExcluir;
+      closeModal();
+      render("conta","Sua conta foi excluída.");
+    }catch(err){
+      if(btn) btn.disabled=false;
+      if(msg){ msg.textContent="Não foi possível excluir agora: "+(err.message||err); msg.style.color="var(--bad-ink)"; }
+    }
+  };
+}
+
 function contaSair(){
   showModal(`<div class="mh"><h3>Sair desta conta?</h3><p class="muted" style="margin-top:6px;font-size:14px">
       O aplicativo volta a pedir ativação. Seu histórico de simulados fica guardado neste aparelho.</p></div>

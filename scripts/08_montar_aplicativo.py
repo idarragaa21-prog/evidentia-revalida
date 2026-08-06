@@ -110,12 +110,19 @@ def main():
 
     os.makedirs(APLICATIVO, exist_ok=True)
     for alvo in alvos:
-        if alvo not in ("completo", "livre", "teste"):
+        if alvo not in ("completo", "livre", "teste", "ios"):
             raise SystemExit(f"edicao desconhecida: {alvo}")
         qs = recorte_livre(questoes) if alvo == "livre" else questoes
         # A build de teste tem o banco inteiro e nao pede licenca: e o alvo da suite
         # automatizada, que precisa chegar as telas sem uma assinatura de verdade.
-        modo = "livre" if alvo == "teste" else alvo
+        modo = "livre" if alvo == "teste" else ("completo" if alvo == "ios" else alvo)
+
+        # A diretriz 3.1.1 da App Store proibe um aplicativo de iOS levar a comprar
+        # fora da loja — e proibe ate dizer onde se compra. A build "ios" e a
+        # "completo" sem uma palavra sobre compra: entra-se com a conta e usa-se o
+        # que ja foi comprado. Os outros canais mantem o caminho de venda, que e
+        # onde ele funciona sem a comissao de 15 a 30% da Apple.
+        vende_aqui = "false" if alvo == "ios" else "true"
 
         # So viajam para o aplicativo as figuras e as fontes que aquela edicao usa.
         citadas = {
@@ -147,16 +154,45 @@ def main():
                  .replace("/*__NUVEM__*/ {}", json.dumps(nuvem, ensure_ascii=False), 1)
                  .replace("__CHAVE_LICENCA__", chave_pub)
                  .replace("__EDICAO__", modo)
+                 .replace("__VENDE_AQUI__", vende_aqui)
                  .replace("__FAVICON__", favicon)
                  .replace("__LOGO__", logo))
 
         for marcador in ["/*__DATA__*/", "/*__META__*/", "/*__REFS__*/", "/*__FIGS__*/",
-                         "/*__NUVEM__*/", "__CHAVE_LICENCA__", "__EDICAO__", "__LOGO__", "__FAVICON__"]:
+                         "/*__NUVEM__*/", "__CHAVE_LICENCA__", "__EDICAO__", "__VENDE_AQUI__",
+                         "__LOGO__", "__FAVICON__"]:
             assert marcador not in saida, f"marcador nao substituido: {marcador}"
+
+        # A App Store nao inspeciona so o comportamento: um revisor pode abrir o
+        # pacote e ler as cadeias. Deixar "a compra e feita no site" enterrado num
+        # ramo que nunca executa e um risco desnecessario, entao na build de iOS
+        # essas frases somem do arquivo. Cada troca e conferida logo abaixo: se
+        # alguem reescrever a frase no modelo e esquecer de atualizar aqui, o
+        # build para em vez de publicar um binario reprovavel.
+        if alvo == "ios":
+            proibidas = [
+                ("https://idarragaa21-prog.github.io/evidentia-revalida/assinar/", ""),
+                ("Ainda não assinou? ", ""),
+                ("Veja os planos e preços", "Entrar"),
+                ("— a compra é feita no site e ativa aqui com o mesmo e-mail. A <b>edição livre</b>, com",
+                 "A <b>edição livre</b>, com"),
+                ("Conhecer os planos", "Saiba mais"),
+                ("Se você acabou de comprar, aguarde um instante e tente de novo.",
+                 "Verifique se é o mesmo e-mail da sua assinatura."),
+                ("assine para liberar as ${META.total||600} questões, ou peça acesso de cortesia.",
+                 "fale com o suporte se achar que isso é um engano."),
+            ]
+            for antes, depois in proibidas:
+                if antes not in saida:
+                    raise SystemExit(
+                        f"build ios: a frase de compra mudou no modelo e este script nao a "
+                        f"encontrou mais: {antes[:60]!r}. Atualize a lista antes de publicar.")
+                saida = saida.replace(antes, depois)
 
         nome = {"completo": "Revalida_Evidentia.html",
                 "livre": "Revalida_Evidentia_livre.html",
-                "teste": "Revalida_Evidentia_teste.html"}[alvo]
+                "teste": "Revalida_Evidentia_teste.html",
+                "ios": "Revalida_Evidentia_ios.html"}[alvo]
         destino = os.path.join(APLICATIVO, nome)
         open(destino, "w", encoding="utf-8").write(saida)
         print(f"gerado ({alvo}): {destino}")
