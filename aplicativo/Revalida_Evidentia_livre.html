@@ -18,14 +18,67 @@
   /* tintas de texto sobre fundo tingido: garantem 4.5:1 (WCAG AA) */
   --good-ink:#0f6b45; --bad-ink:#9d3a2b; --gold-ink:#6a5410; --branco-ink:#6c7369;
   --gold-glow:rgba(176,141,76,.40); --gold-glow-2:rgba(176,141,76,.52);
+  --focus:#9a7530;
   --bg:#f4f3ec; --card:#ffffff; --ink:#1a2620; --ink-2:#4d5a51; --ink-3:#69756b;
   --line:#d3e1d8; --line-2:#bcd0c2;
   --shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.09);
   --shadow-lg:0 8px 40px rgba(27,46,34,.18);
   --r:16px; --r-sm:10px; --r-lg:22px;
-  --ff:"Calibri","Segoe UI",system-ui,-apple-system,"Roboto","Helvetica Neue",Arial,sans-serif;
-  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+  /* A tipografia do sistema primeiro. Num Mac ou num iPhone isto faz o
+     aplicativo se desenhar em San Francisco — a mesma letra do resto do
+     aparelho — e em New York para os titulos. Calibri fica de reserva para
+     Windows. E a mudanca tipografica de maior retorno por linha editada. */
+  --ff:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,
+       "Segoe UI Variable Text","Segoe UI","Calibri",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"New York","Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
   --maxw:1080px;
+
+  /* ---- TIPOGRAFIA ----------------------------------------------------------
+     Dez degraus no lugar dos 27 tamanhos soltos que havia (varios com meio
+     pixel: 11.5, 12.5, 14.5, 16.5). O tracking negativo nos tamanhos grandes e
+     o que faz um titulo parecer desenhado e nao esticado: quanto maior o corpo,
+     mais apertada precisa ser a letra. */
+  --fs-c2:11px;      --ls-c2:.022em;
+  --fs-c1:12px;      --ls-c1:.006em;
+  --fs-foot:13px;    --ls-foot:0;
+  --fs-sub:15px;     --ls-sub:-.011em;
+  --fs-body:17px;    --ls-body:-.021em;
+  --fs-t3:20px;      --ls-t3:-.024em;
+  --fs-t2:24px;      --ls-t2:-.026em;
+  --fs-t1:28px;      --ls-t1:-.030em;
+  --fs-lg:34px;      --ls-lg:-.035em;
+  --fs-display:56px; --ls-display:-.040em;
+
+  --lh-tight:1.14;   /* titulos serif */
+  --lh-snug:1.30;    /* subtitulos, botoes */
+  --lh-body:1.50;    /* interface */
+  --lh-read:1.62;    /* enunciado, justificativa */
+
+  /* ---- ESPACO — grade de 4px ---------------------------------------------- */
+  --s1:4px;  --s2:8px;  --s3:12px; --s4:16px; --s5:20px;
+  --s6:24px; --s7:32px; --s8:40px; --s9:56px;
+
+  /* Recorte do aparelho (notch) e altura da appbar. Usados pelos sticky. */
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+  --bar-h:62px;
+
+  /* ---- MOVIMENTO -----------------------------------------------------------
+     Cinco curvas e cinco duracoes, no lugar do `ease` implicito e das nove
+     duracoes soltas que havia. A curva que da o carater e --e-out: uma
+     desaceleracao forte, que faz o elemento chegar depressa e assentar devagar.
+     --e-release tem um repique minimo (o valor passa de 1 antes de voltar), e e
+     o que faz um botao "voltar" ao ser solto em vez de simplesmente parar. */
+  --e-out:cubic-bezier(.32,.72,0,1);
+  --e-in:cubic-bezier(.4,0,.9,.35);
+  --e-io:cubic-bezier(.65,0,.35,1);
+  --e-press:cubic-bezier(.2,0,0,1);
+  --e-release:cubic-bezier(.34,1.32,.6,1);
+
+  --t-press:90ms;    /* acuse de recebimento ao toque */
+  --t-fast:160ms;    /* cor, borda */
+  --t-base:260ms;    /* estado selecionado, abrir e fechar */
+  --t-screen:380ms;  /* troca de tela */
+  --t-data:640ms;    /* barras do resultado: o dado cresce e se olha */
 }
 [data-theme="dark"]{
   --navy:#0d1712; --navy-700:#16271c; --navy-600:#2f6047; --navy-050:#12211a;
@@ -35,6 +88,7 @@
   --branco:#93a08f; --branco-100:#1a2a20;
   --good-ink:#3fbb86; --bad-ink:#e0705f; --gold-ink:#cca862; --branco-ink:#a9b6a6;
   --gold-glow:rgba(0,0,0,.42); --gold-glow-2:rgba(0,0,0,.55);
+  --focus:#e2c98a;
   --bg:#08130d; --card:#0f1e16; --ink:#eaf1ea; --ink-2:#b6c6ba; --ink-3:#8fa094;
   --line:#1d3226; --line-2:#284735;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.35);
@@ -44,25 +98,42 @@
 html,body{margin:0;padding:0}
 body{
   font-family:var(--ff); background:var(--bg); color:var(--ink);
-  line-height:1.5; font-size:16px; -webkit-font-smoothing:antialiased;
+  line-height:var(--lh-body); font-size:var(--fs-body); letter-spacing:var(--ls-body);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
 h1,h2,h3,h4{margin:0;font-weight:700;color:var(--navy)}
-h1,h2{font-family:var(--serif);letter-spacing:-.005em}
+h1,h2{font-family:var(--serif);letter-spacing:var(--ls-t2);line-height:var(--lh-tight)}
 h3,h4{font-family:var(--ff);letter-spacing:0}
 [data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4{color:var(--ink)}
 p{margin:0}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus{outline:none}
-:focus-visible{outline:2.5px solid var(--sky);outline-offset:2px;border-radius:8px}
+/* Dourado e nao verde: o anel tem que se ver POR CIMA dos proprios estados
+   selecionados, que ja sao verdes (.chip.on, .modecard.on, .alt.sel). E sem
+   border-radius: o valor de 8px que havia aqui deformava tudo o que recebia
+   foco — um chip de 999px virava um retangulo de cantos suaves ao ser focado. */
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .switch:focus-visible,.chip:focus-visible,.preset:focus-visible{outline-offset:3px}
-/* altura da appbar + recorte superior do aparelho (notch), usada pelos elementos sticky */
-:root{--safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);--bar-h:62px}
 .wrap{max-width:var(--maxw);margin:0 auto;
   padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 .hidden{display:none!important}
-.fade{animation:fade .32s ease both}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* Tres entradas em vez de uma: avancar entra pela direita, voltar pela esquerda,
+   e o resto sobe. Da a leitura de "onde estou indo" sem fingir uma continuidade
+   que nao existe — render() destroi o DOM anterior, entao nao ha tela saindo
+   para empurrar. 18px bastam para ler a direcao; um deslize de tela inteira
+   pediria as duas telas vivas ao mesmo tempo.
+
+   As tres terminam em opacity:1 e transform:none, que e exatamente o que a
+   suite espera antes de medir transbordo horizontal ou clicar em nada. */
+.fade,.enter-f,.enter-b{animation-duration:var(--t-screen);
+  animation-timing-function:var(--e-out);animation-fill-mode:both}
+.fade{animation-name:fade}
+.enter-f{animation-name:enter-fwd}
+.enter-b{animation-name:enter-back}
+@keyframes fade{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:none}}
+@keyframes enter-fwd{from{opacity:0;transform:translate3d(18px,0,0)}to{opacity:1;transform:none}}
+@keyframes enter-back{from{opacity:0;transform:translate3d(-18px,0,0)}to{opacity:1;transform:none}}
 
 /* ===================== TOPO ===================== */
 .appbar{position:sticky;top:0;z-index:40;background:var(--card);padding-top:var(--safe-t);
@@ -75,7 +146,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .brand small{display:block;font-size:11px;color:var(--sky-600);font-weight:700;letter-spacing:.04em;margin-top:3px;text-transform:uppercase}
 .appbar .spacer{flex:1}
 .iconbtn{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;color:var(--ink-2);
-  transition:background .2s}
+  transition:background-color var(--t-fast) var(--e-out)}
 /* botões de ícone dentro do conteúdo (voltar, sair, mapa): legíveis nos dois temas */
 .iconbtn-nav{color:var(--navy)}
 [data-theme="dark"] .iconbtn-nav{color:var(--ink)}
@@ -93,18 +164,15 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .muted{color:var(--ink-2)}
 .chiprow{display:flex;flex-wrap:wrap;gap:9px}
 .chip{border:1.5px solid var(--line-2);background:var(--card);color:var(--ink-2);
-  padding:9px 15px;border-radius:999px;font-size:14.5px;font-weight:600;transition:all .16s;display:inline-flex;align-items:center;gap:7px}
+  padding:9px 15px;min-height:44px;border-radius:999px;font-size:14.5px;font-weight:600;transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out);display:inline-flex;align-items:center;gap:7px}
 .chip:hover{border-color:var(--sky);color:var(--sky-600)}
 .chip.on{background:var(--sky);border-color:var(--sky);color:#fff;box-shadow:0 4px 14px rgba(47,96,71,.30)}
 [data-theme="dark"] .chip.on{color:#08130d;box-shadow:0 4px 14px rgba(0,0,0,.45)}
 .chip .dot{width:9px;height:9px;border-radius:50%}
-.seg{display:inline-flex;background:var(--navy-050);border:1px solid var(--line);border-radius:13px;padding:5px;gap:4px;flex-wrap:wrap}
-.seg button{padding:10px 16px;border-radius:9px;font-weight:700;font-size:14.5px;color:var(--ink-2);transition:all .16s}
-.seg button.on{background:var(--card);color:var(--navy);box-shadow:var(--shadow)}
 [data-theme="dark"] .seg button.on{color:var(--ink)}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;border-radius:13px;
-  font-weight:800;font-size:15.5px;transition:transform .12s,box-shadow .2s,background .2s;border:1.5px solid transparent}
+  min-height:48px;font-weight:800;font-size:15.5px;transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out);border:1.5px solid transparent}
 .btn:active{transform:translateY(1px)}
 .btn-gold{background:linear-gradient(180deg,#c9a463,var(--gold));color:#2e2404;box-shadow:0 6px 20px var(--gold-glow)}
 .btn-gold:hover{box-shadow:0 8px 26px var(--gold-glow-2)}
@@ -118,46 +186,56 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 
 /* stepper */
 .stepper{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--line-2);border-radius:12px;overflow:hidden}
-.stepper button{width:46px;height:46px;font-size:22px;font-weight:700;color:var(--sky-600);background:var(--sky-050)}
+.stepper button{width:48px;height:48px;font-size:22px;font-weight:700;color:var(--sky-600);background:var(--sky-050)}
 .stepper button:hover{background:var(--sky-100)}
-.stepper input{width:78px;height:46px;border:none;text-align:center;font-size:20px;font-weight:800;color:var(--navy);background:var(--card);font-family:inherit}
+.stepper input{width:78px;height:48px;border:none;text-align:center;font-size:20px;font-weight:800;color:var(--navy);background:var(--card);font-family:inherit}
 [data-theme="dark"] .stepper input{color:var(--ink)}
-.stepper input:focus{outline:none}
+/* Offset negativo porque .stepper tem overflow:hidden e recortaria um anel
+   desenhado para fora. Antes aqui so havia outline:none, sem substituto: quem
+   navegava por teclado perdia o cursor ao chegar neste campo. */
+.stepper input:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
 .presetrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.preset{padding:11px 16px;border-radius:10px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
-.preset.on,.preset:hover{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100)}
+.preset{padding:11px 16px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
+/* Separados de proposito: estavam na mesma regra, e por isso o atalho escolhido
+   ficava identico ao que estava apenas sob o cursor — nao dava para saber qual
+   estava valendo. O hover so insinua a borda; o selecionado tem fundo, peso e
+   um anel interno. */
+.preset:hover{border-color:var(--gold);color:var(--gold-ink)}
+.preset.on{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100);
+  font-weight:800;box-shadow:0 0 0 1px var(--gold) inset}
 
 /* toggle */
 .tg{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 2px;border-bottom:1px solid var(--line)}
 .tg:last-child{border-bottom:none}
 .tg .lab b{display:block;font-size:15px;color:var(--ink)}
 .tg .lab small{color:var(--ink-2);font-size:13px}
-.switch{width:54px;height:32px;border-radius:999px;background:var(--line-2);position:relative;transition:background .2s;flex:none}
+.switch{width:54px;height:32px;border-radius:999px;background:var(--line-2);position:relative;transition:background-color var(--t-base) var(--e-out);flex:none}
 /* estende a área de toque a 44px sem alterar o desenho */
 .switch::before{content:"";position:absolute;inset:-7px -4px}
-.switch::after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.switch::after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform var(--t-base) var(--e-release),width var(--t-press) var(--e-press);box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .switch.on{background:var(--good)}
-.switch.on::after{left:25px}
+/* translateX e nao `left`: mesmo percurso (25-3=22px), mas na GPU. */
+.switch.on::after{transform:translateX(22px)}
 
 /* ===================== COMPONENTES (rediseño) ===================== */
 .modegrid{display:grid;grid-template-columns:1fr;gap:10px}
-.modecard{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1.5px solid var(--line-2);border-radius:14px;background:var(--card);text-align:left;transition:all .16s;width:100%}
+.modecard{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1.5px solid var(--line-2);border-radius:14px;background:var(--card);text-align:left;transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out);width:100%}
 .modecard:hover{border-color:var(--sky)}
 .modecard.on{border-color:var(--sky);background:var(--sky-050);box-shadow:0 0 0 1px var(--sky) inset}
-.modecard .mi{width:42px;height:42px;flex:none;border-radius:11px;display:grid;place-items:center;background:var(--navy-050);color:var(--sky-600);transition:all .16s}
+.modecard .mi{width:42px;height:42px;flex:none;border-radius:11px;display:grid;place-items:center;background:var(--navy-050);color:var(--sky-600);transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
 .modecard.on .mi{background:var(--sky);color:#fff}
 [data-theme=dark] .modecard.on .mi{color:#08130d}
 .modecard .mi svg{width:21px;height:21px}
 .modecard .mt b{display:block;font-size:15px;color:var(--ink);font-weight:700}
 .modecard .mt small{color:var(--ink-2);font-size:12.5px}
-.modecard .chk{margin-left:auto;width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line-2);display:grid;place-items:center;color:#fff;transition:all .16s}
+.modecard .chk{margin-left:auto;width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line-2);display:grid;place-items:center;color:#fff;transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
 .modecard.on .chk{background:var(--sky);border-color:var(--sky)}
 .modecard .chk svg{width:13px;height:13px;opacity:0}
 .modecard.on .chk svg{opacity:1}
 [data-theme=dark] .modecard.on .chk{color:#08130d}
 .pickhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
 .pickhead label{margin:0!important}
-.linklike{font-size:13px;font-weight:700;color:var(--sky-600);background:none;padding:10px 12px;border-radius:8px}
+.linklike{font-size:13px;font-weight:700;color:var(--sky-600);background:none;padding:10px 12px;min-height:44px;display:inline-flex;align-items:center;border-radius:8px}
 .linklike:hover{background:var(--sky-050)}
 .simbar{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin:18px 0 4px;padding:14px 16px;border:1.5px dashed var(--line-2);border-radius:14px;background:var(--navy-050)}
 .simbar .lead{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--navy);font-size:14px}
@@ -167,7 +245,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .simbar .pill b{color:var(--sky-600);font-weight:800}
 /* navegação do quiz */
 .qactions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:22px}
-.navbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:800;font-size:15px;border:1.5px solid var(--line-2);background:var(--card);color:var(--ink-2);transition:all .14s}
+.navbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;min-height:48px;border-radius:12px;font-weight:800;font-size:15px;border:1.5px solid var(--line-2);background:var(--card);color:var(--ink-2);transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
 .navbtn:hover:not(:disabled){border-color:var(--sky);color:var(--sky-600)}
 .navbtn svg{width:17px;height:17px}
 .navbtn:disabled{opacity:.5;cursor:not-allowed}
@@ -189,7 +267,6 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .hero .metrics div span{font-size:12px;color:#c3b59a;font-weight:600;letter-spacing:.04em}
 .hero-over{position:relative;color:#dcc07f;font-weight:800;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:13px}
 .hero-over::before{content:"";display:inline-block;width:22px;height:2px;background:#b08d4c;vertical-align:middle;margin-right:9px;margin-bottom:3px}
-.grid2{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
 .field{margin-bottom:22px}
 .field:last-child{margin-bottom:0}
 .field>label{display:block;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:10px}
@@ -202,7 +279,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .availcard span{display:block;font-size:12px;color:var(--ink-2);font-weight:600}
 
 .secbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-.secbtn{display:flex;align-items:center;gap:12px;padding:15px;border-radius:14px;border:1.5px solid var(--line-2);background:var(--card);text-align:left;transition:all .16s}
+.secbtn{display:flex;align-items:center;gap:12px;padding:15px;border-radius:14px;border:1.5px solid var(--line-2);background:var(--card);text-align:left;transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
 .secbtn:hover{border-color:var(--sky);transform:translateY(-1px);box-shadow:var(--shadow)}
 .secbtn .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:none;background:var(--sky-100);color:var(--sky-600)}
 .secbtn .ic svg{width:21px;height:21px}
@@ -225,7 +302,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
   background:var(--navy);color:#f4f3ec;font-size:14.5px;font-weight:600;text-align:center;
   box-shadow:0 6px 26px rgba(27,46,34,.28);opacity:1;
   animation:saudacao-entra .32s ease-out}
-.saudacao.saindo{opacity:0;transition:opacity .34s ease-in,transform .34s ease-in;
+.saudacao.saindo{opacity:0;transition:opacity var(--t-base) var(--e-in),transform var(--t-base) var(--e-in);
   transform:translate(-50%,10px)}
 /* So o deslocamento e animado, nunca a opacidade: um navegador com a aba em segundo
    plano congela a animacao no primeiro quadro, e se esse quadro fosse transparente a
@@ -239,7 +316,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .qtop{position:sticky;top:calc(var(--bar-h) + var(--safe-t));z-index:30;background:var(--bg);padding:12px 0 8px;border-bottom:1px solid var(--line)}
 .qtop .wrap{display:flex;align-items:center;gap:12px}
 .progress{flex:1;height:9px;background:var(--line-2);border-radius:999px;overflow:hidden}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--gold));border-radius:999px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--gold));border-radius:999px;transition:width var(--t-base) var(--e-out)}
 .qcount{font-size:13.5px;font-weight:800;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
 [data-theme="dark"] .qcount{color:var(--ink)}
 .timer{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums;font-weight:800;font-size:14px;color:var(--sky-600);background:var(--sky-050);padding:7px 11px;border-radius:10px}
@@ -252,7 +329,8 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .tag-ar{background:var(--sky-100);color:var(--sky-600)}
 .tag-num{background:var(--branco-100);color:var(--ink-2)}
 .tag-anul{background:var(--bad-100);color:var(--bad-ink)}
-.enun{font-size:17px;line-height:1.62;color:var(--ink);margin-bottom:22px;white-space:pre-wrap}
+.enun{font-size:var(--fs-body);line-height:var(--lh-read);letter-spacing:var(--ls-body);
+  color:var(--ink);margin-bottom:var(--s6);white-space:pre-wrap}
 .figbox{margin:0 0 22px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--navy-050)}
 .figbox img{display:block;width:100%;height:auto;cursor:zoom-in;background:#fff}
 .figbox .cap{padding:9px 13px;font-size:12px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;gap:7px}
@@ -274,12 +352,14 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .lbbar svg{width:17px;height:17px}
 .alts{display:flex;flex-direction:column;gap:11px}
 .alt{display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border:1.8px solid var(--line-2);border-radius:14px;
-  background:var(--card);transition:all .14s;text-align:left;width:100%}
+  background:var(--card);transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out);text-align:left;width:100%}
 .alt:hover{border-color:var(--sky);background:var(--sky-050)}
 .alt .key{width:30px;height:30px;flex:none;border-radius:9px;border:1.8px solid var(--line-2);display:grid;place-items:center;
-  font-weight:800;font-size:15px;color:var(--ink-2);transition:all .14s}
-.alt .txt{font-size:15.5px;line-height:1.5;color:var(--ink);padding-top:3px}
-.alt.sel{border-color:var(--sky);background:var(--sky-100);box-shadow:0 4px 16px rgba(47,96,71,.20)}
+  font-weight:800;font-size:15px;color:var(--ink-2);transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
+.alt .txt{font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);
+  color:var(--ink);padding-top:2px}
+.alt.sel{border-color:var(--sky);background:var(--sky-100);
+  box-shadow:0 0 0 1px var(--sky) inset,0 4px 16px rgba(47,96,71,.20)}
 .alt.sel .key{background:var(--sky);border-color:var(--sky);color:#fff}
 [data-theme="dark"] .alt.sel .key,[data-theme="dark"] .alt.correct .key,[data-theme="dark"] .alt.wrong .key{color:#08130d}
 /* estados de revisão/estudo */
@@ -290,7 +370,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .alt .mk{margin-left:auto;font-weight:800;font-size:12.5px;align-self:center;display:flex;align-items:center;gap:5px}
 .alt.correct .mk{color:var(--good-ink)} .alt.wrong .mk{color:var(--bad-ink)}
 
-.flagbtn{display:inline-flex;align-items:center;gap:7px;padding:13px 15px;border-radius:11px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
+.flagbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:13px 15px;min-height:48px;border-radius:11px;border:1.5px solid var(--line-2);font-weight:700;font-size:14px;color:var(--ink-2)}
 .flagbtn.on{background:var(--gold-100);border-color:var(--gold);color:var(--gold-ink)}
 .flagbtn svg{width:16px;height:16px}
 .navspace{flex:1}
@@ -308,7 +388,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .qgrid button.answered{background:var(--sky);border-color:var(--sky);color:#fff}
 [data-theme="dark"] .qgrid button.answered{color:#08130d}
 .qgrid button.flagged::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.qgrid button.current{outline:3px solid var(--gold);outline-offset:1px}
+.qgrid button.current{box-shadow:0 0 0 2px var(--gold),0 0 0 5px var(--gold-glow)}
 
 /* ===================== RESULTADO ===================== */
 .result-hero{text-align:center;padding:30px 22px}
@@ -331,7 +411,7 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .barrow .top b{font-size:14px;color:var(--ink);font-weight:700}
 .barrow .top span{font-size:13px;color:var(--ink-2);font-weight:700;font-variant-numeric:tabular-nums}
 .track{height:12px;background:var(--branco-100);border-radius:999px;overflow:hidden}
-.track i{display:block;height:100%;border-radius:999px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.track i{display:block;height:100%;border-radius:999px;transition:width var(--t-data) var(--e-out)}
 
 table.perf{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
 table.perf th,table.perf td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line)}
@@ -352,7 +432,7 @@ table.perf td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight
 .just .src{padding:0 16px 14px;font-size:12px;color:var(--ink-3)}
 .just .embaviso{margin:0 16px 14px;padding:9px 11px;border-radius:9px;background:var(--gold-100);
   color:var(--gold-ink);font-size:12px;line-height:1.45}
-.chev{transition:transform .2s} .just[open] .chev{transform:rotate(90deg)}
+.chev{transition:transform var(--t-base) var(--e-out)} .just[open] .chev{transform:rotate(90deg)}
 
 /* atribuição da fonte oficial, por questão */
 .fonteinep{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
@@ -379,7 +459,7 @@ table.perf td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight
 .jsec-h.ok{color:var(--good-ink)} .jsec-h.no{color:var(--bad-ink)}
 .jsec-h.key{color:var(--gold-ink)} .jsec-h.ref{color:var(--sky-600)}
 [data-theme="dark"] .jsec-h.ref{color:var(--sky)}
-.jsec p{font-size:15px;line-height:1.62;color:var(--ink-2)}
+.jsec p{font-size:var(--fs-sub);line-height:var(--lh-read);letter-spacing:var(--ls-sub);color:var(--ink-2)}
 .jdist{display:flex;gap:11px;align-items:flex-start;margin-bottom:11px}
 .jdist:last-child{margin-bottom:0}
 .jletra{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
@@ -421,13 +501,22 @@ footer .brandline b{color:var(--navy)}
 
 /* ===================== RESPONSIVO ===================== */
 @media(min-width:720px){
-  .grid2{grid-template-columns:1fr}
   .tiles{grid-template-columns:repeat(4,1fr)}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .hero h1{font-size:32px}
+  .hero h1{font-size:var(--fs-lg)}
+  /* Os tres modos cabem lado a lado e se comparam de relance. Empilhados numa
+     coluna so, como estavam ate em 1080px, obrigavam a percorrer a lista. */
+  .modegrid{grid-template-columns:repeat(3,1fr)}
+  .modecard{flex-direction:column;align-items:flex-start;gap:10px;padding:16px}
+  .modecard .chk{position:absolute;top:12px;right:12px;margin:0}
+  .modecard{position:relative}
 }
 @media(max-width:520px){
-  .wrap{padding:0 15px}
+  /* mantem o recuo do recorte do aparelho: um `padding:0 15px` seco aqui
+     pisava o env(safe-area-inset-*) e no iPhone deitado o texto passava
+     por baixo do notch. */
+  .wrap{padding-left:max(15px,env(safe-area-inset-left,0px));
+        padding-right:max(15px,env(safe-area-inset-right,0px))}
   .hero{padding:24px 20px} .hero h1{font-size:23px}
   .scorebig{font-size:50px}
   .secbtns{grid-template-columns:1fr}
@@ -439,7 +528,7 @@ footer .brandline b{color:var(--navy)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .fade{animation:none}
+  .fade,.enter-f,.enter-b{animation:none}
 }
 /* estados de hover só onde existe cursor: evita hover "grudado" no toque */
 @media(hover:none){
@@ -447,10 +536,58 @@ footer .brandline b{color:var(--navy)}
     border-color:var(--line-2);background:var(--card);color:inherit;transform:none;box-shadow:none}
   .alt.sel:hover{border-color:var(--sky);background:var(--sky-100)}
   .chip.on:hover{background:var(--sky);border-color:var(--sky);color:#fff}
-  .preset.on:hover{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100)}
+  .preset.on:hover{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-100);
+    box-shadow:0 0 0 1px var(--gold) inset}
   .modecard.on:hover{border-color:var(--sky);background:var(--sky-050)}
   .navbtn.primary:hover,.navbtn.finish:hover{border-color:transparent;color:inherit}
+  /* Sem estes, o hover fica grudado depois do toque nestes controles tambem. */
+  .iconbtn:hover,.stepper button:hover,.linklike:hover,.flagbtn:hover,
+  .btn-ghost:hover,.just summary:hover,.qgrid button:hover,.lbbar button:hover{
+    background:none;border-color:var(--line-2);color:inherit;box-shadow:none}
+  .btn-gold:hover{box-shadow:0 2px 8px var(--gold-glow)}
+  .btn-ghost:hover{background:transparent}
+  .qgrid button.answered:hover{background:var(--sky-100);border-color:var(--sky)}
 }
+
+/* ---------- RESPOSTA AO TOQUE ----------------------------------------------
+   Tem que vir DEPOIS de @media(hover:none). No iOS um toque dispara :hover e
+   :active ao mesmo tempo, e o bloco acima zera o fundo com a mesma
+   especificidade — se estes :active viessem antes, seriam anulados e nada
+   disto apareceria no celular.
+
+   A linha 43 desliga o destaque nativo do sistema (um retangulo que ignora o
+   border-radius e fica grosseiro sobre um chip arredondado). O certo nao e
+   devolve-lo: e substitui-lo, que e o que este bloco faz. Nao reative
+   -webkit-tap-highlight-color.
+
+   A assimetria e proposital: ao PRESSIONAR, 90 ms com curva seca; ao SOLTAR,
+   os 260 ms de --e-release, com um repique minimo. Esse contraste e o que da
+   o tato de iOS. */
+
+/* Controles compactos: afundam e esmaecem. */
+.btn:active,.navbtn:active:not(:disabled),.iconbtn:active,.chip:active,
+.preset:active,.linklike:active,.flagbtn:active,.stepper button:active,
+.lbbar button:active,.updbar button:active{
+  transform:scale(.96);opacity:.92;
+  transition-duration:var(--t-press);transition-timing-function:var(--e-press)}
+
+/* Superficies grandes: afundam menos e se tingem. `button.alt` e nao `.alt`
+   porque na revisao a alternativa e um <div> que nao responde a nada; e
+   :not(:disabled) porque no modo estudo ela trava depois de respondida. */
+button.alt:not(:disabled):active,.modecard:active,.secbtn:active,
+.hist-item:active,.qgrid button:active{
+  transform:scale(.985);background:var(--sky-050);
+  transition-duration:var(--t-press);transition-timing-function:var(--e-press)}
+
+/* Botao de largura total: .96 deforma visivelmente; .985 nao. */
+.btn.block:active,.btn.lg:active{transform:scale(.985)}
+
+.brand:active{opacity:.6;transition:opacity var(--t-press) var(--e-press)}
+.just summary:active{background:var(--sky-050)}
+.figbox img:active{opacity:.9}
+/* o pino do interruptor estica ao ser pressionado, como no iOS */
+.switch:active::after{width:30px}
+
 .stack{display:flex;flex-direction:column;gap:18px}
 .rowbtns{display:flex;gap:10px;flex-wrap:wrap}
 .rowbtns .btn{flex:1;min-width:150px}
@@ -571,7 +708,12 @@ function esc(t){return (t==null?"":String(t)).replace(/[&<>"]/g,c=>({"&":"&amp;"
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function fmtTime(s){s=Math.max(0,Math.floor(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
   return (h?h+":":"")+String(m).padStart(h?2:1,"0")+":"+String(ss).padStart(2,"0");}
-function go(scr,arg){ if(S&&S.timer&&scr!=="quiz"){/*keep*/} window.scrollTo(0,0); render(scr,arg); }
+function go(scr,arg){
+  if(S&&S.timer&&scr!=="quiz"){/*keep*/}
+  if(dirTela===0) dirTela=Math.sign((NIVEL[scr]??1)-(NIVEL[telaAtual]??0));
+  window.scrollTo(0,0);   // instantaneo: scroll suave brigaria com a entrada
+  render(scr,arg);
+}
 function poolFor(c){
   return QUESTOES.filter(q=>{
     if(!c.incluirAnuladas && q.anulada) return false;
@@ -583,10 +725,15 @@ function poolFor(c){
 
 /*==================== RENDER PRINCIPAL ====================*/
 let telaAtual="home";
+/* Direcao da proxima entrada: 1 avanca, -1 volta, 0 sobe, null nao anima.
+   NIVEL da a profundidade de cada tela; a diferenca entre a de destino e a
+   atual decide o sentido, sem precisar de historico. */
+let dirTela=0;
+const NIVEL={home:0,about:1,history:1,conta:1,quiz:1,result:2,review:3};
 function render(scr,arg){
   /* "wrap" precisa sobreviver ao render: é ela que dá a largura máxima e a margem
      lateral da coluna de conteúdo. Sem ela o conteúdo cola nas bordas da tela. */
-  const el=$("#screen"); el.className="wrap"; el.classList.add("fade");
+  const el=$("#screen"); el.className="wrap";
   if(scr!=="quiz") unbindQuizKeys();   // fora da prova, A–D e as setas voltam a ser teclas comuns
   /* Na edição assinada, sem licença válida só existe a tela de conta. */
   if(EDICAO==="completo" && !LIC.estado().liberado && scr!=="conta" && scr!=="about") scr="conta";
@@ -599,7 +746,11 @@ function render(scr,arg){
   else if(scr==="history") el.innerHTML=viewHistory();
   else if(scr==="about") el.innerHTML=viewAbout();
   else if(scr==="conta") el.innerHTML=viewConta(arg);
-  el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
+  /* Reinicia a animacao num DOM recem-construido: sem o reflow forcado o
+     navegador nao ve mudanca de classe e nao anima. */
+  void el.offsetWidth;
+  if(dirTela!==null) el.classList.add(dirTela>0?"enter-f":dirTela<0?"enter-b":"fade");
+  dirTela=0;
 }
 
 /*==================== INÍCIO ====================*/
@@ -883,19 +1034,19 @@ function answer(orig){
   const it=curItem();
   if(S.cfg.feedback && it.resp) return;            // já corrigida em modo estudo
   it.resp=orig; persistRun();
-  if(S.cfg.feedback){ render("quiz"); return; }    // revela correção + justificativa
+  if(S.cfg.feedback){ dirTela=null; render("quiz"); return; }  // revela correção: cresce na própria tela, não navega
   // modo prova: atualiza a seleção no lugar (sem re-render → sem piscar)
   const alts=document.querySelectorAll('#alts .alt');
   if(alts.length){
     alts.forEach(b=>b.classList.toggle('sel', b.getAttribute('data-o')===orig));
     const rc=$("#respCount"); if(rc) rc.textContent=S.items.filter(x=>x.resp).length;
-  } else render("quiz");
+  } else { dirTela=null; render("quiz"); }
   if(S.cfg.autoAvancar){ setTimeout(()=>{ if(!S||S.finished)return; S.idx<S.items.length-1?nextQ():finishRun(); },240); }
 }
-function toggleFlag(){ curItem().flag=!curItem().flag; persistRun(); render("quiz"); }
-function nextQ(){ if(S.idx<S.items.length-1){S.idx++;persistRun();render("quiz");} }
-function prevQ(){ if(S.idx>0){S.idx--;persistRun();render("quiz");} }
-function gotoQ(i){ S.idx=i; persistRun(); closeModal(); render("quiz"); }
+function toggleFlag(){ curItem().flag=!curItem().flag; persistRun(); dirTela=null; render("quiz"); }
+function nextQ(){ if(S.idx<S.items.length-1){S.idx++;persistRun();dirTela=1;render("quiz");} }
+function prevQ(){ if(S.idx>0){S.idx--;persistRun();dirTela=-1;render("quiz");} }
+function gotoQ(i){ dirTela=Math.sign(i-S.idx); S.idx=i; persistRun(); closeModal(); render("quiz"); }
 function bindQuizKeys(){ document.onkeydown=(e)=>{
   if(!S||S.finished)return;
   if(e.ctrlKey||e.metaKey||e.altKey)return;        // Cmd+C copia, não responde a alternativa C
@@ -1722,6 +1873,11 @@ async function renovarLicencaEmSilencio(){
 (function init(){
   const th=store.get("revalida_theme"); if(th==="dark")document.documentElement.setAttribute("data-theme","dark");
   loadCfg();
+  /* Destrava o :active no iOS. O WebKit não aplica :active a elementos que não
+     sejam links ou botões nativos enquanto o documento não tiver um ouvinte de
+     toque — sem esta linha, metade do retorno tátil do CSS não aparece no
+     iPhone. Vazio e passivo de propósito: não interfere na rolagem. */
+  document.addEventListener("touchstart",()=>{},{passive:true});
   document.addEventListener("keydown",e=>{
     if((e.key===" "||e.key==="Enter") && e.target && e.target.classList && e.target.classList.contains("switch")){ e.preventDefault(); e.target.click(); return; }
     if(e.key==="Escape"){ if($(".lightbox")){ fecharLightbox(); e.preventDefault(); } else if($("#ov")){ closeModal(); e.preventDefault(); } }

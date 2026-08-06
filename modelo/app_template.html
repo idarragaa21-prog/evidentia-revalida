@@ -24,9 +24,39 @@
   --shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.09);
   --shadow-lg:0 8px 40px rgba(27,46,34,.18);
   --r:16px; --r-sm:10px; --r-lg:22px;
-  --ff:"Calibri","Segoe UI",system-ui,-apple-system,"Roboto","Helvetica Neue",Arial,sans-serif;
-  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+  /* A tipografia do sistema primeiro. Num Mac ou num iPhone isto faz o
+     aplicativo se desenhar em San Francisco — a mesma letra do resto do
+     aparelho — e em New York para os titulos. Calibri fica de reserva para
+     Windows. E a mudanca tipografica de maior retorno por linha editada. */
+  --ff:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,
+       "Segoe UI Variable Text","Segoe UI","Calibri",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"New York","Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
   --maxw:1080px;
+
+  /* ---- TIPOGRAFIA ----------------------------------------------------------
+     Dez degraus no lugar dos 27 tamanhos soltos que havia (varios com meio
+     pixel: 11.5, 12.5, 14.5, 16.5). O tracking negativo nos tamanhos grandes e
+     o que faz um titulo parecer desenhado e nao esticado: quanto maior o corpo,
+     mais apertada precisa ser a letra. */
+  --fs-c2:11px;      --ls-c2:.022em;
+  --fs-c1:12px;      --ls-c1:.006em;
+  --fs-foot:13px;    --ls-foot:0;
+  --fs-sub:15px;     --ls-sub:-.011em;
+  --fs-body:17px;    --ls-body:-.021em;
+  --fs-t3:20px;      --ls-t3:-.024em;
+  --fs-t2:24px;      --ls-t2:-.026em;
+  --fs-t1:28px;      --ls-t1:-.030em;
+  --fs-lg:34px;      --ls-lg:-.035em;
+  --fs-display:56px; --ls-display:-.040em;
+
+  --lh-tight:1.14;   /* titulos serif */
+  --lh-snug:1.30;    /* subtitulos, botoes */
+  --lh-body:1.50;    /* interface */
+  --lh-read:1.62;    /* enunciado, justificativa */
+
+  /* ---- ESPACO — grade de 4px ---------------------------------------------- */
+  --s1:4px;  --s2:8px;  --s3:12px; --s4:16px; --s5:20px;
+  --s6:24px; --s7:32px; --s8:40px; --s9:56px;
 
   /* Recorte do aparelho (notch) e altura da appbar. Usados pelos sticky. */
   --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
@@ -68,11 +98,12 @@
 html,body{margin:0;padding:0}
 body{
   font-family:var(--ff); background:var(--bg); color:var(--ink);
-  line-height:1.5; font-size:16px; -webkit-font-smoothing:antialiased;
+  line-height:var(--lh-body); font-size:var(--fs-body); letter-spacing:var(--ls-body);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
 h1,h2,h3,h4{margin:0;font-weight:700;color:var(--navy)}
-h1,h2{font-family:var(--serif);letter-spacing:-.005em}
+h1,h2{font-family:var(--serif);letter-spacing:var(--ls-t2);line-height:var(--lh-tight)}
 h3,h4{font-family:var(--ff);letter-spacing:0}
 [data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4{color:var(--ink)}
 p{margin:0}
@@ -138,9 +169,6 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .chip.on{background:var(--sky);border-color:var(--sky);color:#fff;box-shadow:0 4px 14px rgba(47,96,71,.30)}
 [data-theme="dark"] .chip.on{color:#08130d;box-shadow:0 4px 14px rgba(0,0,0,.45)}
 .chip .dot{width:9px;height:9px;border-radius:50%}
-.seg{display:inline-flex;background:var(--navy-050);border:1px solid var(--line);border-radius:13px;padding:5px;gap:4px;flex-wrap:wrap}
-.seg button{padding:10px 16px;border-radius:9px;font-weight:700;font-size:14.5px;color:var(--ink-2);transition:all .16s}
-.seg button.on{background:var(--card);color:var(--navy);box-shadow:var(--shadow)}
 [data-theme="dark"] .seg button.on{color:var(--ink)}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;border-radius:13px;
@@ -239,7 +267,6 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .hero .metrics div span{font-size:12px;color:#c3b59a;font-weight:600;letter-spacing:.04em}
 .hero-over{position:relative;color:#dcc07f;font-weight:800;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:13px}
 .hero-over::before{content:"";display:inline-block;width:22px;height:2px;background:#b08d4c;vertical-align:middle;margin-right:9px;margin-bottom:3px}
-.grid2{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
 .field{margin-bottom:22px}
 .field:last-child{margin-bottom:0}
 .field>label{display:block;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:10px}
@@ -302,7 +329,8 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .tag-ar{background:var(--sky-100);color:var(--sky-600)}
 .tag-num{background:var(--branco-100);color:var(--ink-2)}
 .tag-anul{background:var(--bad-100);color:var(--bad-ink)}
-.enun{font-size:17px;line-height:1.62;color:var(--ink);margin-bottom:22px;white-space:pre-wrap}
+.enun{font-size:var(--fs-body);line-height:var(--lh-read);letter-spacing:var(--ls-body);
+  color:var(--ink);margin-bottom:var(--s6);white-space:pre-wrap}
 .figbox{margin:0 0 22px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--navy-050)}
 .figbox img{display:block;width:100%;height:auto;cursor:zoom-in;background:#fff}
 .figbox .cap{padding:9px 13px;font-size:12px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;gap:7px}
@@ -328,7 +356,8 @@ main{padding:26px 0 calc(90px + var(--safe-b))}
 .alt:hover{border-color:var(--sky);background:var(--sky-050)}
 .alt .key{width:30px;height:30px;flex:none;border-radius:9px;border:1.8px solid var(--line-2);display:grid;place-items:center;
   font-weight:800;font-size:15px;color:var(--ink-2);transition:transform var(--t-base) var(--e-release),background-color var(--t-fast) var(--e-out),border-color var(--t-fast) var(--e-out),color var(--t-fast) var(--e-out),box-shadow var(--t-fast) var(--e-out)}
-.alt .txt{font-size:15.5px;line-height:1.5;color:var(--ink);padding-top:3px}
+.alt .txt{font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);
+  color:var(--ink);padding-top:2px}
 .alt.sel{border-color:var(--sky);background:var(--sky-100);
   box-shadow:0 0 0 1px var(--sky) inset,0 4px 16px rgba(47,96,71,.20)}
 .alt.sel .key{background:var(--sky);border-color:var(--sky);color:#fff}
@@ -430,7 +459,7 @@ table.perf td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight
 .jsec-h.ok{color:var(--good-ink)} .jsec-h.no{color:var(--bad-ink)}
 .jsec-h.key{color:var(--gold-ink)} .jsec-h.ref{color:var(--sky-600)}
 [data-theme="dark"] .jsec-h.ref{color:var(--sky)}
-.jsec p{font-size:15px;line-height:1.62;color:var(--ink-2)}
+.jsec p{font-size:var(--fs-sub);line-height:var(--lh-read);letter-spacing:var(--ls-sub);color:var(--ink-2)}
 .jdist{display:flex;gap:11px;align-items:flex-start;margin-bottom:11px}
 .jdist:last-child{margin-bottom:0}
 .jletra{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
@@ -472,13 +501,22 @@ footer .brandline b{color:var(--navy)}
 
 /* ===================== RESPONSIVO ===================== */
 @media(min-width:720px){
-  .grid2{grid-template-columns:1fr}
   .tiles{grid-template-columns:repeat(4,1fr)}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .hero h1{font-size:32px}
+  .hero h1{font-size:var(--fs-lg)}
+  /* Os tres modos cabem lado a lado e se comparam de relance. Empilhados numa
+     coluna so, como estavam ate em 1080px, obrigavam a percorrer a lista. */
+  .modegrid{grid-template-columns:repeat(3,1fr)}
+  .modecard{flex-direction:column;align-items:flex-start;gap:10px;padding:16px}
+  .modecard .chk{position:absolute;top:12px;right:12px;margin:0}
+  .modecard{position:relative}
 }
 @media(max-width:520px){
-  .wrap{padding:0 15px}
+  /* mantem o recuo do recorte do aparelho: um `padding:0 15px` seco aqui
+     pisava o env(safe-area-inset-*) e no iPhone deitado o texto passava
+     por baixo do notch. */
+  .wrap{padding-left:max(15px,env(safe-area-inset-left,0px));
+        padding-right:max(15px,env(safe-area-inset-right,0px))}
   .hero{padding:24px 20px} .hero h1{font-size:23px}
   .scorebig{font-size:50px}
   .secbtns{grid-template-columns:1fr}
