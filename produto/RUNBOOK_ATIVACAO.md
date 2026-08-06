@@ -129,7 +129,7 @@ La aplicación gratuita ya vive en GitHub Pages. Conviértela en el embudo:
 1. La edición libre (`aplicativo/Revalida_Evidentia_livre.html`) es lo que se publica.
    Tiene 40 preguntas con las mismas justificaciones referenciadas: no es una demo mutilada.
 2. Desde ella, el botón de compra lleva a tu página de Hotmart.
-3. En la página de venta, di el número real: **400 preguntas oficiales**, no «miles». Tu
+3. En la página de venta, di el número real: **500 preguntas oficiales**, no «miles». Tu
    argumento es que cada una está conferida contra el cuaderno del INEP y justificada con la
    fuente citada. Es lo único que ningún competidor ofrece.
 

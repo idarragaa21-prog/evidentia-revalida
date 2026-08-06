@@ -6,7 +6,7 @@
 
 Aplicativo web de arquivo único, que funciona sem internet, no celular e no computador.
 
-`400 questões` · `4 edições` · `26 figuras originais` · `texto e gabarito conferidos contra o caderno oficial`
+`500 questões` · `5 edições` · `30 figuras originais` · `justificativa com fontes citadas em cada questão`
 
 </div>
 
@@ -28,11 +28,14 @@ O aplicativo inteiro é **um único arquivo HTML**. Não precisa de instalação
 | 2023/2 | 100 | 9 | 91 |
 | 2024/1 | 100 | 5 | 95 |
 | 2024/2 | 100 | 6 | 94 |
-| **Total** | **400** | **27** | **373** |
+| 2026/1 | 100 | 0 | 100 |
+| **Total** | **500** | **27** | **473** |
 
-Distribuição por área: Clínica Médica (99), Ginecologia e Obstetrícia (87), Pediatria (86), Cirurgia (68) e Medicina da Família, Comunidade e Saúde Coletiva (60).
+Distribuição por área: Clínica Médica (120), Ginecologia e Obstetrícia (107), Pediatria (104), Medicina da Família, Comunidade e Saúde Coletiva (87) e Cirurgia (82).
 
-As 26 questões que dependem de figura — radiografias, eletrocardiogramas, monitores, fotografias e gráficos — trazem a imagem original recortada do caderno oficial, para que possam ser respondidas por inteiro.
+As 30 questões que dependem de figura — radiografias, eletrocardiogramas, monitores, fotografias, partogramas e gráficos — trazem a imagem original recortada do caderno oficial, para que possam ser respondidas por inteiro.
+
+As 500 questões têm justificativa estruturada; 455 delas citam ao menos uma das 318 fontes verificadas do catálogo.
 
 ## Recursos
 

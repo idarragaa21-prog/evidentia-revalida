@@ -12,7 +12,7 @@
 
 ## 1. Qué se vende y por qué alguien pagaría
 
-El producto es un **banco de las 400 preguntas objetivas del Revalida (INEP) de 2023/1 a
+El producto es un **banco de las 500 preguntas objetivas del Revalida (INEP) de 2023/1 a
 2024/2**, con simulados, corrección detallada y — esto es lo nuevo — **una justificación por
 pregunta anclada en literatura verificable**, en una aplicación que funciona sin internet y
 se instala de verdad en el computador y en el celular.
@@ -317,7 +317,7 @@ producto entero, que es justamente lo único que lo diferencia.
 
 ## 10. Riesgos, sin maquillaje
 
-1. **Solo 400 preguntas.** Es el flanco de comparación más obvio. Mitigación: precio a la mitad
+1. **Solo 500 preguntas.** Es el flanco de comparación más obvio. Mitigación: precio a la mitad
    del ancla y promesa honesta en la primera pantalla. Cada edición nueva del INEP suma 100.
 2. **Las justificaciones eran generadas con IA.** En un producto gratuito era un aviso; en uno de
    pago es responsabilidad. Por eso este plan las reconstruye con fuente citada y mantiene el
