@@ -1503,19 +1503,43 @@ const LIC = (()=>{
     return chavePub;
   }
 
-  /* Devolve o conteúdo da licença só se a assinatura conferir e o prazo não tiver
-     vencido. Qualquer falha devolve null: nunca "no benefício da dúvida". */
-  async function conferir(token){
+  /* Relógio de referência à prova de atraso manual. Atrasar o relógio do aparelho
+     revalidaria uma licença vencida e ainda faria o aplicativo parar de consultar o
+     servidor. Por isso guardamos o instante mais adiantado já visto e nunca aceitamos
+     um "agora" anterior a ele. Adiantar o relógio não ajuda ninguém: só antecipa o
+     vencimento. */
+  const CHAVE_RELOGIO="revalida_relogio";
+  function agora(){
+    const real=Date.now();
+    let maior=0;
+    try{ maior=Number(store.get(CHAVE_RELOGIO)||0)||0; }catch(e){ maior=0; }
+    if(real>maior){ try{ store.set(CHAVE_RELOGIO,String(real)); }catch(e){} return real; }
+    return maior;
+  }
+
+  /* Devolve o conteúdo da licença só se a assinatura conferir, o prazo não tiver
+     vencido e ela tiver sido emitida para esta conta. Qualquer falha devolve null:
+     nunca "no benefício da dúvida". */
+  async function conferir(token, emailEsperado){
     try{
-      const [corpo,assinatura]=String(token).split(".");
+      const partes=String(token).split(".");
+      if(partes.length!==2) return null;          // ponto a mais é token forjado
+      const [corpo,assinatura]=partes;
       if(!corpo||!assinatura) return null;
       const dados=b64urlParaBytes(corpo);
       const ok=await crypto.subtle.verify({name:"ECDSA",hash:"SHA-256"},
         await chave(), b64urlParaBytes(assinatura), dados);
       if(!ok) return null;
       const p=JSON.parse(new TextDecoder().decode(dados));
-      if(!p||typeof p.exp!=="number") return null;
-      if(p.exp*1000 <= Date.now()) return null;
+      if(!p||typeof p!=="object") return null;
+      if(typeof p.exp!=="number"||!Number.isFinite(p.exp)) return null;
+      if(p.exp*1000 <= agora()) return null;
+      /* A licença é nominal: vale para a conta que a pediu. Sem esta conferência ela
+         seria um portador puro, e um assinante liberaria quantas pessoas quisesse
+         apenas copiando o arquivo. */
+      const dono=String(p.email||"").toLowerCase();
+      const esperado=String(emailEsperado||"").toLowerCase();
+      if(dono && esperado && dono!==esperado) return null;
       return p;
     }catch(e){ return null; }
   }
@@ -1570,7 +1594,7 @@ const LIC = (()=>{
       r=await pedir(novo);
     }
     if(!r?.ativo || !r.licenca) return {ativo:false,motivo:r?.motivo||"sem_assinatura"};
-    const p=await conferir(r.licenca);
+    const p=await conferir(r.licenca, s.email);
     if(!p) throw new Error("o servidor devolveu uma licença que não confere");
     store.set(CHAVE_TOKEN,r.licenca);
     payload=p;
@@ -1579,21 +1603,41 @@ const LIC = (()=>{
 
   async function carregar(){
     if(EDICAO!=="completo") return null;
-    payload=await conferir(store.get(CHAVE_TOKEN)||"");
+    payload=await conferir(store.get(CHAVE_TOKEN)||"", sessao()?.email);
+    if(payload) verificarRevogacao();   // em segundo plano; não atrasa a abertura
     return payload;
+  }
+
+  /* A licença vale 30 dias offline, mas uma revogação não pode esperar todo esse
+     prazo. Sempre que houver rede, o aplicativo pergunta se aquela licença ainda
+     vale; se o servidor disser que não, ela morre aqui na hora. Sem esta consulta,
+     `licencas.revogada_em` seria uma coluna que se escreve e nunca se lê. */
+  async function verificarRevogacao(){
+    const s=sessao();
+    if(!payload?.jti || !s?.access_token || !NUVEM.url) return;
+    try{
+      const r=await nuvem("/rest/v1/rpc/licenca_valida",{
+        method:"POST", headers:{Authorization:"Bearer "+s.access_token},
+        body:JSON.stringify({p_jti:payload.jti})
+      });
+      if(r===false){
+        store.del(CHAVE_TOKEN); payload=null;
+        if(typeof render==="function" && EDICAO==="completo") render("conta");
+      }
+    }catch(e){ /* sem rede: a licença segue valendo até vencer, como previsto */ }
   }
 
   function estado(){
     if(EDICAO!=="completo") return {liberado:true,edicao:"livre"};
     if(!payload) return {liberado:false,edicao:"completo"};
-    const diasRestantes=Math.ceil((payload.exp*1000-Date.now())/86400000);
+    const diasRestantes=Math.ceil((payload.exp*1000-agora())/86400000);
     return {liberado:true,edicao:"completo",payload,diasRestantes,
             renovarLogo:diasRestantes<=DIAS_AVISO};
   }
 
   function sair(){ store.del(CHAVE_TOKEN); store.del(CHAVE_SESSAO); payload=null; }
 
-  return {conferir,carregar,estado,entrar,criarConta,recuperarSenha,buscarLicenca,sair,
+  return {conferir,carregar,estado,entrar,criarConta,recuperarSenha,buscarLicenca,sair,verificarRevogacao,
           sessao,nuvem,get payload(){return payload;}};
 })();
 
