@@ -20,7 +20,7 @@ Protótipo inicial do segundo vertical da Evidentia.
 Como os arquivos são estáticos, basta servir esta pasta localmente. Exemplo:
 
 ```bash
-cd evidential-revalida/evidentia-orto
+cd evidentia-revalida/evidentia-orto
 python3 -m http.server 8081
 ```
 
