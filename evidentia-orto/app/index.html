@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidentia Orto · TEPOT · TEOT</title>
+<style>
+:root{
+  --green:#1f6a4d; --green-2:#e7f1ec; --gold:#b08d4c; --bg:#f5f4ee;
+  --card:#fff; --ink:#17241d; --muted:#617066; --line:#d8e2dc; --bad:#a54635;
+}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:980px;margin:auto;padding:20px}.top{display:flex;align-items:center;gap:14px;padding:8px 0 20px}.brand{font-weight:900;letter-spacing:.12em}.sub{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 6px 20px rgba(20,45,30,.06)}
+h1{font-family:Georgia,serif;font-size:clamp(28px,5vw,44px);margin:4px 0 10px}.lead{font-size:17px;color:var(--muted);max-width:760px;line-height:1.6}
+.metric b{font-size:30px;display:block}.metric span{font-size:13px;color:var(--muted)}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer;background:var(--green);color:#fff}button.alt{background:var(--green-2);color:var(--green)}button.gold{background:var(--gold);color:#2f2407}
+.row{display:flex;gap:10px;flex-wrap:wrap}.section{margin-top:26px}.topic{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}.topic:last-child{border-bottom:0}.bar{height:9px;background:#e8ece9;border-radius:99px;overflow:hidden;flex:1}.bar i{display:block;height:100%;background:var(--green)}.topic small{color:var(--muted)}
+.badge{font-size:12px;font-weight:800;padding:4px 8px;border-radius:99px;background:var(--green-2);color:var(--green)}.badge.bad{background:#f4e5e1;color:var(--bad)}
+.qopt{display:block;width:100%;text-align:left;margin:8px 0;background:#fff;color:var(--ink);border:1.5px solid var(--line)}.qopt:hover{border-color:var(--green)}
+.hidden{display:none}.muted{color:var(--muted)}.sessionItem{padding:12px 0;border-bottom:1px solid var(--line)}.sessionItem:last-child{border-bottom:0}
+input,select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">EVIDENTIA</div><div class="sub">Orto · TEPOT · TEOT</div></div>
+  <h1>Estude o que você precisa hoje.</h1>
+  <p class="lead">Protótipo do motor adaptativo local do Evidentia Orto. Ele aprende com acertos, erros, tempo, confiança e padrões de distrator — sem IA, sem tokens e sem depender de internet.</p>
+
+  <div class="grid section">
+    <div class="card metric"><b id="dominioGeral">—</b><span>domínio estimado</span></div>
+    <div class="card metric"><b id="respondidas">0</b><span>tentativas registradas</span></div>
+    <div class="card metric"><b id="errosSeguros">0</b><span>erros com alta confiança</span></div>
+    <div class="card metric"><b id="revisoes">0</b><span>flashcards vencidos</span></div>
+  </div>
+
+  <div class="section card">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div><b>Sessão recomendada</b><div class="muted">A aplicação escolhe a maior prioridade.</div></div>
+      <div class="row"><select id="minutos"><option>20</option><option selected>30</option><option>45</option><option>60</option></select><button onclick="montarSessao()">Montar sessão</button></div>
+    </div>
+    <div id="sessao" class="section muted">Ainda não montada.</div>
+  </div>
+
+  <div class="section grid">
+    <div class="card">
+      <b>Pontos que precisam de atenção</b>
+      <div id="topics" class="section muted">Responda algumas questões para o painel aprender seu padrão.</div>
+    </div>
+    <div class="card">
+      <b>Flashcards Evidentia</b>
+      <p class="muted">Repetição espaçada local. Avalie a lembrança e o intervalo muda automaticamente.</p>
+      <div id="flashcard"></div>
+    </div>
+  </div>
+
+  <div class="section card" id="questionCard">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <b>Questão demonstrativa</b><span id="qmeta" class="badge"></span>
+    </div>
+    <p id="stem" style="line-height:1.55"></p>
+    <div id="options"></div>
+    <div id="feedback" class="hidden"></div>
+  </div>
+
+  <div class="section row"><button class="alt" onclick="resetar()">Limpar dados do protótipo</button></div>
+</div>
+<script src="../src/adaptive-engine.js"></script>
+<script src="../data/sample-data.js"></script>
+<script>
+const DATA=window.EVIDENTIA_ORTO_SAMPLE;
+let state=EvidentiaAdaptive.load();
+let current=null, started=0;
+
+function pct(v){return Math.round((v||0)*100)+'%'}
+function atualizar(){
+  const stats=Object.values(state.questions);
+  const mastery=stats.length?stats.reduce((a,s)=>a+EvidentiaAdaptive.computeMastery(s),0)/stats.length:0;
+  dominioGeral.textContent=stats.length?pct(mastery):'—';
+  respondidas.textContent=stats.reduce((a,s)=>a+(s.attempts||0),0);
+  errosSeguros.textContent=stats.reduce((a,s)=>a+(s.highConfidenceErrors||0),0);
+  revisoes.textContent=EvidentiaAdaptive.dueCards(state,DATA.cards).length;
+
+  const dash=EvidentiaAdaptive.groupDashboard(state,'topic');
+  topics.innerHTML=dash.length?dash.slice(0,6).map(t=>`<div class="topic"><div style="min-width:130px"><b>${t.name}</b><br><small>${t.attempts} tentativas</small></div><div class="bar"><i style="width:${Math.round(t.mastery*100)}%"></i></div><span class="${t.mastery<.55?'badge bad':'badge'}">${pct(t.mastery)}</span></div>`).join(''):'<span class="muted">Responda algumas questões para o painel aprender seu padrão.</span>';
+  mostrarFlashcard();
+}
+
+function escolherQuestao(){
+  current=DATA.questions.map(q=>({...q,p:EvidentiaAdaptive.questionPriority(state,q)})).sort((a,b)=>b.p-a.p)[0];
+  started=Date.now();
+  qmeta.textContent=current.area+' · '+current.topic;
+  stem.textContent=current.stem;
+  options.innerHTML=Object.entries(current.options).map(([k,v])=>`<button class="qopt" onclick="responder('${k}')"><b>${k}.</b> ${v}</button>`).join('');
+  feedback.className='hidden';feedback.innerHTML='';
+}
+
+function responder(letter){
+  const correct=letter===current.answer;
+  const confidence=prompt('Confiança? Digite: chutei, duvida ou seguro','duvida')||'duvida';
+  const sec=Math.max(1,Math.round((Date.now()-started)/1000));
+  const stat=EvidentiaAdaptive.recordAttempt(state,{
+    questionId:current.id,area:current.area,topic:current.topic,competency:current.competency,
+    correct,responseTimeSec:sec,confidence,distractorTag:correct?null:current.distractorTags?.[letter],targetTimeSec:current.targetTimeSec
+  });
+  EvidentiaAdaptive.save(state);
+  feedback.className='';
+  feedback.innerHTML=`<div class="card" style="margin-top:14px;border-color:${correct?'var(--green)':'var(--bad)'}"><b>${correct?'Correto':'Incorreto'}</b><p>${current.explanation}</p><span class="badge">Domínio desta questão: ${pct(stat.mastery)}</span><div style="margin-top:12px"><button onclick="escolherQuestao()">Próxima prioridade</button></div></div>`;
+  atualizar();
+}
+
+function mostrarFlashcard(){
+  const due=EvidentiaAdaptive.dueCards(state,DATA.cards);
+  const card=(due[0]||{card:DATA.cards[0]}).card;
+  if(!card){flashcard.innerHTML='<span class="muted">Sem cards.</span>';return;}
+  flashcard.innerHTML=`<div><p><b>${card.front}</b></p><details><summary>Mostrar resposta</summary><p>${card.back}</p></details><div class="row" style="margin-top:12px"><button class="alt" onclick="avaliarCard('${card.id}','again')">Esqueci</button><button class="alt" onclick="avaliarCard('${card.id}','hard')">Difícil</button><button onclick="avaliarCard('${card.id}','good')">Bom</button><button class="gold" onclick="avaliarCard('${card.id}','easy')">Fácil</button></div></div>`;
+}
+function avaliarCard(id,rating){EvidentiaAdaptive.rateCard(state,id,rating);EvidentiaAdaptive.save(state);atualizar()}
+
+function montarSessao(){
+  const s=EvidentiaAdaptive.buildDailySession(state,{questions:DATA.questions,cards:DATA.cards,minutes:Number(minutos.value)});
+  sessao.innerHTML=`<b>≈ ${s.estimatedMinutes} min</b><br>${s.cards.length} revisões + ${s.questions.length} questões<div style="margin-top:12px">${s.questions.map(q=>`<div class="sessionItem"><b>${q.area}</b> · ${q.topic} <span class="badge">prioridade ${Math.round(q.priority*100)}</span></div>`).join('')}</div>`;
+}
+function resetar(){localStorage.removeItem(EvidentiaAdaptive.STORAGE_KEY);state=EvidentiaAdaptive.emptyState();atualizar();escolherQuestao()}
+
+atualizar();escolherQuestao();
+</script>
+</body>
+</html>
