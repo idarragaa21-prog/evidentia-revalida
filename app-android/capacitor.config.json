@@ -2,6 +2,6 @@
   "appId": "com.evidentia.revalida",
   "appName": "Evidentia Revalida",
   "webDir": "www",
-  "backgroundColor": "#182118",
-  "android": { "backgroundColor": "#182118" }
+  "backgroundColor": "#F7FAF8",
+  "android": { "backgroundColor": "#F7FAF8" }
 }

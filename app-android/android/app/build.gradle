@@ -1,26 +1,79 @@
 apply plugin: 'com.android.application'
 
+def releaseKeystorePath = System.getenv('EVIDENTIA_ANDROID_KEYSTORE')
+def releaseKeystorePassword = System.getenv('EVIDENTIA_ANDROID_KEYSTORE_PASSWORD')
+def releaseKeyAlias = System.getenv('EVIDENTIA_ANDROID_KEY_ALIAS')
+def releaseKeyPassword = System.getenv('EVIDENTIA_ANDROID_KEY_PASSWORD')
+def releaseSigningConfigured = [
+    releaseKeystorePath,
+    releaseKeystorePassword,
+    releaseKeyAlias,
+    releaseKeyPassword,
+].every { value -> value != null && !value.trim().isEmpty() }
+def allowUnsignedRelease = providers.gradleProperty('allowUnsignedRelease')
+    .map { it == 'true' }
+    .getOrElse(false)
+
 android {
-    namespace "com.evidentia.revalida"
-    compileSdk rootProject.ext.compileSdkVersion
+    namespace = "com.evidentia.revalida"
+    compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.evidentia.revalida"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
-        versionName "1.1"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
-            ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        if (releaseSigningConfigured) {
+            release {
+                storeFile file(releaseKeystorePath)
+                storePassword releaseKeystorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+                enableV1Signing true
+                enableV2Signing true
+            }
         }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (releaseSigningConfigured) {
+                signingConfig signingConfigs.release
+            }
         }
+    }
+}
+
+tasks.register('verifyReleaseSigning') {
+    group = 'verification'
+    description = 'Fails closed when a release artifact would be generated without the upload key.'
+    doLast {
+        if (!releaseSigningConfigured && !allowUnsignedRelease) {
+            throw new GradleException(
+                'Release signing is not configured. Set EVIDENTIA_ANDROID_KEYSTORE, ' +
+                'EVIDENTIA_ANDROID_KEYSTORE_PASSWORD, EVIDENTIA_ANDROID_KEY_ALIAS and ' +
+                'EVIDENTIA_ANDROID_KEY_PASSWORD. For compile-only local validation, use ' +
+                '-PallowUnsignedRelease=true; that artifact must never be uploaded.'
+            )
+        }
+        if (releaseSigningConfigured && !file(releaseKeystorePath).isFile()) {
+            throw new GradleException('EVIDENTIA_ANDROID_KEYSTORE does not point to a readable file.')
+        }
+    }
+}
+
+tasks.configureEach { task ->
+    if (task.name == 'bundleRelease' || task.name == 'assembleRelease') {
+        task.dependsOn tasks.named('verifyReleaseSigning')
     }
 }
 
@@ -31,6 +84,7 @@ repositories {
 }
 
 dependencies {
+    implementation "com.android.billingclient:billing:9.1.0"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"

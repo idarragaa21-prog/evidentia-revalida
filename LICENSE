@@ -1,31 +1,19 @@
-MIT License
+# Mapa de licenciamento
 
-Copyright (c) 2026 Diego Alejandro Idárraga López (Evidentia)
+Este repositorio contem materiais sujeitos a regimes diferentes. A presenca de
+um arquivo no mesmo repositorio nao estende automaticamente uma licenca a ele.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. **Codigo-fonte:** o codigo e os scripts que nao incorporam conteudo editorial
+   ou material de provas sao licenciados conforme `LICENSE-CODE` (MIT).
+2. **Conteudo editorial da Evidentia:** justificativas, explicacoes, analises de
+   alternativas, classificacoes, selecoes, mapeamentos de referencias,
+   algoritmos didaticos e bases curadas seguem `CONTENT_LICENSE.md`.
+3. **Conteudo de terceiros:** enunciados, alternativas, gabaritos, figuras e
+   demais elementos das provas do INEP nao sao licenciados pela Evidentia.
+   Consulte `AVISO_DE_CONTEUDO.md` e os termos do titular.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
----
-
-NOTA SOBRE O CONTEUDO DAS PROVAS
-
-Esta licenca cobre o codigo, os scripts e a interface deste repositorio.
-NAO se aplica ao conteudo das provas objetivas do Revalida (enunciados,
-alternativas, gabaritos e figuras), que pertence ao Instituto Nacional de
-Estudos e Pesquisas Educacionais Anisio Teixeira (INEP) e e aqui reunido
-para fins de estudo. Consulte AVISO_DE_CONTEUDO.md.
+Esta separacao vale prospectivamente para esta revisao e revisoes posteriores.
+Ela nao pretende revogar direitos que tenham sido validamente concedidos sobre
+copias ou revisoes ja distribuidas, nem altera ou apaga o historico publico do
+Git. Em caso de duvida sobre uma revisao anterior, consulte os arquivos de
+licenca existentes naquela revisao.

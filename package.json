@@ -12,9 +12,10 @@
     "preparar": "playwright install chromium",
     "teste:funcional": "node testes/teste_funcional.mjs",
     "teste:tema": "node testes/teste_tema_escuro.mjs",
+    "teste:checkout": "node testes/teste_checkout.mjs",
     "capturas:telas": "node testes/capturas_telas.mjs",
     "capturas:figuras": "node testes/capturas_figuras.mjs",
-    "test": "npm run teste:funcional && npm run teste:tema && npm run teste:cors && npm run capturas:telas && npm run capturas:figuras",
+    "test": "npm run teste:funcional && npm run teste:tema && npm run teste:checkout && npm run teste:cors && npm run capturas:telas && npm run capturas:figuras",
     "teste:cors": "node testes/teste_cors.mjs"
   },
   "devDependencies": {

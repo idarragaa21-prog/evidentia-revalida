@@ -19,8 +19,8 @@
     "empacotar:linux": "npm run preparar && electron-builder --linux --publish never"
   },
   "devDependencies": {
-    "electron": "^33.2.0",
-    "electron-builder": "^25.1.8"
+    "electron": "41.10.4",
+    "electron-builder": "26.15.3"
   },
   "build": {
     "appId": "co.evidentia.revalida",

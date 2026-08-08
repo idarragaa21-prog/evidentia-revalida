@@ -10,7 +10,9 @@ Este repositório reúne esse material com finalidade exclusivamente educativa, 
 
 **Do INEP:** o texto das questões, as alternativas, os gabaritos, a indicação das questões anuladas e as figuras dos cadernos. Este projeto não reivindica qualquer direito sobre esse conteúdo, não o modifica em substância e não o apresenta como produção própria.
 
-**Deste projeto:** o código, os scripts de extração e verificação, a interface, a organização dos dados, a classificação por especialidade e as justificativas de estudo. Essa parte é distribuída sob a licença MIT.
+**Deste projeto:** o código, os scripts de extração e verificação, a interface, a organização editorial dos dados, a classificação por especialidade, os mapeamentos de referências e as justificativas de estudo. O código que não incorpora conteúdo editorial é distribuído sob a licença MIT de `LICENSE-CODE`. O conteúdo editorial segue `CONTENT_LICENSE.md`.
+
+Essa separação de licenças é prospectiva. Ela não pretende revogar permissões validamente concedidas sobre cópias ou revisões já distribuídas; para uma revisão anterior, consulte os avisos existentes naquela própria revisão.
 
 ## Sobre as justificativas
 
@@ -30,4 +32,4 @@ Caso represente o INEP ou outro titular de direitos e entenda que algum item des
 
 ## Antes de reutilizar
 
-Ao reaproveitar este material — sobretudo em produto comercial, curso pago ou plataforma de terceiros — verifique a legislação aplicável e as condições de uso publicadas pelo INEP. A licença MIT deste repositório cobre apenas o código e a interface, e **não concede direitos sobre o conteúdo das provas**.
+Ao reaproveitar este material — sobretudo em produto comercial, curso pago ou plataforma de terceiros — verifique a legislação aplicável e as condições de uso publicadas pelo INEP. A licença MIT cobre apenas o código indicado em `LICENSE-CODE`; ela **não concede direitos sobre o conteúdo das provas nem sobre o conteúdo editorial regido por `CONTENT_LICENSE.md`**.

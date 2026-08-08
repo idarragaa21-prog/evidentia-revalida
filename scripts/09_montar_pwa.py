@@ -113,15 +113,15 @@ def main():
     # O aplicativo de celular NAO leva a edicao livre: ele e o produto pago, baixado
     # depois da compra e liberado com a conta. Por isso o Android recebe a edicao
     # completa, e nao o que acabou de ir para o Pages.
-    completo = os.path.join(APLICATIVO, "Revalida_Evidentia.html")
-    if os.path.exists(completo):
-        conteudo = open(completo, encoding="utf-8").read()
+    android = os.path.join(APLICATIVO, "Revalida_Evidentia_android.html")
+    if os.path.exists(android):
+        conteudo = open(android, encoding="utf-8").read()
         for caminho in DESTINOS_ANDROID:
             if os.path.isdir(os.path.dirname(caminho)):
                 open(caminho, "w", encoding="utf-8").write(conteudo)
-                print(f"sincronizado (edicao completa): {os.path.relpath(caminho, RAIZ)}")
+                print(f"sincronizado (build Android nativa): {os.path.relpath(caminho, RAIZ)}")
     else:
-        print("aviso: sem a edicao completa montada, o Android nao foi sincronizado")
+        print("aviso: sem Revalida_Evidentia_android.html, o Android nao foi sincronizado")
     print("os arquivos manifest.webmanifest e icons/ ja estao em app-web/")
 
 

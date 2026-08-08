@@ -6,7 +6,7 @@
 
 Aplicativo web de arquivo único, que funciona sem internet, no celular e no computador.
 
-`500 questões` · `5 edições` · `30 figuras originais` · `justificativa com fontes citadas em cada questão`
+`600 questões` · `6 edições` · `30 figuras` · `600 justificativas` · `526 questões com referências`
 
 </div>
 
@@ -18,7 +18,7 @@ Um aplicativo para estudar para o Exame Nacional de Revalidação de Diplomas M�
 
 Você monta o simulado como quiser — aleatório, por especialidade ou por edição —, responde, e recebe uma análise de desempenho com a revisão de cada questão, o gabarito oficial e um comentário de estudo.
 
-O aplicativo inteiro é **um único arquivo HTML**. Não precisa de instalação, servidor, cadastro nem conexão. Basta abrir `aplicativo/Revalida_Evidentia.html` no navegador. O progresso fica salvo apenas no seu aparelho.
+O aplicativo inteiro é **um único arquivo HTML**. A edição livre não exige cadastro; a edição completa usa uma conta apenas para ativar a licença. Depois da ativação, o estudo e o progresso funcionam localmente, inclusive sem conexão.
 
 ## Conteúdo
 
@@ -28,14 +28,15 @@ O aplicativo inteiro é **um único arquivo HTML**. Não precisa de instalação
 | 2023/2 | 100 | 9 | 91 |
 | 2024/1 | 100 | 5 | 95 |
 | 2024/2 | 100 | 6 | 94 |
+| 2025/1 | 100 | 3 | 97 |
 | 2026/1 | 100 | 0 | 100 |
-| **Total** | **500** | **27** | **473** |
+| **Total** | **600** | **30** | **570** |
 
-Distribuição por área: Clínica Médica (120), Ginecologia e Obstetrícia (107), Pediatria (104), Medicina da Família, Comunidade e Saúde Coletiva (87) e Cirurgia (82).
+Distribuição por área: Clínica Médica (140), Ginecologia e Obstetrícia (127), Pediatria (124), Medicina da Família, Comunidade e Saúde Coletiva (107) e Cirurgia (102).
 
 As 30 questões que dependem de figura — radiografias, eletrocardiogramas, monitores, fotografias, partogramas e gráficos — trazem a imagem original recortada do caderno oficial, para que possam ser respondidas por inteiro.
 
-As 500 questões têm justificativa estruturada; 455 delas citam ao menos uma das 318 fontes verificadas do catálogo.
+As 600 questões têm justificativa estruturada. **526** citam ao menos uma das **319** fontes do catálogo; **74** não têm referência catalogada e são apresentadas sem selo de citação. Esses números são recalculados por `scripts/22_validar_metricas_produto.py` a partir dos dados, não atualizados manualmente.
 
 ## Recursos
 
@@ -86,14 +87,14 @@ Este é o ponto central do projeto, então vale ser explícito sobre o que é of
 
 **Verificações realizadas:**
 
-- **Cada palavra de cada questão foi conferida contra o caderno oficial.** O INEP passou a publicar os cadernos com texto extraível, então `scripts/10_conferir_textos_oficiais.py` compara enunciado e alternativas, campo a campo, com o PDF de cada edição. A conferência hoje termina sem nenhuma divergência.
+- **O gate oficial cobre 600/600 questões e compara 3.000 campos.** `scripts/10_conferir_textos_oficiais.py` exige os seis PDFs, valida o SHA-256 de cada fonte e falha se faltar uma edição, uma questão, um campo ou uma divergência. O relatório atual termina sem divergências não resolvidas e lista cinco adaptações editoriais deliberadas (tabelas para tela e correções documentadas do próprio caderno).
 - Essa conferência encontrou e corrigiu perdas silenciosas da primeira extração: unidades que sumiram (`130 × 80` sem o mmHg, `3.850 mm3` virando `mmy`), cifras que sumiram no meio da frase (`duração de 8 horas` virando `duração de horas`, `homem com 65 anos` virando `homem com anos`), letras iniciais comidas e 187 caracteres não decifrados grudados na alternativa correta da questão 100 de 2024/2. Ao todo, 47 campos foram restaurados a partir do original.
 - Também apareceram **quatro questões cuja imagem havia ficado de fora** — sem ela não dava para respondê-las: as radiografias seriadas da 63 de 2023/2, o monitor multiparamétrico da 11 de 2024/2, os dois eletrocardiogramas da 46 e a radiografia de tórax da 60. Foram extraídas do caderno por `scripts/11_figuras_faltantes.py`.
 - Nos dois casos em que o banco diverge do caderno de propósito, o motivo está registrado no próprio script: o caderno de 2024/2 traz `CKP - EPI` (a sigla correta é CKD-EPI) e `Trichomonas vaginallis` (o correto é *vaginalis*).
 - Cada gabarito foi conferido por dupla verificação: leitura automática do arquivo e leitura visual da imagem oficial do gabarito definitivo, comparadas item a item.
 - As tabelas de exames laboratoriais foram transcritas a partir da imagem oficial e conferidas valor a valor, e não por leitura automática, porque um erro em resultado, unidade ou valor de referência seria especialmente danoso.
 - Cada justificativa foi cruzada automaticamente contra a letra do gabarito oficial. Esse cruzamento encontrou duas justificativas erradas (questões 85 e 89 de 2024/2), que foram revistas no original e corrigidas.
-- O aplicativo passa por 121 verificações automatizadas: pontuação (tudo certo, tudo errado, metade em branco, anuladas fora da conta), correspondência entre a alternativa exibida e a registrada com o embaralhamento ligado, recusa de backups malformados, atalhos de teclado, cronômetro, contraste de cores nos dois temas e ausência de transbordo em tela de 375 px.
+- O aplicativo passa por suítes automatizadas de conteúdo e interface: pontuação, questões anuladas, embaralhamento, backups malformados, atalhos, cronômetro, contraste, responsividade, figuras e capturas de regressão. A CI reconstrói a edição de teste antes de executar Playwright, para não aprovar um artefato antigo.
 
 ## O caderno cifrado de 2024/2
 
@@ -145,6 +146,7 @@ catálogo de fontes em `dados/referencias.json`. A porta de qualidade confere as
 contra o banco e falha se alguma referência citada não existir no catálogo:
 
 ```bash
+python3 scripts/22_validar_metricas_produto.py
 python3 scripts/12_validar_justificativas.py
 ```
 
@@ -153,8 +155,15 @@ Para refazer o processo desde os PDF originais, os scripts estão numerados na o
 Os dois scripts de conferência contra a fonte oficial exigem `PyMuPDF` e os cadernos em `fontes_inep/`:
 
 ```bash
-python3 scripts/10_conferir_textos_oficiais.py   # confere; --corrigir grava as correções
+python3 scripts/10_conferir_textos_oficiais.py   # exige as seis fontes e cobertura 600/600
 python3 scripts/11_figuras_faltantes.py          # extrai as figuras que faltarem
+```
+
+Em CI, o comparador baixa as cópias públicas para um cache isolado e só aceita cada PDF quando seu SHA-256 coincide com o auditado:
+
+```bash
+python3 scripts/10_conferir_textos_oficiais.py \
+  --fontes /tmp/evidentia-fontes --baixar-fontes
 ```
 
 > Os cadernos e gabaritos oficiais em PDF **não são versionados por padrão**, por ocuparem cerca de 27 MB. Baixe-os do portal do INEP e coloque-os em `fontes_inep/` com os nomes indicados em [`fontes_inep/FONTES.md`](fontes_inep/FONTES.md). Para versioná-los mesmo assim, remova a última regra do `.gitignore` e rode `git add -f fontes_inep/*.pdf`.

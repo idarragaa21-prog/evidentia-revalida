@@ -52,6 +52,14 @@ for m in "$NUVEM"/migrations/*.sql; do
   psql -f "$m" >/dev/null
 done
 
+# As migracoes novas declaram-se idempotentes: reaplica-las no mesmo banco prova
+# que retry de deploy nao cria trigger, constraint ou grant duplicado.
+for m in "$NUVEM"/migrations/20260808*.sql; do
+  echo "idempotencia: $(basename "$m")"
+  psql -f "$m" >/dev/null
+done
+
 echo "--- provas ---"
 psql -f "$AQUI/test_assinaturas.sql" 2>&1 | sed 's/^NOTICE:  //'
+psql -f "$AQUI/test_privacidade_compras.sql" 2>&1 | sed 's/^NOTICE:  //'
 echo "--- fim ---"

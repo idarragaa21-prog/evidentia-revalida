@@ -1,0 +1,25 @@
+name: Segurança do conteúdo público
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  impedir-vazamento-premium:
+    name: Bloquear bundles e dados premium
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Auditar arquivos rastreados
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/25_verificar_conteudo_publico.py --self-test
+          python3 scripts/25_verificar_conteudo_publico.py

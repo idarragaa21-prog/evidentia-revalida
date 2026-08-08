@@ -32,8 +32,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  qualidade:
+    name: Bloquear publicação sem qualidade
+    uses: ./.github/workflows/qualidade.yml
+
   publicar:
     name: Publicar app-web/
+    needs: qualidade
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Revalida</string>
-    <string name="title_activity_main">Revalida</string>
+    <string name="app_name">Evidentia Revalida</string>
+    <string name="title_activity_main">Evidentia Revalida</string>
     <string name="package_name">com.evidentia.revalida</string>
     <string name="custom_url_scheme">com.evidentia.revalida</string>
 </resources>

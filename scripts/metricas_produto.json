@@ -1,0 +1,30 @@
+{
+  "versao": 1,
+  "descricao": "Baseline canônico do acervo publicado. Os valores são recalculados e conferidos por scripts/22_validar_metricas_produto.py.",
+  "acervo": {
+    "questoes": 600,
+    "edicoes": [
+      "2023/1",
+      "2023/2",
+      "2024/1",
+      "2024/2",
+      "2025/1",
+      "2026/1"
+    ],
+    "questoes_por_edicao": 100,
+    "justificativas": 600,
+    "questoes_com_referencias": 526,
+    "questoes_sem_referencias": 74,
+    "questoes_nao_anuladas_sem_referencias": 70,
+    "fontes_catalogadas": 319,
+    "figuras": 30
+  },
+  "linguagem_publica": {
+    "resumo": "600 questões de seis edições; 600 justificativas; 526 questões com referências verificáveis e 74 marcadas sem referência catalogada.",
+    "nao_prometemos": [
+      "fonte citada em cada questão",
+      "conferência palavra por palavra das 600 questões enquanto o gate oficial não estiver verde",
+      "lembrete por e-mail antes do vencimento enquanto o envio não estiver implementado"
+    ]
+  }
+}

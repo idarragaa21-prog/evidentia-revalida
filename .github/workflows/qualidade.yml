@@ -1,0 +1,115 @@
+name: Qualidade do repositório público
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  publico:
+    name: Conteúdo público, checkout e ASO
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Impedir vazamento e validar claims públicos
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/25_verificar_conteudo_publico.py --self-test
+          python3 scripts/25_verificar_conteudo_publico.py
+          python3 scripts/23_validar_claims_comerciais.py
+          python3 scripts/24_validar_metadados_lojas.py
+          python3 -m py_compile scripts/23_validar_claims_comerciais.py scripts/24_validar_metadados_lojas.py scripts/25_verificar_conteudo_publico.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependências e auditar a interface pública
+        run: |
+          npm ci
+          npm audit --audit-level=high
+          npx playwright install --with-deps chromium
+          npm run teste:checkout
+
+      - name: Conferir a PWA livre pré-gerada
+        run: |
+          test -f app-web/index.html
+          test -f app-web/manifest.webmanifest
+          test -f app-web/sw.js
+          node --check app-web/sw.js
+          python3 -c "import json; json.load(open('app-web/manifest.webmanifest'))"
+          grep -q 'manifest.webmanifest' app-web/index.html
+          grep -q 'serviceWorker' app-web/index.html
+          ! grep -q 'const VERSAO = \"dev\"' app-web/sw.js
+
+  backend:
+    name: Edge Functions, SQL e retenção
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Testar e conferir Edge Functions
+        run: |
+          deno test nuvem/supabase/functions/_shared/*_test.ts
+          deno check nuvem/supabase/functions/*/index.ts
+
+      - name: Instalar PostgreSQL descartável
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-16
+          echo "/usr/lib/postgresql/16/bin" >> "$GITHUB_PATH"
+
+      - name: Aplicar e reaplicar migrações com as provas SQL
+        run: bash nuvem/supabase/tests/rodar_testes.sh
+
+  dependencias:
+    name: Dependências e contrato Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            app-android/package-lock.json
+            app-desktop/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Auditar dependências móveis e desktop
+        run: |
+          npm --prefix app-android ci --ignore-scripts
+          npm --prefix app-android audit --audit-level=high
+          npm --prefix app-desktop ci --ignore-scripts
+          npm --prefix app-desktop audit --audit-level=high
+
+      - name: Instalar SDK Android 36
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Testar allowlist e vínculo de conta Android
+        working-directory: app-android/android
+        run: ./gradlew :app:testDebugUnitTest --tests com.evidentia.revalida.NativePurchaseContractTest

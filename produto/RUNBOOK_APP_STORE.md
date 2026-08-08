@@ -1,18 +1,18 @@
 # Runbook: publicar en la App Store
 
-> Para Diego. Los ocho motivos por los que Apple habría rechazado la app están
-> **resueltos en el código**. Lo que queda aquí es lo que exige tu identidad o tu tarjeta.
-> Escrito el 2026-08-06, tras auditar el proyecto contra las App Store Review Guidelines.
+> Para Diego. Checklist operativo actualizado el 8 de agosto de 2026. Ningún ítem se da por
+> resuelto solo porque exista código: privacidad, compras, borrado y metadatos se vuelven a
+> probar en la build exacta que se envía.
 
 ---
 
-## Lo que ya está resuelto (no tienes que hacer nada)
+## Preflight técnico — volver a comprobar en cada build
 
 | Guideline | Qué habría pasado | Cómo quedó |
 |:--|:--|:--|
 | **3.1.1** Pagos externos | Rechazo seguro: la app llevaba a comprar en la web, y hasta *decir dónde se compra* está prohibido | Edición iOS propia (`--edicao ios`) sin botones **y sin las frases**, borradas del archivo. Verificado: cero coincidencias de «compra», «planos» o la URL en el binario |
-| **5.1.1(v)** Borrar cuenta | Rechazo automático: se podía crear cuenta pero no borrarla | **Conta → Excluir minha conta**, con doble confirmación. Probado de punta a punta: la cuenta desaparece y el login deja de funcionar |
-| **5.1.1** Privacidad | Rechazo por declaración inexacta: la app decía «Nada é enviado para servidores» y la edición de pago envía correo y contraseña | El texto ahora dice la verdad y depende de la edición. Enlaza la política |
+| **5.1.1(v)** Borrar cuenta | Se podía crear cuenta pero no borrarla | Existe **Conta → Excluir minha conta**; antes de enviar, probar también anonimización/retención de checkouts y eventos, no solo que falle el login |
+| **5.1.1** Privacidad | La ficha puede no coincidir con red, compra y dispositivo | Generar un inventario de datos de la build y reconciliarlo con política y etiqueta de App Store |
 | **Envío** Política de privacidad | No se puede ni enviar sin la URL | `app-web/privacidade/`, alineada con la LGPD |
 | **Missing Compliance** | Cada subida se quedaba bloqueada | `ITSAppUsesNonExemptEncryption = false` en el Info.plist |
 | **5.2.1** Nombre institucional | La app se llamaba «Revalida» a secas: se lee como app oficial del INEP | Ahora «Evidentia Revalida», en el plist y en Capacitor |
@@ -47,29 +47,31 @@ caduque durante la revisión ni en las actualizaciones futuras:
 
 En las notas para el revisor, escribe algo así:
 
-> O aplicativo funciona sem conexão depois de ativado. As questões são da prova objetiva do
-> Revalida (Inep), conteúdo público sob licença CC BY-ND 3.0, reproduzidas sem alteração e com
-> atribuição. A Evidentia não tem vínculo com o Inep. A assinatura é vendida fora do aplicativo
-> e este binário não a oferece nem a menciona.
+> O aplicativo funciona sem conexão depois de ativado. O acervo reúne 600 questões de seis
+> edições das provas objetivas do Revalida, com fonte atribuída ao Inep e cinco adaptações
+> editoriais documentadas para apresentação. A Evidentia não tem vínculo com o Inep nem com o
+> MEC. As credenciais abaixo dão acesso integral para a revisão.
 
 ### 3. Rellenar la etiqueta de privacidad
 
-En App Store Connect, declara exactamente esto — **no pongas «Data Not Collected»**, porque el
-binario contiene llamadas de registro y se detecta:
+No pongas «Data Not Collected». La declaración final sale del inventario de datos y de la
+política vigente. Como mínimo, revisar y clasificar:
 
-- **Contact Info → Email Address**: recogido, **vinculado a la identidad**, finalidad *App
-  Functionality*. No usado para seguimiento.
-- Nada más. Ni identificadores de publicidad, ni ubicación, ni datos de salud.
+- correo y credenciales de cuenta;
+- estado y eventos de compra vinculados al correo;
+- plataforma o información técnica enviada al activar/diagnosticar;
+- cualquier dato retenido después de eliminar la cuenta.
+
+No declarar salud, ubicación, publicidad o seguimiento si la build realmente no los recoge.
+Guardar una captura fechada de la etiqueta enviada y repetir la reconciliación en cada release.
 
 Y pon la URL de la política: `https://idarragaa21-prog.github.io/evidentia-revalida/privacidade/`
 
 ### 4. Metadatos de la ficha
 
-- **Nombre**: Evidentia Revalida
-- **Subtítulo**: *Questões oficiais comentadas* — **nunca** «oficial» ni «do Inep»
-- **Descripción**: repite en las primeras líneas que no hay vínculo con el INEP ni con el MEC
-- **Capturas**: sin logotipo ni colores institucionales del INEP
-- **Categoría**: Educação
+Usa la copia, keywords, capturas y campos del checklist versionado en
+`produto/METADADOS_LOJAS.md`. La ficha nunca usa «aplicativo oficial», promesa de aprobación,
+cobertura total de fuentes ni comparaciones de competidores sin verificación fechada.
 
 ---
 
@@ -109,12 +111,15 @@ select public.definir_modo_avaliacao(0);
 
 ---
 
-## Lo que decidimos NO hacer, y por qué
+## Decisiones que deben revalidarse antes del envío
 
-- **No implementar pagos de Apple (StoreKit).** Son semanas de trabajo más 15-30 % de comisión
-  sobre cada venta. La ruta elegida —app sin mención a la compra, venta en la web— es la misma
-  que usan Netflix y Spotify, y es legítima (excepción 3.1.3(b), *Multiplatform Services*).
-- **No añadir `PrivacyInfo.xcprivacy`.** Los pods de Capacitor ya traen el suyo y tú no tienes
-  código nativo propio que declarar. Lo obligatorio es la etiqueta en App Store Connect.
+- **Compras y activación.** Seguir `produto/CONTRATO_COMPRAS_NATIVAS.md` y comprobar la build
+  contra la política vigente de la tienda. No asumir que una comparación con otra empresa prueba
+  elegibilidad para una excepción.
+- **Manifest y etiqueta de privacidad.** La app ya incluye `App/PrivacyInfo.xcprivacy` con
+  correo, identificador de cuenta, historial de compra e información técnica mínima,
+  vinculados a la cuenta para funcionalidad y sin tracking. Los pods de Capacitor conservan
+  sus manifests propios. La declaración de App Store Connect debe coincidir exactamente con
+  este inventario y con la política publicada; una cosa no sustituye la otra.
 - **No prometer fecha de publicación antes del 13 de septiembre.** La aprobación de la cuenta no
   tiene plazo publicado por Apple. Ficha publicada realista: octubre.

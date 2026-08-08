@@ -3,96 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evidentia · Revalida — Planos e assinatura</title>
-<meta name="description" content="Banco de 600 questões oficiais do Revalida (INEP), de seis edições, cada uma conferida contra o caderno oficial e justificada com fonte citada. Funciona offline. Planos a partir de R$ 57.">
+<title>Evidentia · Revalida — Planos de acesso</title>
+<meta name="description" content="600 questões de seis edições do Revalida, com justificativa em todas e referências catalogadas em 526. Comparação automatizada com os cadernos do INEP e estudo offline.">
+<meta name="theme-color" content="#173d2e">
 <style>
 :root{
-  --navy:#1b2e22; --sky:#2f6047; --sky-100:#e2ede7; --gold:#b08d4c; --gold-100:#f3ead2; --gold-ink:#6a5410;
-  --good:#0f6b45; --good-100:#e3f3ec; --bad:#9d3a2b; --bad-100:#f8e9e5;
-  --bg:#f4f3ec; --card:#fff; --ink:#1a2620; --ink-2:#4d5a51; --ink-3:#69756b;
-  --line:#d3e1d8; --r:14px;
+  color-scheme:light;
+  --forest-950:#102d22; --forest-900:#173d2e; --forest-800:#1d4c39;
+  --forest-700:#245f45; --forest-600:#2f7656; --mint-100:#e5f0e9; --mint-50:#f1f7f3;
+  --gold:#c6a052; --gold-strong:#a97f31; --gold-100:#f5ecd7; --gold-ink:#684d15;
+  --good:#146643; --good-100:#e3f3eb; --bad:#9a382a; --bad-100:#f8e9e5;
+  --bg:#f6f4ed; --card:#fffefa; --ink:#17241d; --ink-2:#44534a; --ink-3:#657168;
+  --line:#d6e1da; --line-strong:#b9cdbf; --r:18px; --r-sm:12px;
   --ff:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --shadow:0 1px 2px rgba(16,45,34,.04),0 14px 36px rgba(16,45,34,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#141a16; --card:#1c241f; --ink:#e8ede9; --ink-2:#b3bfb6; --ink-3:#8d998f;
-    --line:#31413a; --sky-100:#243830; --gold-100:#3a3021; --gold-ink:#e5cf9b;
-    --good-100:#1d3a2d; --bad-100:#40261f;
+    color-scheme:dark;
+    --bg:#101814; --card:#18231d; --ink:#edf3ef; --ink-2:#bdc9c1; --ink-3:#9aa89f;
+    --forest-700:#9bd8b7; --forest-600:#80c6a2;
+    --line:#304239; --line-strong:#496256; --mint-100:#20382d; --mint-50:#172a21;
+    --gold:#dbb767; --gold-strong:#ebc878; --gold-100:#382f20; --gold-ink:#efd69e;
+    --good:#88d6ae; --good-100:#18372a; --bad:#f0a293; --bad-100:#40251f;
+    --shadow:0 1px 2px rgba(0,0,0,.18),0 18px 42px rgba(0,0,0,.24);
   }
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:var(--ff);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px}
-header{background:var(--card);border-bottom:2px solid var(--sky);padding:14px 0}
-header .wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-header b{font-family:var(--serif);font-size:19px;letter-spacing:.06em}
-header small{color:var(--ink-3)}
-header a{margin-left:auto;font-size:13.5px;color:var(--sky);text-decoration:underline}
-main{padding:34px 0 90px}
-h1{font-family:var(--serif);font-size:clamp(26px,4.6vw,38px);line-height:1.2;margin:0 0 14px}
-h2{font-family:var(--serif);font-size:22px;margin:44px 0 12px}
-p.lead{font-size:17.5px;color:var(--ink-2);margin:0 0 8px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;
-  box-shadow:0 1px 2px rgba(27,46,34,.06),0 6px 22px rgba(27,46,34,.07)}
-.pontos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:22px 0 0}
-.pontos .card{padding:16px}
-.pontos b{display:block;margin-bottom:4px}
-.pontos span{font-size:14px;color:var(--ink-2)}
-.aviso-honesto{border-left:4px solid var(--gold);padding:14px 16px;background:var(--gold-100);
-  color:var(--gold-ink);border-radius:0 10px 10px 0;margin:22px 0;font-size:15px}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--ff);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.58}
+body::before{content:"";position:absolute;inset:72px 0 auto;height:520px;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle at 78% 8%,rgba(198,160,82,.16),transparent 33%),
+    linear-gradient(180deg,var(--mint-50),transparent 88%)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.skip{position:fixed;left:16px;top:10px;z-index:30;transform:translateY(-160%);background:var(--card);
+  color:var(--forest-700);padding:10px 14px;border:2px solid var(--gold);border-radius:10px;font-weight:750}
+.skip:focus{transform:none}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--card) 92%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 0}
+header .wrap{display:flex;align-items:center;gap:14px}
+.brand-lockup{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;min-width:max-content}
+.brand-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--forest-900);
+  color:#f2d99d;font-family:var(--serif);font-size:22px;font-weight:800;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.brand-name{font-family:var(--serif);font-size:18px;line-height:1;letter-spacing:.08em;font-weight:800}
+.brand-sub{display:block;color:var(--ink-3);font:600 11px/1.25 var(--ff);letter-spacing:.02em;margin-top:4px}
+header nav{margin-left:auto;display:flex;align-items:center;gap:18px}
+header nav a{color:var(--forest-700);font-size:14px;font-weight:700;text-decoration:none}
+.nav-demo{display:inline-flex;align-items:center;min-height:44px;border:1px solid var(--line-strong);padding:9px 13px;border-radius:11px;background:var(--card)}
+main{padding:54px 0 96px}
+.hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.7fr);gap:42px;align-items:center;padding:24px 0 34px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 15px;color:var(--forest-700);font-size:12px;
+  line-height:1.2;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--gold)}
+h1{font-family:var(--serif);font-size:clamp(38px,5.7vw,64px);letter-spacing:-.025em;line-height:1.05;margin:0 0 20px;max-width:16ch}
+h1 span{color:var(--forest-700)}
+h2{font-family:var(--serif);font-size:clamp(27px,3.2vw,36px);letter-spacing:-.015em;line-height:1.16;margin:0}
+h3{line-height:1.25}
+p.lead{font-size:clamp(17px,2vw,19px);color:var(--ink-2);margin:0;max-width:65ch}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:26px}
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:13px;padding:12px 18px;
+  background:var(--gold);color:var(--forest-950);font-weight:800;text-decoration:none;box-shadow:0 8px 22px rgba(169,127,49,.2)}
+.cta-secondary{background:transparent;color:var(--forest-700);box-shadow:none;border:1px solid var(--line-strong)}
+.trust-inline{display:flex;gap:8px 18px;flex-wrap:wrap;padding:0;margin:18px 0 0;list-style:none;color:var(--ink-3);font-size:13px}
+.trust-inline li::before{content:"✓";color:var(--good);font-weight:900;margin-right:6px}
+.hero-proof{position:relative;overflow:hidden;background:linear-gradient(155deg,var(--forest-900),var(--forest-800));
+  color:#f4f7f5;border-radius:26px;padding:26px;box-shadow:0 24px 54px rgba(16,45,34,.2)}
+.hero-proof::after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(237,211,151,.22);
+  border-radius:50%;right:-78px;top:-70px;box-shadow:0 0 0 28px rgba(237,211,151,.04)}
+.proof-label{margin:0 0 17px;color:#dbe8e0;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.16);border-radius:15px;overflow:hidden}
+.proof-stat{background:rgba(12,40,29,.46);padding:18px 14px;min-height:96px}
+.proof-stat b{display:block;font-family:var(--serif);font-size:32px;line-height:1;color:#f0d595}
+.proof-stat span{display:block;font-size:12px;line-height:1.35;color:#dbe8e0;margin-top:7px}
+.proof-note{margin:17px 0 0;font-size:12.5px;line-height:1.5;color:#dbe8e0}
+.section{padding-top:64px;scroll-margin-top:82px}
+.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:20px}
+.section-head p{max-width:55ch;color:var(--ink-2);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+.pontos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0}
+.pontos .card{padding:20px;box-shadow:none;transition:transform .18s ease,border-color .18s ease}
+.pontos .card:hover{transform:translateY(-2px);border-color:var(--line-strong)}
+.point-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--mint-100);
+  color:var(--forest-700);font-size:17px;font-weight:900;margin-bottom:14px}
+.pontos b{display:block;margin-bottom:6px;line-height:1.3}
+.pontos span{display:block;font-size:13.5px;color:var(--ink-2)}
+.aviso-honesto{border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line));padding:16px 18px;background:var(--gold-100);
+  color:var(--gold-ink);border-radius:var(--r-sm);margin:18px 0 0;font-size:14px}
 .aviso-honesto b{color:inherit}
-label{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin:0 0 5px}
-input{width:100%;font:inherit;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
-input:focus{outline:2.5px solid var(--sky);outline-offset:1px}
-.planos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
-.plano{position:relative;display:flex;flex-direction:column;gap:6px;padding:20px}
-.plano .selo{position:absolute;top:-11px;right:14px;background:var(--gold);color:#2e2404;
-  font-size:11px;font-weight:800;letter-spacing:.06em;padding:3px 10px;border-radius:8px}
-.plano.heroi{border:2px solid var(--gold)}
-.plano h3{margin:0;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--sky)}
-.plano .preco{font-family:var(--serif);font-size:34px;line-height:1.1}
-.plano .pormes{font-size:13.5px;color:var(--ink-3)}
-.plano .econ{font-size:13px;font-weight:700;color:var(--good)}
-.plano .desc{font-size:14px;color:var(--ink-2);flex:1}
-button.comprar{font:inherit;font-weight:700;border:none;border-radius:11px;padding:13px 16px;cursor:pointer;
-  background:var(--gold);color:#2e2404;margin-top:8px}
-button.comprar:disabled{opacity:.55;cursor:default}
-.msg{margin-top:12px;font-size:14px;color:var(--ink-3);min-height:20px}
-.msg.erro{color:var(--bad)}
-.passos{counter-reset:p;margin:16px 0 0;padding:0;list-style:none}
-.passos li{counter-increment:p;position:relative;padding:0 0 16px 44px}
-.passos li::before{content:counter(p);position:absolute;left:0;top:-2px;width:30px;height:30px;
-  border-radius:50%;background:var(--sky-100);color:var(--sky);font-weight:800;display:grid;place-items:center}
-.faq details{border-bottom:1px solid var(--line);padding:12px 0}
-.faq summary{cursor:pointer;font-weight:700}
-.faq p{color:var(--ink-2);font-size:15px;margin:10px 0 2px}
-.metodos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.metodos span{font-size:12.5px;font-weight:700;background:var(--sky-100);color:var(--sky);
-  padding:4px 10px;border-radius:8px}
-.obrigado{border:2px solid var(--good);background:var(--good-100)}
+.checkout-shell{display:grid;grid-template-columns:minmax(230px,.65fr) minmax(0,1.35fr);gap:0;overflow:hidden;padding:0}
+.checkout-intro{padding:26px;background:var(--forest-900);color:#f4f7f5}
+.checkout-intro h3{font-family:var(--serif);font-size:25px;margin:0 0 10px;color:#fff}
+.checkout-intro p{color:#dbe8e0;font-size:14px;margin:0}
+.checkout-intro .metodos span{background:rgba(255,255,255,.1);color:#eef6f1;border:1px solid rgba(255,255,255,.15)}
+.checkout-form{padding:26px}
+label{display:block;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);margin:0 0 7px}
+input{width:100%;min-height:48px;font:inherit;padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:12px;background:var(--card);color:var(--ink)}
+input::placeholder{color:var(--ink-3)}
+.field-help{font-size:12.5px;color:var(--ink-3);margin:7px 0 0}
+.legal-inline{font-size:12.5px;color:var(--ink-3);margin:13px 0 0}
+.planos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:18px;align-items:stretch}
+.plano{position:relative;display:flex;flex-direction:column;gap:7px;padding:22px;box-shadow:none}
+.plano .selo{position:absolute;top:-11px;right:14px;background:var(--gold);color:var(--forest-950);
+  font-size:10.5px;font-weight:900;letter-spacing:.07em;padding:4px 10px;border-radius:999px}
+.plano.heroi{border:2px solid var(--gold);background:linear-gradient(180deg,var(--gold-100),var(--card) 31%)}
+.plano h3{margin:0;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--forest-700)}
+.plano .preco{font-family:var(--serif);font-size:38px;letter-spacing:-.02em;line-height:1.05;margin-top:4px}
+.plano .pormes{font-size:13px;color:var(--ink-3)}
+.plano .econ{min-height:20px;font-size:12.5px;font-weight:800;color:var(--good)}
+.plano .desc{font-size:13.5px;color:var(--ink-2);flex:1;margin-top:4px}
+.plan-features{list-style:none;padding:0;margin:10px 0 0;font-size:12.5px;color:var(--ink-2)}
+.plan-features li{margin:5px 0}.plan-features li::before{content:"✓";color:var(--good);font-weight:900;margin-right:7px}
+button.comprar{min-height:48px;font:inherit;font-weight:800;border:1px solid var(--gold-strong);border-radius:12px;padding:12px 16px;cursor:pointer;
+  background:var(--gold);color:var(--forest-950);margin-top:12px;transition:transform .15s ease,filter .15s ease}
+button.comprar:hover{filter:brightness(1.04);transform:translateY(-1px)}
+button.comprar:disabled{opacity:.55;cursor:default;transform:none}
+.msg{margin-top:12px;font-size:13.5px;color:var(--ink-3);min-height:21px}
+.msg.erro{color:var(--bad);background:var(--bad-100);border-radius:9px;padding:8px 10px}
+.passos{counter-reset:p;margin:8px 0 0;padding:0;list-style:none}
+.passos li{counter-increment:p;position:relative;padding:4px 0 20px 50px}
+.passos li:last-child{padding-bottom:0}
+.passos li::before{content:counter(p);position:absolute;left:0;top:0;width:34px;height:34px;
+  border-radius:12px;background:var(--mint-100);color:var(--forest-700);font-weight:900;display:grid;place-items:center}
+.how-card{padding:26px 28px;box-shadow:none}
+.coverage-card{overflow-x:auto;box-shadow:none;padding:10px 20px 16px}
+.coverage-note{font-size:12.5px;color:var(--ink-3);margin:12px 0 0}
+.faq{padding:8px 24px;box-shadow:none}
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;font-weight:750;padding-right:32px;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:2px;top:-3px;color:var(--forest-700);font-size:24px;font-weight:500}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--ink-2);font-size:14.5px;margin:11px 34px 2px 0;max-width:75ch}
+.metodos{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.metodos span{font-size:11.5px;font-weight:800;background:var(--mint-100);color:var(--forest-700);
+  padding:5px 9px;border-radius:999px}
+.obrigado{border:2px solid var(--good);background:var(--good-100);margin-bottom:28px}
+.obrigado h2{font-size:28px}
 .hidden{display:none!important}
-footer{border-top:1px solid var(--line);padding:26px 0 60px;font-size:13px;color:var(--ink-3)}
-footer p{margin:6px 0}
-a{color:var(--sky)}
-table.compara{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
-table.compara th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);
-  text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
-table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
+footer{background:var(--forest-950);border-top:3px solid var(--gold);padding:34px 0 52px;font-size:12.5px;color:#bdcbc3}
+footer .footer-brand{font-family:var(--serif);font-size:17px;letter-spacing:.07em;color:#fff}
+footer p{margin:7px 0;max-width:85ch}
+footer nav{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0 8px}
+footer a{color:#c8e7d5}
+a{color:var(--forest-700);text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--gold-strong);outline-offset:3px}
+table.compara{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:0;min-width:650px}
+table.compara th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+  text-align:left;padding:12px 10px;border-bottom:2px solid var(--line)}
+table.compara td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.compara tbody tr:last-child td{border-bottom:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:26px}.hero-proof{max-width:560px}.pontos{grid-template-columns:1fr 1fr}
+  .planos{grid-template-columns:repeat(auto-fit,minmax(235px,1fr))}.checkout-shell{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .wrap{padding:0 17px}header{padding:9px 0}header .wrap{gap:10px}header nav a:first-child{display:none}.nav-demo{padding:8px 10px}
+  .brand-sub,.nav-long{display:none}
+  .brand-mark{width:34px;height:34px}.brand-name{font-size:16px}.brand-sub{font-size:10px}
+  main{padding-top:28px}.hero{padding-top:15px}.eyebrow{font-size:11px}h1{font-size:clamp(36px,11vw,48px)}
+  .hero-actions{display:grid;grid-template-columns:1fr}.cta{width:100%}.trust-inline{display:grid;gap:7px}
+  .hero-proof{padding:21px;border-radius:20px}.proof-stat{padding:15px 12px}.proof-stat b{font-size:28px}
+  .section{padding-top:52px}.section-head{display:block}.section-head p{margin-top:9px}.pontos{grid-template-columns:1fr}
+  .pontos .card{display:grid;grid-template-columns:42px 1fr;column-gap:12px}.point-icon{grid-row:1/3;margin:0}.pontos b{align-self:end}
+  .checkout-intro,.checkout-form{padding:21px}.planos{grid-template-columns:1fr;gap:13px}.plano{padding:20px}
+  .how-card{padding:22px 20px}.passos li{padding-left:45px}.faq{padding:5px 18px}
+  .coverage-card{margin-left:-3px;margin-right:-3px}.obrigado{padding:20px}
+}
+@media(max-width:380px){
+  header .wrap{gap:8px}
+  .nav-demo{font-size:12px;padding:7px 9px;min-height:40px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
 </head>
 <body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header><div class="wrap">
-  <b>EVIDENTIA</b><small>Revalida · planos</small>
-  <a href="../">Experimentar grátis (40 questões)</a>
+  <a class="brand-lockup" href="../" aria-label="Evidentia Revalida — início">
+    <span class="brand-mark" aria-hidden="true">E</span>
+    <span><span class="brand-name">EVIDENTIA</span><span class="brand-sub">Revalida · estudo independente</span></span>
+  </a>
+  <nav aria-label="Navegação principal">
+    <a href="#planos">Ver planos</a>
+    <a class="nav-demo" href="../" aria-label="Experimentar 40 questões grátis"><span class="nav-long">Experimentar&nbsp;</span>40 questões</a>
+  </nav>
 </div></header>
-<main><div class="wrap">
+<main id="conteudo"><div class="wrap">
 
   <div class="card obrigado hidden" id="cartaoObrigado">
     <h2 style="margin-top:0">Pagamento recebido — falta só ativar</h2>
     <ol class="passos">
-      <li><b>Aguarde a confirmação.</b> No PIX é quase na hora; no cartão pode levar alguns
-        minutos. Você receberá a confirmação do pagamento por e-mail.</li>
+	      <li><b>Aguarde a confirmação.</b> No PIX costuma ser rápido; no cartão pode levar alguns
+	        minutos. O acesso só é liberado depois que a processadora confirmar o pagamento.</li>
       <li><b>Crie sua conta (ou entre)</b> no aplicativo com o <b>mesmo e-mail usado na
         compra</b>. Se pagou antes de criar a conta, o acesso é aplicado sozinho assim que a
         conta existir.</li>
@@ -105,70 +211,112 @@ table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
     nome. Qualquer dúvida, escreva para o e-mail de suporte no rodapé.</p>
   </div>
 
-  <h1>600 questões oficiais do Revalida, conferidas uma a uma — e justificadas com a fonte citada</h1>
-  <p class="lead">Monte simulados com as questões objetivas reais do INEP (2023/1 a 2026/1, seis edições), com
-  correção detalhada e uma justificativa por questão ancorada em literatura verificável.
-  Funciona <b>sem internet</b>, no computador e no celular.</p>
+  <section class="hero" aria-labelledby="tituloPrincipal">
+    <div>
+      <p class="eyebrow">Preparação rastreável para o Revalida</p>
+      <h1 id="tituloPrincipal">Estude questões reais. <span>Entenda cada alternativa.</span></h1>
+      <p class="lead">Monte simulados com 600 questões objetivas de seis edições, de 2023/1 a
+        2026/1. Todas têm justificativa estruturada; 526 possuem referências catalogadas e 74
+        são apresentadas sem referência catalogada.</p>
+      <div class="hero-actions">
+        <a class="cta" href="#planos">Conhecer os planos</a>
+        <a class="cta cta-secondary" href="../">Testar 40 questões grátis</a>
+      </div>
+      <ul class="trust-inline" aria-label="Condições principais">
+        <li>Pagamento único</li><li>Sem renovação automática</li><li>7 dias para reembolso</li>
+      </ul>
+    </div>
+    <aside class="hero-proof" aria-label="Cobertura atual verificada">
+      <p class="proof-label">Acervo atual verificado</p>
+      <div class="proof-grid">
+        <div class="proof-stat"><b>600</b><span>questões objetivas</span></div>
+        <div class="proof-stat"><b>6</b><span>edições completas</span></div>
+        <div class="proof-stat"><b>526</b><span>questões com referências</span></div>
+        <div class="proof-stat"><b>30</b><span>figuras incorporadas</span></div>
+      </div>
+      <p class="proof-note">Gate automatizado: 600/600 questões e 3.000 campos comparados com
+        seis cadernos oficiais do INEP.</p>
+    </aside>
+  </section>
 
-  <div class="pontos">
-    <div class="card"><b>Conferido palavra por palavra</b><span>Cada enunciado e alternativa é
-      comparado, por script, com o caderno oficial do INEP — sem erro de digitação, sem questão
-      truncada.</span></div>
-    <div class="card"><b>Nenhuma fonte inventada</b><span>300 fontes verificadas — diretrizes,
-      PCDT do Ministério da Saúde, artigos — citadas questão a questão. Quando o catálogo não
-      cobre um ponto, dizemos «estudo» em vez de forçar uma citação.</span></div>
-    <div class="card"><b>Funciona offline de verdade</b><span>Arquivo único, sem servidor. No
-      plantão, no avião ou no interior sem sinal, o aplicativo abre e funciona.</span></div>
-    <div class="card"><b>Figuras oficiais incluídas</b><span>As questões que dependem de imagem
-      trazem a figura recortada do caderno original do exame.</span></div>
-  </div>
+  <section class="section" aria-labelledby="diferenciais">
+    <div class="section-head">
+      <h2 id="diferenciais">Menos promessa. Mais evidência.</h2>
+      <p>Um acervo delimitado, com cobertura declarada e ferramentas para transformar cada erro
+        em revisão dirigida.</p>
+    </div>
+    <div class="pontos">
+      <div class="card"><span class="point-icon" aria-hidden="true">✓</span><b>Texto conferido</b><span>O gate exige os seis PDFs, valida seus hashes e reprova divergências não documentadas.</span></div>
+      <div class="card"><span class="point-icon" aria-hidden="true">↗</span><b>Fontes transparentes</b><span>526 questões têm referências catalogadas; as outras 74 aparecem claramente sem referência.</span></div>
+      <div class="card"><span class="point-icon" aria-hidden="true">◌</span><b>Estudo offline</b><span>Depois da ativação, estude sem conexão por até 30 dias antes da renovação periódica da licença.</span></div>
+      <div class="card"><span class="point-icon" aria-hidden="true">▦</span><b>Revisão completa</b><span>Simulados, estatísticas, justificativas por alternativa e 30 figuras incorporadas.</span></div>
+    </div>
+    <div class="aviso-honesto"><b>Material de estudo independente.</b> A Evidentia não é afiliada
+      ao INEP nem ao MEC, não promete aprovação e não substitui os documentos oficiais nem
+      orientação médica.</div>
+  </section>
 
-  <div class="aviso-honesto"><b>Por que 600 questões, e não 20 mil?</b> Porque cada uma daqui
-  foi verificada, uma a uma, contra a prova oficial. Vendemos certeza, não volume — e por isso
-  custamos uma fração das plataformas que cobram de R$ 129,99 a R$ 249 por mês. Você já investe
-  R$ 4.516 só nas taxas do exame; estudar por questões sem conferência oficial pode custar uma
-  edição inteira do Revalida.</div>
+  <section class="section" id="planos" aria-labelledby="tituloPlanos">
+    <div class="section-head">
+      <h2 id="tituloPlanos">Escolha seu período de acesso</h2>
+      <p>Os valores e prazos aparecem antes do pagamento. Todos os passes liberam o mesmo acervo;
+        muda apenas o período de acesso.</p>
+    </div>
+    <div class="card checkout-shell">
+      <div class="checkout-intro">
+        <h3>Compra simples e transparente</h3>
+        <p>Use o mesmo e-mail no pagamento e na conta do aplicativo. A liberação ocorre após a
+          confirmação da processadora.</p>
+        <div class="metodos" aria-label="Condições de pagamento"><span>PIX</span><span>Cartão</span><span>BRL</span><span>Pagamento único</span></div>
+      </div>
+      <div class="checkout-form">
+        <label for="email">E-mail de ativação</label>
+        <input id="email" type="email" inputmode="email" autocomplete="email"
+          placeholder="voce@exemplo.com" aria-describedby="emailAjuda">
+        <p class="field-help" id="emailAjuda">Digite o e-mail que você usará para entrar no aplicativo.</p>
+        <p class="legal-inline">Ao continuar, você confirma que leu os
+          <a href="termos.html">Termos de uso e reembolso</a> e a
+          <a href="../privacidade/">Política de privacidade</a>.</p>
+        <div class="msg" id="msgCompra" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="planos" id="listaPlanos" aria-live="polite" aria-busy="true"><div class="card"><p class="msg">Carregando os planos…</p></div></div>
+  </section>
 
-  <h2 id="planos">Escolha seu plano</h2>
-  <div class="card">
-    <label for="email">Seu e-mail (o mesmo que você usará para ativar o aplicativo)</label>
-    <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com">
-    <div class="metodos"><span>PIX</span><span>Cartão de crédito</span><span>Preços em reais</span><span>Sem renovação automática</span></div>
-    <div class="msg" id="msgCompra" role="status" aria-live="polite"></div>
-  </div>
-  <div class="planos" id="listaPlanos"><div class="card"><p class="msg">Carregando os planos…</p></div></div>
-
-  <h2>Como funciona</h2>
-  <div class="card">
+  <section class="section" aria-labelledby="comoFunciona">
+  <div class="section-head"><h2 id="comoFunciona">Da compra ao primeiro simulado</h2></div>
+  <div class="card how-card">
     <ol class="passos" style="margin-top:4px">
-      <li><b>Compre no site</b> com PIX ou cartão, em reais. Sem renovação automática: quando o
-        acesso estiver perto de vencer, avisamos por e-mail e você decide se renova.</li>
+	      <li><b>Compre no site</b> com PIX ou cartão, em reais. Não há renovação automática: confira
+	        a data final do período adquirido na sua conta e decida se quer comprar outro passe.</li>
       <li><b>Crie sua conta gratuita</b> no aplicativo com o mesmo e-mail da compra (pode criar
         antes ou depois de pagar — a ordem não importa).</li>
       <li><b>Entre e ative.</b> O aplicativo guarda uma licença assinada e funciona offline;
         perto do vencimento, renova sozinho quando houver internet.</li>
     </ol>
   </div>
+  </section>
 
-  <h2>Compare com honestidade</h2>
-  <div class="card" style="overflow-x:auto">
-    <table class="compara">
-      <thead><tr><th>Produto</th><th>Mensal</th><th>Proposta</th></tr></thead>
-      <tbody>
-        <tr><td><b>Evidentia Revalida</b></td><td><b>R$ 57</b> (ou R$ 41/mês no semestral)</td>
-          <td>600 questões oficiais, conferidas contra o caderno do INEP, justificativa com fonte citada</td></tr>
-        <tr><td>Revalida Resolve</td><td>R$ 147</td><td>Questões oficiais comentadas</td></tr>
-        <tr><td>Meedik Learn</td><td>R$ 129,99</td><td>Banco de questões</td></tr>
-        <tr><td>MedTask</td><td>R$ 249</td><td>«+90 mil questões», correção por IA</td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:13.5px;color:var(--ink-3);margin:10px 0 0">Preços dos concorrentes
-    verificados em agosto de 2026, nos sites públicos de cada um. Eles têm mais volume; nós
-    temos conferência oficial e fonte citada em cada questão. Escolha o que combina com você —
-    e três meses de Evidentia custam o que o comparável direto cobra por um mês.</p>
+  <section class="section" aria-labelledby="inclui">
+    <div class="section-head"><h2 id="inclui">O que o passe inclui</h2></div>
+	  <div class="card coverage-card">
+	    <table class="compara">
+	      <caption class="sr-only">Cobertura atual do passe Evidentia Revalida e método de verificação</caption>
+	      <thead><tr><th>Item</th><th>Cobertura atual</th><th>Como é verificado</th></tr></thead>
+	      <tbody>
+	        <tr><td><b>Questões</b></td><td>600, em seis edições</td><td>Gate de 600/600 contra os cadernos</td></tr>
+	        <tr><td><b>Justificativas</b></td><td>600</td><td>Estrutura e gabarito validados automaticamente</td></tr>
+	        <tr><td><b>Referências</b></td><td>526 questões com referências; 74 sem</td><td>IDs, links e detalhes validados contra 319 fontes</td></tr>
+	        <tr><td><b>Figuras</b></td><td>30</td><td>Inventário confere questão e imagem incorporada</td></tr>
+	      </tbody>
+	    </table>
+	    <p class="coverage-note">As cifras acima vêm do
+	      baseline canônico do produto e são bloqueadas pela CI quando deixam de coincidir com os dados.</p>
   </div>
+  </section>
 
-  <h2>Perguntas frequentes</h2>
+  <section class="section" aria-labelledby="perguntas">
+  <div class="section-head"><h2 id="perguntas">Perguntas frequentes</h2></div>
   <div class="card faq">
     <details><summary>Tem garantia?</summary>
       <p>Sim: 7 dias com devolução total, sem perguntas. Escreva para o e-mail de suporte com o
@@ -184,26 +332,31 @@ table.compara td{padding:8px 10px;border-bottom:1px solid var(--line)}
       <p>No seu computador e no seu celular, com a mesma conta. A licença é nominal, ligada ao
       seu e-mail.</p></details>
     <details><summary>A renovação é automática?</summary>
-      <p>Não. Você compra um período fechado (30, 90 ou 180 dias). Perto do vencimento, avisamos
-      por e-mail e você decide se renova. Sem surpresa na fatura.</p></details>
+	      <p>Não. Você compra um período fechado (30, 90 ou 180 dias). A data final aparece na sua
+	      conta; se quiser continuar, você compra outro passe. Não há cobrança automática.</p></details>
     <details><summary>Vocês são ligados ao INEP?</summary>
-      <p>Não. A Evidentia não tem vínculo com o INEP nem com o MEC. As questões são conteúdo
-      público oficial, reproduzido sem alteração e com atribuição, sob a licença CC BY-ND 3.0
-      declarada pelo próprio INEP. As justificativas, a conferência e o aplicativo são obra
-      independente da Evidentia.</p></details>
+	      <p>Não. A Evidentia não tem vínculo com o INEP nem com o MEC. A autoria e a fonte das provas
+	      são atribuídas ao INEP; as justificativas, a conferência e o aplicativo são material
+	      independente da Evidentia.</p></details>
     <details><summary>O que acontece quando sai uma edição nova do exame?</summary>
-      <p>Cada edição nova do Revalida soma ~100 questões ao banco. Quem tem acesso ativo recebe
-      a atualização sem pagar nada a mais.</p></details>
+	      <p>Uma edição futura pode ser incorporada depois da extração e da revisão. O acervo comprado
+	      é o que estiver descrito nesta página no momento da compra; não prometemos data para novas edições.</p></details>
   </div>
+  </section>
 
 </div></main>
 <footer><div class="wrap">
-  <p><b>EVIDENTIA</b> · Revalida — material de estudo independente.</p>
-  <p>Questões: Inep — Revalida, Provas Objetivas 2023/1 a 2026/1, reproduzidas sem alteração,
-  sob a licença <a href="https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR" rel="noopener noreferrer" target="_blank">CC BY-ND 3.0</a>
-  declarada em <a href="https://download.inep.gov.br/" rel="noopener noreferrer" target="_blank">download.inep.gov.br</a>.
-  A Evidentia não é afiliada ao INEP nem ao MEC; este material não substitui os documentos oficiais.</p>
-  <p>Suporte: <a href="mailto:idarragaa21@gmail.com">idarragaa21@gmail.com</a></p>
+	  <p class="footer-brand">EVIDENTIA · REVALIDA</p>
+	  <p>Material de estudo independente.</p>
+	  <p>Questões: Inep — Revalida, Provas Objetivas 2023/1 a 2026/1, fonte atribuída a
+	  <a href="https://download.inep.gov.br/" rel="noopener noreferrer" target="_blank">download.inep.gov.br</a>.
+	  A Evidentia não é afiliada ao INEP nem ao MEC; este material não substitui os documentos oficiais.</p>
+	  <nav aria-label="Informações legais e suporte">
+	    <a href="termos.html">Termos e reembolso</a>
+	    <a href="../privacidade/">Privacidade</a>
+	    <a href="mailto:idarragaa21@gmail.com">Suporte</a>
+	  </nav>
+	  <p>Suporte: <a href="mailto:idarragaa21@gmail.com">idarragaa21@gmail.com</a></p>
 </div></footer>
 <script>
 "use strict";
@@ -235,17 +388,20 @@ function cartaoPlano(p, precoMensalCentavos){
   const economia = precoMensalCentavos > 0 && m > 1
     ? Math.round((1 - porMes / precoMensalCentavos) * 100) : 0;
   const heroi = m >= 6;
-  return `<div class="card plano ${heroi ? "heroi" : ""}">
+  const idTitulo = `titulo-plano-${String(p.id).replace(/[^a-z0-9_-]/gi, "") || "acesso"}`;
+  return `<article class="card plano ${heroi ? "heroi" : ""}" aria-labelledby="${esc(idTitulo)}">
     ${heroi ? '<span class="selo">UM CICLO COMPLETO</span>' : ""}
-    <h3>${esc(p.nome)}</h3>
-    <div class="preco">${reais(p.preco_centavos)}</div>
+    <h3 id="${esc(idTitulo)}">${esc(p.nome)}</h3>
+    <div class="preco" aria-label="Preço total: ${esc(reais(p.preco_centavos))}">${reais(p.preco_centavos)}</div>
     <div class="pormes">${m > 1 ? `sai por ${reais(Math.round(porMes))}/mês` : "por 30 dias de acesso"}</div>
     ${economia > 0 ? `<div class="econ">economize ${economia}% vs. mensal</div>` : "<div class='econ'>&nbsp;</div>"}
-    <div class="desc">${esc(p.descricao || "")}. Acesso completo: 600 questões, justificativas
-      referenciadas, simulados e estatísticas. PIX ou cartão, pagamento único.</div>
-    <button class="comprar" data-plano="${esc(p.id)}" onclick="comprar(this.dataset.plano, this)">
+	    <div class="desc">${esc(p.descricao || "")}. Inclui 600 questões e justificativas;
+	      526 questões com referências catalogadas. Simulados e estatísticas. PIX ou cartão, pagamento único.</div>
+    <ul class="plan-features" aria-label="Incluído"><li>Mesmo acervo completo</li><li>Estudo offline após ativar</li><li>Sem renovação automática</li></ul>
+    <button type="button" class="comprar" data-plano="${esc(p.id)}" onclick="comprar(this.dataset.plano, this)"
+      aria-label="Comprar ${esc(p.nome)} por ${esc(reais(p.preco_centavos))}">
       Comprar ${esc(p.nome.toLowerCase())}</button>
-  </div>`;
+  </article>`;
 }
 
 async function carregarPlanos(){
@@ -258,29 +414,16 @@ async function carregarPlanos(){
     if(!planos.length){
       $("#listaPlanos").innerHTML = `<div class="card"><p class="msg">As vendas abrem em breve.
         Enquanto isso, <a href="../">estude grátis com 40 questões</a>.</p></div>`;
+      $("#listaPlanos").setAttribute("aria-busy", "false");
       return;
     }
     const mensal = planos.find(p => meses(p.dias) === 1);
     $("#listaPlanos").innerHTML = planos.map(p => cartaoPlano(p, mensal ? mensal.preco_centavos / meses(mensal.dias) : 0)).join("");
+    $("#listaPlanos").setAttribute("aria-busy", "false");
   }catch(e){
     $("#listaPlanos").innerHTML = `<div class="card"><p class="msg erro">Não foi possível carregar os
       planos agora (${esc(e.message)}). Recarregue a página ou tente mais tarde.</p></div>`;
-  }
-}
-
-/* Lista de espera. É o único valor que a visita deixa enquanto a cobrança não abre,
-   e a promessa da tela só se faz depois de o banco confirmar que guardou. */
-async function guardarInteresse(email, planoId){
-  try{
-    const r = await fetch(`${NUVEM.url}/rest/v1/rpc/registrar_interesse`, {
-      method: "POST",
-      headers: { apikey: NUVEM.chave, "content-type": "application/json" },
-      body: JSON.stringify({ p_email: email, p_plano_id: planoId, p_origem: "pagina_de_vendas" })
-    });
-    if(!r.ok) throw new Error("erro " + r.status);
-    diz("Guardamos seu e-mail. Avisamos assim que as vendas abrirem — e, enquanto isso, você pode estudar de graça com as 40 questões.");
-  }catch(e){
-    diz("As vendas ainda não abriram e não conseguimos guardar seu e-mail agora. Tente de novo em instantes, ou escreva para idarragaa21@gmail.com.", true);
+    $("#listaPlanos").setAttribute("aria-busy", "false");
   }
 }
 
@@ -288,9 +431,11 @@ async function comprar(planoId, botao){
   const email = ($("#email").value || "").trim().toLowerCase();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
     diz("Escreva seu e-mail primeiro — é com ele que você ativa o aplicativo.", true);
+    $("#email").setAttribute("aria-invalid", "true");
     $("#email").focus();
     return;
   }
+  $("#email").setAttribute("aria-invalid", "false");
   botao.disabled = true;
   diz("Preparando seu pagamento…");
   try{
@@ -301,9 +446,7 @@ async function comprar(planoId, botao){
     });
     const corpo = await r.json().catch(() => null);
     if(r.status === 503 && corpo?.erro === "pagamentos_nao_ativados"){
-      /* Prometer guardar o e-mail e nao guardar seria a pior forma de comecar uma
-         relacao com quem quis pagar. Guarda de verdade, e so entao promete. */
-      await guardarInteresse(email, planoId);
+      diz("As vendas ainda não abriram e seu e-mail não foi guardado. Estude com as 40 questões gratuitas e consulte esta página novamente mais tarde.");
       return;
     }
     if(!r.ok || !corpo?.redirect_url){

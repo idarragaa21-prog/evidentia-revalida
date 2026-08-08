@@ -10,23 +10,11 @@
 //          SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 //          REVALIDA_DIAS_LICENCA (opcional, padrao 30).
 
-// `apikey` tem que estar aqui. O aplicativo manda esse cabecalho em toda chamada ao
-// projeto, e o navegador pergunta por ele no preflight: sem a permissao explicita, o
-// pedido morre antes de sair e a pessoa ve «Failed to fetch» ao ativar. Nao aparece em
-// teste com curl, que nao faz preflight — so num navegador de verdade.
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, content-type, apikey, x-client-info",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Max-Age": "86400",
-};
-
-function json(corpo: unknown, status = 200): Response {
-  return new Response(JSON.stringify(corpo), {
-    status,
-    headers: { ...CORS, "content-type": "application/json; charset=utf-8" },
-  });
-}
+import {
+  origemAceita,
+  respostaJson,
+  respostaPreflight,
+} from "../_shared/http_security.ts";
 
 function base64urlDeBytes(bytes: Uint8Array): string {
   let bin = "";
@@ -68,34 +56,34 @@ async function assinarLicenca(payload: Record<string, unknown>): Promise<string>
 }
 
 Deno.serve(async (req: Request) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
-  if (req.method !== "POST") return json({ erro: "metodo nao suportado" }, 405);
+  if (req.method === "OPTIONS") return respostaPreflight(req);
+  if (!origemAceita(req)) return respostaJson(req, { erro: "origem nao permitida" }, 403);
+  if (req.method !== "POST") return respostaJson(req, { erro: "metodo nao suportado" }, 405);
 
   const url = Deno.env.get("SUPABASE_URL");
   const anon = Deno.env.get("SUPABASE_ANON_KEY");
   const service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  if (!url || !anon || !service) return json({ erro: "servidor mal configurado" }, 500);
+  if (!url || !anon || !service) return respostaJson(req, { erro: "servidor mal configurado" }, 500);
 
   const autorizacao = req.headers.get("Authorization") ?? "";
   if (!autorizacao.toLowerCase().startsWith("bearer ")) {
-    return json({ erro: "sessao ausente" }, 401);
+    return respostaJson(req, { erro: "sessao ausente" }, 401);
   }
 
-  let aparelho = "";
-  try {
-    const corpo = await req.json();
-    aparelho = String(corpo?.aparelho ?? "").slice(0, 200);
-  } catch {
-    // corpo vazio e aceitavel; o aparelho e so para o historico
+  // Versoes antigas ainda enviam plataforma/user-agent. O backend descarta esse
+  // campo em vez de criar um inventario de aparelhos sem finalidade de produto.
+  const corpoCru = await req.text();
+  if (new TextEncoder().encode(corpoCru).byteLength > 2_048) {
+    return respostaJson(req, { erro: "corpo grande demais" }, 413);
   }
 
   // 1. Quem e a pessoa. Perguntamos ao proprio Supabase, nunca confiamos no corpo.
   const quem = await fetch(`${url}/auth/v1/user`, {
     headers: { Authorization: autorizacao, apikey: anon },
   });
-  if (!quem.ok) return json({ erro: "sessao invalida ou expirada" }, 401);
+  if (!quem.ok) return respostaJson(req, { erro: "sessao invalida ou expirada" }, 401);
   const usuario = await quem.json();
-  if (!usuario?.id) return json({ erro: "sessao invalida" }, 401);
+  if (!usuario?.id) return respostaJson(req, { erro: "sessao invalida" }, 401);
 
   // 2. Tem acesso? Quem responde e o banco, com o token da propria pessoa:
   //    a RLS decide, esta funcao nao tem opiniao sobre isso.
@@ -109,11 +97,11 @@ Deno.serve(async (req: Request) => {
     body: "{}",
   });
   if (!consulta.ok) {
-    return json({ erro: "nao foi possivel conferir o acesso" }, 502);
+    return respostaJson(req, { erro: "nao foi possivel conferir o acesso" }, 502);
   }
   const acesso = await consulta.json();
   if (!acesso?.ativo) {
-    return json({ ativo: false, motivo: "sem_assinatura" }, 200);
+    return respostaJson(req, { ativo: false, motivo: "sem_assinatura" }, 200);
   }
 
   // 3. A licenca nunca dura mais que a assinatura.
@@ -122,7 +110,7 @@ Deno.serve(async (req: Request) => {
   const fimJanela = Date.now() + dias * 86400_000;
   const expiraEm = new Date(Math.min(fimAssinatura, fimJanela));
   if (!(expiraEm.getTime() > Date.now())) {
-    return json({ ativo: false, motivo: "assinatura_vencida" }, 200);
+    return respostaJson(req, { ativo: false, motivo: "assinatura_vencida" }, 200);
   }
 
   // 4. Antes de registrar, garante que dá para assinar. A ordem importa: registrar
@@ -131,7 +119,7 @@ Deno.serve(async (req: Request) => {
   try {
     await chavePrivada();
   } catch {
-    return json({ erro: "servidor sem chave de assinatura configurada" }, 500);
+    return respostaJson(req, { erro: "servidor sem chave de assinatura configurada" }, 500);
   }
 
   // 5. Registra a entrega para poder revogar e auditar depois.
@@ -145,10 +133,10 @@ Deno.serve(async (req: Request) => {
     body: JSON.stringify({
       p_user_id: usuario.id,
       p_expira_em: expiraEm.toISOString(),
-      p_aparelho: aparelho,
+      p_aparelho: null,
     }),
   });
-  if (!registro.ok) return json({ erro: "nao foi possivel registrar a licenca" }, 502);
+  if (!registro.ok) return respostaJson(req, { erro: "nao foi possivel registrar a licenca" }, 502);
   const jti = await registro.json();
 
   const licenca = await assinarLicenca({
@@ -162,7 +150,7 @@ Deno.serve(async (req: Request) => {
     jti,
   });
 
-  return json({
+  return respostaJson(req, {
     ativo: true,
     licenca,
     expira_em: expiraEm.toISOString(),

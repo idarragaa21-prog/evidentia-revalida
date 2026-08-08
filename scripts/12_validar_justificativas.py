@@ -4,7 +4,7 @@
 Confere o catalogo de fontes e as justificativas por edicao contra o banco oficial.
 Falha (codigo 1) se encontrar qualquer inconsistencia.
 
-Entrada : dados/banco_400_questoes.json, dados/referencias.json,
+Entrada : banco canônico de questões, dados/referencias.json,
           dados/justificativas/<edicao>.json
 Uso     : python3 scripts/12_validar_justificativas.py [--parcial]
 
@@ -56,6 +56,7 @@ def validar(parcial=False):
     just = carregar_justificativas(edicoes)
 
     erros, avisos, sem_fonte = [], [], []
+    questoes_com_fonte = 0
     citadas = set()
 
     # 1. Catalogo de fontes
@@ -168,6 +169,8 @@ def validar(parcial=False):
         # enganado. O que nao se admite e citar uma fonte que nao sustenta a afirmacao.
         if not refs and not q["anulada"]:
             sem_fonte.append(onde)
+        if refs:
+            questoes_com_fonte += 1
         for r in refs:
             rid = r.get("id", "")
             citadas.add(rid)
@@ -198,7 +201,12 @@ def validar(parcial=False):
         avisos.append(f"{len(orfas)} fontes no catalogo nunca citadas: {orfas[:8]}{' ...' if len(orfas) > 8 else ''}")
 
     total_just = len(just)
+    questoes_sem_fonte_total = len(banco) - questoes_com_fonte
     print(f"banco: {len(banco)} questoes | catalogo: {len(catalogo)} fontes | justificativas: {total_just}")
+    print(
+        f"questoes com referencias: {questoes_com_fonte}/{len(banco)} | "
+        f"sem referencia catalogada: {questoes_sem_fonte_total}/{len(banco)}"
+    )
     if catalogo:
         cobertura = len(citadas & set(catalogo))
         print(f"fontes efetivamente citadas: {cobertura}/{len(catalogo)}")

@@ -1,36 +1,78 @@
-# App Android (Capacitor)
+# Aplicativos móveis (Capacitor 8)
 
-Este é o projeto que empacota o aplicativo web em um app Android nativo (WebView),
-usando o Capacitor. O arquivo pronto para instalar já está aqui:
-**`Evidentia-Revalida.apk`** (versão de teste, assinada em modo debug).
+Este projeto empacota a edição comercial da Evidentia Revalida para iOS e Android.
+O conteúdo nativo é gerado a partir das fontes editoriais locais e não deve ser
+versionado nem distribuído como HTML solto.
 
-## Estrutura
+## Requisitos fixados
 
-- `www/index.html` — o aplicativo (o mesmo arquivo único da pasta `aplicativo/`)
-- `resources/` — ícone e tela de abertura de origem
-- `android/` — projeto Android nativo gerado pelo Capacitor
-- `capacitor.config.json` — identificador `com.evidentia.revalida`, nome “Revalida”
+- Node.js 22 ou superior;
+- JDK 21;
+- Android SDK 36 e Build Tools 36;
+- Xcode 26 ou superior e CocoaPods, para iOS;
+- dependências exatas do Capacitor 8.5.0 registradas no `package-lock.json`.
 
-## Recompilar o APK
-
-Requer Node, Java 17 ou 21 (nao 22+: o Gradle deste projeto nao os suporta) e o Android SDK (plataforma 34 e build-tools 34).
+Instale as dependências de forma reproduzível:
 
 ```bash
-npm install
-npx cap sync android
-cd android
-./gradlew assembleDebug
-# saída: android/app/build/outputs/apk/debug/app-debug.apk
+npm ci
 ```
 
-Para atualizar o conteúdo do app, substitua `www/index.html` pelo novo
-`aplicativo/Revalida_Evidentia.html`, rode `npx cap sync android` e compile de novo.
+## Android de desenvolvimento
 
-A forma mais simples de compilar sem configurar o SDK à mão é abrir a pasta
-`android/` no **Android Studio** e usar *Build → Build APK(s)*.
+O comando de preparação gera a variante Android, elimina qualquer direcionamento
+para checkout externo e sincroniza os assets do Capacitor:
 
-## Publicar na Google Play
+```bash
+npm run prepare:android
+cd android
+./gradlew assembleDebug
+```
 
-Para a Play Store é preciso gerar um *Android App Bundle* assinado com uma chave
-de produção (`./gradlew bundleRelease` após configurar a assinatura) e uma conta
-de desenvolvedor do Google Play (taxa única de 25 dólares).
+Saída: `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+O APK debug serve apenas para testes locais. Ele não pode ser enviado à Play Store.
+
+## Android de produção
+
+Use o **Google Play App Signing** e mantenha a upload key fora do repositório. O
+build falha de propósito se uma assinatura de produção não estiver configurada.
+Defina as quatro variáveis no terminal ou no cofre de segredos da CI:
+
+```bash
+export EVIDENTIA_ANDROID_KEYSTORE="/caminho/seguro/evidentia-upload.jks"
+export EVIDENTIA_ANDROID_KEYSTORE_PASSWORD="..."
+export EVIDENTIA_ANDROID_KEY_ALIAS="evidentia-upload"
+export EVIDENTIA_ANDROID_KEY_PASSWORD="..."
+npm run build:aab
+```
+
+Saída: `android/app/build/outputs/bundle/release/app-release.aab`.
+
+Antes de cada upload, incremente `versionCode`, confirme o `versionName` e valide
+a assinatura. Nunca reutilize nem publique a senha ou o arquivo `.jks`.
+
+Para validar somente a compilação Release sem possuir a chave, é possível executar
+`./gradlew bundleRelease -PallowUnsignedRelease=true`. O AAB resultante é
+deliberadamente não publicável e não deve sair da máquina de desenvolvimento.
+
+## iOS
+
+```bash
+npm run prepare:ios
+open ios/App/App.xcworkspace
+```
+
+No Xcode, selecione o Team da conta Apple Developer, confira o bundle
+`com.evidentia.revalida`, incremente o build e execute primeiro os testes. Para a
+entrega: **Product → Archive → Distribute App → App Store Connect**.
+
+Os produtos nativos precisam existir nas duas lojas com estes IDs exatos:
+
+- `com.evidentia.revalida.access.30d`
+- `com.evidentia.revalida.access.90d`
+- `com.evidentia.revalida.access.180d`
+
+A transação só é finalizada/confirmada no aparelho depois que o backend retorna
+`ativo: true`. Sandbox, TestFlight e License Testers devem ser aprovados antes da
+produção.

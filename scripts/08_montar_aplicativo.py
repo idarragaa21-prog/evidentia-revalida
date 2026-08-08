@@ -10,16 +10,31 @@ O banco permanece como fonte da verdade do conteudo INEP; as justificativas com
 referencias vivem em arquivos proprios e sao unidas aqui, na montagem. O formato esta
 em docs/ESQUEMA_JUSTIFICATIVAS.md e a porta de qualidade em 12_validar_justificativas.py.
 
-Duas edicoes saem do mesmo modelo:
+Varios canais saem do mesmo modelo:
 
-  completo  400 questoes, exige licenca valida (produto pago)
+  completo  600 questoes, exige licenca valida (produto web pago)
   livre     recorte gratuito, sem conta nem licenca (funil)
+  ios       produto completo com StoreKit e sem direcionamento externo
+  android   produto completo com Play Billing e sem direcionamento externo
 
-Uso: python3 scripts/08_montar_aplicativo.py [--edicao completo|livre|ambas]
+Uso: python3 scripts/08_montar_aplicativo.py [--edicao completo|livre|ios|android|ambas]
 """
-import os, sys, json
+import os, sys, json, base64
+from urllib.parse import urlparse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import DADOS, MODELO, APLICATIVO
+
+RAIZ = os.path.dirname(DADOS)
+DESTINOS_NATIVOS = {
+    "android": [
+        os.path.join(RAIZ, "app-android", "www", "index.html"),
+        os.path.join(RAIZ, "app-android", "android", "app", "src", "main", "assets", "public", "index.html"),
+    ],
+    "ios": [
+        os.path.join(RAIZ, "app-android", "www", "index.html"),
+        os.path.join(RAIZ, "app-android", "ios", "App", "App", "public", "index.html"),
+    ],
+}
 
 # Quantas questoes por area entram na edicao livre.
 GRATUITAS_POR_AREA = 8
@@ -58,8 +73,8 @@ def recorte_livre(questoes):
 
 
 def config_nuvem():
-    """Le nuvem/supabase/client_config.local.json se existir. Sem ele, a edicao
-    completa e montada mesmo assim, mas nao consegue ativar — util para testar."""
+    """Le nuvem/supabase/client_config.local.json se existir. A edicao web completa
+    pode ser montada sem ele para diagnostico local; builds de loja falham fechadas."""
     caminho = os.path.join(os.path.dirname(DADOS), "nuvem", "supabase", "client_config.local.json")
     if not os.path.exists(caminho):
         return {}
@@ -70,6 +85,21 @@ def config_nuvem():
 def chave_licenca():
     caminho = os.path.join(os.path.dirname(DADOS), "nuvem", "chaves", "licenca_publica.txt")
     return open(caminho, encoding="utf-8").read().strip() if os.path.exists(caminho) else ""
+
+
+def validar_config_ativacao(alvo, origem_nuvem, chave_nuvem, chave_pub):
+    """Impede gerar um binario de loja instalavel que jamais conseguiria ativar."""
+    faltantes = []
+    if not origem_nuvem:
+        faltantes.append("URL HTTPS do Supabase")
+    if not str(chave_nuvem or "").strip():
+        faltantes.append("chave publicavel do Supabase")
+    if not str(chave_pub or "").strip():
+        faltantes.append("chave publica de licenca")
+    if alvo in ("ios", "android") and faltantes:
+        raise SystemExit(
+            f"build {alvo} bloqueada: configuracao de ativacao ausente: " + ", ".join(faltantes))
+    return faltantes
 
 
 def main():
@@ -97,9 +127,20 @@ def main():
     } for r in banco]
 
     modelo = open(os.path.join(MODELO, "app_template.html"), encoding="utf-8").read()
-    logo = open(os.path.join(DADOS, "logo_b64.txt"), encoding="utf-8").read().strip()
-    favicon = open(os.path.join(DADOS, "favicon_b64.txt"), encoding="utf-8").read().strip()
+    icone_marca = os.path.join(RAIZ, "design", "brand", "evidentia-icon-1024.png")
+    if os.path.exists(icone_marca):
+        marca_b64 = base64.b64encode(open(icone_marca, "rb").read()).decode("ascii")
+        logo = favicon = marca_b64
+    else:
+        logo = open(os.path.join(DADOS, "logo_b64.txt"), encoding="utf-8").read().strip()
+        favicon = open(os.path.join(DADOS, "favicon_b64.txt"), encoding="utf-8").read().strip()
     nuvem = config_nuvem()
+    origem_nuvem = ""
+    if nuvem.get("url"):
+        u = urlparse(nuvem["url"])
+        if u.scheme == "https" and u.netloc:
+            origem_nuvem = f"{u.scheme}://{u.netloc}"
+    csp_connect = origem_nuvem or "'none'"
     chave_pub = chave_licenca()
 
     quais = "ambas"
@@ -110,19 +151,20 @@ def main():
 
     os.makedirs(APLICATIVO, exist_ok=True)
     for alvo in alvos:
-        if alvo not in ("completo", "livre", "teste", "ios"):
+        if alvo not in ("completo", "livre", "teste", "ios", "android"):
             raise SystemExit(f"edicao desconhecida: {alvo}")
         qs = recorte_livre(questoes) if alvo == "livre" else questoes
         # A build de teste tem o banco inteiro e nao pede licenca: e o alvo da suite
         # automatizada, que precisa chegar as telas sem uma assinatura de verdade.
-        modo = "livre" if alvo == "teste" else ("completo" if alvo == "ios" else alvo)
+        modo = "livre" if alvo == "teste" else ("completo" if alvo in ("ios", "android") else alvo)
 
-        # A diretriz 3.1.1 da App Store proibe um aplicativo de iOS levar a comprar
-        # fora da loja — e proibe ate dizer onde se compra. A build "ios" e a
-        # "completo" sem uma palavra sobre compra: entra-se com a conta e usa-se o
-        # que ja foi comprado. Os outros canais mantem o caminho de venda, que e
-        # onde ele funciona sem a comissao de 15 a 30% da Apple.
-        vende_aqui = "false" if alvo == "ios" else "true"
+        # Builds de loja vendem exclusivamente pelo mecanismo nativo. A pagina web
+        # continua com seu checkout proprio, mas esse direcionamento nao viaja dentro
+        # do binario submetido a Apple ou Google.
+        nativo = alvo in ("ios", "android")
+        vende_aqui = "false" if nativo else "true"
+        faltantes_ativacao = validar_config_ativacao(
+            alvo, origem_nuvem, nuvem.get("chave"), chave_pub)
 
         # So viajam para o aplicativo as figuras e as fontes que aquela edicao usa.
         citadas = {
@@ -155,53 +197,60 @@ def main():
                  .replace("__CHAVE_LICENCA__", chave_pub)
                  .replace("__EDICAO__", modo)
                  .replace("__VENDE_AQUI__", vende_aqui)
+                 .replace("__CSP_CONNECT__", csp_connect)
                  .replace("__FAVICON__", favicon)
                  .replace("__LOGO__", logo))
 
         for marcador in ["/*__DATA__*/", "/*__META__*/", "/*__REFS__*/", "/*__FIGS__*/",
                          "/*__NUVEM__*/", "__CHAVE_LICENCA__", "__EDICAO__", "__VENDE_AQUI__",
-                         "__LOGO__", "__FAVICON__"]:
+                         "__CSP_CONNECT__", "__LOGO__", "__FAVICON__"]:
             assert marcador not in saida, f"marcador nao substituido: {marcador}"
 
-        # A App Store nao inspeciona so o comportamento: um revisor pode abrir o
-        # pacote e ler as cadeias. Deixar "a compra e feita no site" enterrado num
-        # ramo que nunca executa e um risco desnecessario, entao na build de iOS
-        # essas frases somem do arquivo. Cada troca e conferida logo abaixo: se
-        # alguem reescrever a frase no modelo e esquecer de atualizar aqui, o
-        # build para em vez de publicar um binario reprovavel.
-        if alvo == "ios":
+        # Um revisor pode inspecionar as cadeias do pacote. Removemos também os textos
+        # mortos do funil web e falhamos o build se algum direcionamento voltar.
+        if nativo:
             proibidas = [
                 ("https://idarragaa21-prog.github.io/evidentia-revalida/assinar/", ""),
-                ("Ainda não assinou? ", ""),
-                ("Veja os planos e preços", "Entrar"),
-                ("— a compra é feita no site e ativa aqui com o mesmo e-mail. A <b>edição livre</b>, com",
-                 "A <b>edição livre</b>, com"),
-                ("Conhecer os planos", "Saiba mais"),
-                ("Se você acabou de comprar, aguarde um instante e tente de novo.",
-                 "Verifique se é o mesmo e-mail da sua assinatura."),
-                ("assine para liberar as ${META.total||600} questões, ou peça acesso de cortesia.",
-                 "fale com o suporte se achar que isso é um engano."),
+                ("600 questões, seis edições e uso offline. Consulte os planos antes de decidir.",
+                 "600 questões, seis edições e uso offline para estudar com método."),
+                ("Comparar planos", "Conhecer o acervo"),
+                ("Na versão web, os planos são contratados pela página segura da Evidentia.",
+                 "Escolha um período de acesso na loja deste aparelho."),
+                ("A mesma conta reconhece compras na web, App Store e Google Play e mantém seu acesso consistente entre aparelhos.",
+                 "Sua conta mantém o acesso consistente entre aparelhos."),
+                ("Uma conta, três canais", "Uma conta protegida"),
+                ("Compras verificadas pela loja ou pela Evidentia", "Compras verificadas com segurança"),
             ]
             for antes, depois in proibidas:
                 if antes not in saida:
                     raise SystemExit(
-                        f"build ios: a frase de compra mudou no modelo e este script nao a "
+                        f"build {alvo}: a frase de compra mudou no modelo e este script nao a "
                         f"encontrou mais: {antes[:60]!r}. Atualize a lista antes de publicar.")
                 saida = saida.replace(antes, depois)
+            vetadas = [URL for URL in (
+                "evidentia-revalida/assinar/", "Na versão web, os planos",
+                "compras na web", "Comparar planos") if URL in saida]
+            if vetadas:
+                raise SystemExit(f"build {alvo}: direcionamento externo ainda presente: {vetadas}")
 
         nome = {"completo": "Revalida_Evidentia.html",
                 "livre": "Revalida_Evidentia_livre.html",
                 "teste": "Revalida_Evidentia_teste.html",
-                "ios": "Revalida_Evidentia_ios.html"}[alvo]
+                "ios": "Revalida_Evidentia_ios.html",
+                "android": "Revalida_Evidentia_android.html"}[alvo]
         destino = os.path.join(APLICATIVO, nome)
         open(destino, "w", encoding="utf-8").write(saida)
         print(f"gerado ({alvo}): {destino}")
+        for caminho_nativo in DESTINOS_NATIVOS.get(alvo, []):
+            os.makedirs(os.path.dirname(caminho_nativo), exist_ok=True)
+            open(caminho_nativo, "w", encoding="utf-8").write(saida)
+            print(f"  sincronizado: {os.path.relpath(caminho_nativo, RAIZ)}")
         print(f"  {round(len(saida)/1024/1024, 2)} MB - {len(qs)} questoes - {len(figs)} figuras")
         print(f"  {meta['com_justificativa']}/{len(qs)} com justificativa estruturada"
               f" - {meta['fontes']} fontes citadas")
-        if alvo == "completo" and not (nuvem.get("url") and chave_pub):
-            print("  aviso: sem client_config.local.json ou sem chave publica —"
-                  " esta build nao consegue ativar assinatura")
+        if alvo == "completo" and faltantes_ativacao:
+            print("  aviso: build de diagnostico sem " + ", ".join(faltantes_ativacao) +
+                  " — nao consegue ativar assinatura")
 
 
 if __name__ == "__main__":

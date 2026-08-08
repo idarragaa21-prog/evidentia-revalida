@@ -7,36 +7,39 @@
 >
 > Sigue la disciplina del plan de negocios de Atlas: precio con ancla explícita, criterio
 > de falsación por delante, y honestidad sobre lo que todavía no está resuelto.
+>
+> **Baseline vigente:** 600 preguntas, 6 ediciones, 600 justificaciones, 526 preguntas con
+> referencias y 74 sin referencia catalogada. La fuente canónica es
+> `scripts/metricas_produto.json`; las cifras de mercado de este documento son investigación
+> fechada y deben revalidarse antes de usarlas públicamente.
 
 ---
 
 ## 1. Qué se vende y por qué alguien pagaría
 
-El producto es un **banco de las 500 preguntas objetivas del Revalida (INEP) de 2023/1 a
-2024/2**, con simulados, corrección detallada y — esto es lo nuevo — **una justificación por
-pregunta anclada en literatura verificable**, en una aplicación que funciona sin internet y
-se instala de verdad en el computador y en el celular.
+El producto es un **banco de 600 preguntas objetivas del Revalida (INEP) de 2023/1 a
+2026/1**, con simulados, corrección detallada y una justificación por pregunta. **526** preguntas
+tienen referencias catalogadas y **74** se presentan sin referencia catalogada, en una aplicación
+que funciona sin internet y se instala en computador y celular.
 
 ### El diferenciador no es el tamaño, es la confianza
 
 **[Verificado]** Los competidores directos venden volumen: MedTask anuncia «+90 mil questões»,
 Estratégia MED «+290 mil questões cadastradas», Eu Médico Revalida «+60.000 questões». Evidentia
-tiene 400. Competir por volumen es perder.
+tiene 600. Competir por volumen es perder. Estas cifras competitivas son una fotografía fechada,
+no texto listo para marketing.
 
 Lo que Evidentia tiene y ninguno de ellos ofrece:
 
-1. **Texto conferido palabra por palabra contra el cuaderno oficial del INEP.** El script
-   `scripts/10_conferir_textos_oficiais.py` compara enunciado y alternativas campo a campo con
-   el PDF oficial y hoy termina sin ninguna divergencia. Esa conferencia ya encontró y corrigió
-   47 campos perdidos en la primera extracción (unidades que desaparecían, cifras comidas) y
-   4 preguntas cuya figura faltaba. **[Verificado]** Ningún competidor documenta nada parecido.
-2. **Justificación con fuente identificable.** Hoy las 400 explicaciones son buen razonamiento
-   clínico pero tienen **cero DOIs, cero URLs, cero autores, cero años** — solo 11 mencionan
-   genéricamente «Ministério da Saúde» o «diretrizes» sin decir cuál. **[Verificado]** Eso es
-   exactamente lo que este plan corrige, y es el argumento de venta central.
+1. **Gate oficial fail-closed.** `scripts/10_conferir_textos_oficiais.py` exige seis PDFs con
+   hashes auditados y compara 600/600 preguntas, 3.000 campos. El reporte actual no contiene
+   divergencias pendientes y declara cinco adaptaciones editoriales; no omite ediciones ausentes.
+2. **Cobertura de referencias medible.** Las 600 justificaciones pasan por un catálogo de 319
+   fuentes. 526 preguntas citan al menos una y 74 no tienen referencia catalogada. El argumento
+   de venta es esa transparencia, no afirmar cobertura total.
 3. **Funciona sin internet, de verdad.** Archivo único, sin servidor. Un candidato estudiando en
    el interior, en un plantón o en un avión no depende de señal.
-4. **26 figuras originales** recortadas del cuaderno oficial, para que las preguntas que dependen
+4. **30 figuras** recortadas del caderno oficial, para que las preguntas que dependen
    de imagen se puedan responder enteras.
 
 **La tesis**: el candidato del Revalida ya paga R$ 4.516 solo en tasas oficiales del examen
@@ -88,24 +91,22 @@ invertía (39×6 = 234 < 247 — pagar mes a mes salía más barato que comprome
 
 Familia terminada en 7, la convención del mercado digital brasileño. **Sin plan anual al
 lanzamiento**: el Revalida tiene dos ediciones al año, el ciclo real de preparación es ≤ 6
-meses, y un banco de 500 preguntas no sostiene honestamente una promesa de 12 meses.
+meses, y un banco de 600 preguntas no sostiene por sí solo una promesa de 12 meses.
 Reevaluar el anual (R$ 397) cuando el banco pase de ~1.000 preguntas o cuando ≥ 20 % de los
 semestrales renueven para un segundo ciclo — esos renovadores SON el mercado del anual.
 
 **Venta como pases de pago único, sin renovación automática** (fase 1): habilita PIX —
 dominante en Brasil —, elimina las disputas por renovaciones no deseadas, y el backend ya
-corta el acceso al vencer la licencia firmada. La recompra se dispara con recordatorios por
-correo (D-7 y D-1 del vencimiento). **La escalera vive en la tabla `planos` y Diego la edita
+corta el acceso al vencer la licencia firmada. Los recordatorios por correo no forman parte del
+lanzamiento mientras no exista un envío transaccional probado. **La escalera vive en la tabla `planos` y Diego la edita
 desde el panel** — cambiar un precio no requiere republicar nada.
 
 Y una **capa gratuita permanente de 40 preguntas** (8 por área), con la justificación
 referenciada completa. No es una demo mutilada: es el producto entero sobre un décimo del banco.
 
-**Ancla explícita**: contra Revalida Resolve (R$ 147/mes o R$ 497/año), Meedik (R$ 129,99/mes)
-y MedTask (R$ 249/mes). La razón para estar por debajo es honesta y se dice en la primera
-pantalla: *Evidentia tiene menos preguntas — solo las 500 oficiales de las últimas cinco
-ediciones — pero cada una está conferida contra el cuaderno del INEP y justificada con la
-fuente citada.* Tres meses de Evidentia cuestan lo que el comparable directo cobra por un mes.
+Las comparaciones de precio anteriores sirven como investigación histórica, no como claim
+permanente. La pantalla pública debe describir solo hechos propios: 600 preguntas de seis
+ediciones, 600 justificaciones, 526 con referencias y 74 sin referencia catalogada.
 
 **Criterio de falsación (primeros 60 días con tráfico real)**: si el semestral es < 30 % de
 las unidades vendidas, la escalera no empuja al plazo largo → subir el mensual a R$ 67 y medir
@@ -119,50 +120,50 @@ objeción principal de un producto nuevo sin reputación.
 
 ---
 
-## 4. Situación legal — resuelta, con una consulta pendiente
+## 4. Situación legal — hipótesis documentadas, dictamen pendiente
 
-Esta era la duda que bloqueaba todo. La investigación primaria la deja en buen sitio.
+La investigación siguiente orienta las preguntas, pero **no autoriza el lanzamiento comercial**.
+Se exige respuesta escrita de un abogado brasileño antes de cobrar.
 
-**[Verificado] El INEP publica bajo Creative Commons BY-ND 3.0.** El pie de la página oficial de
+**[Hallazgo documental; alcance jurídico por confirmar]** El pie de la página oficial de
 *Provas e Gabaritos* del Revalida y también el servidor que aloja los PDFs
 (`download.inep.gov.br`) declaran: «Todo o conteúdo deste site está publicado sob a licença
 Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada». El deed de esa licencia permite
 expresamente *«copy and redistribute the material in any medium or format **for any purpose, even
 commercially**»*.
 
-**[Verificado] Las preguntas de examen probablemente ni siquiera son obra protegida.** El TJ-SP
+**[Precedente para revisión del abogado]** El TJ-SP
 (3ª Câmara de Direito Privado, Apelação 1112376-68.2021.8.26.0100, 05/04/2024) decidió que las
 preguntas de prueba «não são mais que um método de estudo ou avaliação», carecen de originalidad
 y que un acervo de preguntas no constituye base de datos protegida — desestimando la demanda de
 dos asociaciones contra un cursinho que reproducía sus preguntas.
 
-**[Verificado] El PDF oficial no tiene ningún aviso de copyright.** Búsqueda exhaustiva del texto
+**[Observación documental, no licencia]** El PDF oficial revisado no mostraba aviso de copyright. Búsqueda exhaustiva del texto
 completo del cuaderno 2024/2: no aparece «direitos reservados», «proibida a reprodução» ni
 términos de uso. El único veto de reproducción en los editales es sobre las **filmaciones de la
 2ª etapa**, no sobre las preguntas objetivas publicadas.
 
-**[Verificado] El INEP no tiene ninguna marca viva** — ni «INEP», ni «Revalida», ni «ENEM», ni
-«ENAMED». Y «REVALIDA» como palabra suelta no está registrada por nadie, mientras el INPI viene
-denegando sistemáticamente los pedidos de «Revalida + término genérico» en clase 41.
+**[Búsqueda fechada; revalidar antes de solicitar marca]** La consulta realizada sobre INEP,
+Revalida, ENEM y ENAMED no sustituye una búsqueda profesional de anterioridades. No usar su
+resultado como garantía de disponibilidad de marca.
 
 ### Las tres reglas de producto que salen de esto
 
-1. **Las preguntas se reproducen verbatim, sin tocar una coma.** Todo el valor añadido
+1. **Las preguntas se comparan campo a campo y toda adaptación queda documentada.** Todo el valor añadido
    (justificación, referencias, clasificación, estadísticas) vive en capas *visualmente
-   separadas* del enunciado original. Así el producto es «obra oficial sin modificar + obra
-   nueva propia», no «obra derivada» — que es lo único que la cláusula SemDerivações prohíbe.
+   separadas* del enunciado original. El gate declara las adaptaciones editoriales; la calificación
+   jurídica de esa separación todavía depende del dictamen.
    La arquitectura actual ya cumple esto: el banco es la fuente de la verdad y las justificaciones
    viven en `dados/justificativas/`. **No se fusionan nunca en el mismo campo.**
-2. **Atribución visible por ítem, no solo en un pie legal.** Cada pregunta muestra:
-   *«Fonte: Inep — Revalida <edición>, Prova Objetiva. Conteúdo sob licença CC BY-ND 3.0.»*
-   Esto satisface a la vez la licencia CC, el art. 46 III de la Lei 9.610/1998 y el art. 2º III
-   del Decreto 8.777/2016.
+2. **Atribución visible por ítem, no solo en un pie legal.** La redacción exacta y cualquier
+   mención de licencia se fijan después del dictamen; mientras tanto, se atribuye la fuente al
+   INEP y se evita afirmar una autorización comercial no confirmada.
 3. **Nunca sugerir vínculo oficial.** Sin logotipo del INEP ni del MEC, sin las palabras
    «oficial», «autorizado» o «parceria» aplicadas al producto, y con el aviso de no afiliación
    visible. El riesgo real no es el copyright: es la confusión institucional.
 
-**Línea roja absoluta**: no construir nada sobre las filmaciones de la 2ª etapa. Es la única
-prohibición expresa y literal de los editales, y alcanza incluso el uso propio sin ánimo de lucro.
+**Línea roja absoluta**: no construir nada sobre las filmaciones de la 2ª etapa. Los documentos
+revisados contienen una prohibición expresa; cualquier otro uso requiere revisión jurídica propia.
 
 ### Lo que falta (barato y con ventana de oportunidad)
 
@@ -172,10 +173,8 @@ prohibición expresa y literal de los editales, y alcanza incluso el uso propio 
   (c) ¿una justificación que acompaña un enunciado íntegro e inalterado es «obra derivada»
   prohibida por el ND, o obra nueva independiente? (d) ¿qué tratamiento tipográfico de la palabra
   «Revalida» minimiza el riesgo frente a las ~40 marcas compuestas vivas en clase 41?
-- **[Verificado] Registrar «EVIDENTIA» en la clase NCL 41 del INPI.** La búsqueda muestra la clase
-  **libre**: no hay ni un solo proceso con «Evidentia» en servicios educativos. Registrar el
-  elemento distintivo solo (nunca el compuesto con «Revalida») es además la estrategia que el
-  INPI viene premiando.
+- **Evaluar el registro de «EVIDENTIA» en la clase NCL 41 del INPI.** Repetir la búsqueda de
+  anterioridades y confirmar la estrategia con profesional antes de presentar la solicitud.
 - Descargar el edital de la **1ª etapa** directamente del servidor del INEP y confirmar que
   tampoco reivindica propiedad intelectual sobre las preguntas.
 - Confirmar el régimen de los ítems reutilizados del **Banco Nacional de Itens**, ahora que el
@@ -194,14 +193,14 @@ una licencia que autoriza a terceros a revenderlo no es sostenible.
 
 | Artefacto | Qué es | Licencia | Dónde vive |
 |:--|:--|:--|:--|
-| Banco de preguntas INEP | Contenido público del INEP | CC BY-ND 3.0 (del INEP) | Se mantiene atribuido |
+| Banco de preguntas INEP | Contenido del INEP | Régimen comercial por confirmar con abogado | Se mantiene atribuido |
 | Herramientas de extracción y conferencia (`scripts/01`–`11`) | El método, que da credibilidad | MIT, se queda público | Repositorio público |
 | Aplicación completa, justificaciones referenciadas, backend, apps empaquetadas | El producto | **Propietaria** | Repositorio privado |
 | Edición gratuita (40 preguntas) | El embudo | Propietaria, uso gratuito | Pages público |
 
 Lo ya publicado bajo MIT no se puede retirar retroactivamente — quien lo descargó tiene sus
 derechos. Lo que sí se hace es que **las versiones nuevas** salgan bajo licencia propietaria.
-El valor comercial no está en el código de 2026; está en las 400 justificaciones referenciadas,
+El valor comercial no está solo en el código; está en las 600 justificaciones, la trazabilidad,
 en las apps firmadas, en el backend y en la actualización cuando salga cada edición nueva.
 
 ---
@@ -243,7 +242,7 @@ ejecuciones recurrentes):
 - **Fase 1 — lanzamiento**: los tres planes como **pases de pago único** (30/90/180 días),
   PIX o tarjeta. El flujo está 100 % cubierto por la notificación documentada
   (`payment_id` → GET payment → PAID) y el backend ya corta el acceso al vencer la licencia.
-  Sin renovación automática: recordatorios de recompra por correo en D-7 y D-1.
+  Sin renovación automática. La fecha final se consulta en la cuenta; no se promete correo hasta implementarlo.
 - **Fase 2 — assinatura mensual con tarjeta**: solo después de confirmar por escrito con
   soporte de dLocal Go cómo se notifican las ejecuciones recurrentes (o de validar el polling
   diario en sandbox). No se publica un modo de cobro cuyo aviso al backend no está confirmado.
@@ -251,8 +250,8 @@ ejecuciones recurrentes):
 **Estado técnico: hecho y desplegado.** `criar-checkout` crea el pedido con el precio leído de
 la tabla `planos` (nunca del navegador) y lo congela en `checkouts`; el webhook verifica la
 firma HMAC-SHA256 de la notificación, consulta el pago en el API del proveedor — el estado
-jamás se cree de la notificación — y activa o revoca. Falta solo el onboarding de Diego
-(runbook, paso 3).
+jamás se cree de la notificación — y activa o revoca. Aún faltan onboarding, sandbox, compra y
+reembolso reales, además de los gates legales y de privacidad del plan de lanzamiento.
 
 **Riesgos abiertos** (del dossier de verificación adversarial): la aprobación del onboarding es
 discrecional hasta pasar el KYC; reserva de garantía del 5-10 % sin plazo de liberación escrito;
@@ -379,10 +378,12 @@ producto entero, que es justamente lo único que lo diferencia.
 
 ## 10. Riesgos, sin maquillaje
 
-1. **Solo 500 preguntas.** Es el flanco de comparación más obvio. Mitigación: precio a la mitad
-   del ancla y promesa honesta en la primera pantalla. Cada edición nueva del INEP suma 100.
+1. **600 preguntas.** Sigue siendo un acervo menor que plataformas de volumen; la mitigación es
+   una promesa delimitada y transparente en la primera pantalla. Una edición futura solo se suma
+   después de extracción y revisión; no se promete fecha.
 2. **Las justificaciones eran generadas con IA.** En un producto gratuito era un aviso; en uno de
-   pago es responsabilidad. Por eso este plan las reconstruye con fuente citada y mantiene el
+   pago es responsabilidad. Por eso el plan exige revisión editorial, informa 526 con referencia
+   y 74 sin referencia catalogada, y mantiene el
    aviso de que son material de estudio de Evidentia, no documento oficial del INEP.
 3. **[Verificado] El compromiso de retirada.** `AVISO_DE_CONTEUDO.md` promete públicamente retirar
    el material «sem discussão prévia» ante cualquier reclamo de un titular de derechos. En un
@@ -405,19 +406,19 @@ producto entero, que es justamente lo único que lo diferencia.
 | Mapa del proyecto | **hecho** |
 | Esquema de justificaciones + porta de calidad | **hecho** |
 | Backend de suscripciones probado contra PostgreSQL | **hecho** — y **desplegado** en el proyecto real |
-| Catálogo de fuentes verificadas | **hecho** — 318 fuentes, 183 con DOI conferido |
-| Las 500 justificaciones referenciadas | **hecho** — 500/500 estructuradas, 458 con fuente del catálogo, 42 con sello «estudo» honesto |
+| Catálogo de fuentes | **hecho** — 319 fuentes; el gate valida estructura y localización |
+| Las 600 justificaciones | **hecho** — 600/600 estructuradas, 526 con referencia y 74 sin referencia catalogada |
 | Interfaz: bloque de referencias, pantalla de cuenta, atribución por ítem | **hecho** |
 | Camino de compra en el app (edición libre y pantalla de activación → /assinar/) | **hecho** |
 | Panel de administración, con gestión de planos y precios | **hecho** |
 | Apps empaquetadas: macOS y Android | **hecho**; Windows y Linux configurados; iPhone por PWA |
 | Edición gratuita de 40 preguntas | **hecho** |
-| Suite automatizada | **hecho** — SQL (~40) + interfaz (116+) pasando |
+| Suite automatizada | **hecho** — SQL, contenido y Playwright; los conteos exactos salen de cada ejecución |
 | Runbook de activación | **hecho** — `produto/RUNBOOK_ATIVACAO.md` |
 | Edición 2026/1 (100 preguntas nuevas) | **hecho** — integrada con figuras, gabarito y justificaciones |
 | Nube desplegada (esquema, secretos, 3 funciones) | **hecho** — 2026-08-06 |
 | Página de venta (`app-web/assinar/`) | **hecha** — planos en vivo; se publica al hacer merge a `main` |
-| Cobro real | **pendiente de Diego**: onboarding en dLocal Go + credenciales (runbook, paso 3) |
+| Cobro real | **bloqueado**: onboarding, sandbox, compra/reembolso reales y gates legal/privacidad/evaluación |
 
 ---
 

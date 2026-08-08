@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>Evidentia</title>
+  <desc>Monograma E com sinal de verificação</desc>
+  <rect width="1024" height="1024" fill="#14382B"/>
+  <circle cx="512" cy="512" r="388" fill="none" stroke="#2D5847" stroke-width="2"/>
+  <g fill="#F6F1E6">
+    <rect x="224" y="196" width="116" height="632" rx="58"/>
+    <rect x="224" y="196" width="568" height="116" rx="58"/>
+    <rect x="224" y="454" width="430" height="116" rx="58"/>
+    <rect x="224" y="712" width="568" height="116" rx="58"/>
+  </g>
+  <path d="M548 632 L590 590 L664 666 L804 494 L850 532 L668 758 Z" fill="#D3AF68"/>
+</svg>

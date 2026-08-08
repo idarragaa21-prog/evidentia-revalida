@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src https://flnawwzkmttsxuozjwar.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <title>Evidentia · Revalida — Painel</title>
 <style>
 :root{
@@ -64,13 +66,10 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 
   <div class="card" id="cardConfig">
     <h2>Conexão</h2>
-    <p class="mini">Preencha uma vez; fica guardado só neste navegador. Use a chave <b>publicável</b> do
-    projeto (a mesma do aplicativo). O painel só funciona para contas que estão na tabela
-    <code>admins</code> — qualquer outra recebe «apenas administradores».</p>
-    <label>URL do projeto Supabase</label>
-    <input id="cfgUrl" placeholder="https://xxxx.supabase.co" autocomplete="off">
-    <label>Chave publicável</label>
-    <input id="cfgChave" placeholder="sb_publishable_…" autocomplete="off">
+    <p class="mini">Este painel está preso ao projeto de produção da Evidentia. A URL não é editável:
+    assim a senha nunca pode ser enviada por engano a outro servidor. A chave embutida é apenas a
+    chave publicável; autorização continua nas RPC e na tabela <code>admins</code>. A sessão fica só
+    em memória e é descartada ao fechar ou recarregar esta página.</p>
   </div>
 
   <div class="card" id="cardEntrar">
@@ -150,13 +149,14 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
    Nenhum segredo aqui: entra a chave publicável e a segurança quem faz é o banco
    (RLS + is_admin nas próprias funções). */
 
+const SUPABASE_URL="https://flnawwzkmttsxuozjwar.supabase.co";
+const SUPABASE_CHAVE="sb_publishable_JZzZRrMH3M4jm55sr3j8Gg_0oiLYJi5";
+let SESSAO=null;
 const cfg = {
-  get url(){ return (localStorage.getItem("painel_url")||"").replace(/\/+$/,""); },
-  set url(v){ localStorage.setItem("painel_url", v.trim()); },
-  get chave(){ return localStorage.getItem("painel_chave")||""; },
-  set chave(v){ localStorage.setItem("painel_chave", v.trim()); },
-  get sessao(){ try{ return JSON.parse(sessionStorage.getItem("painel_sessao")||"null"); }catch(e){ return null; } },
-  set sessao(v){ v ? sessionStorage.setItem("painel_sessao", JSON.stringify(v)) : sessionStorage.removeItem("painel_sessao"); },
+  url:SUPABASE_URL,
+  chave:SUPABASE_CHAVE,
+  get sessao(){ return SESSAO; },
+  set sessao(v){ SESSAO=v||null; },
 };
 
 const $ = s=>document.querySelector(s);
@@ -165,11 +165,14 @@ const esc = s=>String(s??"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">"
 function diz(sel, txt, erro){ const el=$(sel); el.textContent=txt||""; el.classList.toggle("erro", !!erro); }
 
 async function api(caminho, corpo, token){
+  if(!/^\/(auth\/v1\/(token\?grant_type=password|logout)|rest\/v1\/rpc\/[a-z0-9_]+)$/.test(caminho))
+    throw new Error("caminho de API recusado");
   const r = await fetch(cfg.url+caminho, {
     method:"POST",
     headers:{ apikey:cfg.chave, "content-type":"application/json",
               ...(token?{Authorization:"Bearer "+token}:{}) },
     body: JSON.stringify(corpo??{}),
+    cache:"no-store", credentials:"omit", referrerPolicy:"no-referrer",
   });
   const t = await r.text();
   let d=null;
@@ -185,8 +188,6 @@ async function api(caminho, corpo, token){
 const rpc = (nome,args)=>api("/rest/v1/rpc/"+nome, args||{}, cfg.sessao?.access_token);
 
 async function entrar(){
-  cfg.url=$("#cfgUrl").value; cfg.chave=$("#cfgChave").value;
-  if(!cfg.url||!cfg.chave){ diz("#msgLogin","Preencha a URL e a chave do projeto.",true); return; }
   $("#btnEntrar").disabled=true; diz("#msgLogin","Entrando…");
   try{
     const r = await api("/auth/v1/token?grant_type=password",
@@ -197,10 +198,14 @@ async function entrar(){
     mostrarPainel();
   }catch(e){
     diz("#msgLogin", /Invalid login/i.test(e.message)?"E-mail ou senha incorretos.":("Não deu: "+e.message), true);
-  }finally{ $("#btnEntrar").disabled=false; }
+  }finally{ $("#loginSenha").value=""; $("#btnEntrar").disabled=false; }
 }
 
-function sair(){ cfg.sessao=null; location.reload(); }
+async function sair(){
+  const token=cfg.sessao?.access_token;
+  try{ if(token) await api("/auth/v1/logout", {}, token); }catch(e){}
+  cfg.sessao=null; location.reload();
+}
 
 async function mostrarPainel(){
   $("#cardEntrar").classList.add("hidden");
@@ -336,7 +341,6 @@ async function revogar(email){
 }
 
 (function init(){
-  $("#cfgUrl").value=cfg.url; $("#cfgChave").value=cfg.chave;
   if(cfg.sessao) mostrarPainel();
 })();
 </script>

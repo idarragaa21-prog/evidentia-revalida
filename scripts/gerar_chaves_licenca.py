@@ -64,8 +64,8 @@ def main():
     os.chmod(os.path.join(PASTA, "PRIVADA_BASE64.txt"), 0o600)
 
     print("par de chaves gerado em nuvem/chaves/\n")
-    print("1) no servidor (uma vez):")
-    print(f"   supabase secrets set REVALIDA_CHAVE_PRIVADA='{priv_b64}'\n")
+    print("1) no servidor: carregue PRIVADA_BASE64.txt pelo gerenciador de secrets.")
+    print("   o valor nao e exibido aqui para nao parar no terminal ou em logs.\n")
     print("2) no aplicativo: a chave publica abaixo vai em modelo/app_template.html")
     print("   (constante CHAVE_LICENCA). O script 08 nao a toca.")
     print(f"   {pub_b64}\n")

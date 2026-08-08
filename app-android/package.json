@@ -3,15 +3,27 @@
   "version": "1.0.0",
   "description": "Evidentia · Revalida — banco de questões (app Android)",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
-    "sync": "cap sync android",
-    "build:apk": "cd android && ./gradlew assembleDebug",
-    "build:aab": "cd android && ./gradlew bundleRelease"
+    "sync": "cap sync",
+    "sync:android": "cap sync android",
+    "sync:ios": "cap sync ios",
+    "prepare:android": "python3 ../scripts/08_montar_aplicativo.py --edicao android && cap sync android",
+    "prepare:ios": "python3 ../scripts/08_montar_aplicativo.py --edicao ios && cap sync ios",
+    "build:apk": "npm run prepare:android && cd android && ./gradlew assembleDebug",
+    "build:aab": "npm run prepare:android && cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
-    "@capacitor/android": "^6.2.1",
-    "@capacitor/cli": "^6.2.1",
-    "@capacitor/core": "^6.2.1",
-    "@capacitor/ios": "^6.2.1"
+    "@capacitor/android": "8.5.0",
+    "@capacitor/core": "8.5.0",
+    "@capacitor/ios": "8.5.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.0"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
   }
 }

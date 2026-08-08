@@ -1,0 +1,81 @@
+{
+  "versao": 1,
+  "locale": "pt-BR",
+  "capturas_lojas": [
+    {
+      "ordem": 1,
+      "tela": "inicio",
+      "titulo": "Monte seu simulado",
+      "subtitulo": "Filtre por edição ou área e estude no seu ritmo.",
+      "alt_text": "Tela inicial com filtros de edição, especialidade, quantidade e modo de estudo.",
+      "precondicao": "Build limpa, sem dados pessoais; mostrar filtros reais disponíveis."
+    },
+    {
+      "ordem": 2,
+      "tela": "questao",
+      "titulo": "600 questões de seis edições",
+      "subtitulo": "Treine com questões de 2023/1 a 2026/1.",
+      "alt_text": "Questão do simulado com quatro alternativas e controles de navegação.",
+      "precondicao": "Usar uma questão sem informação pessoal e sem painel de resposta aberto."
+    },
+    {
+      "ordem": 3,
+      "tela": "modo_estudo",
+      "titulo": "Entenda cada alternativa",
+      "subtitulo": "Justificativa estruturada em todas as questões.",
+      "alt_text": "Modo estudo mostrando a alternativa correta e a justificativa dos distratores.",
+      "precondicao": "Mostrar conteúdo real e legível; não inventar resposta ou pontuação."
+    },
+    {
+      "ordem": 4,
+      "tela": "revisao_com_referencia",
+      "titulo": "Cobertura transparente",
+      "subtitulo": "526 questões têm referências catalogadas; 74 aparecem sem.",
+      "alt_text": "Revisão de uma questão com referências, detalhes da fonte e aviso de material independente.",
+      "precondicao": "Escolher uma das 526 questões com referência e manter o detalhe da fonte visível."
+    },
+    {
+      "ordem": 5,
+      "tela": "resultado",
+      "titulo": "Acompanhe seu desempenho",
+      "subtitulo": "Resultados e histórico ficam salvos no aparelho.",
+      "alt_text": "Resultado de simulado com acertos, erros, questões em branco e desempenho por área.",
+      "precondicao": "Gerar um resultado de teste real e plausível, sem sugerir ranking ou aprovação."
+    },
+    {
+      "ordem": 6,
+      "tela": "offline_conta",
+      "titulo": "Continue estudando offline",
+      "subtitulo": "Após ativar, use sem conexão por até 30 dias por vez.",
+      "alt_text": "Tela de conta e acesso indicando funcionamento offline e validade da licença.",
+      "precondicao": "Ocultar e-mail; mostrar a informação real da build sem simular renovação."
+    }
+  ],
+  "app_store": {
+    "nome": "Evidentia Revalida",
+    "subtitulo": "Questões comentadas offline",
+    "texto_promocional": "Monte simulados, revise alternativas e acompanhe seu desempenho. O acervo atual reúne 600 questões de seis edições.",
+    "palavras_chave": "simulado,medicina,prova,médico,questões,estudo,offline,diploma",
+    "descricao": "Estude com questões das provas objetivas do Revalida em um aplicativo independente, sem vínculo com o INEP nem com o MEC.\n\nO acervo atual reúne:\n• 600 questões de seis edições, de 2023/1 a 2026/1;\n• justificativa estruturada em todas as questões;\n• 526 questões com referências catalogadas;\n• 74 questões apresentadas sem referência catalogada;\n• 30 figuras incorporadas.\n\nMonte simulados por edição ou área, embaralhe alternativas, use cronômetro, marque questões para revisar e acompanhe seu desempenho. Depois da ativação, o estudo funciona offline por até 30 dias por vez. O progresso fica no aparelho e pode ser exportado em arquivo.\n\nAs classificações e justificativas são material independente de estudo, podem conter imprecisões e não constituem orientação médica nem garantia de aprovação. Confirme regras, cadernos e gabaritos nos canais oficiais do INEP.",
+    "categoria_primaria": "Educação",
+    "url_privacidade": "https://idarragaa21-prog.github.io/evidentia-revalida/privacidade/",
+    "url_suporte": "https://idarragaa21-prog.github.io/evidentia-revalida/assinar/termos.html",
+    "url_marketing": "https://idarragaa21-prog.github.io/evidentia-revalida/",
+    "notas_revisao_base": "A conta informada em App Review deve permanecer ativa e dar acesso ao acervo integral durante a revisão. O aplicativo funciona offline depois da ativação e exige conexão periódica para renovar a licença. O acervo reúne 600 questões de seis edições com fonte atribuída ao INEP; a Evidentia não tem vínculo com o INEP nem com o MEC e não presta atendimento médico. Acrescentar a descrição exata do fluxo de compras conforme produto/CONTRATO_COMPRAS_NATIVAS.md antes de enviar."
+  },
+  "google_play": {
+    "nome": "Evidentia Revalida",
+    "descricao_curta": "Simulados do Revalida com 600 questões comentadas e estudo offline",
+    "feature_graphic": {
+      "titulo": "Estudo com evidência",
+      "subtitulo": "Simulados e questões comentadas para o Revalida",
+      "alt_text": "Identidade verde e dourada da Evidentia ao lado de uma tela de simulado médico."
+    },
+    "descricao_completa": "Estude com questões das provas objetivas do Revalida em um aplicativo independente, sem vínculo com o INEP nem com o MEC.\n\nO acervo atual reúne 600 questões de seis edições, de 2023/1 a 2026/1. Todas têm justificativa estruturada: 526 questões possuem referências catalogadas e 74 são apresentadas sem referência catalogada. Há 30 figuras incorporadas.\n\nMonte simulados por edição ou área, embaralhe alternativas, use cronômetro, marque questões para revisar e acompanhe seu desempenho. Depois da ativação, o estudo funciona offline por até 30 dias por vez. O progresso fica no aparelho e pode ser exportado em arquivo.\n\nAs classificações e justificativas são material independente de estudo, podem conter imprecisões e não constituem orientação médica nem garantia de aprovação. Confirme regras, cadernos e gabaritos nos canais oficiais do INEP.",
+    "categoria": "Educação",
+    "email_suporte": "idarragaa21@gmail.com",
+    "site": "https://idarragaa21-prog.github.io/evidentia-revalida/",
+    "url_privacidade": "https://idarragaa21-prog.github.io/evidentia-revalida/privacidade/",
+    "url_exclusao_conta": "https://idarragaa21-prog.github.io/evidentia-revalida/excluir-conta/"
+  }
+}

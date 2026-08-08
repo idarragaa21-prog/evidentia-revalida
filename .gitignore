@@ -47,9 +47,22 @@ aplicativo/Revalida_Evidentia_teste.html
 # do aparelho e uma barreira de honestidade, nao um cofre — quem tem o arquivo tem
 # o conteudo. O que se distribui e o instalador assinado, depois da compra.
 aplicativo/Revalida_Evidentia.html
+aplicativo/Revalida_Evidentia_ios.html
+aplicativo/Revalida_Evidentia_android.html
 app-android/www/index.html
 app-android/android/app/src/main/assets/public/index.html
 app-android/*.apk
+
+# Fontes editoriais e dados premium. Permanecem nas maquinas autorizadas para
+# gerar os instaladores, mas nao entram no repositorio publico. Somente os dois
+# ativos de marca abaixo podem ser rastreados em dados/; a amostra livre e
+# gerada em HTML e continua versionada separadamente.
+dados/**
+!dados/favicon_b64.txt
+!dados/logo_b64.txt
+scripts/justificativas_*/
+scripts/tabelas_*.py
+scripts/verificar_gabaritos.py
 
 # Estado local del CLI de Supabase (enlace del proyecto): no se versiona
 nuvem/supabase/.temp/

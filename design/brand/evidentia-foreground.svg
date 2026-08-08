@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>Evidentia adaptive foreground</title>
+  <g transform="translate(102 102) scale(.8)">
+    <g fill="#F6F1E6">
+      <rect x="224" y="196" width="116" height="632" rx="58"/>
+      <rect x="224" y="196" width="568" height="116" rx="58"/>
+      <rect x="224" y="454" width="430" height="116" rx="58"/>
+      <rect x="224" y="712" width="568" height="116" rx="58"/>
+    </g>
+    <path d="M548 632 L590 590 L664 666 L804 494 L850 532 L668 758 Z" fill="#D3AF68"/>
+  </g>
+</svg>

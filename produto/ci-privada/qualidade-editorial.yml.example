@@ -1,0 +1,54 @@
+# Copiar este arquivo para `.github/workflows/qualidade-editorial.yml` SOMENTE
+# no repositório editorial privado, junto do corpus e das fontes autorizadas.
+# A ausência de qualquer dado/PDF é erro; não converter estes gates em skips.
+
+name: Qualidade editorial privada
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conteudo:
+    name: Conteúdo, fontes e claims (600/600)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pymupdf>=1.24,<2"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/evidentia-fontes
+          key: inep-cadernos-v1-${{ hashFiles('scripts/10_conferir_textos_oficiais.py') }}
+      - name: Gates editoriais fail-closed
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python -m unittest testes/teste_gates_conteudo.py -v
+          python scripts/22_validar_metricas_produto.py
+          python scripts/12_validar_justificativas.py
+          python scripts/23_validar_claims_comerciais.py
+          python scripts/24_validar_metadados_lojas.py
+          python scripts/10_conferir_textos_oficiais.py --fontes "$HOME/.cache/evidentia-fontes" --baixar-fontes
+
+  interface-completa:
+    name: Playwright sobre build editorial nova
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: python3 scripts/08_montar_aplicativo.py --edicao teste
+      - run: npm test

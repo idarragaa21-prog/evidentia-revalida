@@ -1,5 +1,9 @@
 # Runbook de activación — de aquí a la primera venta
 
+> **Documento histórico.** Para la release móvil v1 use como checklist autoritativo
+> `produto/RUNBOOK_PUBLICACAO_V1.md`. Este plan conserva contexto de decisiones anteriores, pero
+> contiene estados de despliegue y toolchains que no deben asumirse vigentes.
+
 > Para Diego. Cada paso dice qué hacer, dónde, y cómo saber que quedó bien.
 > Los pasos marcados **(solo tú)** necesitan tu identidad, tu tarjeta o tu firma:
 > no se pueden automatizar.
@@ -55,7 +59,7 @@ las **tres** funciones: `emitir-licenca`, `webhook-pagamento` y `criar-checkout`
 no existan las credenciales de dLocal Go, la página de venta muestra «as vendas abrem em
 breve» — nada se rompe.
 
-Cuando termines el paso 3, lo único que falta aquí es:
+Cuando termines el paso 3, en esta sección técnica faltará cargar:
 
 ```bash
 cd ~/evidentia-revalida/nuvem
@@ -111,8 +115,9 @@ aparece IOF ni cargo internacional en su extracto (antes de usar «sem IOF» com
 de venta), que el reembolso real corta el acceso, y el spread BRL→COP de tu primer retiro
 contra la tasa del día.
 
-> Sin renovación automática, la recompra depende de recordatorios: programa (o pídeme) los
-> correos D-7 y D-1 antes del vencimiento de cada licencia. El backend sabe la fecha exacta.
+> Sin renovación automática, la persona consulta la fecha final en su cuenta. No anuncies
+> recordatorios por correo hasta que exista un envío transaccional probado, con reintentos y
+> seguimiento de entrega.
 >
 > Cuando la facturación anual pase de unos R$ 100.000, revisa la ruta Stripe con una LLC
 > estadounidense: la comisión baja a ~1,9 %. El webhook ya entiende Stripe; solo hay que
@@ -125,9 +130,9 @@ contra la tasa del día.
 Ya existe en `app-web/assinar/` y quedó integrada al embudo: la edición libre muestra
 «Conhecer os planos», la pantalla de activación de la edición completa enlaza «Veja os
 planos e preços», y la página lee los planos **en vivo** de tu tabla `planos` — cambias un
-precio en el panel y la página lo muestra sin republicar nada. El texto dice el número real
-(500 preguntas conferidas, comparación honesta con los competidores y sus precios) y avisa
-del descriptor DL*/DLOCAL para contener contracargos.
+precio en el panel y la página lo muestra sin republicar nada. El texto usa el baseline vigente:
+600 preguntas, seis ediciones, 600 justificaciones, 526 con referencias y 74 sin referencia
+catalogada. Se retiraron comparaciones de competidores que caducan y promesas de correo no implementadas.
 
 Para publicarla: haz merge de la rama `produto-assinatura` a `main` — el workflow de Pages
 publica `app-web/` entero, incluida `/assinar/`. Publícala **después** de tener las
@@ -170,10 +175,11 @@ cd app-desktop && npm install && npm run empacotar:mac
 
 Los instaladores quedan en `app-desktop/dist/`.
 
-> **La edición completa no está en el repositorio.** `aplicativo/Revalida_Evidentia.html`,
-> el APK y `app-android/www/` están en `.gitignore`: son el producto que vendes. El portón
+> **No presupongas que el producto premium está fuera del repositorio.** Antes de cada release,
+> audita `git ls-files aplicativo dados app-android/ios`; `.gitignore` no retira artefactos ya
+> versionados. El portón
 > de licencia corre en el aparato y es una barrera de honestidad, no una caja fuerte —
-> quien tiene el archivo tiene las 500 preguntas. Los comandos de arriba los regeneran en
+> quien tiene el archivo tiene las 600 preguntas. Los comandos de arriba los regeneran en
 > tu disco cuando los necesites; lo que se versiona es lo que los construye.
 
 ### Android
@@ -205,9 +211,8 @@ firma de producción.
 
 ### iPhone
 
-Hoy el canal es la PWA: se instala desde Safari con *Compartir → Añadir a pantalla de inicio*
-y funciona sin conexión. Una aplicación nativa exigiría `npx cap add ios` y cuenta Apple
-Developer.
+Existe un proyecto nativo Capacitor. La preparación, metadatos, cuenta de revisión, privacidad
+y build están en `produto/RUNBOOK_APP_STORE.md`; la PWA sigue siendo un canal separado.
 
 > **Importante**: no vendas dentro de la aplicación móvil. Apple y Google exigen su
 > facturación (30 %, o 15 % con el programa de pequeñas empresas) para desbloquear contenido
@@ -217,8 +222,8 @@ Developer.
 
 ## 7. Lo legal, antes de cobrar **(solo tú)**
 
-La investigación ya hizo el trabajo pesado y el resultado es favorable — está en
-`produto/PLANO_PRODUTO.md`, sección 4. Falta cerrarlo:
+La investigación formuló las hipótesis — está en `produto/PLANO_PRODUTO.md`, sección 4 —,
+pero no sustituye dictamen. La venta queda bloqueada hasta cerrarlo:
 
 1. **Consulta a un abogado brasileño de propiedad intelectual.** Llévale estas cuatro
    preguntas cerradas y el dossier de fuentes primarias del plan:
@@ -230,9 +235,8 @@ La investigación ya hizo el trabajo pesado y el resultado es favorable — est�
      prohibida por la cláusula SemDerivações, u obra nueva independiente?
    - ¿Qué tratamiento tipográfico de la palabra «Revalida» minimiza el riesgo frente a las
      ~40 marcas compuestas vivas en la clase 41?
-2. **Registra «EVIDENTIA» en el INPI, clase NCL 41.** La búsqueda muestra la clase libre hoy:
-   no hay ni un solo proceso con «Evidentia» en servicios educativos. Registra el elemento
-   distintivo solo, nunca el compuesto con «Revalida».
+2. **Repite una búsqueda de anterioridades y evalúa registrar «EVIDENTIA» en el INPI, clase NCL
+   41.** No trates una búsqueda fechada como garantía de disponibilidad.
 3. **Reescribe la cláusula de retirada** de `AVISO_DE_CONTEUDO.md`. Hoy promete retirar el
    material «sem discussão prévia» ante cualquier reclamo. En un producto de suscripción eso
    deja a tus clientes sin producto de un día para otro. Mantén el canal de contacto y la
@@ -274,7 +278,12 @@ No lo he ejecutado: es una decisión tuya y visible hacia afuera.
       «pagante» en el panel, pido reembolso de prueba y pierdo el acceso.
 - [ ] En producción: una compra real pequeña con tarjeta brasileña — sin IOF en el extracto,
       reembolso real corta el acceso, y el retiro a COP llega con spread aceptable.
-- [ ] La edición libre abre sin pedir cuenta, muestra 40 preguntas con referencias y el botón
+- [ ] La edición libre abre sin pedir cuenta, muestra 40 preguntas con justificación y estado de referencia explícito, y el botón
       «Conhecer os planos» lleva a `/assinar/`.
+- [ ] La página de planes enlaza términos, reembolso, privacidad y soporte; no promete correos inexistentes.
+- [ ] `python3 scripts/22_validar_metricas_produto.py` termina sin divergencias (600/6/526).
 - [ ] `python3 scripts/12_validar_justificativas.py` termina sin errores.
+- [ ] `python3 scripts/10_conferir_textos_oficiais.py --fontes /tmp/evidentia-fontes --baixar-fontes`
+      termina con cobertura 600/600 y cero divergencias.
+- [ ] `python3 scripts/23_validar_claims_comerciais.py` termina sin claims prohibidos.
 - [ ] `nuvem/supabase/tests/rodar_testes.sh` termina con «TODAS AS PROVAS PASSARAM».
